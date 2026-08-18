@@ -1,0 +1,64 @@
+.categoryMenu {
+  display: flex; /* Kategori butonlarını yan yana dizer */
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 60px;
+  background-color: #2b2b2e;
+  border-bottom: 1px solid #3e424c;
+  overflow-x: auto;
+}
+
+/* Normal kategori butonları */
+.categoryButton {
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #dfe3eb;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Kullanıcı normal kategori butonunun üzerine geldiğinde */
+.categoryButton:hover {
+  border-color: #6085dd;
+  background-color: rgba(96, 133, 221, 0.12);
+  color: #86a5ed;
+}
+
+/* Başlangıçta seçili görünen kategori */
+.activeButton {
+  padding: 9px 16px;
+  border: 1px solid #6085dd;
+  border-radius: 8px;
+  background-color: #6085dd;
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Seçili butonun üzerine gelindiğinde */
+.activeButton:hover {
+  border-color: #4f73c9;
+  background-color: #4f73c9;
+}
+
+/* Küçük ekranlarda menünün yatay kaydırılabilmesi için */
+@media (max-width: 800px) {
+  .categoryMenu {
+    justify-content: flex-start;
+    padding: 12px 20px;
+  }
+}
