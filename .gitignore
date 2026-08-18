@@ -1,5 +1,19 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Yüklenen npm paketleri
+**/node_modules/
 
+# Next.js çalışma ve derleme dosyaları
+**/.next/
+
+# Ortam değişkenleri
+**/.env
+**/.env.local
+
+# macOS dosyaları
+.DS_Store
+
+# Log dosyaları
+*.log
 # dependencies
 /node_modules
 /.pnp
