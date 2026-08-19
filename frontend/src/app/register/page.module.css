@@ -1,0 +1,432 @@
+/* Kayıt sayfasının tamamı */
+.registerPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+  padding: 40px;
+
+  background-color: #f7f7f8;
+  color: #111116;
+}
+
+/*
+  Sol tanıtım alanıyla sağ kayıt formunu
+  yan yana tutan ana kutu.
+*/
+.registerContainer {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+
+  width: 100%;
+  max-width: 1250px;
+  min-height: 760px;
+
+  overflow: hidden;
+
+  border: 1px solid #dedee3;
+  border-radius: 28px;
+
+  background-color: #ffffff;
+  box-shadow: 0 24px 70px rgba(17, 17, 22, 0.1);
+}
+
+/* Sol taraftaki koyu tanıtım alanı */
+.introduction {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 48px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #29292f 0%,
+      #111116 60%,
+      #08080d 100%
+    );
+
+  color: #ffffff;
+}
+
+/* TECHCART logosu */
+.logo {
+  width: fit-content;
+
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+
+.introductionContent {
+  max-width: 480px;
+}
+
+/* TechCart üyeliği yazısının bulunduğu küçük etiket */
+.label {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 24px;
+  padding: 9px 15px;
+
+  border: 1px solid #55555e;
+  border-radius: 999px;
+
+  color: #d8d8de;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* Küçük etiketin solundaki beyaz nokta */
+.label::before {
+  width: 7px;
+  height: 7px;
+  margin-right: 9px;
+
+  border-radius: 50%;
+  background-color: #ffffff;
+
+  content: "";
+}
+
+/* Sol bölümdeki büyük başlık */
+.introductionContent h1 {
+  margin: 0 0 22px;
+
+  font-size: clamp(38px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -2.3px;
+}
+
+/* Sol bölüm açıklaması */
+.introductionContent p {
+  margin: 0;
+
+  color: #b8b8c1;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Üyelik avantajlarını alt alta dizer */
+.benefitList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  margin: 30px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+/* Her avantaj satırının görünümü */
+.benefitList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #e4e4e8;
+  font-size: 14px;
+}
+
+/* Avantajların yanındaki onay ikonları */
+.benefitList svg {
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+/* Ana sayfaya dönüş bağlantısı */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  width: fit-content;
+
+  color: #d8d8de;
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backLink:hover {
+  color: #ffffff;
+  transform: translateX(-4px);
+}
+
+/* Sağ taraftaki form alanı */
+.formSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 50px 60px;
+}
+
+/* Form başlığıyla form arasındaki boşluk */
+.formHeader {
+  margin-bottom: 28px;
+}
+
+.formHeader h2 {
+  margin: 0 0 10px;
+
+  color: #111116;
+  font-size: 38px;
+  letter-spacing: -1.2px;
+}
+
+.formHeader p {
+  margin: 0;
+
+  color: #71717b;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Form elemanlarını alt alta dizer */
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/*
+  İki form alanını yan yana gösterir.
+  Ad-soyad ve iki parola bu yapıyı kullanır.
+*/
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Bir label ve input alanını birlikte tutar */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.formGroup label {
+  color: #29292f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/*
+  İkonu input alanının içinde konumlandırabilmek için
+  kapsayıcıya position: relative veriyoruz.
+*/
+.inputWrapper {
+  position: relative;
+}
+
+/* Input alanının solundaki ikon */
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  left: 17px;
+
+  color: #8a8a94;
+
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Formdaki bütün metin giriş kutuları */
+.inputWrapper input {
+  width: 100%;
+  padding: 15px 16px 15px 49px;
+
+  border: 1px solid #d8d8de;
+  border-radius: 12px;
+  outline: none;
+
+  background-color: #f8f8fa;
+  color: #111116;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Kullanıcı giriş kutusunu seçtiğinde */
+.inputWrapper input:focus {
+  border-color: #29292f;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(17, 17, 22, 0.08);
+}
+
+.inputWrapper input::placeholder {
+  color: #9a9aa3;
+}
+
+/* Parola kurallarını gösteren açıklama */
+.passwordInformation {
+  margin: -8px 0 0;
+
+  color: #7a7a84;
+  font-size: 12px;
+}
+
+/* Koşulları kabul etme alanı */
+.termsArea {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+
+  color: #686873;
+  font-size: 13px;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+/* Checkbox kutusu */
+.termsArea input {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+
+  accent-color: #111116;
+  cursor: pointer;
+}
+
+.termsArea a {
+  color: #111116;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.termsArea a:hover {
+  text-decoration: underline;
+}
+
+/* Hesap oluştur butonu */
+.registerButton {
+  width: 100%;
+  padding: 16px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background-color: #09090f;
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Butonun üzerine gelindiğinde */
+.registerButton:hover {
+  background-color: #29292f;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(17, 17, 22, 0.18);
+}
+
+/* Butona basıldığı anda */
+.registerButton:active {
+  transform: translateY(0);
+}
+
+/* Formun altındaki giriş yap alanı */
+.loginArea {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+
+  margin-top: 24px;
+
+  color: #74747e;
+  font-size: 14px;
+}
+
+.loginArea a {
+  color: #111116;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.loginArea a:hover {
+  text-decoration: underline;
+}
+
+/* Tablet boyutunda sol ve sağ alanları alt alta getirir */
+@media (max-width: 950px) {
+  .registerPage {
+    padding: 20px;
+  }
+
+  .registerContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .introduction {
+    min-height: 480px;
+    padding: 36px;
+  }
+
+  .formSection {
+    padding: 45px 36px;
+  }
+}
+
+/*
+  Telefon ekranında yan yana duran form alanlarını
+  tek sütuna çevirir.
+*/
+@media (max-width: 600px) {
+  .registerPage {
+    padding: 0;
+    background-color: #ffffff;
+  }
+
+  .registerContainer {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .introduction {
+    min-height: 450px;
+    padding: 28px 22px;
+  }
+
+  .introductionContent h1 {
+    font-size: 38px;
+    letter-spacing: -1.5px;
+  }
+
+  .formSection {
+    padding: 40px 22px;
+  }
+
+  .formHeader h2 {
+    font-size: 32px;
+  }
+
+  /*
+    Ad-soyad ve parola alanları
+    telefon ekranında alt alta görünür.
+  */
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
