@@ -1,0 +1,197 @@
+/* Footer bölümünün tamamı */
+.footer {
+  width: 100%;
+  margin-top: 70px;
+  border-top: 1px solid #e2e2e5;
+  background-color: #ffffff;
+  color: #676771;
+}
+
+
+.footerContainer {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 60px 80px 35px;
+}
+
+/* Footer'ın üst bölümünü dört sütuna ayırır */
+.footerGrid {
+  display: grid;
+
+  grid-template-columns: 1.3fr 0.8fr 1fr 0.9fr;
+
+  gap: 65px;
+  align-items: start;
+}
+
+/* TechCart açıklamasının bulunduğu ilk sütun */
+.brandColumn {
+  max-width: 320px;
+}
+
+/* Footer içerisindeki TechCart logosu */
+.logo {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #0c0c11;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  text-transform: uppercase;
+
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.65;
+}
+
+/* TechCart'ın altındaki açıklama */
+.brandDescription {
+  margin: 0;
+  color: #72727d;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* Kurumsal ve müşteri hizmetleri sütunları */
+.footerColumn {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Footer sütun başlıklarının ortak görünümü */
+.footerColumn h2,
+.contactColumn h2 {
+  margin: 0 0 6px;
+  color: #656570;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+/* Footer içerisindeki bağlantılar */
+.footerColumn a,
+.contactColumn a {
+  color: #757580;
+  font-size: 14px;
+  line-height: 1.5;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Kullanıcı bağlantının üzerine geldiğinde */
+.footerColumn a:hover,
+.contactColumn a:hover {
+  color: #111116;
+  transform: translateX(3px);
+}
+
+/* İletişim sütunu */
+.contactColumn {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 15px;
+
+  /*
+    address etiketi tarayıcı tarafından varsayılan olarak
+    eğik gösterilebilir. Normal yazı için sıfırlıyoruz.
+  */
+  font-style: normal;
+}
+
+.contactColumn p {
+  margin: 0;
+  color: #757580;
+  font-size: 14px;
+}
+
+/* Footer üst ve alt alanlarını ayıran çizgi */
+.divider {
+  width: 100%;
+  height: 1px;
+  margin: 42px 0 28px;
+  background-color: #e2e2e5;
+}
+
+/* Telif bilgisi ve yasal bağlantıları yan yana tutar */
+.footerBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.footerBottom p {
+  margin: 0;
+  color: #85858f;
+  font-size: 13px;
+}
+
+/* Gizlilik ve kullanım koşulları bağlantıları */
+.legalLinks {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.legalLinks a {
+  color: #787883;
+  font-size: 13px;
+
+  transition: color 0.2s ease;
+}
+
+.legalLinks a:hover {
+  color: #111116;
+}
+
+/* Tablet ekranlarında Footer'ı iki sütuna düşürür */
+@media (max-width: 1000px) {
+  .footerContainer {
+    padding: 50px 30px 30px;
+  }
+
+  .footerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 45px;
+  }
+}
+
+/* Telefon ekranlarında Footer'ı tek sütun yapar */
+@media (max-width: 600px) {
+  .footer {
+    margin-top: 50px;
+  }
+
+  .footerContainer {
+    padding: 45px 20px 25px;
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .brandColumn {
+    max-width: 100%;
+  }
+
+  .footerBottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .legalLinks {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -144,9 +144,7 @@ function ProductVisual({
             type="button"
 
             // Ürün stokta değilse butonu devre dışı bırakır.
-            disabled={!product.inStock}
-          >
-    
+            disabled={!product.inStock}>
             {product.inStock ? "Sepete Ekle" : "Tükendi"}
           </button>
         </div>
