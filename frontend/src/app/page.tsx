@@ -1,5 +1,9 @@
+import CategoryMenu from "../components/CategoryMenu/CategoryMenu";
+import Filters from "../components/Filters/Filters";
 import Header from  "../components/Header/Header";
 import Hero from "../components/Hero/Hero";
+import styles from "./page.module.css";
+import ProductList from "../components/ProductList/ProductList";
 
 
 export default function HomePage() {
@@ -10,8 +14,18 @@ export default function HomePage() {
       <main>
         <Hero />
 
-        <section id="products">
-          <h2>Ürünleri Keşfet</h2>
+        <CategoryMenu />
+
+         <section
+          className={styles.productSection}
+          id="products"
+        >
+          <Filters />
+
+          <div className={styles.productArea}>
+            <ProductList />
+          </div>
+          
         </section>
       </main>
     </>

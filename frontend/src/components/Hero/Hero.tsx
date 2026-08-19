@@ -10,13 +10,12 @@ export default function Hero() {
                    Teknolojinin yeni adresi
                    </span>
                 <h1 className={styles.title}>
-                      Teknolojiye
+                      Teknolojiyi Seçmenin 
           <br /> 
-          Kolayca Ulaş
+          Kolay Yolu
         </h1>
         <p className={styles.description}>
-          En yeni teknoloji ürünlerini keşfet, karşılaştır ve ihtiyacına
-          uygun ürüne güvenli alışveriş deneyimiyle ulaş.
+          Ürünleri keşfet, özelliklerini karşılaştır, ihtiyacına uygun olanı güvenle seç.
         </p>
 
         <div className={styles.actions}>

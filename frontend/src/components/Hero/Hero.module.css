@@ -1,3 +1,4 @@
+
 .hero {
   display: grid;
   grid-template-columns: 1fr 0.9fr;
@@ -11,10 +12,12 @@
   background-color: #ffffff;
 }
 
+/*sol taraftaki yazilar*/
 .content {
   max-width: 650px;
 }
 
+/*kucuk ust etiket*/
 .label {
   display: inline-flex;
   align-items: center;
@@ -30,6 +33,7 @@
   text-transform: uppercase;
 }
 
+/**/
 .label::before {
   width: 7px;
   height: 7px;
@@ -42,8 +46,9 @@
 .title {
   margin-bottom: 24px;
   color: #09090e;
-  font-size: clamp(60px, 6vw, 96px);
-  font-weight: 800;
+  font-size: clamp(60px, 4vw, 80px);
+  white-space: nowrap;
+  font-weight: 600;
   line-height: 1.02;
   letter-spacing: -4px;
 }
@@ -56,11 +61,13 @@
   line-height: 1.7;
 }
 
+/*buton ve urun sayisi*/
 .actions {
   display: flex;
   align-items: center;
   gap: 28px;
 }
+
 
 .discoverButton {
   display: inline-flex;
@@ -78,10 +85,12 @@
     transform 0.2s ease;
 }
 
+
 .discoverButton:hover {
   background-color: #303039;
   transform: translateY(-2px);
 }
+
 
 .discoverButton:active {
   transform: scale(0.98);
@@ -103,6 +112,7 @@
   font-size: 15px;
 }
 
+/* sag taraftaki görsel */
 .visual {
   position: relative;
   display: flex;
@@ -118,6 +128,7 @@
   overflow: hidden;
 }
 
+/*sagdaki buyuk gri gorsel kutusunun tamami*/
 .visual::before {
   position: absolute;
   width: 340px;
@@ -127,6 +138,7 @@
   content: "";
 }
 
+/* pc, telefon, kulaklik ikonlarinin grubu*/
 .visualContent {
   position: relative;
   display: flex;
@@ -135,17 +147,20 @@
   color: #111116;
 }
 
+
 .laptopIcon {
   width: 190px;
   height: 190px;
 }
 
+/*telefon - kulaklik kutularinin grubu */
 .smallIcons {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
+/*Telefon veya kulaklığın içindeki küçük beyaz kutu */
 .iconBox {
   display: flex;
   align-items: center;
@@ -158,6 +173,7 @@
   backdrop-filter: blur(8px);
 }
 
+/*Guvenli alisveris bilgi butonu*/
 .visualNote {
   position: absolute;
   right: 24px;
@@ -174,12 +190,14 @@
   backdrop-filter: blur(10px);
 }
 
+/**/
 .visualNote p {
   margin-top: 4px;
   color: #797984;
   font-size: 13px;
 }
 
+/*guvenli alisveris yazisinin yanindaki tik kutusu*/
 .noteIcon {
   display: flex;
   align-items: center;

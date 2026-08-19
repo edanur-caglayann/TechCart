@@ -1,64 +1,259 @@
-.categoryMenu {
-  display: flex; /* Kategori butonlarını yan yana dizer */
+/* Kategori bölümünün tamamı */
+.categorySection {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 70px 80px;
+  background-color: #ffffff;
+}
+
+/* Başlık ve açıklamayı yan yana tutan üst alan */
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+/* Başlığın üzerindeki küçük KATEGORİLER yazısı */
+.sectionLabel {
+  display: block;
+  margin-bottom: 10px;
+  color: #777782;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Kategori bölümünün ana başlığı */
+.sectionTitle {
+  max-width: 650px;
+  color: #111116;
+  font-size: 34px;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+/* Başlığın sağ tarafındaki açıklama */
+.sectionDescription {
+  max-width: 360px;
+  color: #777782;
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* Dört kategori kartını yerleştiren alan */
+.categoryGrid {
+  display: grid;
+
+  /* Alanı eşit genişlikte dört sütuna böler */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  /* Kartlar arasında 18 piksel boşluk bırakır */
+  gap: 18px;
+}
+
+/* Bütün kategori kartlarının ortak görünümü */
+.categoryCard {
+  position: relative;
+
+  /* Kart içeriğini dikey olarak ortalar */
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 14px 60px;
-  background-color: #2b2b2e;
-  border-bottom: 1px solid #3e424c;
-  overflow-x: auto;
-}
 
-/* Normal kategori butonları */
-.categoryButton {
-  padding: 9px 16px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background-color: transparent;
-  color: #dfe3eb;
-  font-weight: 500;
-  white-space: nowrap;
-  cursor: pointer;
-
-  transition:
-    color 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-/* Kullanıcı normal kategori butonunun üzerine geldiğinde */
-.categoryButton:hover {
-  border-color: #6085dd;
-  background-color: rgba(96, 133, 221, 0.12);
-  color: #86a5ed;
-}
-
-/* Başlangıçta seçili görünen kategori */
-.activeButton {
-  padding: 9px 16px;
-  border: 1px solid #6085dd;
-  border-radius: 8px;
-  background-color: #6085dd;
+  min-height: 220px;
+  padding: 24px;
+  border: 1px solid #dedee2;
+  border-radius: 18px;
   color: #ffffff;
-  font-weight: 600;
-  white-space: nowrap;
-  cursor: pointer;
+
+  /*
+    Kartın dışına taşan büyük arka plan ikonunu
+    kartın sınırları içinde gizler.
+  */
+  overflow: hidden;
+
+  /*
+    Kart büyüdüğünde veya gölgesi değiştiğinde
+    geçişin yumuşak olmasını sağlar.
+  */
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/*
+  Kartın alt tarafına koyu bir gölge katmanı ekler.
+  Bu katman sayesinde beyaz yazılar arka planda
+  daha kolay okunur.
+*/
+.categoryCard::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(7, 7, 12, 0.9),
+    rgba(20, 20, 25, 0.35)
+  );
+  content: "";
+}
+
+/* Fare kartın üzerine geldiğinde */
+.categoryCard:hover {
+  border-color: #a9a9b0;
+  box-shadow: 0 18px 35px rgba(15, 15, 20, 0.18);
+  transform: translateY(-5px);
+}
+
+/* Telefon kartının arka planı */
+.phoneCard {
+  background:
+    radial-gradient(circle at top right, #9b9ba2, transparent 50%),
+    linear-gradient(145deg, #55555d, #17171c);
+}
+
+/* Bilgisayar kartının arka planı */
+.computerCard {
+  background:
+    radial-gradient(circle at top left, #b4b4b9, transparent 48%),
+    linear-gradient(145deg, #696970, #18181d);
+}
+
+/* Tablet kartının arka planı */
+.tabletCard {
+  background:
+    radial-gradient(circle at center, #85858d, transparent 50%),
+    linear-gradient(145deg, #4c4c54, #15151a);
+}
+
+/* Aksesuar kartının arka planı */
+.accessoryCard {
+  background:
+    radial-gradient(circle at top right, #aaaab0, transparent 48%),
+    linear-gradient(145deg, #64646b, #19191e);
+}
+
+/* Kartın arkasındaki büyük ve silik ikon */
+.backgroundIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 190px;
+  height: 190px;
+
+  color: rgba(255, 255, 255, 0.17);
+
+  /*
+    İkonu kendi genişliğinin ve yüksekliğinin yarısı kadar
+    geri taşıyarak kartın tam ortasına yerleştirir.
+  */
+  transform: translate(-50%, -50%);
 
   transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease;
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
-/* Seçili butonun üzerine gelindiğinde */
-.activeButton:hover {
-  border-color: #4f73c9;
-  background-color: #4f73c9;
+/* Fare kartın üzerine geldiğinde büyük ikon hafif büyür */
+.categoryCard:hover .backgroundIcon {
+  color: rgba(255, 255, 255, 0.24);
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
-/* Küçük ekranlarda menünün yatay kaydırılabilmesi için */
-@media (max-width: 800px) {
-  .categoryMenu {
-    justify-content: flex-start;
-    padding: 12px 20px;
+/* İkon, kategori adı ve ürün sayısını tutan alan */
+.cardContent {
+  /*
+    ::after ile oluşturulan koyu katmanın
+    önünde görünmesi için z-index veriyoruz.
+  */
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Küçük kategori ikonunun kutusu */
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 54px;
+  height: 54px;
+  margin-bottom: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+
+  /*
+    Kutunun arkasındaki alanı hafifçe bulanıklaştırır.
+  */
+  backdrop-filter: blur(8px);
+}
+
+/* Kategori adı */
+.cardContent h3 {
+  margin: 0 0 7px;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Ürün sayısı */
+.cardContent p {
+  margin: 0;
+  color: #d0d0d5;
+  font-size: 14px;
+}
+
+/* Tablet büyüklüğündeki ekranlarda iki sütuna geçer */
+@media (max-width: 1000px) {
+  .categorySection {
+    padding: 60px 30px;
+  }
+
+  .categoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Telefon ekranlarında tek sütuna geçer */
+@media (max-width: 600px) {
+  .categorySection {
+    padding: 45px 20px;
+  }
+
+  .sectionHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sectionDescription {
+    text-align: left;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+  }
+
+  .categoryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .categoryCard {
+    min-height: 180px;
   }
 }

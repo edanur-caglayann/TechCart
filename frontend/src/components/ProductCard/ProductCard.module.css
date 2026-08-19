@@ -1,0 +1,235 @@
+/* Tek bir ürün kartının tamamı */
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  border: 1px solid #dedee2;
+  border-radius: 16px;
+  background-color: #ffffff;
+  overflow: hidden;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+/*
+  height: 100%, aynı satırdaki kartların içerikleri farklı
+  uzunlukta olsa bile eşit yükseklikte görünmesini sağlar.
+
+  overflow: hidden, görsel alanının kartın yuvarlak
+  köşelerinin dışına taşmasını engeller.
+*/
+
+/* Fare kartın üzerine geldiğinde */
+.card:hover {
+  border-color: #b8b8bf;
+  box-shadow: 0 15px 30px rgba(20, 20, 25, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Ürün görselinin veya ikonunun gösterildiği alan */
+.visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  min-height: 220px;
+  background:
+    radial-gradient(circle at top, #ffffff, transparent 55%),
+    linear-gradient(145deg, #eeeeF0, #d5d5d9);
+  color: #202027;
+}
+
+/*
+  position: relative, Tükendi etiketinin bu görsel alanına
+  göre konumlandırılmasını sağlar.
+
+  align-items ve justify-content, ürün ikonunu görsel
+  alanının tam ortasına getirir.
+*/
+
+/* Stokta olmayan ürünün üzerindeki etiket */
+.outOfStockBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 9px 15px;
+  border-radius: 9px;
+  background-color: #0b0b14;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+}
+
+/* Ürün bilgilerinin bulunduğu alt alan */
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/*
+  flex: 1, bilgi alanının kartta kalan bütün yüksekliği
+  kullanmasını sağlar. Böylece butonlar kartların
+  alt kısmında aynı hizada kalabilir.
+*/
+
+/* Marka ve kategori bilgilerini yan yana tutar */
+.productMeta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 10px;
+  min-width: 0;
+}
+
+.brand {
+  color: #242429;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.separator {
+  color: #c0c0c5;
+}
+
+.category {
+  color: #888892;
+  font-size: 12px;
+}
+
+/* Ürünün ana adı */
+.productName {
+  min-height: 48px;
+  margin: 0 0 6px;
+  color: #111116;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/*
+  min-height: 48px, kısa ve uzun ürün isimlerinin
+  kart yerleşimini bozmamasını sağlar.
+*/
+
+/* Ürün modeli */
+.model {
+  margin: 0 0 13px;
+  color: #85858f;
+  font-size: 12px;
+}
+
+/* Puan ve değerlendirme sayısının bulunduğu alan */
+.ratingArea {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+/* Yıldız ve puanı yan yana tutar */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #e5a400;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.reviewCount {
+  color: #92929c;
+  font-size: 12px;
+}
+
+/* Ürün fiyatı */
+.price {
+  display: block;
+  margin-top: auto;
+  margin-bottom: 18px;
+  color: #111116;
+  font-size: 21px;
+  font-weight: 750;
+}
+
+/*
+  margin-top: auto, fiyatı ve altındaki butonları kartın
+  alt tarafına iter. Böylece bütün kartların butonları
+  aynı seviyede görünür.
+*/
+
+/* Detay ve sepet butonlarını yan yana tutar */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+/* İki butonun ortak görünümü */
+.detailsButton,
+.cartButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 43px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 650;
+  text-align: center;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Detayları Gör bağlantısı */
+.detailsButton {
+  border: 1px solid #d7d7dc;
+  background-color: #ffffff;
+  color: #656570;
+}
+
+.detailsButton:hover {
+  border-color: #a8a8b0;
+  background-color: #f4f4f6;
+  color: #111116;
+}
+
+/* Sepete Ekle butonu */
+.cartButton {
+  border: 1px solid #0b0b14;
+  background-color: #0b0b14;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.cartButton:hover:not(:disabled) {
+  background-color: #303039;
+}
+
+.cartButton:active:not(:disabled),
+.detailsButton:active {
+  transform: scale(0.97);
+}
+
+/* Stokta olmayan ürünün devre dışı butonu */
+.cartButton:disabled {
+  border-color: #f0f0f2;
+  background-color: #f0f0f2;
+  color: #bcbcc3;
+  cursor: not-allowed;
+}
