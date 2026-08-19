@@ -4,7 +4,7 @@ import Header from  "../components/Header/Header";
 import Hero from "../components/Hero/Hero";
 import styles from "./page.module.css";
 import ProductList from "../components/ProductList/ProductList";
-
+import Footer from "../components/Footer/Footer";
 
 export default function HomePage() {
   return (
@@ -28,6 +28,9 @@ export default function HomePage() {
           
         </section>
       </main>
+
+            <Footer />
+
     </>
   );
 }

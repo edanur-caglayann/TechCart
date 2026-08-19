@@ -1,6 +1,8 @@
 /* Ürün başlığı, kartlar ve sayfalamanın tamamı */
 .productListArea {
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* Başlık ve sıralama kutusunu yan yana tutar */
@@ -47,8 +49,8 @@
 .productGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  align-items: stretch;
+  gap: 20px;
+  flex: 1;
 }
 
 /*
