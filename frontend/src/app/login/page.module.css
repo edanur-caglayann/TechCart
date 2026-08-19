@@ -1,0 +1,381 @@
+/* Giriş sayfasının tamamı */
+.loginPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Sayfanın en az ekran yüksekliği kadar olmasını sağlar. */
+  min-height: 100vh;
+
+  padding: 40px;
+  background-color: #f7f7f8;
+  color: #111116;
+}
+
+/*
+  Giriş sayfasının ana kutusu.
+  Sol tanıtım ve sağ form alanını yan yana tutar.
+*/
+.loginContainer {
+  display: grid;
+
+  /* Sol bölüm biraz daha geniş, sağ bölüm form alanıdır. */
+  grid-template-columns: 1.05fr 0.95fr;
+
+  width: 100%;
+  max-width: 1100px;
+  min-height: 650px;
+
+  overflow: hidden;
+  border: 1px solid #dedee3;
+  border-radius: 28px;
+  background-color: #ffffff;
+
+  /*
+    Kutunun arkasında yumuşak bir gölge oluşturur.
+    Dördüncü değer gölgenin saydamlığıdır.
+  */
+  box-shadow: 0 24px 70px rgba(17, 17, 22, 0.1);
+}
+
+/* Sol taraftaki koyu tanıtım alanı */
+.introduction {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 48px;
+  background:
+    linear-gradient(
+      145deg,
+      #29292f 0%,
+      #111116 60%,
+      #08080d 100%
+    );
+
+  color: #ffffff;
+}
+
+/* TECHCART logosu */
+.logo {
+  width: fit-content;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+
+/* Sol bölümdeki ana metin alanı */
+.introductionContent {
+  max-width: 480px;
+}
+
+/* Güvenli alışveriş yazısının bulunduğu küçük etiket */
+.label {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 24px;
+  padding: 9px 15px;
+
+  border: 1px solid #55555e;
+  border-radius: 999px;
+
+  color: #d8d8de;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* Etiketin solundaki küçük nokta */
+.label::before {
+  width: 7px;
+  height: 7px;
+  margin-right: 9px;
+
+  border-radius: 50%;
+  background-color: #ffffff;
+  content: "";
+}
+
+/* Sol bölümün büyük başlığı */
+.introductionContent h1 {
+  margin: 0 0 22px;
+
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -2.4px;
+}
+
+/* Sol bölümün açıklama metni */
+.introductionContent p {
+  max-width: 440px;
+  margin: 0;
+
+  color: #b8b8c1;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* Ana sayfaya dön bağlantısı */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  width: fit-content;
+
+  color: #d8d8de;
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backLink:hover {
+  color: #ffffff;
+  transform: translateX(-4px);
+}
+
+/* Sağ taraftaki form bölümü */
+.formSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 60px;
+}
+
+/* Formun üstündeki başlık alanı */
+.formHeader {
+  margin-bottom: 36px;
+}
+
+.formHeader h2 {
+  margin: 0 0 10px;
+
+  color: #111116;
+  font-size: 38px;
+  letter-spacing: -1.2px;
+}
+
+.formHeader p {
+  margin: 0;
+
+  color: #71717b;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Form alanlarını alt alta dizer */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Her label ve input grubunu bir arada tutar */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.formGroup label {
+  color: #29292f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Parola başlığı ve bağlantısını karşılıklı hizalar */
+.passwordHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.passwordHeader a {
+  color: #686873;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.passwordHeader a:hover {
+  color: #111116;
+}
+
+/*
+  İkon ve input alanını tek kutu içerisinde tutar.
+  position: relative sayesinde ikon input'un içinde konumlanır.
+*/
+.inputWrapper {
+  position: relative;
+}
+
+/* Input alanının solundaki ikon */
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  left: 17px;
+
+  color: #8a8a94;
+
+  /* İkonu kendi yüksekliğinin yarısı kadar yukarı taşır. */
+  transform: translateY(-50%);
+
+  /*
+    Kullanıcının ikona tıklamasının input'u
+    engellememesini sağlar.
+  */
+  pointer-events: none;
+}
+
+/* E-posta ve parola giriş kutuları */
+.inputWrapper input {
+  width: 100%;
+
+  /*
+    Sol padding daha büyüktür çünkü
+    bu alanda bir ikon bulunur.
+  */
+  padding: 16px 18px 16px 50px;
+
+  border: 1px solid #d8d8de;
+  border-radius: 12px;
+  outline: none;
+
+  background-color: #f8f8fa;
+  color: #111116;
+  font-size: 15px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Kullanıcı input alanını seçtiğinde uygulanır */
+.inputWrapper input:focus {
+  border-color: #29292f;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(17, 17, 22, 0.08);
+}
+
+/* Input içerisindeki örnek yazının rengi */
+.inputWrapper input::placeholder {
+  color: #9a9aa3;
+}
+
+/* Giriş yap butonu */
+.loginButton {
+  width: 100%;
+  margin-top: 6px;
+  padding: 16px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background-color: #09090f;
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Kullanıcı butonun üzerine geldiğinde */
+.loginButton:hover {
+  background-color: #29292f;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(17, 17, 22, 0.18);
+}
+
+/* Kullanıcı butona bastığı anda */
+.loginButton:active {
+  transform: translateY(0);
+}
+
+/* Formun altındaki kayıt ol alanı */
+.registerArea {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+
+  margin-top: 28px;
+
+  color: #74747e;
+  font-size: 14px;
+}
+
+.registerArea a {
+  color: #111116;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.registerArea a:hover {
+  text-decoration: underline;
+}
+
+/*
+  Ekran 850 pikselden küçük olduğunda
+  sol ve sağ alanları alt alta getirir.
+*/
+@media (max-width: 850px) {
+  .loginPage {
+    padding: 20px;
+  }
+
+  .loginContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .introduction {
+    min-height: 420px;
+    padding: 36px;
+  }
+
+  .formSection {
+    padding: 45px 36px;
+  }
+}
+
+/* Telefon ekranları için daha küçük boşluklar */
+@media (max-width: 500px) {
+  .loginPage {
+    padding: 0;
+    background-color: #ffffff;
+  }
+
+  .loginContainer {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .introduction {
+    min-height: 390px;
+    padding: 28px 22px;
+  }
+
+  .introductionContent h1 {
+    font-size: 38px;
+    letter-spacing: -1.5px;
+  }
+
+  .formSection {
+    padding: 40px 22px;
+  }
+
+  .formHeader h2 {
+    font-size: 32px;
+  }
+}
