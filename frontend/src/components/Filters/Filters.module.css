@@ -1,0 +1,232 @@
+/* Filtre panelinin tamamı */
+.filterPanel {
+  width: 280px;
+  min-width: 280px;
+  padding: 26px;
+  border: 1px solid #dedee2;
+  border-radius: 18px;
+  background-color: #ffffff;
+}
+
+/*
+  width panelin normal genişliğidir.
+  min-width ise ürün listesi genişlediğinde panelin
+  280 pikselden daha fazla daralmasını engeller.
+*/
+
+/* Filtreler başlığı ve Temizle butonu */
+.filterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
+.filterHeader h2 {
+  margin: 0;
+  color: #111116;
+  font-size: 25px;
+  font-weight: 750;
+}
+
+/* Filtreleri temizlemek için kullanılan sade buton */
+.clearButton {
+  padding: 5px;
+  border: none;
+  background-color: transparent;
+  color: #777782;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.clearButton:hover {
+  color: #111116;
+  text-decoration: underline;
+}
+
+/* Bütün filtre gruplarını tutan form */
+.filterForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Her filtre bölümünün ortak görünümü */
+.filterGroup {
+  padding: 22px 0;
+  border-bottom: 1px solid #e8e8eb;
+}
+
+/*
+  border-bottom her filtre grubunun altına ince çizgi ekler.
+  Böylece kategori, marka ve fiyat bölümleri birbirinden ayrılır.
+*/
+
+.filterGroup h3,
+.groupTitle {
+  display: block;
+  margin: 0 0 14px;
+  color: #64646f;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+/* Checkbox ve yanındaki yazıyı hizalar */
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #5f5f69;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.checkboxLabel:last-child {
+  margin-bottom: 0;
+}
+
+/* Tarayıcının checkbox görünümünü siyah yapar */
+.checkboxLabel input {
+  width: 17px;
+  height: 17px;
+  accent-color: #111116;
+  cursor: pointer;
+}
+
+.checkboxLabel:hover {
+  color: #111116;
+}
+
+/* Marka ve puan seçim kutuları */
+.select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d6d6db;
+  border-radius: 10px;
+  background-color: #f4f4f6;
+  color: #222228;
+  outline: none;
+  cursor: pointer;
+}
+
+.select:focus {
+  border-color: #777782;
+  box-shadow: 0 0 0 3px rgba(20, 20, 25, 0.07);
+}
+
+/* Minimum ve maksimum fiyat kutularını yan yana dizer */
+.priceInputs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.priceInputs div {
+  min-width: 0;
+}
+
+.priceInputs label {
+  display: block;
+  margin-bottom: 7px;
+  color: #888892;
+  font-size: 12px;
+}
+
+.priceInputs input {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 9px;
+  border: 1px solid #d6d6db;
+  border-radius: 10px;
+  background-color: #f4f4f6;
+  color: #222228;
+  outline: none;
+}
+
+.priceInputs input:focus {
+  border-color: #777782;
+  box-shadow: 0 0 0 3px rgba(20, 20, 25, 0.07);
+}
+
+/* Renk seçeneklerini alt alta dizer */
+.colorList {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+/* Checkbox, renk dairesi ve yazıyı yan yana dizer */
+.colorOption {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #5f5f69;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.colorOption input {
+  width: 16px;
+  height: 16px;
+  accent-color: #111116;
+}
+
+/* Rengi gösteren küçük yuvarlak alan */
+.colorCircle {
+  width: 17px;
+  height: 17px;
+  border: 1px solid #bcbcc2;
+  border-radius: 50%;
+}
+
+.black {
+  background-color: #15151a;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.gray {
+  background-color: #92929a;
+}
+
+.blue {
+  background-color: #68758c;
+}
+
+/* Filtreleri uygulama butonu */
+.applyButton {
+  width: 100%;
+  margin-top: 24px;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 11px;
+  background-color: #0b0b14;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.applyButton:hover {
+  background-color: #303039;
+}
+
+.applyButton:active {
+  transform: scale(0.98);
+}
+
+/* Küçük ekranlarda filtre panelini tam genişlik yapar */
+@media (max-width: 900px) {
+  .filterPanel {
+    width: 100%;
+    min-width: 0;
+  }
+}

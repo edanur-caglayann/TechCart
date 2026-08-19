@@ -1,0 +1,255 @@
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 70px;
+  width: 100%;
+  max-width: 1500px;
+  min-height: 680px;
+  margin: 0 auto;
+  padding: 70px 80px;
+  background-color: #ffffff;
+}
+
+/*sol taraftaki yazilar*/
+.content {
+  max-width: 650px;
+}
+
+/*kucuk ust etiket*/
+.label {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  margin-bottom: 30px;
+  border: 1px solid #cfcfd4;
+  border-radius: 999px;
+  background-color: #f1f1f3;
+  color: #242429;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/**/
+.label::before {
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background-color: #111116;
+  content: "";
+}
+
+.title {
+  margin-bottom: 24px;
+  color: #09090e;
+  font-size: clamp(60px, 4vw, 80px);
+  white-space: nowrap;
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -4px;
+}
+
+.description {
+  max-width: 600px;
+  margin-bottom: 36px;
+  color: #6b6b76;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+/*buton ve urun sayisi*/
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+
+.discoverButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 17px 24px;
+  border-radius: 12px;
+  background-color: #0b0b14;
+  color: #ffffff;
+  font-weight: 700;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.discoverButton:hover {
+  background-color: #303039;
+  transform: translateY(-2px);
+}
+
+
+.discoverButton:active {
+  transform: scale(0.98);
+}
+
+.customerInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.customerInfo strong {
+  color: #111116;
+  font-size: 25px;
+}
+
+.customerInfo span {
+  color: #777782;
+  font-size: 15px;
+}
+
+/* sag taraftaki görsel */
+.visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 490px;
+  border: 1px solid #dedee2;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top right, #e4e4e7, transparent 42%),
+    linear-gradient(145deg, #f5f5f6, #d5d5d9);
+  box-shadow: 0 30px 60px rgba(20, 20, 25, 0.18);
+  overflow: hidden;
+}
+
+/*sagdaki buyuk gri gorsel kutusunun tamami*/
+.visual::before {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border: 1px solid rgba(20, 20, 25, 0.12);
+  border-radius: 50%;
+  content: "";
+}
+
+/* pc, telefon, kulaklik ikonlarinin grubu*/
+.visualContent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  color: #111116;
+}
+
+
+.laptopIcon {
+  width: 190px;
+  height: 190px;
+}
+
+/*telefon - kulaklik kutularinin grubu */
+.smallIcons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/*Telefon veya kulaklığın içindeki küçük beyaz kutu */
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border: 1px solid #d0d0d5;
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+/*Guvenli alisveris bilgi butonu*/
+.visualNote {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid #e2e2e5;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #15151a;
+  backdrop-filter: blur(10px);
+}
+
+/**/
+.visualNote p {
+  margin-top: 4px;
+  color: #797984;
+  font-size: 13px;
+}
+
+/*guvenli alisveris yazisinin yanindaki tik kutusu*/
+.noteIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background-color: #e5e5e8;
+  font-weight: 800;
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 60px 30px;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+
+  .visual {
+    min-height: 430px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 45px 20px;
+  }
+
+  .title {
+    font-size: 52px;
+    letter-spacing: -2px;
+  }
+
+  .description {
+    font-size: 17px;
+  }
+
+  .actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .visual {
+    min-height: 350px;
+  }
+
+  .laptopIcon {
+    width: 130px;
+    height: 130px;
+  }
+}

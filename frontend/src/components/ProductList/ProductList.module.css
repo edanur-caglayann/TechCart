@@ -1,0 +1,134 @@
+/* Ürün başlığı, kartlar ve sayfalamanın tamamı */
+.productListArea {
+  min-width: 0;
+}
+
+/* Başlık ve sıralama kutusunu yan yana tutar */
+.listHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 24px;
+}
+
+.listHeader h2 {
+  margin: 0 0 7px;
+  color: #111116;
+  font-size: 34px;
+  font-weight: 750;
+  letter-spacing: -1px;
+}
+
+.listHeader p {
+  margin: 0;
+  color: #888892;
+  font-size: 14px;
+}
+
+/* Ürün sıralama kutusu */
+.sortSelect {
+  min-width: 180px;
+  padding: 11px 13px;
+  border: 1px solid #d8d8dd;
+  border-radius: 10px;
+  background-color: #f3f3f5;
+  color: #33333a;
+  outline: none;
+  cursor: pointer;
+}
+
+.sortSelect:focus {
+  border-color: #888892;
+  box-shadow: 0 0 0 3px rgba(20, 20, 25, 0.07);
+}
+
+/* Ürün kartlarını dört eşit sütuna böler */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+/*
+  repeat(4, ...) dört sütun oluşturur.
+  1fr bütün sütunların eşit genişlikte olmasını sağlar.
+  minmax(0, 1fr), uzun ürün adlarının grid alanını
+  genişletmesini ve sayfa düzenini bozmasını engeller.
+*/
+
+/* Sayfa değiştirme butonlarını tutan alan */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 42px;
+}
+
+/* Bütün sayfalama butonlarının ortak görünümü */
+.pagination button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #dedee2;
+  border-radius: 11px;
+  background-color: #ffffff;
+  color: #62626d;
+  font-weight: 650;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #f0f0f2;
+  color: #111116;
+}
+
+.pagination button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Kullanıcının bulunduğu sayfa */
+.pagination .activePage {
+  border-color: #0b0b14;
+  background-color: #0b0b14;
+  color: #ffffff;
+}
+
+/* Kullanılamayan önceki veya sonraki butonu */
+.pagination button:disabled {
+  color: #c6c6cc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Orta genişlikte ekranlarda iki karta düşer */
+@media (max-width: 1250px) {
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Telefon ekranlarında ürünler tek sütun olur */
+@media (max-width: 650px) {
+  .listHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sortSelect {
+    width: 100%;
+  }
+
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+}

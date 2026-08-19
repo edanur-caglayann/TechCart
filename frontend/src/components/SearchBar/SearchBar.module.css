@@ -1,0 +1,60 @@
+.searchBar {
+  display: flex; /* Input ve arama ikonunu yan yana dizer */
+  align-items: center;
+  flex: 1;
+  max-width: 720px;
+  padding: 0 8px 0 18px;
+  border: 1px solid #d5d5da;
+  border-radius: 14px;
+  background-color: #f1f1f4;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Kullanıcı arama kutusuna tıkladığında dış alanı vurgular */
+.searchBar:focus-within {
+  border-color: #7a7a84;
+  box-shadow: 0 0 0 3px rgba(20, 20, 25, 0.08);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 0;
+  border: none;
+  background-color: transparent;
+  color: #17171c;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #858590;
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #4c4c56;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.searchButton:hover {
+  background-color: #ddddE2;
+  color: #08080d;
+}
+
+.searchButton:active {
+  transform: scale(0.95);
+}

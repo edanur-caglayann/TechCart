@@ -1,0 +1,112 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 18px 60px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e4e4e7;
+}
+
+.logo {
+  color: #0c0c11;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.65;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginLink,
+.registerLink,
+.cartLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-radius: 11px;
+  white-space: nowrap;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Giriş Yap bağlantısı */
+.loginLink {
+  color: #656570;
+}
+
+.loginLink:hover {
+  background-color: #f1f1f3;
+  color: #111116;
+}
+
+/* Kayıt Ol bağlantısı */
+.registerLink {
+  background-color: #f0f0f2;
+  color: #17171c;
+}
+
+.registerLink:hover {
+  background-color: #dedee2;
+}
+
+/* Sepetim butonu */
+.cartLink {
+  background-color: #0b0b14;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.cartLink:hover {
+  background-color: #292932;
+}
+
+.loginLink:active,
+.registerLink:active,
+.cartLink:active {
+  transform: scale(0.97);
+}
+
+/* Ekran küçüldüğünde Header elemanlarını düzenler */
+@media (max-width: 1000px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 18px 25px;
+  }
+
+  .menu {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .logo {
+    text-align: center;
+  }
+
+  .menu {
+    justify-content: center;
+    margin-left: 0;
+  }
+}
