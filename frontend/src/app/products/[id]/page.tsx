@@ -18,7 +18,9 @@ import { notFound } from "next/navigation";
 
 import { products } from "../../../data/products";
 import { Product } from "../../../types/product";
+import AddToCartButton from "../../../components/AddToCartButton/AddToCartButton";
 import styles from "./page.module.css";
+
 
 /*
   Ürünün visualType değerine göre
@@ -181,18 +183,12 @@ export default async function ProductDetailPage({
             </span>
           </div>
 
-          {/*
-            Stokta olmayan ürünlerde buton disabled özelliğiyle devre dışı kalır.
-          */}
-          <button
+          {/* boylece hem urun kartindaki 
+          hem de urun detay sayfasindaki buton ayni sepete urun ekler */}
+          <AddToCartButton
+            product={product}
             className={styles.cartButton}
-            type="button"
-            disabled={!product.inStock}
-          >
-            {product.inStock
-              ? "Sepete Ekle"
-              : "Ürün Tükendi"}
-          </button>
+         />
 
           <div className={styles.serviceInformation}>
             <div>

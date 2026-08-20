@@ -173,8 +173,12 @@
 /* Detay ve sepet butonlarını yan yana tutar */
 .actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  /* Sepete Ekle butonuna biraz daha fazla alan verir. */
+  grid-template-columns: 1fr 1.15fr;
+
   gap: 9px;
+  margin-top: auto;
 }
 
 /* İki butonun ortak görünümü */
@@ -209,12 +213,70 @@
   color: #111116;
 }
 
-/* Sepete Ekle butonu */
+/* Sepete Ekle butonunun normal görünümü */
 .cartButton {
-  border: 1px solid #0b0b14;
-  background-color: #0b0b14;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  min-height: 52px;
+  padding: 11px 12px;
+
+  border: 1px solid #111116;
+  border-radius: 10px;
+
+  /* İlk tasarımdaki siyaha yakın arka plan */
+  background-color: #111116;
   color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/*
+  Üzerine gelindiğinde aşırı koyulaşmak yerine
+  biraz daha açık antrasit olur.
+*/
+.cartButton:hover:not(:disabled) {
+  border-color: #35353c;
+  background-color: #35353c;
+  transform: translateY(-1px);
+}
+
+/* Stokta olmayan ürün butonu */
+.cartButton:disabled {
+  border-color: #eeeef1;
+  background-color: #eeeef1;
+  color: #b1b1b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Butonun içindeki adet göstergesi */
+.cartQuantity {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #111116;
+
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .cartButton:hover:not(:disabled) {
