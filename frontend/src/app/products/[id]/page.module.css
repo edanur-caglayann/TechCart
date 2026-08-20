@@ -1,0 +1,424 @@
+/* Ürün detay sayfasının tamamı */
+.detailPage {
+  min-height: 100vh;
+  padding: 0 70px 80px;
+
+  background-color: #ffffff;
+  color: #111116;
+}
+
+/*
+  Sayfanın üstündeki logo ve geri dönüş bağlantısını
+  karşılıklı olarak hizalar.
+*/
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 28px 0;
+
+  border-bottom: 1px solid #e4e4e8;
+}
+
+/* TechCart logosu */
+.logo {
+  color: #111116;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+
+/* Ürün listesine dönüş bağlantısı */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #686873;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backLink:hover {
+  color: #111116;
+  transform: translateX(-4px);
+}
+
+/*
+  Ürün görseliyle ürün bilgilerini iki sütunda
+  yan yana gösteren ana bölüm.
+*/
+.productDetail {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: stretch;
+  gap: 60px;
+
+  width: 100%;
+  max-width: 1400px;
+  margin: 60px auto 0;
+}
+
+/* Ürün görselinin veya ikonunun bulunduğu alan */
+.visualArea {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 590px;
+
+  overflow: hidden;
+
+  border: 1px solid #dedee3;
+  border-radius: 26px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #f7f7f9 0%,
+      #ededf0 58%,
+      #dcdce1 100%
+    );
+
+  color: #17171c;
+}
+
+/*
+  Görsel alanının arkasındaki dekoratif halka.
+  ::before kullanıldığı için HTML içine
+  ayrıca bir element eklememize gerek kalmaz.
+*/
+.visualArea::before {
+  position: absolute;
+
+  width: 390px;
+  height: 390px;
+
+  border: 1px solid #d0d0d6;
+  border-radius: 50%;
+
+  content: "";
+}
+
+/*
+  İkonun dekoratif halkanın önünde
+  görünmesini sağlar.
+*/
+.visualArea svg {
+  position: relative;
+  z-index: 1;
+}
+
+/* Stokta bulunmayan ürün etiketi */
+.outOfStockBadge {
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  right: 25px;
+
+  padding: 10px 16px;
+
+  border-radius: 999px;
+  background-color: #111116;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+/* Ürün bilgilerinin bulunduğu sağ alan */
+.informationArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Marka ve kategori bilgileri */
+.productMeta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 18px;
+
+  color: #6f6f79;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+/* Ürünün büyük başlığı */
+.informationArea h1 {
+  margin: 0 0 12px;
+
+  color: #111116;
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+/* Model bilgisi */
+.model {
+  margin: 0 0 22px;
+
+  color: #777781;
+  font-size: 15px;
+}
+
+/* Puan ve değerlendirme sayısını yan yana tutar */
+.ratingArea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 25px;
+
+  color: #81818a;
+  font-size: 14px;
+}
+
+/* Yıldızla puanı bir arada tutar */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #e8a500;
+}
+
+/* Ürün açıklaması */
+.description {
+  margin: 0 0 28px;
+
+  color: #65656f;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* Fiyat başlığı ve fiyatı alt alta tutar */
+.priceArea {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  margin-bottom: 20px;
+}
+
+.priceArea span {
+  color: #797983;
+  font-size: 13px;
+}
+
+.priceArea strong {
+  color: #111116;
+  font-size: 36px;
+  letter-spacing: -1px;
+}
+
+/* Stok bilgisi */
+.stockInformation {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 22px;
+
+  color: #4f4f58;
+  font-size: 14px;
+}
+
+/* Sepete ekle butonu */
+.cartButton {
+  width: 100%;
+  padding: 17px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background-color: #09090f;
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cartButton:hover:not(:disabled) {
+  background-color: #29292f;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(17, 17, 22, 0.18);
+}
+
+/* Stokta olmayan ürünün butonu */
+.cartButton:disabled {
+  background-color: #e8e8eb;
+  color: #a0a0a8;
+  cursor: not-allowed;
+}
+
+/* Teslimat ve güvenlik bilgileri */
+.serviceInformation {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+
+  margin-top: 22px;
+}
+
+.serviceInformation > div {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 15px;
+
+  border: 1px solid #e1e1e5;
+  border-radius: 12px;
+
+  color: #61616b;
+  font-size: 12px;
+}
+
+.serviceInformation span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.serviceInformation strong {
+  color: #29292f;
+  font-size: 13px;
+}
+
+/* Ürün özellikleri alt bölümü */
+.featuresSection {
+  width: 100%;
+  max-width: 1400px;
+  margin: 80px auto 0;
+  padding-top: 45px;
+
+  border-top: 1px solid #e3e3e7;
+}
+
+.sectionTitle span {
+  color: #74747e;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.sectionTitle h2 {
+  margin: 10px 0 30px;
+
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+/* Ürün özelliklerini dört kutu halinde gösterir */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 22px;
+
+  border: 1px solid #dedee3;
+  border-radius: 14px;
+
+  background-color: #f8f8fa;
+  color: #29292f;
+}
+
+.featureItem span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  color: #6e6e77;
+  font-size: 14px;
+}
+
+.featureItem strong {
+  color: #111116;
+  font-size: 13px;
+}
+
+/* Tablet görünümü */
+@media (max-width: 950px) {
+  .detailPage {
+    padding: 0 30px 60px;
+  }
+
+  .productDetail {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .visualArea {
+    min-height: 480px;
+  }
+
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Telefon görünümü */
+@media (max-width: 600px) {
+  .detailPage {
+    padding: 0 18px 45px;
+  }
+
+  .topBar {
+    padding: 22px 0;
+  }
+
+  .productDetail {
+    margin-top: 30px;
+  }
+
+  .visualArea {
+    min-height: 350px;
+    border-radius: 18px;
+  }
+
+  .visualArea::before {
+    width: 260px;
+    height: 260px;
+  }
+
+  .informationArea h1 {
+    font-size: 38px;
+  }
+
+  .serviceInformation,
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+}
