@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Headphones,
   Laptop,
@@ -13,6 +15,7 @@ import Link from "next/link";
 // urun hangi alanlara sahip
 import { Product } from "../../types/product";
 import styles from "./ProductCard.module.css";
+import { useCart } from "../../context/CartContext";
 
 // product karti icin gerekli olan propslari tanimlar
 type ProductCardProps = {
@@ -54,10 +57,32 @@ function ProductVisual({
     return <Disc3 size={105} strokeWidth={1.2} />;
 }
 
-// Tek bir ürün kartını oluşturan ana bileşen.
+  // Tek bir ürün kartını oluşturan ana bileşen.
     export default function ProductCard({
      product,
     }: ProductCardProps) {
+      /*
+  addToCart ürün eklemek için,
+  cartItems ise ürünün sepetteki mevcut adedini
+  bulmak için kullanılır.
+  */
+    const {
+     addToCart,
+     cartItems,
+    } = useCart();
+    /*
+  Bu karttaki ürün daha önce sepete eklenmiş mi
+  diye ürün id'sine göre arıyoruz.
+*/
+const cartItem = cartItems.find(
+  (item) => item.product.id === product.id
+);
+
+/*
+  Ürün sepetteyse mevcut adedini,
+  sepette değilse 0 değerini kullanıyoruz.
+*/
+const cartQuantity = cartItem?.quantity ?? 0;
   return (
     // article, tek başına anlamlı bir içeriği temsil eder.
     // Her ürün bağımsız bir içerik olduğu için article kullanıyoruz.
@@ -137,16 +162,33 @@ function ProductVisual({
             Detayları Gör
           </Link>
 
-          {/* Ürünü sepete eklemek için kullanılacak buton */}
-          <button
-            className={styles.cartButton}
+        <button
+  className={styles.cartButton}
+  type="button"
+  disabled={!product.inStock}
+  onClick={() => addToCart(product)}
+>
+  {product.inStock ? (
+    <>
+      <span>Sepete Ekle</span>
 
-            type="button"
-
-            // Ürün stokta değilse butonu devre dışı bırakır.
-            disabled={!product.inStock}>
-            {product.inStock ? "Sepete Ekle" : "Tükendi"}
-          </button>
+      {/*
+        Ürün en az bir kez sepete eklenmişse
+        butonun yanında mevcut adedi gösterir.
+      */}
+      {cartQuantity > 0 && (
+        <span
+          className={styles.cartQuantity}
+          aria-label={`Sepette ${cartQuantity} adet var`}
+        >
+          {cartQuantity}
+        </span>
+      )}
+    </>
+  ) : (
+    "Tükendi"
+  )}
+</button>
         </div>
       </div>
     </article>
