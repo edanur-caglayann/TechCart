@@ -1,160 +1,146 @@
-TechCart
+<div align="center">
 
-TechCart, teknoloji ürünlerinin keşfedilmesi ve satın alınması süreçlerini modern bir kullanıcı deneyimiyle sunmayı amaçlayan full-stack bir e-ticaret uygulamasıdır. Proje; katmanlı backend mimarisi, bağımsız frontend uygulaması, otomatik test altyapısı ve container tabanlı geliştirme ortamı ile yapılandırılmıştır.
+# TechCart
 
-Proje kapsamı
+**Modern ve ölçeklenebilir bir full-stack e-ticaret uygulaması**
 
-Kullanıcı kaydı, giriş ve rol tabanlı yetkilendirme
+Next.js • ASP.NET Core • PostgreSQL • Docker
 
-Ürün, kategori, marka ve stok yönetimi
+</div>
 
-Ürün listeleme, detay görüntüleme, filtreleme ve sıralama
+---
 
-Elasticsearch destekli ürün arama
+## Proje Hakkında
 
-Sepet ve ürün adedi yönetimi
+TechCart; teknoloji ürünlerinin keşfedilmesi, karşılaştırılması ve satın alınması süreçlerini kullanıcı dostu bir deneyimle sunan full-stack bir e-ticaret uygulamasıdır.
 
-Ürün karşılaştırma
+Proje; katmanlı backend mimarisi, bağımsız frontend uygulaması, test altyapısı ve container tabanlı geliştirme ortamıyla yapılandırılmıştır.
 
-Sipariş oluşturma, geçmiş görüntüleme ve durum takibi
+## Proje Kapsamı
 
-3D Secure destekli test ödeme entegrasyonu
+- Kullanıcı kaydı, giriş ve rol tabanlı yetkilendirme
+- Ürün, kategori, marka ve stok yönetimi
+- Ürün listeleme ve detay görüntüleme
+- Arama, filtreleme ve sıralama
+- Sepet ve ürün adedi yönetimi
+- Ürün karşılaştırma
+- Sipariş oluşturma ve durum takibi
+- 3D Secure destekli test ödeme entegrasyonu
+- Satın alınan ürünler için puanlama
+- Yönetici işlemleri
 
-Satın alınan ürünler için puanlama
+## Teknoloji Yığını
 
-Yönetici işlemleri
+| Alan | Teknoloji |
+|---|---|
+| Frontend | Next.js, React, TypeScript |
+| Backend | ASP.NET Core Web API, .NET 9 |
+| Veritabanı | PostgreSQL |
+| Arama | Elasticsearch |
+| Test | xUnit |
+| Container | Docker, Docker Compose |
 
-Teknoloji yığını
+## Backend Mimarisi
 
-Alan
+Backend, sorumlulukların ayrılmasını sağlayan katmanlı mimari yaklaşımıyla yapılandırılmıştır.
 
-Teknoloji
+| Katman | Sorumluluk |
+|---|---|
+| `TechCart.API` | HTTP istekleri ve API endpoint’leri |
+| `TechCart.Application` | Servisler, DTO’lar ve kullanım senaryoları |
+| `TechCart.Domain` | Entity’ler, enum’lar ve iş kuralları |
+| `TechCart.Persistence` | PostgreSQL ve veri erişim işlemleri |
+| `TechCart.Infrastructure` | Arama, ödeme ve e-posta entegrasyonları |
 
-Frontend
+## Kurulum
 
-Next.js, React, TypeScript
+### Gereksinimler
 
-Backend
+- Git
+- Docker Desktop
 
-ASP.NET Core Web API, .NET 9
+### Repository’yi klonlama
 
-Veritabanı
-
-PostgreSQL
-
-Arama
-
-Elasticsearch
-
-Test
-
-xUnit
-
-Container
-
-Docker, Docker Compose
-
-Mimari
-
-Backend, sorumlulukların ayrılmasını sağlayan katmanlı mimari yaklaşımıyla yapılandırılmıştır:
-
-TechCart.API: HTTP istekleri ve API endpoint'leri
-
-TechCart.Application: Uygulama servisleri, DTO'lar ve kullanım senaryoları
-
-TechCart.Domain: Entity'ler, enum'lar ve temel iş kuralları
-
-TechCart.Persistence: PostgreSQL ve veri erişim işlemleri
-
-TechCart.Infrastructure: Elasticsearch, ödeme ve e-posta gibi dış servis entegrasyonları
-
-Kurulum ve çalıştırma
-
-Gereksinimler
-
-Git
-
-Docker Desktop
-
-1. Repository'yi klonlayın
-
+```bash
 git clone https://github.com/edanur-caglayann/TechCart.git
 cd TechCart
+```
 
-2. Docker Desktop'ı başlatın
+### Docker ile çalıştırma
 
-Docker Desktop açıldıktan sonra Docker Engine'in çalışır durumda olduğundan emin olun.
+Docker Desktop’ın çalıştığından emin olduktan sonra:
 
-3. Uygulamayı çalıştırın
-
+```bash
 docker compose up --build
+```
 
-Docker Compose, uygulama servislerini ayrı container'lar hâlinde aynı ağ üzerinde çalıştırır:
+Servis adresleri:
 
-Servis
+| Servis | Adres |
+|---|---|
+| Frontend | `http://localhost:3000` |
+| Backend API | `http://localhost:8080` |
+| PostgreSQL | `localhost:5433` |
+| OpenAPI | `http://localhost:8080/openapi/v1.json` |
 
-Adres
+Projeyi arka planda çalıştırmak için:
 
-Frontend
-
-http://localhost:3000
-
-Backend API
-
-http://localhost:8080
-
-PostgreSQL
-
-localhost:5433
-
-OpenAPI belgesi
-
-http://localhost:8080/openapi/v1.json
-
-Uygulamayı arka planda çalıştırmak için:
-
+```bash
 docker compose up --build -d
+```
 
 Çalışan servisleri görüntülemek için:
 
+```bash
 docker compose ps
+```
 
-Uygulamayı durdurmak için:
+Projeyi durdurmak için:
 
+```bash
 docker compose down
+```
 
-Docker kullanmadan çalıştırma
+## Docker Kullanmadan Çalıştırma
 
-Frontend
+### Frontend
 
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
-Backend API
+### Backend API
 
-TechCart ana klasöründe:
-
+```bash
 dotnet run --project backend/src/TechCart.API
+```
 
-Testler
+## Testler
 
-Tüm backend testlerini çalıştırmak için:
+Bütün backend testlerini çalıştırmak için:
 
+```bash
 dotnet test backend/TechCart.sln
+```
 
 Yalnızca unit testleri çalıştırmak için:
 
+```bash
 cd tests/TechCart.UnitTests
 dotnet test
+```
 
-Solution dosyası TechCart.slnx biçimindeyse test komutunda TechCart.sln yerine TechCart.slnx kullanılmalıdır.
+> Solution dosyası `TechCart.slnx` biçimindeyse komutta `TechCart.sln` yerine `TechCart.slnx` kullanılmalıdır.
 
-Container yapısı
+## Docker Yapısı
 
+```text
 TechCart Compose Project
 ├── techcart-frontend
 ├── techcart-api
 └── techcart-postgres
+```
 
-Frontend ve backend için ayrı Dockerfile kullanılır. PostgreSQL ise resmi PostgreSQL imajı üzerinden çalıştırılır. Servislerin oluşturulması, ağ bağlantıları, portları ve çalışma sırası docker-compose.yml dosyası tarafından yönetilir.
+Frontend, backend API ve PostgreSQL ayrı container’larda çalışır. Servislerin ağ bağlantıları, portları ve çalışma düzeni `docker-compose.yml` üzerinden yönetilir.
