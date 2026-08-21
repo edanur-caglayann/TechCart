@@ -155,7 +155,7 @@ export default function RegisterPage() {
                     size={20}
                     aria-hidden="true"
                   />
-
+      {/* birdden fazla sifre icin ozellik rakam isaret gibi - zod, yup */}
                   <input
                     id="password"
                     name="password"

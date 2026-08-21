@@ -1,0 +1,12 @@
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/bin/Debug/net9.0/TechCart.Domain.deps.json
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/bin/Debug/net9.0/TechCart.Domain.dll
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/bin/Debug/net9.0/TechCart.Domain.pdb
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/TechCart.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/TechCart.Domain.AssemblyInfoInputs.cache
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/TechCart.Domain.AssemblyInfo.cs
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/TechCart.Domain.csproj.CoreCompileInputs.cache
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/TechCart.Domain.sourcelink.json
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/TechCart.Domain.dll
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/refint/TechCart.Domain.dll
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/TechCart.Domain.pdb
+/Users/cagla/Desktop/TechCart/backend/src/TechCart.Domain/obj/Debug/net9.0/ref/TechCart.Domain.dll
