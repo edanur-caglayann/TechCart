@@ -40,18 +40,6 @@ Proje; katmanlı backend mimarisi, bağımsız frontend uygulaması, test altyap
 | Test | xUnit |
 | Container | Docker, Docker Compose |
 
-## Backend Mimarisi
-
-Backend, sorumlulukların ayrılmasını sağlayan katmanlı mimari yaklaşımıyla yapılandırılmıştır.
-
-| Katman | Sorumluluk |
-|---|---|
-| `TechCart.API` | HTTP istekleri ve API endpoint’leri |
-| `TechCart.Application` | Servisler, DTO’lar ve kullanım senaryoları |
-| `TechCart.Domain` | Entity’ler, enum’lar ve iş kuralları |
-| `TechCart.Persistence` | PostgreSQL ve veri erişim işlemleri |
-| `TechCart.Infrastructure` | Arama, ödeme ve e-posta entegrasyonları |
-
 ## Kurulum
 
 ### Gereksinimler
@@ -133,14 +121,5 @@ dotnet test
 ```
 
 > Solution dosyası `TechCart.slnx` biçimindeyse komutta `TechCart.sln` yerine `TechCart.slnx` kullanılmalıdır.
-
-## Docker Yapısı
-
-```text
-TechCart Compose Project
-├── techcart-frontend
-├── techcart-api
-└── techcart-postgres
-```
 
 Frontend, backend API ve PostgreSQL ayrı container’larda çalışır. Servislerin ağ bağlantıları, portları ve çalışma düzeni `docker-compose.yml` üzerinden yönetilir.
