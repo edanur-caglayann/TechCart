@@ -1,0 +1,79 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: techcart-postgres
+    environment:
+      POSTGRES_DB: techcart
+      POSTGRES_USER: techcart
+      POSTGRES_PASSWORD: techcart
+    ports:
+      - "5433:5432"
+    volumes:
+      - techcart-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U techcart -d techcart"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    container_name: techcart-api
+    build:
+      context: .
+      dockerfile: deploy/api.Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__PostgreSQL: Host=postgres;Port=5432;Database=techcart;Username=techcart;Password=techcart
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    container_name: techcart-frontend
+    build:
+      context: .
+      dockerfile: deploy/frontend.Dockerfile
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+  
+  worker:
+    build:
+      context: .
+      dockerfile: deploy/worker.Dockerfile
+    container_name: techcart-worker
+    environment:
+      DOTNET_ENVIRONMENT: Development
+      RabbitMq__Host: rabbitmq
+      RabbitMq__Port: 5672
+      RabbitMq__Username: guest
+      RabbitMq__Password: guest
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+    
+  rabbitmq:
+      image: rabbitmq:4-management
+      container_name: techcart-rabbitmq
+      environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+      ports:
+        - "5672:5672"
+        - "15672:15672"
+      healthcheck:
+        test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+      restart: unless-stopped
+
+volumes:
+  techcart-postgres-data:
