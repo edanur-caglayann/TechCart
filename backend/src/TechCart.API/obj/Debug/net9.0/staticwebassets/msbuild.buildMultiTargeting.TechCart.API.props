@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/TechCart.API.props" />
-</Project>
