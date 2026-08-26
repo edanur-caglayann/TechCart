@@ -53,49 +53,6 @@ backend/
 └── TechCart.sln
 ```
 
-```text
-TechCart/
-├── backend/                         # .NET tabanlı Backend çalışma alanı
-│   ├── src/
-│   │   ├── BuildingBlocks/          # Ortak altyapı ve çekirdek kütüphaneler (Shared)
-│   │   │   ├── TechCart.EventBus         # RabbitMQ / Pub-Sub altyapısı
-│   │   │   ├── TechCart.Infrastructure   # Veritabanı, loglama vb. temel ayarlar
-│   │   │   └── TechCart.SharedKernel     # Ortak domain objeleri ve exception'lar
-│   │   │
-│   │   ├── Hosts/                   # Uygulamanın ayağa kalktığı giriş noktaları
-│   │   │   ├── TechCart.Api              # API isteklerini karşılayan ana proje
-│   │   │   └── TechCart.Worker           # Arka plan işlemlerini yürüten worker
-│   │   │
-│   │   └── Modules/                 # İzole iş alanları (Domainler)
-│   │       ├── Cart
-│   │       ├── Catalog
-│   │       ├── Identity
-│   │       ├── Inventory
-│   │       ├── Ordering
-│   │       ├── Payment
-│   │       ├── Ratings
-│   │       └── Search
-│   │
-│   ├── tests/                       # Test katmanı
-│   │   ├── TechCart.ArchitectureTests    # Mimari kuralların testleri
-│   │   ├── TechCart.IntegrationTests     # Modüller arası entegrasyon testleri
-│   │   └── TechCart.UnitTests            # Birim testleri
-│   │
-│   └── TechCart.sln                 # .NET Solution dosyası
-│
-├── deploy/                          # Container (Docker) ve dağıtım yapılandırmaları
-│   ├── api.Dockerfile
-│   ├── frontend.Dockerfile
-│   └── worker.Dockerfile
-│
-└── frontend/                        # Next.js & React tabanlı kullanıcı arayüzü
-    ├── public/
-    ├── src/
-    ├── next.config.ts
-    ├── package.json
-    └── (diğer konfigürasyon dosyaları)
- ```   
-
 Her modül kendi içinde şu katmanlara ayrılır:
 
 ```text
