@@ -13,8 +13,6 @@ export type ProductVisualType =
     model: string;
     brand: string; // marka
     category: string;
-    rating: number; // kullanicinin verdigi puan 
-    reviewCount: number; // kac kullanici puan verdi
     price: number;
     inStock: boolean;
     visualType: ProductVisualType; // ikon

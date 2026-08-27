@@ -1,0 +1,100 @@
+/* Boş durum alanının ana kapsayıcısı */
+.emptyState {
+  display: flex;
+  width: 100%;
+  min-height: 380px;
+  padding: 48px 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #d7d7dc;
+  border-radius: 18px;
+  background-color: #fafafa;
+  text-align: center;
+}
+
+/* Ürün bulunamadı ikonunun bulunduğu daire */
+.iconArea {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 22px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dddde2;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #242022;
+}
+
+/* Boş durum başlığı */
+.title {
+  margin: 0 0 10px;
+  color: #242022;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* Açıklama metni */
+.description {
+  max-width: 460px;
+  margin: 0;
+  color: #70707b;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Tüm ürünlere dönme bağlantısı */
+.clearButton {
+  display: inline-flex;
+  min-height: 46px;
+  margin-top: 26px;
+  padding: 11px 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+  background-color: #242022;
+  color: #eee4e2;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Fare butonun üzerine geldiğinde uygulanır */
+.clearButton:hover {
+  background-color: #242022;
+  color: #eee4e2;
+  transform: translateY(-1px);
+}
+
+/* Klavye ile butona gelindiğinde odak çizgisi gösterilir */
+/* Klavye ile butona gelindiğinde odak çizgisi gösterilir */
+.clearButton:focus-visible {
+  outline: 3px solid rgb(36 32 34 / 20%);
+  outline-offset: 3px;
+}
+
+/* Küçük ekran düzenlemeleri */
+@media (max-width: 600px) {
+  .emptyState {
+    min-height: 330px;
+    padding: 40px 20px;
+  }
+
+  .title {
+    font-size: 23px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .clearButton {
+    width: 100%;
+    max-width: 270px;
+  }
+}

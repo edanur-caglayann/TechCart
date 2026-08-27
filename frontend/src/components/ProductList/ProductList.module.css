@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  /* Sayfa geçişlerindeki yumuşak kaydırma deneyimini tarayıcı bazında destekler */
+  scroll-margin-top: 20px;
 }
 
 /* Başlık ve sıralama kutusunu yan yana tutar */
@@ -38,6 +40,7 @@
   color: #33333a;
   outline: none;
   cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sortSelect:focus {
@@ -86,12 +89,14 @@
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .pagination button:hover:not(:disabled) {
   background-color: #f0f0f2;
   color: #111116;
+  border-color: #c0c0c6;
 }
 
 .pagination button:active:not(:disabled) {
@@ -110,6 +115,7 @@
   color: #c6c6cc;
   cursor: not-allowed;
   opacity: 0.6;
+  background-color: #fafafa;
 }
 
 /* Orta genişlikte ekranlarda iki karta düşer */
@@ -132,5 +138,70 @@
 
   .productGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Ekran okuyucular (Accessibility) için görsel olarak gizlenmiş metin alanı */
+.screenReaderText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Sayfa boyutu ve sıralama alanlarını yan yana tutar */
+.listControls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Sayfa başına ürün sayısı etiketi ve seçim kutusu */
+.pageSizeControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #656570;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Sayfa başına ürün sayısı seçim kutusu */
+.pageSizeSelect {
+  min-height: 42px;
+  padding: 8px 30px 8px 12px;
+  border: 1px solid #dedee2;
+  border-radius: 10px;
+  background-color: #f7f7f8;
+  color: #242022;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Klavye ile seçim kutusuna gelindiğinde */
+.pageSizeSelect:focus-visible {
+  outline: 2px solid #242022;
+  outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+  .listControls {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pageSizeControl {
+    justify-content: space-between;
+  }
+
+  .pageSizeSelect,
+  .sortSelect {
+    width: 100%;
   }
 }

@@ -6,7 +6,7 @@ oalrak isaretleriz
 "use client";
 
 import {
-    createContext,
+  createContext,
   ReactNode,
   useContext,
   useEffect,
@@ -49,8 +49,17 @@ export function CartProvider({
         []
     );
 
-    // sayfa ilk acildiginda localStorage icindeki
-    // onceden kaydedilen sepeti okuyarak cartItems state'ine aktarir
+    /*
+    sayfa ilk acildiginda localStorage icindeki
+    onceden kaydedilen sepeti okuyarak cartItems state'ine aktarir
+    Syafa yenilendiginde kullanici bilgileri silinmez.
+    localStorage ile tarayicidan girilen kullanici bilgileri bilgisayarda kallici olarak
+    saklar. Ama kart bilgileri gibi ozel veriler hairc.
+
+    SEPETI KAYDEDERIZ
+    */ 
+
+    // syafa yenilendiginde getItem ile kaydedilmis sepeti okuruz
     useEffect(() => {
         const savedCart = localStorage.getItem(
       "techcart-cart"
@@ -74,7 +83,7 @@ export function CartProvider({
     }
   }, []);
     
-// cartItems degistiginde guncel sepeti localStorage icine kaydeder
+// sepet bilgileirni tarayicicya setItem ile kaydedriz
 useEffect(() => {
     localStorage.setItem(
       "techcart-cart",
