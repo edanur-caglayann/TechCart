@@ -7,7 +7,6 @@ import {
   PackageCheck,
   ShieldCheck,
   Smartphone,
-  Star,
   Tablet,
   Truck,
   Tv,
@@ -140,22 +139,6 @@ export default async function ProductDetailPage({
           <p className={styles.model}>
             Model: {product.model}
           </p>
-
-          <div className={styles.ratingArea}>
-            <div className={styles.rating}>
-              <Star
-                size={19}
-                fill="currentColor"
-                strokeWidth={1.5}
-              />
-
-              <strong>{product.rating}</strong>
-            </div>
-
-            <span>
-              ({product.reviewCount} değerlendirme)
-            </span>
-          </div>
 
           <p className={styles.description}>
             {product.name}, günlük kullanım ve teknoloji
