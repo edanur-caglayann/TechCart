@@ -13,7 +13,6 @@ export type ProductVisualType =
     model: string;
     brand: string; // marka
     category: string;
-    reviewCount: number;
     price: number;
     inStock: boolean;
     visualType: ProductVisualType; // ikon
