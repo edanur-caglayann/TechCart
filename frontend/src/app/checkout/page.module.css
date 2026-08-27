@@ -1,0 +1,490 @@
+/* Ödeme sayfasının tamamı */
+.checkoutPage {
+  min-height: 100vh;
+  padding: 0 70px 80px;
+
+  background-color: #f8f8fa;
+  color: #111116;
+}
+
+/* Logo ve sepete dönüş bağlantısı */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 28px 0;
+
+  border-bottom: 1px solid #dedee3;
+}
+
+.logo {
+  color: #111116;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #686873;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backLink:hover {
+  color: #111116;
+  transform: translateX(-4px);
+}
+
+/* Ödeme sayfasındaki içerikleri sınırlar */
+.checkoutContainer {
+  width: 100%;
+  max-width: 1400px;
+  margin: 55px auto 0;
+}
+
+.pageHeader {
+  margin-bottom: 35px;
+}
+
+.label {
+  color: #72727c;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.pageHeader h1 {
+  margin: 10px 0 10px;
+
+  font-size: 46px;
+  letter-spacing: -1.7px;
+}
+
+.pageHeader p {
+  max-width: 650px;
+  margin: 0;
+
+  color: #74747e;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/*
+  Sol tarafta form alanları,
+  sağ tarafta sipariş özeti bulunur.
+*/
+.checkoutGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 370px;
+  align-items: start;
+  gap: 28px;
+}
+
+.formSections {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Teslimat ve kart bilgisi kutuları */
+.formCard {
+  padding: 30px;
+
+  border: 1px solid #dedee3;
+  border-radius: 20px;
+
+  background-color: #ffffff;
+}
+
+/* Bölüm ikonu, başlık ve açıklama */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+.sectionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+
+  border-radius: 13px;
+  background-color: #eeeef1;
+  color: #111116;
+}
+
+.sectionHeader h2 {
+  margin: 0 0 5px;
+  font-size: 22px;
+}
+
+.sectionHeader p {
+  margin: 0;
+
+  color: #7c7c86;
+  font-size: 13px;
+}
+
+/* Tek label ve input grubunu tutar */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  margin-bottom: 19px;
+}
+
+.formGroup:last-child {
+  margin-bottom: 0;
+}
+
+.formGroup label {
+  color: #34343b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* İl-ilçe ve tarih-CVV alanlarını yan yana dizer */
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Form giriş alanlarının ortak görünümü */
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 15px 16px;
+
+  border: 1px solid #d8d8de;
+  border-radius: 11px;
+  outline: none;
+
+  background-color: #f8f8fa;
+  color: #111116;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 105px;
+}
+
+/* Input seçildiğinde uygulanan görünüm */
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: #29292f;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(17, 17, 22, 0.07);
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #9999a2;
+}
+
+/* İkon ve input alanını birlikte tutar */
+.secureInput {
+  position: relative;
+}
+
+.secureInput > svg {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 15px;
+
+  color: #84848e;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* İkon bulunduğu için input'un sol boşluğunu artırır */
+.formGroup .secureInput input {
+  padding-left: 46px;
+}
+
+/* 3D Secure onay alanı */
+.secureAgreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+
+  margin-top: 4px;
+
+  color: #5f5f69;
+  font-size: 13px;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.secureAgreement input {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+
+  accent-color: #111116;
+  cursor: pointer;
+}
+
+/* Kartların saklanmadığını belirten bilgi */
+.securityInformation {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+
+  margin-top: 19px;
+  padding: 15px;
+
+  border-radius: 11px;
+  background-color: #f1f1f3;
+  color: #61616b;
+}
+
+.securityInformation svg {
+  flex-shrink: 0;
+}
+
+.securityInformation p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Sipariş özeti paneli */
+.orderSummary {
+  position: sticky;
+  top: 25px;
+
+  padding: 28px;
+
+  border: 1px solid #dedee3;
+  border-radius: 19px;
+
+  background-color: #ffffff;
+}
+
+.orderSummary h2 {
+  margin: 0 0 24px;
+  font-size: 23px;
+}
+
+/* Özette gösterilen ürünler */
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  margin-bottom: 23px;
+  padding-bottom: 23px;
+
+  border-bottom: 1px solid #e2e2e6;
+}
+
+.productItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+
+  font-size: 13px;
+}
+
+.productItem > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.productItem span {
+  color: #85858e;
+  font-size: 11px;
+}
+
+.productItem > strong {
+  white-space: nowrap;
+}
+
+/* Ürün adedi, ara toplam ve kargo satırları */
+.summaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+
+  color: #71717b;
+  font-size: 14px;
+}
+
+.summaryRow strong {
+  color: #29292f;
+}
+
+/* Toplam fiyat satırı */
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 23px;
+  padding-top: 21px;
+
+  border-top: 1px solid #dedee3;
+}
+
+.totalRow span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.totalRow strong {
+  font-size: 23px;
+  letter-spacing: -0.5px;
+}
+
+/* 3D Secure ekranına geçiş butonu */
+.paymentButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  width: 100%;
+  margin-top: 26px;
+  padding: 16px;
+
+  border: none;
+  border-radius: 11px;
+
+  background-color: #111116;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.paymentButton:hover {
+  background-color: #35353c;
+  transform: translateY(-2px);
+}
+
+.paymentButton:active {
+  transform: translateY(0);
+}
+
+.paymentInformation {
+  margin: 14px 0 0;
+
+  color: #8a8a93;
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Boş sepet görünümü */
+.emptyCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 70px 30px;
+
+  border: 1px solid #dedee3;
+  border-radius: 20px;
+
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.emptyCart h2 {
+  margin: 20px 0 10px;
+}
+
+.emptyCart p {
+  margin: 0 0 25px;
+  color: #777781;
+}
+
+.emptyCart a {
+  padding: 14px 22px;
+
+  border-radius: 10px;
+  background-color: #111116;
+  color: #ffffff;
+
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Tablet ekranları */
+@media (max-width: 1000px) {
+  .checkoutPage {
+    padding: 0 30px 60px;
+  }
+
+  .checkoutGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .orderSummary {
+    position: static;
+  }
+}
+
+/* Telefon ekranları */
+@media (max-width: 600px) {
+  .checkoutPage {
+    padding: 0 18px 45px;
+  }
+
+  .checkoutContainer {
+    margin-top: 35px;
+  }
+
+  .pageHeader h1 {
+    font-size: 37px;
+  }
+
+  .formCard {
+    padding: 22px 18px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

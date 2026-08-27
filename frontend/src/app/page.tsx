@@ -21,10 +21,11 @@ export default function HomePage() {
           id="products"
         >
           <Filters />
-
-          <div className={styles.productArea}>
+        
+           <div className={styles.productArea}>
             <ProductList />
           </div>
+       
           
         </section>
       </main>

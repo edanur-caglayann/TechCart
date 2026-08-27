@@ -1,14 +1,13 @@
 /* Tek bir ürün kartının tamamı */
 .card {
   display: flex;
-  flex-direction: column;
   min-width: 0;
   height: 100%;
+  flex-direction: column;
   border: 1px solid #dedee2;
   border-radius: 16px;
   background-color: #ffffff;
   overflow: hidden;
-
   transition:
     border-color 0.25s ease,
     box-shadow 0.25s ease,
@@ -34,13 +33,13 @@
 .visual {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
   height: 220px;
   min-height: 220px;
+  align-items: center;
+  justify-content: center;
   background:
     radial-gradient(circle at top, #ffffff, transparent 55%),
-    linear-gradient(145deg, #eeeeF0, #d5d5d9);
+    linear-gradient(145deg, #eeeef0, #d5d5d9);
   color: #202027;
 }
 
@@ -85,10 +84,10 @@
 /* Marka ve kategori bilgilerini yan yana tutar */
 .productMeta {
   display: flex;
+  min-width: 0;
+  margin-bottom: 10px;
   align-items: center;
   gap: 7px;
-  margin-bottom: 10px;
-  min-width: 0;
 }
 
 .brand {
@@ -130,30 +129,6 @@
   font-size: 12px;
 }
 
-/* Puan ve değerlendirme sayısının bulunduğu alan */
-.ratingArea {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 20px;
-}
-
-/* Yıldız ve puanı yan yana tutar */
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #e5a400;
-  font-size: 14px;
-  font-weight: 650;
-}
-
-.reviewCount {
-  color: #92929c;
-  font-size: 12px;
-}
-
 /* Ürün fiyatı */
 .price {
   display: block;
@@ -170,43 +145,46 @@
   aynı seviyede görünür.
 */
 
-/* Detay ve sepet butonlarını yan yana tutar */
+/* Detay ve sepete ekleme butonlarını aynı satırda tutar */
 .actions {
   display: grid;
-
-  /* Sepete Ekle butonuna biraz daha fazla alan verir. */
-  grid-template-columns: 1fr 1.15fr;
-
-  gap: 9px;
-  margin-top: auto;
+  grid-template-columns: 105px minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
 }
 
-/* İki butonun ortak görünümü */
-.detailsButton,
-.cartButton {
+/*
+  Ürün sepete eklendiğinde adet kontrol alanının
+  yeterli genişliğe sahip olması için Detayları Gör
+  bağlantısı ve sepet kontrolü alt alta yerleştirilir.
+*/
+.actions:has(.cartControls) {
+  grid-template-columns: 1fr;
+}
+
+/* Detayları Gör bağlantısı */
+.detailsButton {
   display: flex;
+  min-height: 52px;
+  padding: 8px 12px;
   align-items: center;
   justify-content: center;
-  min-height: 43px;
-  padding: 9px 10px;
+  border: 1px solid #d7d7dc;
   border-radius: 10px;
-  font-size: 12px;
+  background-color: #ffffff;
+  color: #656570;
+  font-size: 13px;
   font-weight: 650;
+  line-height: 1.3;
   text-align: center;
-
+  text-decoration: none;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
     transform 0.2s ease;
 }
 
-/* Detayları Gör bağlantısı */
-.detailsButton {
-  border: 1px solid #d7d7dc;
-  background-color: #ffffff;
-  color: #656570;
-}
-
+/* Fare Detayları Gör bağlantısının üzerine geldiğinde */
 .detailsButton:hover {
   border-color: #a8a8b0;
   background-color: #f4f4f6;
@@ -215,26 +193,21 @@
 
 /* Sepete Ekle butonunun normal görünümü */
 .cartButton {
-  display: inline-flex;
+  display: flex;
+  min-width: 0;
+  min-height: 52px;
+  padding: 11px 12px;
   align-items: center;
   justify-content: center;
   gap: 6px;
-
-  min-height: 52px;
-  padding: 11px 12px;
-
   border: 1px solid #111116;
   border-radius: 10px;
-
-  /* İlk tasarımdaki siyaha yakın arka plan */
   background-color: #111116;
   color: #ffffff;
-
   font-size: 13px;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
-
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
@@ -242,8 +215,8 @@
 }
 
 /*
-  Üzerine gelindiğinde aşırı koyulaşmak yerine
-  biraz daha açık antrasit olur.
+  Fare Sepete Ekle butonunun üzerine geldiğinde
+  buton biraz daha açık antrasit görünür.
 */
 .cartButton:hover:not(:disabled) {
   border-color: #35353c;
@@ -251,38 +224,7 @@
   transform: translateY(-1px);
 }
 
-/* Stokta olmayan ürün butonu */
-.cartButton:disabled {
-  border-color: #eeeef1;
-  background-color: #eeeef1;
-  color: #b1b1b8;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* Butonun içindeki adet göstergesi */
-.cartQuantity {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 20px;
-  height: 20px;
-  padding: 0 5px;
-
-  border-radius: 999px;
-  background-color: #ffffff;
-  color: #111116;
-
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.cartButton:hover:not(:disabled) {
-  background-color: #303039;
-}
-
+/* Butonlara basıldığı anda uygulanan görünüm */
 .cartButton:active:not(:disabled),
 .detailsButton:active {
   transform: scale(0.97);
@@ -294,4 +236,60 @@
   background-color: #f0f0f2;
   color: #bcbcc3;
   cursor: not-allowed;
+  transform: none;
+}
+
+/* Sepetteki ürünün adet kontrol alanı */
+.cartControls {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: 6px 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid #242022;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+/* Sepeti yöneten çöp kutusu, eksi ve artı butonları */
+.controlButton {
+  display: flex;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 7px;
+  background-color: transparent;
+  color: #242022;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* Sepette bulunan ürün adedi */
+.quantityText {
+  min-width: 0;
+  color: #242022;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* İkon butonlarının üzerine gelindiğinde */
+.controlButton:hover:not(:disabled) {
+  background-color: #f1f1f3;
+}
+
+/* Devre dışı kalan ikon butonu */
+.controlButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
 }

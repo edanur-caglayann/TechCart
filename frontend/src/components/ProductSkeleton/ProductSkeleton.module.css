@@ -1,0 +1,130 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #e1e1e5;
+  border-radius: 18px;
+  background-color: #ffffff;
+}
+
+/*
+  Bütün gri alanlarda ortak kullanılacak yüklenme efekti.
+
+  background-size değerinin geniş tutulması,
+  açık renkli bölümün soldan sağa hareket edebilmesini sağlar.
+*/
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    #ececef 25%,
+    #f7f7f8 50%,
+    #ececef 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+/* Gerçek ürün kartındaki görsel alanıyla benzer yüksekliğe sahiptir. */
+.visual {
+  width: 100%;
+  height: 265px;
+  border-radius: 0;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.brand {
+  width: 72px;
+  height: 12px;
+}
+
+.category {
+  width: 58px;
+  height: 12px;
+}
+
+.productName {
+  width: 82%;
+  height: 22px;
+  margin-bottom: 18px;
+}
+
+.model {
+  width: 55%;
+  height: 14px;
+  margin-bottom: 22px;
+}
+
+.ratingArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.rating {
+  width: 48px;
+  height: 16px;
+}
+
+.reviewCount {
+  width: 110px;
+  height: 13px;
+}
+
+.price {
+  width: 105px;
+  height: 25px;
+  margin-top: auto;
+  margin-bottom: 24px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.button {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+}
+
+/* Gri parlak alanı soldan sağa hareket ettirir. */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/*
+  Kullanıcı işletim sisteminde hareketli efektleri kapattıysa
+  animasyonu devre dışı bırakır. Bu erişilebilirlik açısından önemlidir.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
