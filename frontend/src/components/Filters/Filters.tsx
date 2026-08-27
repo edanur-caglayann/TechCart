@@ -205,19 +205,6 @@ export default function Filters() {
                     </label>
                 </div>
 
-                <div className={styles.filterGroup}>
-                    <label className={styles.groupTitle} htmlFor="rating">
-                        Minimum Puan
-                    </label>
-
-                    <select className={styles.select} id="rating" name="rating" defaultValue={getParam('rating')}>
-                        <option value="">Tüm puanlar</option>
-                        <option value="4">4 yıldız ve üzeri</option>
-                        <option value="3">3 yıldız ve üzeri</option>
-                        <option value="2">2 yıldız ve üzeri</option>
-                    </select>
-                </div>
-
                 {/* type="submit" ile form verileri yakalanıp URL'e gönderilir */}
                 <button className={styles.applyButton} type="submit">
                     Filtreleri Uygula
