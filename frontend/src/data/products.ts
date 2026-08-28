@@ -7,15 +7,51 @@ import { Product } from "../types/product";
 
 export const products: Product[] = [
 {
-    id: 1,
-    name: "iPhone 15 Pro",
-    model: "A3101",
-    brand: "Apple",
-    category: "Telefon",
-    price: 89999,
-    inStock: true,
-    visualType: "phone",
-  },
+  id: 1,
+  name: "iPhone 15 Pro",
+  model: "A3101",
+  brand: "Apple",
+  category: "Telefon",
+  price: 89999,
+  inStock: true,
+  visualType: "phone",
+  description:
+    "iPhone 15 Pro; güçlü işlemcisi, gelişmiş kamera sistemi ve dayanıklı titanyum tasarımıyla yüksek performans sunar.",
+  stockQuantity: 8,
+  images: [
+  "/products/iphone-15-pro/iphone-front.png",
+  "/products/iphone-15-pro/iphone-back.webp",
+  "/products/iphone-15-pro/iphone-color.webp",
+  ],
+
+  // Ürün detay sayfasında gösterilecek teknik özelliklerin listesi
+  technicalSpecifications: [
+    {
+      label: "Ekran",
+      value: "6.1 inç OLED",
+    },
+    {
+      label: "İşlemci",
+      value: "A17 Pro",
+    },
+    {
+      label: "Depolama",
+      value: "256 GB",
+    },
+    {
+      label: "Kamera",
+      value: "48 MP",
+    },
+    {
+      label: "Renk",
+      value: "Siyah Titanyum",
+    },
+    {
+      label: "Bağlantı",
+      value: "5G",
+    },
+  ],
+},
   {
     id: 2,
     name: "Galaxy S24 Ultra",

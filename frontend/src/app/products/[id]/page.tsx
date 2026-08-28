@@ -1,60 +1,22 @@
 import {
   ArrowLeft,
   Check,
-  Disc3,
-  Headphones,
-  Laptop,
   PackageCheck,
   ShieldCheck,
-  Smartphone,
-  Tablet,
   Truck,
-  Tv,
 } from "lucide-react";
 
 import Link from "next/link";
+
 import { notFound } from "next/navigation";
 
 import { products } from "../../../data/products";
-import { Product } from "../../../types/product";
+
+import ProductGallery from "../../../components/ProductGallery/ProductGallery";
+
 import AddToCartButton from "../../../components/AddToCartButton/AddToCartButton";
+
 import styles from "./page.module.css";
-
-
-/*
-  Ürünün visualType değerine göre
-  detay sayfasında gösterilecek ikonu belirler.
-*/
-function ProductVisual({
-  type,
-}: {
-  type: Product["visualType"];
-}) {
-  if (type === "phone") {
-    return <Smartphone size={190} strokeWidth={1} />;
-  }
-
-  if (type === "computer") {
-    return <Laptop size={230} strokeWidth={1} />;
-  }
-
-  if (type === "tablet") {
-    return <Tablet size={200} strokeWidth={1} />;
-  }
-
-  if (type === "television") {
-    return <Tv size={230} strokeWidth={1} />;
-  }
-
-  if (type === "headphone") {
-    return <Headphones size={210} strokeWidth={1} />;
-  }
-
-  /*
-    Diğer visualType değerlerinde pikap ikonu gösterilir.
-  */
-  return <Disc3 size={210} strokeWidth={1} />;
-}
 
 /*
   [id] dinamik klasöründen gelen adres bilgisinin tipidir.
@@ -93,6 +55,31 @@ export default async function ProductDetailPage({
     notFound();
   }
 
+  /* ?? operatoru ile -> urun varsa urun ozelliklerini kullan
+  yoksa varsayilan 4 ozellgi kullan 
+  */
+  const technicalSpecifications =
+    product.technicalSpecifications ?? [
+      {
+        label: "Marka",
+        value: product.brand,
+      },
+      {
+        label: "Kategori",
+        value: product.category,
+      },
+      {
+        label: "Model",
+        value: product.model,
+      },
+      {
+        label: "Stok durumu",
+        value: product.inStock
+          ? "Stokta var"
+          : "Stokta yok",
+      },
+    ];
+
   return (
     <main className={styles.detailPage}>
       {/*
@@ -117,20 +104,18 @@ export default async function ProductDetailPage({
         yan yana gösteren ana alan.
       */}
       <section className={styles.productDetail}>
-        <div className={styles.visualArea}>
-          <ProductVisual type={product.visualType} />
-
-          {!product.inStock && (
-            <span className={styles.outOfStockBadge}>
-              Tükendi
-            </span>
-          )}
-        </div>
+        {/*
+          Ürünün çoklu görsellerini veya görsel
+          bulunmuyorsa geçici ürün ikonunu gösterir.
+        */}
+        <ProductGallery product={product} />
 
         <div className={styles.informationArea}>
           <div className={styles.productMeta}>
             <span>{product.brand}</span>
+
             <span>•</span>
+
             <span>{product.category}</span>
           </div>
 
@@ -141,11 +126,10 @@ export default async function ProductDetailPage({
           </p>
 
           <p className={styles.description}>
-            {product.name}, günlük kullanım ve teknoloji
-            ihtiyaçları için yüksek performans, güvenilirlik
-            ve modern tasarımı bir araya getirir. Ürün
-            özelliklerini inceleyerek ihtiyacına uygun olup
-            olmadığını değerlendirebilirsin.
+            {/* ?? ile -> urune ozel aciklama varsa onu goster
+            yoksa varsayilan aciklamayi goster */}
+            {product.description ??
+              `${product.name}, günlük kullanım ve teknoloji ihtiyaçları için performans, güvenilirlik ve modern tasarımı bir araya getirir.`}
           </p>
 
           <div className={styles.priceArea}>
@@ -171,7 +155,7 @@ export default async function ProductDetailPage({
           <AddToCartButton
             product={product}
             className={styles.cartButton}
-         />
+          />
 
           <div className={styles.serviceInformation}>
             <div>
@@ -195,51 +179,33 @@ export default async function ProductDetailPage({
         </div>
       </section>
 
-      {/*
-        Ürünün temel özelliklerini gösteren alt bölüm.
-        Şimdilik örnek özellikler kullanıyoruz.
-      */}
       <section className={styles.featuresSection}>
         <div className={styles.sectionTitle}>
           <span>ÜRÜN BİLGİLERİ</span>
+
           <h2>Ürün özellikleri</h2>
         </div>
 
         <div className={styles.featuresGrid}>
-          <div className={styles.featureItem}>
-            <Check size={20} />
-            <span>
-              <strong>Marka</strong>
-              {product.brand}
-            </span>
-          </div>
+          {/* technicalSpecifications dizisindeki her teknik özellik için bir özellik kutusu oluştururuz. */}
+          {technicalSpecifications.map(
+            (specification) => (
+              <div
+                className={styles.featureItem}
+                key={specification.label}
+              >
+                <Check size={20} />
 
-          <div className={styles.featureItem}>
-            <Check size={20} />
-            <span>
-              <strong>Kategori</strong>
-              {product.category}
-            </span>
-          </div>
+                <span>
+                  <strong>
+                    {specification.label}
+                  </strong>
 
-          <div className={styles.featureItem}>
-            <Check size={20} />
-            <span>
-              <strong>Model</strong>
-              {product.model}
-            </span>
-          </div>
-
-          <div className={styles.featureItem}>
-            <Check size={20} />
-            <span>
-              <strong>Stok durumu</strong>
-
-              {product.inStock
-                ? "Stokta var"
-                : "Stokta yok"}
-            </span>
-          </div>
+                  {specification.value}
+                </span>
+              </div>
+            )
+          )}
         </div>
       </section>
     </main>

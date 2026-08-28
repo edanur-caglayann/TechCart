@@ -1,0 +1,133 @@
+.gallery {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mainVisual {
+  position: relative;
+  display: flex;
+  min-height: 590px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #dedee3;
+  border-radius: 26px;
+  background:
+    radial-gradient(
+      circle at center,
+      #f7f7f9 0%,
+      #ededf0 58%,
+      #dcdce1 100%
+    );
+  color: #17171c;
+}
+
+.mainVisual::before {
+  position: absolute;
+  width: 390px;
+  height: 390px;
+  border: 1px solid #d0d0d6;
+  border-radius: 50%;
+  content: "";
+}
+
+.mainVisual svg {
+  position: relative;
+  z-index: 1;
+}
+
+.productImage {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  object-fit: contain;
+  transform: scale(1.25);
+}
+
+.outOfStockBadge {
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  right: 25px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background-color: #111116;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.thumbnailList {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 2px;
+}
+
+.thumbnailButton {
+  display: flex;
+  width: 82px;
+  height: 82px;
+  flex: 0 0 82px;
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #dedee3;
+  border-radius: 12px;
+  background-color: #f7f7f9;
+  cursor: pointer;
+}
+
+.thumbnailButton:hover {
+  border-color: #92929c;
+}
+
+.activeThumbnail {
+  border-color: #111116;
+  box-shadow: 0 0 0 1px #111116;
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 950px) {
+  .mainVisual {
+    min-height: 480px;
+  }
+
+  .productImage {
+    transform: scale(1.12);
+  }
+}
+
+@media (max-width: 600px) {
+  .mainVisual {
+    min-height: 350px;
+    border-radius: 18px;
+  }
+
+  .mainVisual::before {
+    width: 260px;
+    height: 260px;
+  }
+
+  .productImage {
+    padding: 0;
+    object-fit: contain;
+    transform: scale(1.04);
+  }
+
+  .thumbnailButton {
+    width: 70px;
+    height: 70px;
+    flex-basis: 70px;
+  }
+}
