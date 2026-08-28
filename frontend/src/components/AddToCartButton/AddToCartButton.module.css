@@ -1,0 +1,82 @@
+.purchaseArea {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.quantityControl {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  border: 1px solid #d7d7dc;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.quantityButton {
+  display: flex;
+  width: 42px;
+  height: 100%;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: transparent;
+  color: #242022;
+  cursor: pointer;
+}
+
+.quantityButton:hover:not(:disabled) {
+  background-color: #f1f1f3;
+}
+
+.quantityButton:disabled {
+  color: #b9b9c0;
+  cursor: not-allowed;
+}
+
+.quantityValue {
+  min-width: 32px;
+  color: #111116;
+  font-size: 16px;
+  font-weight: 750;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .purchaseArea {
+    grid-template-columns: 1fr;
+  }
+
+  .quantityControl {
+    min-height: 50px;
+  }
+}
+
+.cartButtonWithBadge {
+  position: relative;
+}
+
+/* Ürünün sepetteki güncel adedini gösteren rozet */
+.cartBadge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: flex;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 7px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background-color: #242022;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 4px 12px rgba(17, 17, 22, 0.2);
+}

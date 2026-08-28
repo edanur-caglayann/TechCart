@@ -145,21 +145,23 @@
   aynı seviyede görünür.
 */
 
-/* Detay ve sepete ekleme butonlarını aynı satırda tutar */
+/* Detay ve sepet alanlarını alt alta tutar */
 .actions {
   display: grid;
-  grid-template-columns: 105px minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: 10px;
   align-items: stretch;
 }
 
 /*
-  Ürün sepete eklendiğinde adet kontrol alanının
-  yeterli genişliğe sahip olması için Detayları Gör
-  bağlantısı ve sepet kontrolü alt alta yerleştirilir.
+  Detayları Gör, Sepete Ekle ve sepet kontrol alanlarının
+  kartın kullanılabilir genişliğinin tamamını kullanmasını sağlar.
 */
-.actions:has(.cartControls) {
-  grid-template-columns: 1fr;
+.detailsButton,
+.cartButton,
+.cartControls {
+  width: 100%;
+  min-width: 0;
 }
 
 /* Detayları Gör bağlantısı */
@@ -194,7 +196,6 @@
 /* Sepete Ekle butonunun normal görünümü */
 .cartButton {
   display: flex;
-  min-width: 0;
   min-height: 52px;
   padding: 11px 12px;
   align-items: center;
@@ -242,8 +243,6 @@
 /* Sepetteki ürünün adet kontrol alanı */
 .cartControls {
   display: flex;
-  width: 100%;
-  min-width: 0;
   min-height: 52px;
   padding: 6px 10px;
   align-items: center;
