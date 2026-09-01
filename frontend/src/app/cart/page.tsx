@@ -9,13 +9,33 @@ import {
 } from "lucide-react";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
+import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
+
+import {
+  calculateIncludedVat,
+  calculateNetAmount,
+  DEFAULT_VAT_RATE,
+  formatCurrency,
+} from "../../utils/tax";
+
 import styles from "./page.module.css";
 
 export default function CartPage() {
-  
-  // ilgili sepet bilgilerini aliriz
+  // Sayfalar arasında yönlendirme yapmak için kullanılır.
+  const router = useRouter();
+
+  /*
+    Kullanıcının giriş durumunu ve localStorage kontrolünün tamamlanıp tamamlanmadığını alırız.
+  */
+  const {
+    isAuthenticated,
+    isAuthLoading,
+  } = useAuth();
+
+  // İlgili sepet bilgilerini alırız.
   const {
     cartItems,
     increaseQuantity,
@@ -25,6 +45,65 @@ export default function CartPage() {
     totalQuantity,
     totalPrice,
   } = useCart();
+
+  /*
+    Sepetteki her ürünün KDV hariç tutarınınhesaplayarak genel KDV hariç toplamı buluruz
+  */
+  const totalNetPrice = cartItems.reduce(
+    (total, item) => {
+      const itemTotal =
+        item.product.price * item.quantity;
+
+      const vatRate =
+        item.product.vatRate ?? DEFAULT_VAT_RATE;
+
+      return (
+        total +
+        calculateNetAmount(itemTotal, vatRate)
+      );
+    },
+    0
+  );
+
+  /*
+    Sepetteki ürünlerin fiyatlarına dahil olan KDV tutarlarını toplayarak toplam KDV'yi hespalr
+  */
+  const totalVat = cartItems.reduce(
+    (total, item) => {
+      const itemTotal =
+        item.product.price * item.quantity;
+
+      const vatRate =
+        item.product.vatRate ?? DEFAULT_VAT_RATE;
+
+      return (
+        total +
+        calculateIncludedVat(itemTotal, vatRate)
+      );
+    },
+    0
+  );
+
+  /*
+    Ödemeye Geç butonuna basıldığında kullanıcının giriş yapıp yapmadığını kontrol eder.
+    Kullanıcı giriş yapmadıysa giriş ekranına, giriş yaptıysa ödeme ekranına yönlendirilir.
+  */
+  function handleCheckout() {
+    // Oturum kontrolü devam ediyorsa işlem yapılmaz.
+    if (isAuthLoading) {
+      return;
+    }
+
+    if (!isAuthenticated) {
+      /*
+        kullanıcının sepetine geri dönmesi icin -> returnUrl
+      */
+      router.push("/login?returnUrl=/cart");
+      return;
+    }
+
+    router.push("/checkout");
+  }
 
   return (
     <main className={styles.cartPage}>
@@ -52,13 +131,12 @@ export default function CartPage() {
             <h1>Sepetim</h1>
 
             <p>
-              Sepetinde toplam {totalQuantity} ürün bulunuyor.
+              Sepetinde toplam {totalQuantity} ürün
+              bulunuyor.
             </p>
           </div>
 
-          {/*
-            Sepette ürün varsa temizleme butonunu gösterir.
-          */}
+          {/* Sepette ürün varsa temizleme butonunu gösterir. */}
           {cartItems.length > 0 && (
             <button
               className={styles.clearButton}
@@ -71,9 +149,7 @@ export default function CartPage() {
           )}
         </div>
 
-        {/*
-          Sepet boşsa kullanıcıya boş sepet görünümü gösterilir.
-        */}
+        {/* Sepet boşsa boş sepet görünümü gösterilir. */}
         {cartItems.length === 0 ? (
           <div className={styles.emptyCart}>
             <div className={styles.emptyIcon}>
@@ -98,102 +174,135 @@ export default function CartPage() {
             </Link>
           </div>
         ) : (
-          /*
-            Sepette ürün varsa ürün listesiyle
-            sipariş özetini yan yana gösterir.
-          */
+          // Sepette ürün varsa ürün listesiyle sipariş özetini yan yana gösterir.
           <div className={styles.cartContent}>
             <div className={styles.cartItems}>
-              {cartItems.map((item) => (
-                <article
-                  className={styles.cartItem}
-                  key={item.product.id}
-                >
-                  <div className={styles.productVisual}>
-                    <ShoppingBag
-                      size={42}
-                      strokeWidth={1.3}
-                    />
-                  </div>
+              {cartItems.map((item) => {
+                // Ürünün adedine göre KDV dahil toplamı.
+                const itemTotal =
+                  item.product.price * item.quantity;
 
-                  <div className={styles.productInformation}>
-                    <span className={styles.productMeta}>
-                      {item.product.brand}
-                      {" • "}
-                      {item.product.category}
-                    </span>
+                const vatRate =
+                  item.product.vatRate ??
+                  DEFAULT_VAT_RATE;
 
-                    <Link
-                      href={`/products/${item.product.id}`}
-                    >
-                      {item.product.name}
-                    </Link>
+                // Ürün toplamının içindeki KDV tutarı.
+                const itemVat =
+                  calculateIncludedVat(
+                    itemTotal,
+                    vatRate
+                  );
 
-                    <span>
-                      Model: {item.product.model}
-                    </span>
-                  </div>
-
-                  {/*
-                    Eksi, mevcut adet ve artı butonlarını
-                    bir arada tutan miktar kontrolü.
-                  */}
-                  <div className={styles.quantityControl}>
-                    <button
-                      type="button"
-                      aria-label="Ürün adedini azalt"
-                      disabled={item.quantity === 1}
-                      onClick={() =>
-                        decreaseQuantity(item.product.id)
-                      }
-                    >
-                      <Minus size={16} />
-                    </button>
-
-                    <span>{item.quantity}</span>
-
-                    <button
-                      type="button"
-                      aria-label="Ürün adedini artır"
-                      onClick={() =>
-                        increaseQuantity(item.product.id)
-                      }
-                    >
-                      <Plus size={16} />
-                    </button>
-                  </div>
-
-                  <div className={styles.itemPrice}>
-                    <strong>
-                      {(
-                        item.product.price * item.quantity
-                      ).toLocaleString("tr-TR")}{" "}
-                      ₺
-                    </strong>
-
-                    {item.quantity > 1 && (
-                      <span>
-                        Birim fiyat:{" "}
-                        {item.product.price.toLocaleString(
-                          "tr-TR"
-                        )}{" "}
-                        ₺
-                      </span>
-                    )}
-                  </div>
-
-                  <button
-                    className={styles.removeButton}
-                    type="button"
-                    aria-label="Ürünü sepetten kaldır"
-                    onClick={() =>
-                      removeFromCart(item.product.id)
-                    }
+                return (
+                  <article
+                    className={styles.cartItem}
+                    key={item.product.id}
                   >
-                    <Trash2 size={19} />
-                  </button>
-                </article>
-              ))}
+                    <div
+                      className={styles.productVisual}
+                    >
+                      <ShoppingBag
+                        size={42}
+                        strokeWidth={1.3}
+                      />
+                    </div>
+
+                    <div
+                      className={
+                        styles.productInformation
+                      }
+                    >
+                      <span
+                        className={styles.productMeta}
+                      >
+                        {item.product.brand}
+                        {" • "}
+                        {item.product.category}
+                      </span>
+
+                      <Link
+                        href={`/products/${item.product.id}`}
+                      >
+                        {item.product.name}
+                      </Link>
+
+                      <span>
+                        Model: {item.product.model}
+                      </span>
+                    </div>
+
+                    {/*
+                      Eksi, mevcut adet ve artı
+                      butonlarını bir arada tutar.
+                    */}
+                    <div
+                      className={styles.quantityControl}
+                    >
+                      <button
+                        type="button"
+                        aria-label="Ürün adedini azalt"
+                        disabled={item.quantity === 1}
+                        onClick={() =>
+                          decreaseQuantity(
+                            item.product.id
+                          )
+                        }
+                      >
+                        <Minus size={16} />
+                      </button>
+
+                      <span>{item.quantity}</span>
+
+                      <button
+                        type="button"
+                        aria-label="Ürün adedini artır"
+                        onClick={() =>
+                          increaseQuantity(
+                            item.product.id
+                          )
+                        }
+                      >
+                        <Plus size={16} />
+                      </button>
+                    </div>
+
+                    <div className={styles.itemPrice}>
+                      <strong>
+                        {formatCurrency(itemTotal)}
+                      </strong>
+
+                      <span>
+                        %{vatRate} KDV dahil
+                      </span>
+
+                      <span>
+                        Fiyata dahil KDV:{" "}
+                        {formatCurrency(itemVat)}
+                      </span>
+
+                      {item.quantity > 1 && (
+                        <span>
+                          Birim fiyat:{" "}
+                          {formatCurrency(
+                            item.product.price
+                          )}
+                        </span>
+                      )}
+                    </div>
+
+                    <button
+                      className={styles.removeButton}
+                      type="button"
+                      aria-label="Ürünü sepetten kaldır"
+                      onClick={() =>
+                        removeFromCart(item.product.id)
+                      }
+                    >
+                      <Trash2 size={19} />
+                    </button>
+                  </article>
+                );
+              })}
             </div>
 
             <aside className={styles.orderSummary}>
@@ -205,10 +314,18 @@ export default function CartPage() {
               </div>
 
               <div className={styles.summaryRow}>
-                <span>Ara toplam</span>
+                <span>KDV hariç ara toplam</span>
 
                 <strong>
-                  {totalPrice.toLocaleString("tr-TR")} ₺
+                  {formatCurrency(totalNetPrice)}
+                </strong>
+              </div>
+
+              <div className={styles.summaryRow}>
+                <span>Toplam KDV</span>
+
+                <strong>
+                  {formatCurrency(totalVat)}
                 </strong>
               </div>
 
@@ -218,25 +335,30 @@ export default function CartPage() {
               </div>
 
               <div className={styles.totalRow}>
-                <span>Toplam</span>
+                <span>KDV dahil toplam</span>
 
                 <strong>
-                  {totalPrice.toLocaleString("tr-TR")} ₺
+                  {formatCurrency(totalPrice)}
                 </strong>
               </div>
 
               {/*
-                Ödeme ekranını daha sonra oluşturacağız.
-                Şimdilik /checkout adresine yönlendirir.
+                Ödeme öncesinde kullanıcının giriş durumu handleCheckout ile kontrol edilir.
               */}
-              <Link
+              <button
                 className={styles.checkoutButton}
-                href="/checkout"
+                type="button"
+                disabled={isAuthLoading}
+                onClick={handleCheckout}
               >
-                Ödemeye Geç
-              </Link>
+                {isAuthLoading
+                  ? "Oturum kontrol ediliyor..."
+                  : "Ödemeye Geç"}
+              </button>
 
-              <p className={styles.summaryInformation}>
+              <p
+                className={styles.summaryInformation}
+              >
                 Ödeme işlemine geçtiğinde teslimat ve
                 ödeme bilgilerini girebilirsin.
               </p>

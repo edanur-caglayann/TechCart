@@ -1,0 +1,431 @@
+/* Profil sayfasının tamamı */
+.profilePage {
+  min-height: 100vh;
+  padding: 40px;
+  background-color: #ffffff;
+  color: #111116;
+}
+
+/* Sayfa içeriğini ortalar ve genişliğini sınırlar */
+.profileContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo ve hesap ayarları etiketini aynı satırda tutar */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 52px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e2e7;
+}
+
+/* Ana sayfaya yönlendiren TechCart logosu */
+.logo {
+  color: #09090f;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.65;
+}
+
+/* Hesap ayarları etiketi */
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px;
+  border: 1px solid #d8d8de;
+  border-radius: 999px;
+  background-color: #f4f4f6;
+  color: #29292f;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+/* Hesap ayarları etiketindeki siyah nokta */
+.sectionLabel::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #111116;
+  content: "";
+}
+
+/* Sayfanın başlık bölümü */
+.pageHeader {
+  margin-bottom: 32px;
+}
+
+.pageHeader h1 {
+  margin: 0 0 10px;
+  color: #09090f;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.pageHeader p {
+  margin: 0;
+  color: #71717b;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Kişisel bilgiler ve parola kartları */
+.profileCard {
+  margin-bottom: 24px;
+  padding: 30px;
+  border: 1px solid #d8d8de;
+  border-radius: 18px;
+  background-color: #ffffff;
+  box-shadow: 0 14px 40px rgba(17, 17, 22, 0.06);
+}
+
+/* Kart başlığı ile düzenleme butonunu yan yana tutar */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Kart ikonu, başlığı ve açıklamasını yan yana tutar */
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Kişisel bilgiler ve parola ikonları */
+.cardTitle > svg {
+  flex-shrink: 0;
+  color: #111116;
+}
+
+.cardTitle h2 {
+  margin: 0 0 5px;
+  color: #111116;
+  font-size: 21px;
+}
+
+.cardTitle p {
+  margin: 0;
+  color: #7a7a84;
+  font-size: 13px;
+}
+
+/* Düzenle ve Değiştir butonları */
+.editButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #d8d8de;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #111116;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.editButton:hover {
+  background-color: #111116;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Profil bilgilerinin görüntülendiği alan */
+.informationGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.informationGrid > div,
+.passwordPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 17px 18px;
+  border: 1px solid #e2e2e7;
+  border-radius: 12px;
+  background-color: #f8f8fa;
+}
+
+.informationGrid span,
+.passwordPreview span {
+  color: #81818b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.informationGrid strong,
+.passwordPreview strong {
+  overflow-wrap: anywhere;
+  color: #29292f;
+  font-size: 15px;
+}
+
+/* Gizlenmiş parola gösterim alanı */
+.passwordPreview {
+  margin-top: 28px;
+}
+
+/* Profil ve parola formlarının ortak yapısı */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 28px;
+  padding-top: 26px;
+  border-top: 1px solid #e4e4e8;
+}
+
+/* İki input alanını yan yana gösterir */
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Label, input ve hata mesajını birlikte tutar */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.formGroup label {
+  color: #29292f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Formdaki input alanları */
+.formGroup input {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid #d8d8de;
+  border-radius: 11px;
+  outline: none;
+  background-color: #f8f8fa;
+  color: #111116;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Kullanıcı input alanını seçtiğinde */
+.formGroup input:focus {
+  border-color: #111116;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(17, 17, 22, 0.08);
+}
+
+/* E-posta ikonunu input içinde konumlandırır */
+.inputWithIcon {
+  position: relative;
+}
+
+.inputWithIcon svg {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  color: #8a8a94;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.inputWithIcon input {
+  padding-left: 46px;
+}
+
+/* Parola kurallarını gösteren açıklama */
+.passwordInformation {
+  margin: -7px 0 0;
+  color: #7a7a84;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Kaydet ve iptal butonlarının alanı */
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+/* Butonların ortak yapısı */
+.cancelButton,
+.saveButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* İptal butonu */
+.cancelButton {
+  border: 1px solid #d8d8de;
+  background-color: #ffffff;
+  color: #55555e;
+}
+
+.cancelButton:hover {
+  background-color: #f1f1f3;
+}
+
+/* Kaydet butonu */
+.saveButton {
+  border: none;
+  background-color: #111116;
+  color: #ffffff;
+}
+
+.saveButton:hover {
+  background-color: #29292f;
+  transform: translateY(-1px);
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Başarılı işlem mesajı */
+.successMessage {
+  margin: 22px 0 0;
+  padding: 12px 14px;
+  border: 1px solid #b9dcc5;
+  border-radius: 10px;
+  background-color: #f1fbf4;
+  color: #23713d;
+  font-size: 13px;
+}
+
+/* Input doğrulama hatası */
+.errorMessage {
+  margin: 0;
+  color: #b42318;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Formun genel hata mesajı */
+.formError {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid #efb4b4;
+  border-radius: 10px;
+  background-color: #fff4f4;
+  color: #a51d1d;
+  font-size: 13px;
+}
+
+/* Oturum bilgileri yüklenirken gösterilir */
+.loadingText {
+  margin: 80px auto;
+  color: #71717b;
+  text-align: center;
+}
+
+/* Tablet görünümü */
+@media (max-width: 800px) {
+  .profilePage {
+    padding: 35px 24px;
+  }
+
+  .topBar {
+    margin-bottom: 42px;
+  }
+
+  .informationGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Telefon görünümü */
+@media (max-width: 600px) {
+  .profilePage {
+    padding: 28px 16px;
+  }
+
+  .topBar {
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+  }
+
+  .logo {
+    font-size: 25px;
+  }
+
+  .sectionLabel {
+    padding: 8px 11px;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+  }
+
+  .pageHeader h1 {
+    font-size: 34px;
+  }
+
+  .profileCard {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .cardHeader {
+    align-items: flex-start;
+  }
+
+  .cardTitle {
+    align-items: flex-start;
+  }
+
+  .editButton {
+    padding: 9px 12px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+  }
+
+  .cancelButton,
+  .saveButton {
+    width: 100%;
+  }
+}

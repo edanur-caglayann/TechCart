@@ -3,9 +3,18 @@ ProductList -> urunleri listelemek icin
 Urun detay sayfasi -> secilen urunu bulmak icin
 bu diziyi kullanir.
 */
-import { Product } from "../types/product";
+import type { Product } from "../types/product";
+import { DEFAULT_VAT_RATE } from "../utils/tax";
 
-export const products: Product[] = [
+/*
+  Ürün verisinde KDV oranı yazılmazsa
+  varsayılan oran kullanılabilir.
+*/
+type ProductData = Omit<Product, "vatRate"> & {
+  vatRate?: number;
+};
+
+const productData: ProductData[] = [
 {
   id: 1,
   name: "iPhone 15 Pro",
@@ -13,6 +22,7 @@ export const products: Product[] = [
   brand: "Apple",
   category: "Telefon",
   price: 89999,
+  vatRate: 18,
   inStock: true,
   visualType: "phone",
   description:
@@ -202,5 +212,46 @@ export const products: Product[] = [
     inStock: true,
     visualType: "turntable",
   },
-
+    {
+    id: 17,
+    name: "Tune 770NC Kablosuz Kulaklık",
+    model: "JBLT770NCBLK",
+    brand: "JBL",
+    category: "Aksesuar",
+    price: 4999,
+    vatRate: 25,
+    inStock: true,
+    stockQuantity: 12,
+    visualType: "headphone",
+    description:
+      "Aktif gürültü engelleme özelliği ve uzun pil ömrüyle kablosuz müzik deneyimi sunar.",
+    technicalSpecifications: [
+      {
+        label: "Bağlantı",
+        value: "Bluetooth 5.3",
+      },
+      {
+        label: "Pil Ömrü",
+        value: "70 saate kadar",
+      },
+      {
+        label: "Gürültü Engelleme",
+        value: "Aktif",
+      },
+      {
+        label: "Renk",
+        value: "Siyah",
+      },
+    ],
+  },
 ];
+/*
+  KDV oranı belirtilmeyen bütün ürünlere varsayılan KDV oranını otomatik olarak ekler.
+*/
+export const products: Product[] = productData.map(
+  (product) => ({
+    ...product,
+    vatRate:
+      product.vatRate ?? DEFAULT_VAT_RATE,
+  })
+);

@@ -27,7 +27,8 @@ export type Product = {
   model: string;
   brand: string;
   category: string;
-  price: number;
+  price: number; // urunun kdv dahil satis fiyati
+  vatRate: number; // urune uygulanacak olan kdv orani
   inStock: boolean;
 
   //gorsel kullanilana kadar urun icin kullanilan geçici ikon 

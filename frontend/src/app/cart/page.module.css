@@ -170,7 +170,7 @@
 */
 .cartContent {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 350px;
+  grid-template-columns: minmax(0, 1fr) 380px;
   align-items: start;
   gap: 28px;
 }
@@ -187,31 +187,13 @@
   display: grid;
   grid-template-columns:
     100px minmax(190px, 1fr)
-    auto minmax(150px, auto) 45px;
-
+    auto minmax(185px, auto) 45px;
   align-items: center;
   gap: 22px;
-
   padding: 20px;
-
   border: 1px solid #dedee3;
   border-radius: 17px;
-
   background-color: #ffffff;
-}
-
-/* Ürün ikonu için ayrılan alan */
-.productVisual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100px;
-  height: 100px;
-
-  border-radius: 13px;
-  background-color: #eeeeF1;
-  color: #29292f;
 }
 
 /* Marka, ürün adı ve model bilgileri */
@@ -286,25 +268,35 @@
   font-weight: 700;
 }
 
-/* Ürün toplam fiyatı */
+/* Ürünün KDV dahil toplam fiyat alanı */
 .itemPrice {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 5px;
-
+  gap: 6px;
   text-align: right;
 }
 
 .itemPrice strong {
+  color: #111116;
   font-size: 18px;
   white-space: nowrap;
 }
 
+/* KDV ve birim fiyat açıklamaları */
 .itemPrice span {
-  color: #85858e;
+  color: #7a7a84;
   font-size: 11px;
   white-space: nowrap;
+}
+
+/* Ürünün KDV oranını küçük etiket olarak gösterir */
+.itemPrice span:first-of-type {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background-color: #f0f0f3;
+  color: #4f4f58;
+  font-weight: 700;
 }
 
 /* Tek ürünü silme butonu */
@@ -348,42 +340,47 @@
   font-size: 23px;
 }
 
-/* Özet içerisindeki satırlar */
+/* Sipariş özetindeki hesaplama satırları */
 .summaryRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  gap: 18px;
   margin-bottom: 17px;
-
   color: #72727c;
   font-size: 14px;
 }
 
-.summaryRow strong {
-  color: #29292f;
+.summaryRow span {
+  line-height: 1.4;
 }
 
-/* Toplam fiyat alanı */
+.summaryRow strong {
+  color: #29292f;
+  text-align: right;
+  white-space: nowrap;
+}
+
 .totalRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  gap: 18px;
   margin-top: 24px;
   padding-top: 22px;
-
   border-top: 1px solid #dedee3;
-}
-
-.totalRow span {
-  font-size: 16px;
-  font-weight: 700;
 }
 
 .totalRow strong {
   font-size: 24px;
   letter-spacing: -0.5px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.totalRow span {
+  font-size: 16px;
+  font-weight: 700;
 }
 
 /* Ödemeye geç bağlantısı */
@@ -444,11 +441,6 @@
     grid-template-columns: 80px 1fr auto;
   }
 
-  .productVisual {
-    width: 80px;
-    height: 80px;
-  }
-
   .quantityControl,
   .itemPrice {
     grid-column: 2;
@@ -458,6 +450,10 @@
     grid-column: 3;
     grid-row: 1;
   }
+  .itemPrice {
+  align-items: flex-start;
+  text-align: left;
+}
 }
 
 /* Telefon görünümü */
@@ -479,10 +475,5 @@
     grid-template-columns: 65px 1fr auto;
     gap: 14px;
     padding: 15px;
-  }
-
-  .productVisual {
-    width: 65px;
-    height: 65px;
   }
 }
