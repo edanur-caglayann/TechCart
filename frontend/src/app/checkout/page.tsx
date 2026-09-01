@@ -9,24 +9,42 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
-import type { FormEvent } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
+import { useAddress } from "../../context/AddressContext";
 import { useCart } from "../../context/CartContext";
+
+import {
+  paymentSchema,
+  type PaymentFormValues,
+} from "../../schemas/paymentSchemas";
+
+import {
+  calculateIncludedVat,
+  calculateNetAmount,
+  DEFAULT_VAT_RATE,
+  formatCurrency,
+} from "../../utils/tax";
+
 import styles from "./page.module.css";
 
 export default function CheckoutPage() {
   /*
-    useRouter -> mevcut sepepetteki urun bilgileirni,
-    adeti, fiyati vs okur
+    useRouter -> ödeme doğrulaması tamamlandığında
+    kullanıcıyı 3D Secure ekranına yönlendirir.
   */
   const router = useRouter();
 
   /*
-    Sipariş özetini oluşturmak için
-    sepet bilgilerine ulaşıyoruz.
+    Sipariş özetini oluşturmak için sepet bilgilerine ulaşıyoruz.
   */
   const {
     cartItems,
@@ -35,17 +53,130 @@ export default function CheckoutPage() {
   } = useCart();
 
   /*
-    Kullanıcı formdaki butona bastiginda calisan fonks
+    Kullanıcının kayıtlı teslimat adreslerine AddressContext üzerinden ulaşıyoruz.
   */
-  function handleSubmit(
-    event: FormEvent<HTMLFormElement>
-  ) {
-    /*
-      Formun tarayıcı tarafından normal şekilde
-      gönderilmesini ve sayfanın yenilenmesini engeller.
-    */
-    event.preventDefault();
+  const {
+    addresses,
+    isAddressLoading,
+  } = useAddress();
 
+  // Ödeme için seçilen teslimat adresini tutar.
+  const [
+    selectedAddressId,
+    setSelectedAddressId,
+  ] = useState("");
+
+  /*
+    React Hook Form kart alanlarını yönetir.
+    zodResolver girilen değerleri paymentSchema
+    kurallarıyla doğrular.
+  */
+  const {
+    register,
+    handleSubmit,
+    formState: {
+      errors,
+      isSubmitting,
+    },
+  } = useForm<PaymentFormValues>({
+    resolver: zodResolver(paymentSchema),
+    defaultValues: {
+      cardHolder: "",
+      cardNumber: "",
+      expiryDate: "",
+      cvv: "",
+      useThreeDSecure: false,
+    },
+    mode: "onBlur",
+  });
+
+  /*
+    Adresler yüklendiğinde varsayılan adresi, varsayılan yoksa ilk adresi otomatik seçer.
+  */
+  useEffect(() => {
+    if (
+      isAddressLoading ||
+      addresses.length === 0
+    ) {
+      return;
+    }
+
+    setSelectedAddressId((currentId) => {
+      const selectedAddressExists =
+        addresses.some(
+          (address) =>
+            address.id === currentId
+        );
+
+      if (selectedAddressExists) {
+        return currentId;
+      }
+
+      const defaultAddress = addresses.find(
+        (address) => address.isDefault
+      );
+
+      return (
+        defaultAddress?.id ??
+        addresses[0].id
+      );
+    });
+  }, [addresses, isAddressLoading]);
+
+  /*
+    Sepetteki ürünlerin KDV hariç toplam tutarını hesaplar.
+  */
+  const totalNetPrice = cartItems.reduce(
+    (total, item) => {
+      const itemTotal =
+        item.product.price * item.quantity;
+
+      const vatRate =
+        item.product.vatRate ??
+        DEFAULT_VAT_RATE;
+
+      return (
+        total +
+        calculateNetAmount(
+          itemTotal,
+          vatRate
+        )
+      );
+    },
+    0
+  );
+
+  /*
+    Sepetteki ürün fiyatlarına dahil olan toplam KDV tutarını hesaplar.
+  */
+  const totalVat = cartItems.reduce(
+    (total, item) => {
+      const itemTotal =
+        item.product.price * item.quantity;
+
+      const vatRate =
+        item.product.vatRate ??
+        DEFAULT_VAT_RATE;
+
+      return (
+        total +
+        calculateIncludedVat(
+          itemTotal,
+          vatRate
+        )
+      );
+    },
+    0
+  );
+
+  /*
+    Kullanıcı formdaki butona bastığında çalışan fonksiyon.
+  */
+  /*
+    Kart bilgileri Zod doğrulamasından başarıyla
+    geçtiğinde çalışan ödeme fonksiyonudur.
+  */
+  function onSubmit() {
     /*
       Sepet boşsa ödeme işlemine devam edilmez.
     */
@@ -54,9 +185,25 @@ export default function CheckoutPage() {
     }
 
     /*
-      Tarayıcının required, pattern ve minLength gibi
-      kontrolleri başarılı olduğunda kullanıcıyı
-      3D Secure ekranına yönlendiriyoruz.
+      Teslimat adresi seçilmediyse
+      ödeme işlemine devam edilmez.
+    */
+    if (!selectedAddressId) {
+      return;
+    }
+
+    /*
+      Seçilen adresin kimliğini 3D Secure
+      işleminde kullanmak üzere geçici olarak saklarız.
+    */
+    sessionStorage.setItem(
+      "techcart-checkout-address-id",
+      selectedAddressId
+    );
+
+    /*
+      Kart bilgileri doğrulandıktan sonra kullanıcı
+      3D Secure ekranına yönlendirilir.
     */
     router.push("/checkout/3d-secure");
   }
@@ -81,7 +228,9 @@ export default function CheckoutPage() {
         </Link>
       </header>
 
-      <section className={styles.checkoutContainer}>
+      <section
+        className={styles.checkoutContainer}
+      >
         <div className={styles.pageHeader}>
           <span className={styles.label}>
             GÜVENLİ ÖDEME
@@ -90,8 +239,8 @@ export default function CheckoutPage() {
           <h1>Ödeme Bilgileri</h1>
 
           <p>
-            Teslimat ve kart bilgilerini girerek
-            siparişini tamamlamaya devam edebilirsin.
+            Teslimat adresini seçip kart bilgilerini
+            girerek siparişini tamamlayabilirsin.
           </p>
         </div>
 
@@ -106,11 +255,13 @@ export default function CheckoutPage() {
               strokeWidth={1.3}
             />
 
-            <h2>Ödeme için sepetinde ürün bulunmalı</h2>
+            <h2>
+              Ödeme için sepetinde ürün bulunmalı
+            </h2>
 
             <p>
-              Ürünleri inceleyerek alışveriş sepetine
-              en az bir ürün eklemelisin.
+              Ürünleri inceleyerek alışveriş
+              sepetine en az bir ürün eklemelisin.
             </p>
 
             <Link href="/#products">
@@ -119,115 +270,150 @@ export default function CheckoutPage() {
           </div>
         ) : (
           /*
-            HTML form kontrolleri yapilir. Boylece kullanicidan gelen
-            input ozelliklerine bakarak temek kontrolleri yapar.
-            Bu alan bos birakilamaz,Kullanıcının beş karakterden fazla girmesini engellenir,
-            Kullanıcı alanı doldurmadan butona basarsa tarayıcı formu göndermez ve 
-            uyarı gösterir gibi.
+            HTML form kontrolleri yapılır.
+            Kullanıcı gerekli bilgileri girmeden
+            ödeme işlemine devam edemez.
           */
           <form
             className={styles.checkoutGrid}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
           >
             <div className={styles.formSections}>
               {/*
-                Teslimat bilgilerinin bulunduğu bölüm.
+                Teslimat adreslerinin bulunduğu bölüm.
               */}
               <section className={styles.formCard}>
-                <div className={styles.sectionHeader}>
-                  <div className={styles.sectionIcon}>
+                <div
+                  className={styles.sectionHeader}
+                >
+                  <div
+                    className={styles.sectionIcon}
+                  >
                     <MapPin size={23} />
                   </div>
 
                   <div>
-                    <h2>Teslimat Bilgileri</h2>
+                    <h2>Teslimat Adresi</h2>
 
                     <p>
-                      Siparişin teslim edileceği adresi gir.
+                      Siparişin teslim edileceği
+                      kayıtlı adresi seç.
                     </p>
                   </div>
                 </div>
 
-                <div className={styles.formGroup}>
-                  <label htmlFor="fullName">
-                    Ad Soyad
-                  </label>
+                {isAddressLoading ? (
+                  <p
+                    className={
+                      styles.addressLoading
+                    }
+                  >
+                    Adresler yükleniyor...
+                  </p>
+                ) : addresses.length === 0 ? (
+                  <div
+                    className={styles.emptyAddress}
+                  >
+                    <MapPin size={28} />
 
-                  <input
-                    id="fullName"
-                    name="fullName"
-                    type="text"
-                    placeholder="Adını ve soyadını gir"
-                    autoComplete="name"
-                    required
-                  />
-                </div>
+                    <h3>
+                      Kayıtlı adresin bulunmuyor
+                    </h3>
 
-                <div className={styles.formGroup}>
-                  <label htmlFor="phone">
-                    Telefon numarası
-                  </label>
+                    <p>
+                      Ödemeye devam etmek için bir
+                      teslimat adresi eklemelisin.
+                    </p>
 
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="05XX XXX XX XX"
-                    autoComplete="tel"
-                    required
-                  />
-                </div>
-
-                {/*
-                  İl ve ilçe alanlarını yan yana göstermek
-                  için formRow kullanıyoruz.
-                */}
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="city">
-                      İl
-                    </label>
-
-                    <input
-                      id="city"
-                      name="city"
-                      type="text"
-                      placeholder="İstanbul"
-                      autoComplete="address-level1"
-                      required
-                    />
+                    <Link href="/addresses">
+                      Yeni Adres Ekle
+                    </Link>
                   </div>
+                ) : (
+                  <div
+                    className={styles.addressList}
+                  >
+                    {addresses.map((address) => (
+                      <label
+                        className={`${styles.addressOption} ${
+                          selectedAddressId ===
+                          address.id
+                            ? styles.selectedAddress
+                            : ""
+                        }`}
+                        key={address.id}
+                      >
+                        <input
+                          type="radio"
+                          name="deliveryAddress"
+                          value={address.id}
+                          checked={
+                            selectedAddressId ===
+                            address.id
+                          }
+                          onChange={() =>
+                            setSelectedAddressId(
+                              address.id
+                            )
+                          }
+                        />
 
-                  <div className={styles.formGroup}>
-                    <label htmlFor="district">
-                      İlçe
-                    </label>
+                        <div
+                          className={
+                            styles.addressContent
+                          }
+                        >
+                          <div
+                            className={
+                              styles.addressTitle
+                            }
+                          >
+                            <strong>
+                              {address.title}
+                            </strong>
 
-                    <input
-                      id="district"
-                      name="district"
-                      type="text"
-                      placeholder="Kadıköy"
-                      autoComplete="address-level2"
-                      required
-                    />
+                            {address.isDefault && (
+                              <span
+                                className={
+                                  styles.defaultBadge
+                                }
+                              >
+                                Varsayılan
+                              </span>
+                            )}
+                          </div>
+
+                          <strong>
+                            {address.firstName}{" "}
+                            {address.lastName}
+                          </strong>
+
+                          <p>
+                            {address.neighborhood},{" "}
+                            {address.addressLine}
+                          </p>
+
+                          <span>
+                            {address.district} /{" "}
+                            {address.city}
+                            <br />
+                            {address.phone}
+                          </span>
+                        </div>
+                      </label>
+                    ))}
+
+                    <Link
+                      className={
+                        styles.manageAddressLink
+                      }
+                      href="/addresses"
+                    >
+                      Adresleri Yönet
+                    </Link>
                   </div>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label htmlFor="address">
-                    Açık adres
-                  </label>
-
-                  <textarea
-                    id="address"
-                    name="address"
-                    placeholder="Mahalle, cadde, sokak, bina ve daire bilgilerini gir"
-                    autoComplete="street-address"
-                    rows={4}
-                    required
-                  />
-                </div>
+                )}
               </section>
 
               {/*
@@ -235,8 +421,12 @@ export default function CheckoutPage() {
                 Bu bilgiler localStorage içerisine kaydedilmez.
               */}
               <section className={styles.formCard}>
-                <div className={styles.sectionHeader}>
-                  <div className={styles.sectionIcon}>
+                <div
+                  className={styles.sectionHeader}
+                >
+                  <div
+                    className={styles.sectionIcon}
+                  >
                     <CreditCard size={23} />
                   </div>
 
@@ -256,12 +446,30 @@ export default function CheckoutPage() {
 
                   <input
                     id="cardHolder"
-                    name="cardHolder"
                     type="text"
                     placeholder="AD SOYAD"
                     autoComplete="cc-name"
-                    required
+                    aria-invalid={Boolean(
+                      errors.cardHolder
+                    )}
+                    className={
+                      errors.cardHolder
+                        ? styles.inputError
+                        : ""
+                    }
+                    {...register("cardHolder")}
                   />
+
+                  {errors.cardHolder && (
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                      role="alert"
+                    >
+                      {errors.cardHolder.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className={styles.formGroup}>
@@ -269,7 +477,9 @@ export default function CheckoutPage() {
                     Kart numarası
                   </label>
 
-                  <div className={styles.secureInput}>
+                  <div
+                    className={styles.secureInput}
+                  >
                     <CreditCard
                       size={19}
                       aria-hidden="true"
@@ -277,64 +487,83 @@ export default function CheckoutPage() {
 
                     <input
                       id="cardNumber"
-                      name="cardNumber"
                       type="text"
-
-                      /*
-                        inputMode="numeric", mobil cihazlarda
-                        sayısal klavyenin açılmasını sağlar.
-                      */
                       inputMode="numeric"
-
                       placeholder="0000 0000 0000 0000"
                       autoComplete="cc-number"
-
-                      /*
-                        Boşluklarla birlikte en fazla
-                        19 karakter girilebilir.
-                      */
                       maxLength={19}
-
-                      /*
-                        Yalnızca rakam ve boşluklardan oluşan
-                        15-19 karakterlik değeri kabul eder.
-                      */
-                      pattern="[0-9 ]{15,19}"
-                      required
+                      aria-invalid={Boolean(
+                        errors.cardNumber
+                      )}
+                      className={
+                        errors.cardNumber
+                          ? styles.inputError
+                          : ""
+                      }
+                      {...register("cardNumber")}
                     />
                   </div>
+
+                  {errors.cardNumber && (
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                      role="alert"
+                    >
+                      {errors.cardNumber.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
+                  <div
+                    className={styles.formGroup}
+                  >
                     <label htmlFor="expiryDate">
                       Son kullanma tarihi
                     </label>
 
                     <input
                       id="expiryDate"
-                      name="expiryDate"
                       type="text"
                       inputMode="numeric"
                       placeholder="AA/YY"
                       autoComplete="cc-exp"
                       maxLength={5}
-
-                      /*
-                        01/26 ile 12/99 arasındaki
-                        AA/YY biçimini kontrol eder.
-                      */
-                      pattern="(0[1-9]|1[0-2])\/[0-9]{2}"
-                      required
+                      aria-invalid={Boolean(
+                        errors.expiryDate
+                      )}
+                      className={
+                        errors.expiryDate
+                          ? styles.inputError
+                          : ""
+                      }
+                      {...register("expiryDate")}
                     />
+
+                    {errors.expiryDate && (
+                      <p
+                        className={
+                          styles.errorMessage
+                        }
+                        role="alert"
+                      >
+                        {errors.expiryDate.message}
+                      </p>
+                    )}
                   </div>
 
-                  <div className={styles.formGroup}>
+                  <div
+                    className={styles.formGroup}
+                  >
                     <label htmlFor="cvv">
                       CVV
                     </label>
 
-                    <div className={styles.secureInput}>
+                    <div
+                      className={styles.secureInput}
+                    >
                       <LockKeyhole
                         size={18}
                         aria-hidden="true"
@@ -342,44 +571,81 @@ export default function CheckoutPage() {
 
                       <input
                         id="cvv"
-                        name="cvv"
                         type="password"
                         inputMode="numeric"
                         placeholder="123"
                         autoComplete="cc-csc"
                         maxLength={4}
-
-                        /*
-                          CVV değerinin yalnızca
-                          3 veya 4 rakam olmasını ister.
-                        */
-                        pattern="[0-9]{3,4}"
-                        required
+                        aria-invalid={Boolean(
+                          errors.cvv
+                        )}
+                        className={
+                          errors.cvv
+                            ? styles.inputError
+                            : ""
+                        }
+                        {...register("cvv")}
                       />
                     </div>
+
+                    {errors.cvv && (
+                      <p
+                        className={
+                          styles.errorMessage
+                        }
+                        role="alert"
+                      >
+                        {errors.cvv.message}
+                      </p>
+                    )}
                   </div>
                 </div>
 
-                <label className={styles.secureAgreement}>
+                <label
+                  className={
+                    styles.secureAgreement
+                  }
+                >
                   <input
-                    name="useThreeDSecure"
                     type="checkbox"
-                    required
+                    {...register(
+                      "useThreeDSecure"
+                    )}
                   />
 
                   <span>
-                    Ödemenin 3D Secure doğrulamasıyla
-                    tamamlanmasını kabul ediyorum.
+                    Ödemenin 3D Secure
+                    doğrulamasıyla tamamlanmasını
+                    kabul ediyorum.
                   </span>
                 </label>
 
-                <div className={styles.securityInformation}>
+                {errors.useThreeDSecure && (
+                  <p
+                    className={
+                      styles.errorMessage
+                    }
+                    role="alert"
+                  >
+                    {
+                      errors.useThreeDSecure
+                        .message
+                    }
+                  </p>
+                )}
+
+                <div
+                  className={
+                    styles.securityInformation
+                  }
+                >
                   <ShieldCheck size={21} />
 
                   <p>
-                    Kart bilgilerin TechCart tarafından
-                    saklanmaz. Ödeme işlemi güvenli ödeme
-                    altyapısı üzerinden yürütülecektir.
+                    Kart bilgilerin TechCart
+                    tarafından saklanmaz. Ödeme
+                    işlemi güvenli ödeme altyapısı
+                    üzerinden yürütülecektir.
                   </p>
                 </div>
               </section>
@@ -409,11 +675,10 @@ export default function CheckoutPage() {
                     </div>
 
                     <strong>
-                      {(
+                      {formatCurrency(
                         item.product.price *
-                        item.quantity
-                      ).toLocaleString("tr-TR")}{" "}
-                      ₺
+                          item.quantity
+                      )}
                     </strong>
                   </div>
                 ))}
@@ -425,10 +690,20 @@ export default function CheckoutPage() {
               </div>
 
               <div className={styles.summaryRow}>
-                <span>Ara toplam</span>
+                <span>
+                  KDV hariç ara toplam
+                </span>
 
                 <strong>
-                  {totalPrice.toLocaleString("tr-TR")} ₺
+                  {formatCurrency(totalNetPrice)}
+                </strong>
+              </div>
+
+              <div className={styles.summaryRow}>
+                <span>Toplam KDV</span>
+
+                <strong>
+                  {formatCurrency(totalVat)}
                 </strong>
               </div>
 
@@ -438,10 +713,10 @@ export default function CheckoutPage() {
               </div>
 
               <div className={styles.totalRow}>
-                <span>Toplam</span>
+                <span>KDV dahil toplam</span>
 
                 <strong>
-                  {totalPrice.toLocaleString("tr-TR")} ₺
+                  {formatCurrency(totalPrice)}
                 </strong>
               </div>
 
@@ -452,11 +727,18 @@ export default function CheckoutPage() {
               <button
                 className={styles.paymentButton}
                 type="submit"
+                disabled={
+                  isAddressLoading ||
+                  !selectedAddressId ||
+                  isSubmitting
+                }
               >
                 <LockKeyhole size={19} />
-                3D Secure ile Ödemeye Geç
-              </button>
 
+                {isSubmitting
+                  ? "Ödeme hazırlanıyor..."
+                  : "3D Secure ile Ödemeye Geç"}
+              </button>
             </aside>
           </form>
         )}
