@@ -216,7 +216,7 @@
   position: relative;
 }
 
-.secureInput > svg {
+.secureInput>svg {
   position: absolute;
   z-index: 1;
   top: 50%;
@@ -279,6 +279,194 @@
   line-height: 1.6;
 }
 
+/* Kayıtlı adresler yüklenirken gösterilen metin */
+.addressLoading {
+  margin: 0;
+  padding: 20px;
+  color: #74747e;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Kullanıcının kayıtlı adresi olmadığında gösterilir */
+.emptyAddress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px;
+  border: 1px dashed #d2d2d8;
+  border-radius: 14px;
+  background-color: #f8f8fa;
+  text-align: center;
+}
+
+.emptyAddress svg {
+  margin-bottom: 13px;
+  color: #55555e;
+}
+
+.emptyAddress h3 {
+  margin: 0 0 8px;
+  color: #111116;
+  font-size: 17px;
+}
+
+.emptyAddress p {
+  max-width: 420px;
+  margin: 0 0 18px;
+  color: #777781;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.emptyAddress a {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background-color: #111116;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Kayıtlı teslimat adreslerini alt alta tutar */
+.addressList {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+/* Seçilebilir tek adres kartı */
+.addressOption {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #dedee3;
+  border-radius: 13px;
+  background-color: #f8f8fa;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.addressOption:hover {
+  border-color: #a8a8b0;
+  background-color: #ffffff;
+}
+
+.addressOption:focus-within {
+  box-shadow: 0 0 0 4px rgba(17, 17, 22, 0.07);
+}
+
+/* Adres seçim kutusu */
+.addressOption input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #111116;
+  cursor: pointer;
+}
+
+/* Kullanıcının seçtiği adres kartı */
+.selectedAddress {
+  border-color: #111116;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px #111116;
+}
+
+/* Adres kartındaki metin alanı */
+.addressContent {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.addressTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.addressTitle>strong {
+  color: #111116;
+  font-size: 16px;
+}
+
+/* Varsayılan adres etiketi */
+.defaultBadge {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background-color: #e9e9ec;
+  color: #29292f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.addressContent>strong {
+  color: #34343b;
+  font-size: 14px;
+}
+
+.addressContent p {
+  margin: 0;
+  color: #62626c;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.addressContent>span {
+  color: #85858e;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Adreslerim sayfasına yönlendiren bağlantı */
+.manageAddressLink {
+  width: fit-content;
+  margin-top: 3px;
+  color: #29292f;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.manageAddressLink:hover {
+  text-decoration: underline;
+}
+
+/* Ödeme butonunun aktif hover görünümü */
+.paymentButton:hover:not(:disabled) {
+  background-color: #35353c;
+  transform: translateY(-2px);
+}
+
+/* Adres seçilmediğinde ödeme butonu */
+.paymentButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 600px) {
+  .addressOption {
+    padding: 15px;
+  }
+
+  .addressTitle {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+}
+
 /* Sipariş özeti paneli */
 .orderSummary {
   position: sticky;
@@ -318,7 +506,7 @@
   font-size: 13px;
 }
 
-.productItem > div {
+.productItem>div {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -329,7 +517,7 @@
   font-size: 11px;
 }
 
-.productItem > strong {
+.productItem>strong {
   white-space: nowrap;
 }
 
@@ -448,6 +636,20 @@
 
   font-weight: 700;
   text-decoration: none;
+}
+
+/* Hatalı kart alanının görünümü */
+.formGroup input.inputError {
+  border-color: #c73939;
+  background-color: #fffafa;
+}
+
+/* Zod doğrulama hata mesajı */
+.errorMessage {
+  margin: 0;
+  color: #b42318;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 /* Tablet ekranları */

@@ -7,6 +7,7 @@ import {
 
 import { AuthProvider } from "../context/AuthContext";
 import { CartProvider } from "../context/CartContext";
+import { AddressProvider } from "../context/AddressContext";
 
 import "./globals.css";
 
@@ -44,17 +45,12 @@ export default function RootLayout({
           ${geistMono.variable}
         `}
       >
-        {/*
-          AuthProvider bütün uygulamayı sardığı için
-          giriş, kayıt ve Header kullanıcı bilgisine ulaşabilir.
-
-          CartProvider da bütün sayfalarda ortak
-          sepet bilgisinin kullanılmasını sağlar.
-        */}
-        <AuthProvider>
-          <CartProvider>
-            {children}
-          </CartProvider>
+        <AuthProvider> {/* bütün uygulamayı sardığı için giriş, kayıt ve Header kullanıcı bilgisine ulaşabilir.*/}
+          <AddressProvider>{/* kayıtlı adresleri ortak olarak bütün sayfalara ulaştırır. */}
+            <CartProvider> {/* bütün sayfalarda ortak sepet bilgisinin kullanılmasını sağlar.*/}
+              {children}
+            </CartProvider>
+          </AddressProvider>
         </AuthProvider>
       </body>
     </html>

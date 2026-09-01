@@ -18,28 +18,37 @@ import {
 } from "react";
 import { useForm } from "react-hook-form";
 
+import { useAddress } from "../../context/AddressContext";
 import { useAuth } from "../../context/AuthContext";
+
 import {
   addressSchema,
   type AddressFormValues,
 } from "../../schemas/addressSchemas";
+
 import type { Address } from "../../types/address";
 
 import styles from "./page.module.css";
 
 export default function AddressesPage() {
   const router = useRouter();
+
   const {
     user,
     isAuthLoading,
   } = useAuth();
 
-  // Kullanıcının adreslerini tutar.
-  const [addresses, setAddresses] = useState<Address[]>(
-    []
-  );
+  // Adres bilgilerine ve adres işlemlerine AddressContext üzerinden ulaşırız.
+  const {
+    addresses,
+    isAddressLoading,
+    saveAddress,
+    makeDefault: makeDefaultAddress,
+    deleteAddress: removeAddress,
+  } = useAddress();
 
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] =
+    useState(false);
 
   // Düzenlenen adresin kimliğini tutar.
   const [editingAddressId, setEditingAddressId] =
@@ -55,6 +64,7 @@ export default function AddressesPage() {
     },
   } = useForm<AddressFormValues>({
     resolver: zodResolver(addressSchema),
+
     defaultValues: {
       title: "",
       firstName: "",
@@ -67,6 +77,7 @@ export default function AddressesPage() {
       postalCode: "",
       isDefault: false,
     },
+
     mode: "onBlur",
   });
 
@@ -112,12 +123,15 @@ export default function AddressesPage() {
   }
 
   // Yeni adres ekler veya mevcut adresi günceller.
-  function onSubmit(formValues: AddressFormValues) {
+  function onSubmit(
+    formValues: AddressFormValues
+  ) {
     const addressId =
       editingAddressId ?? crypto.randomUUID();
 
     const editedAddress = addresses.find(
-      (address) => address.id === editingAddressId
+      (address) =>
+        address.id === editingAddressId
     );
 
     const shouldBeDefault =
@@ -131,43 +145,14 @@ export default function AddressesPage() {
       isDefault: shouldBeDefault,
     };
 
-    setAddresses((currentAddresses) => {
-      let updatedAddresses = editingAddressId
-        ? currentAddresses.map((address) =>
-            address.id === editingAddressId
-              ? savedAddress
-              : address
-          )
-        : [...currentAddresses, savedAddress];
-
-      // Yeni varsayılan seçildiyse diğer adresleri normal yapar.
-      if (shouldBeDefault) {
-        updatedAddresses = updatedAddresses.map(
-          (address) => ({
-            ...address,
-            isDefault: address.id === addressId,
-          })
-        );
-      }
-
-      return updatedAddresses;
-    });
-
+    saveAddress(savedAddress);
     closeForm();
   }
 
-  // Seçilen adresi varsayılan adres yapar.
-  function makeDefault(addressId: string) {
-    setAddresses((currentAddresses) =>
-      currentAddresses.map((address) => ({
-        ...address,
-        isDefault: address.id === addressId,
-      }))
-    );
-  }
-
-  // Seçilen adresi siler.
-  function deleteAddress(addressId: string) {
+  // Kullanıcı onaylarsa seçilen adresi siler.
+  function handleDeleteAddress(
+    addressId: string
+  ) {
     const shouldDelete = window.confirm(
       "Bu adresi silmek istediğinize emin misiniz?"
     );
@@ -176,34 +161,14 @@ export default function AddressesPage() {
       return;
     }
 
-    setAddresses((currentAddresses) => {
-      const deletedAddress = currentAddresses.find(
-        (address) => address.id === addressId
-      );
-
-      const remainingAddresses =
-        currentAddresses.filter(
-          (address) => address.id !== addressId
-        );
-
-      // Varsayılan adres silinirse ilk adresi varsayılan yapar.
-      if (
-        deletedAddress?.isDefault &&
-        remainingAddresses.length > 0
-      ) {
-        return remainingAddresses.map(
-          (address, index) => ({
-            ...address,
-            isDefault: index === 0,
-          })
-        );
-      }
-
-      return remainingAddresses;
-    });
+    removeAddress(addressId);
   }
 
-  if (isAuthLoading || !user) {
+  if (
+    isAuthLoading ||
+    isAddressLoading ||
+    !user
+  ) {
     return (
       <main className={styles.addressesPage}>
         <p className={styles.loadingText}>
@@ -229,6 +194,7 @@ export default function AddressesPage() {
         <header className={styles.pageHeader}>
           <div>
             <h1>Adreslerim</h1>
+
             <p>
               Teslimat adreslerinizi ekleyebilir ve
               yönetebilirsiniz.
@@ -284,7 +250,11 @@ export default function AddressesPage() {
                   />
 
                   {errors.title && (
-                    <p className={styles.errorMessage}>
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                    >
                       {errors.title.message}
                     </p>
                   )}
@@ -303,7 +273,11 @@ export default function AddressesPage() {
                   />
 
                   {errors.phone && (
-                    <p className={styles.errorMessage}>
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                    >
                       {errors.phone.message}
                     </p>
                   )}
@@ -312,7 +286,9 @@ export default function AddressesPage() {
 
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label htmlFor="firstName">Ad</label>
+                  <label htmlFor="firstName">
+                    Ad
+                  </label>
 
                   <input
                     id="firstName"
@@ -321,7 +297,11 @@ export default function AddressesPage() {
                   />
 
                   {errors.firstName && (
-                    <p className={styles.errorMessage}>
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                    >
                       {errors.firstName.message}
                     </p>
                   )}
@@ -339,7 +319,11 @@ export default function AddressesPage() {
                   />
 
                   {errors.lastName && (
-                    <p className={styles.errorMessage}>
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                    >
                       {errors.lastName.message}
                     </p>
                   )}
@@ -348,7 +332,9 @@ export default function AddressesPage() {
 
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label htmlFor="city">Şehir</label>
+                  <label htmlFor="city">
+                    Şehir
+                  </label>
 
                   <input
                     id="city"
@@ -357,14 +343,20 @@ export default function AddressesPage() {
                   />
 
                   {errors.city && (
-                    <p className={styles.errorMessage}>
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                    >
                       {errors.city.message}
                     </p>
                   )}
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label htmlFor="district">İlçe</label>
+                  <label htmlFor="district">
+                    İlçe
+                  </label>
 
                   <input
                     id="district"
@@ -373,7 +365,11 @@ export default function AddressesPage() {
                   />
 
                   {errors.district && (
-                    <p className={styles.errorMessage}>
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                    >
                       {errors.district.message}
                     </p>
                   )}
@@ -393,7 +389,11 @@ export default function AddressesPage() {
                   />
 
                   {errors.neighborhood && (
-                    <p className={styles.errorMessage}>
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                    >
                       {errors.neighborhood.message}
                     </p>
                   )}
@@ -412,7 +412,11 @@ export default function AddressesPage() {
                   />
 
                   {errors.postalCode && (
-                    <p className={styles.errorMessage}>
+                    <p
+                      className={
+                        styles.errorMessage
+                      }
+                    >
                       {errors.postalCode.message}
                     </p>
                   )}
@@ -431,13 +435,19 @@ export default function AddressesPage() {
                 />
 
                 {errors.addressLine && (
-                  <p className={styles.errorMessage}>
+                  <p
+                    className={
+                      styles.errorMessage
+                    }
+                  >
                     {errors.addressLine.message}
                   </p>
                 )}
               </div>
 
-              <label className={styles.checkboxArea}>
+              <label
+                className={styles.checkboxArea}
+              >
                 <input
                   type="checkbox"
                   {...register("isDefault")}
@@ -476,11 +486,13 @@ export default function AddressesPage() {
           <section className={styles.emptyState}>
             <MapPin size={34} />
 
-            <h2>Kayıtlı adresiniz bulunmuyor</h2>
+            <h2>
+              Kayıtlı adresiniz bulunmuyor
+            </h2>
 
             <p>
-              Siparişlerinizde kullanmak için yeni bir
-              teslimat adresi ekleyebilirsiniz.
+              Siparişlerinizde kullanmak için yeni
+              bir teslimat adresi ekleyebilirsiniz.
             </p>
           </section>
         ) : (
@@ -501,14 +513,19 @@ export default function AddressesPage() {
                   </div>
 
                   {address.isDefault && (
-                    <span className={styles.defaultBadge}>
+                    <span
+                      className={
+                        styles.defaultBadge
+                      }
+                    >
                       Varsayılan
                     </span>
                   )}
                 </div>
 
                 <strong>
-                  {address.firstName} {address.lastName}
+                  {address.firstName}{" "}
+                  {address.lastName}
                 </strong>
 
                 <p className={styles.addressText}>
@@ -517,7 +534,8 @@ export default function AddressesPage() {
                 </p>
 
                 <p className={styles.addressMeta}>
-                  {address.district} / {address.city}
+                  {address.district} /{" "}
+                  {address.city}
                   <br />
                   {address.postalCode}
                   <br />
@@ -527,10 +545,14 @@ export default function AddressesPage() {
                 <div className={styles.cardActions}>
                   {!address.isDefault && (
                     <button
-                      className={styles.defaultButton}
+                      className={
+                        styles.defaultButton
+                      }
                       type="button"
                       onClick={() =>
-                        makeDefault(address.id)
+                        makeDefaultAddress(
+                          address.id
+                        )
                       }
                     >
                       <Star size={16} />
@@ -539,7 +561,9 @@ export default function AddressesPage() {
                   )}
 
                   <button
-                    className={styles.secondaryButton}
+                    className={
+                      styles.secondaryButton
+                    }
                     type="button"
                     onClick={() =>
                       openEditForm(address)
@@ -553,7 +577,9 @@ export default function AddressesPage() {
                     className={styles.deleteButton}
                     type="button"
                     onClick={() =>
-                      deleteAddress(address.id)
+                      handleDeleteAddress(
+                        address.id
+                      )
                     }
                   >
                     <Trash2 size={16} />
