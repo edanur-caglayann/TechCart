@@ -16,6 +16,12 @@ import ProductGallery from "../../../components/ProductGallery/ProductGallery";
 
 import AddToCartButton from "../../../components/AddToCartButton/AddToCartButton";
 
+import {
+  calculateIncludedVat,
+  calculateNetAmount,
+  formatCurrency,
+} from "../../../utils/tax";
+
 import styles from "./page.module.css";
 
 /*
@@ -80,6 +86,19 @@ export default async function ProductDetailPage({
       },
     ];
 
+  // Ürünün KDV dahil fiyatının içerisindeki KDV tutarini ürünün kendi oranına göre hesaplar
+  const includedVat = calculateIncludedVat(
+    product.price,
+    product.vatRate
+  );
+
+
+  // Ürünün KDV dahil satış fiyatından KDV hariç fiyatını hesaplar.
+  const netPrice = calculateNetAmount(
+    product.price,
+    product.vatRate
+  );
+
   return (
     <main className={styles.detailPage}>
       {/*
@@ -133,11 +152,31 @@ export default async function ProductDetailPage({
           </p>
 
           <div className={styles.priceArea}>
-            <span>Ürün fiyatı</span>
+            <span>KDV dahil satış fiyatı</span>
 
             <strong>
-              {product.price.toLocaleString("tr-TR")} ₺
+              {formatCurrency(product.price)}
             </strong>
+
+            <div className={styles.taxInformation}>
+              <span>
+                KDV hariç fiyat:{" "}
+                <strong>
+                  {formatCurrency(netPrice)}
+                </strong>
+              </span>
+
+              <span>
+                KDV oranı: %{product.vatRate}
+              </span>
+
+              <span>
+                Fiyata dahil KDV:{" "}
+                <strong>
+                  {formatCurrency(includedVat)}
+                </strong>
+              </span>
+            </div>
           </div>
 
           <div className={styles.stockInformation}>
@@ -155,6 +194,7 @@ export default async function ProductDetailPage({
           <AddToCartButton
             product={product}
             className={styles.cartButton}
+            showCartLink
           />
 
           <div className={styles.serviceInformation}>

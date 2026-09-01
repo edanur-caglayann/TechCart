@@ -430,3 +430,37 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Hatalı input alanının görünümü */
+.inputError input {
+  border-color: #c73939;
+  background-color: #fffafa;
+}
+
+/* Alanların altında gösterilen doğrulama mesajı */
+.errorMessage {
+  margin: 0;
+  color: #b42318;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Backend veya oturum işleminden gelen genel form hatası */
+.formError {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid #efb4b4;
+  border-radius: 10px;
+  background-color: #fff4f4;
+  color: #a51d1d;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Form gönderilirken butonun tekrar tıklanmasını engeller */
+.registerButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

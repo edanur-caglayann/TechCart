@@ -126,15 +126,44 @@
   margin-bottom: 20px;
 }
 
-.priceArea span {
+/* Yalnızca ana fiyat başlığını etkiler */
+.priceArea > span {
   color: #797983;
   font-size: 13px;
 }
 
-.priceArea strong {
+/* Yalnızca KDV dahil ana satış fiyatını etkiler */
+.priceArea > strong {
   color: #111116;
   font-size: 36px;
   letter-spacing: -1px;
+}
+
+/* KDV oranı ve KDV tutarının gösterildiği alan */
+.taxInformation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 7px;
+  padding: 11px 14px;
+  border: 1px solid #e1e1e5;
+  border-radius: 10px;
+  background-color: #f8f8fa;
+}
+
+/* KDV açıklamaları */
+.taxInformation span {
+  color: #65656f;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* KDV tutarı */
+.taxInformation strong {
+  color: #29292f;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 /* Stok bilgisi */

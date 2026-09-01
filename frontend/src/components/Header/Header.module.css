@@ -1,11 +1,13 @@
 .header {
+  position: relative;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
   padding: 18px 60px;
-  background-color: #ffffff;
   border-bottom: 1px solid #e4e4e7;
+  background-color: #ffffff;
 }
 
 .logo {
@@ -13,9 +15,9 @@
   font-size: 28px;
   font-weight: 800;
   letter-spacing: -0.7px;
+  text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
-
   transition: opacity 0.2s ease;
 }
 
@@ -31,22 +33,25 @@
 
 .loginLink,
 .registerLink,
-.cartLink {
+.cartLink,
+.accountButton {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  min-height: 43px;
   padding: 11px 14px;
   border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  text-decoration: none;
   white-space: nowrap;
-
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
 }
 
-/* Giriş Yap bağlantısı */
 .loginLink {
   color: #656570;
 }
@@ -56,7 +61,6 @@
   color: #111116;
 }
 
-/* Kayıt Ol bağlantısı */
 .registerLink {
   background-color: #f0f0f2;
   color: #17171c;
@@ -66,7 +70,6 @@
   background-color: #dedee2;
 }
 
-/* Sepetim butonu */
 .cartLink {
   background-color: #0b0b14;
   color: #ffffff;
@@ -79,11 +82,124 @@
 
 .loginLink:active,
 .registerLink:active,
-.cartLink:active {
+.cartLink:active,
+.accountButton:active {
   transform: scale(0.97);
 }
 
-/* Ekran küçüldüğünde Header elemanlarını düzenler */
+/* Hesabım butonuyla açılır menüyü birlikte tutar */
+.accountMenu {
+  position: relative;
+}
+
+/* Hesabım menüsünü açan buton */
+.accountButton {
+  border: 1px solid #dedee2;
+  background-color: #ffffff;
+  color: #17171c;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.accountButton:hover {
+  border-color: #bdbdc4;
+  background-color: #f4f4f6;
+}
+
+/* Hesabım butonundaki aşağı ok */
+.chevron,
+.openChevron {
+  transition: transform 0.2s ease;
+}
+
+.openChevron {
+  transform: rotate(180deg);
+}
+
+/* Hesabım butonunun altında açılan menü */
+.accountDropdown {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 245px;
+  padding: 9px;
+  border: 1px solid #dedee3;
+  border-radius: 14px;
+  background-color: #ffffff;
+  box-shadow: 0 18px 45px rgba(17, 17, 22, 0.15);
+}
+
+/* Menüde gösterilen kullanıcı bilgileri */
+.userInformation {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+}
+
+.userInformation strong {
+  overflow: hidden;
+  color: #17171c;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.userInformation span {
+  overflow: hidden;
+  color: #85858f;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Açılır menü bölümleri arasındaki çizgi */
+.dropdownSeparator {
+  height: 1px;
+  margin: 6px 4px;
+  background-color: #e7e7ea;
+}
+
+/* Profil, adres ve sipariş bağlantıları */
+.dropdownLink,
+.logoutButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  padding: 11px;
+  border: 0;
+  border-radius: 9px;
+  background-color: transparent;
+  color: #42424a;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.dropdownLink:hover {
+  background-color: #f2f2f4;
+  color: #111116;
+}
+
+/* Çıkış Yap butonu */
+.logoutButton {
+  color: #a52b2b;
+}
+
+.logoutButton:hover {
+  background-color: #fff0f0;
+  color: #821c1c;
+}
+
+/* Tablet görünümü */
 @media (max-width: 1000px) {
   .header {
     flex-wrap: wrap;
@@ -95,6 +211,7 @@
   }
 }
 
+/* Telefon görünümü */
 @media (max-width: 700px) {
   .header {
     flex-direction: column;
@@ -108,5 +225,41 @@
   .menu {
     justify-content: center;
     margin-left: 0;
+  }
+
+  .accountDropdown {
+    right: auto;
+    left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    flex-wrap: wrap;
+  }
+
+  .loginLink,
+  .registerLink,
+  .cartLink,
+  .accountMenu,
+  .accountButton {
+    flex: 1;
+  }
+
+  .accountDropdown {
+    right: 0;
+    left: auto;
+    width: min(245px, calc(100vw - 36px));
+  }
+
+  /* Sepetteki toplam ürün adedini gösterir */
+
+  /* Sepetteki toplam ürün adedini gösterir */
+
+  .cartQuantity {
+    margin-left: 5px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
   }
 }

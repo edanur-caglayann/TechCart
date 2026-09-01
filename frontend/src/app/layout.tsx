@@ -1,58 +1,42 @@
 import type { Metadata } from "next";
+
 import {
   Geist,
   Geist_Mono,
 } from "next/font/google";
 
+import { AuthProvider } from "../context/AuthContext";
 import { CartProvider } from "../context/CartContext";
+
 import "./globals.css";
 
-/*
-  Projede kullanılacak ana yazı tipini tanımlar.
-  variable değeri globals.css içerisinde kullanılabilir.
-*/
+
+//Projede kullanılacak ana yazı tipi
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-/* Kod veya teknik metinler için monospace yazı tipi */
+/* Kod veya teknik metinler için monospace yazı tipi. */
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
-/*
-  Tarayıcı sekmesinde gösterilecek
-  başlık ve açıklama bilgileri.
-*/
+//Tarayıcı sekmesinde gösterilecek başlık ve açıklama bilgileri.
 export const metadata: Metadata = {
   title: "TechCart",
   description:
     "Teknoloji ürünlerini keşfetmenin kolay yolu.",
 };
 
-/*
-  RootLayout, projedeki bütün sayfaları kapsayan
-  en üst yerleşim bileşenidir.
-
-  Ana sayfa, ürün detayı, sepet, giriş ve kayıt
-  sayfalarının tamamı bu layout içerisinden geçer.
-*/
+//RootLayout, projedeki bütün sayfaları kapsayan en üst yerleşim bileşenidir.
 export default function RootLayout({
   children,
 }: Readonly<{
-  /*
-    children, kullanıcının o anda görüntülediği
-    sayfayı temsil eder.
-  */
   children: React.ReactNode;
 }>) {
   return (
-    /*
-      lang="tr", sayfanın dilinin Türkçe
-      olduğunu tarayıcıya bildirir.
-    */
     <html lang="tr">
       <body
         className={`
@@ -61,13 +45,17 @@ export default function RootLayout({
         `}
       >
         {/*
-          CartProvider bütün sayfaları sardığı için
-          ProductCard, Header, ürün detay sayfası ve
-          CartPage aynı sepet bilgilerine ulaşabilir.
+          AuthProvider bütün uygulamayı sardığı için
+          giriş, kayıt ve Header kullanıcı bilgisine ulaşabilir.
+
+          CartProvider da bütün sayfalarda ortak
+          sepet bilgisinin kullanılmasını sağlar.
         */}
-        <CartProvider>
-          {children}
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
