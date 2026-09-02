@@ -1,0 +1,125 @@
+.notFoundPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 30px;
+  background-color: #f8f8fa;
+  color: #111116;
+}
+
+.notFoundCard {
+  width: 100%;
+  max-width: 590px;
+  padding: 60px 40px;
+  border: 1px solid #dedee3;
+  border-radius: 22px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.iconArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 23px;
+  border-radius: 50%;
+  background-color: #eeeef1;
+  color: #44444c;
+}
+
+.errorCode {
+  color: #72727c;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.notFoundCard h1 {
+  margin: 10px 0 13px;
+  font-size: 39px;
+  letter-spacing: -1.2px;
+}
+
+.notFoundCard p {
+  max-width: 440px;
+  margin: 0 auto;
+  color: #74747e;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 180px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.primaryButton {
+  border: 1px solid #111116;
+  background-color: #111116;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  border: 1px solid #d2d2d8;
+  background-color: #ffffff;
+  color: #29292f;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-2px);
+}
+
+.primaryButton:hover {
+  background-color: #35353c;
+}
+
+.secondaryButton:hover {
+  border-color: #111116;
+}
+
+@media (max-width: 600px) {
+  .notFoundPage {
+    padding: 18px;
+  }
+
+  .notFoundCard {
+    padding: 45px 22px;
+  }
+
+  .notFoundCard h1 {
+    font-size: 32px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}
