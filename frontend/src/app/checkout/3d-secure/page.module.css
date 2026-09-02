@@ -1,0 +1,279 @@
+/* 3D Secure sayfasının tamamı */
+.securePage {
+  min-height: 100vh;
+  padding: 0 70px 70px;
+  background-color: #f8f8fa;
+  color: #111116;
+}
+/* Logo ve ödeme ekranına dönüş alanı */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 28px 0;
+  border-bottom: 1px solid #dedee3;
+}
+.logo {
+  color: #111116;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #686873;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.backLink:hover {
+  color: #111116;
+  transform: translateX(-4px);
+}
+/* Doğrulama kartını sayfada ortalar */
+.secureContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 0;
+}
+/* Doğrulama formunun bulunduğu kart */
+.secureCard {
+  width: 100%;
+  max-width: 560px;
+  padding: 40px;
+  border: 1px solid #dedee3;
+  border-radius: 22px;
+  background-color: #ffffff;
+  box-shadow: 0 18px 50px rgba(17, 17, 22, 0.08);
+}
+/* Kartın üstündeki güvenlik ikonu */
+.securityIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  border-radius: 18px;
+  background-color: #eeeef1;
+  color: #111116;
+}
+.label {
+  color: #74747e;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.secureCard h1 {
+  margin: 10px 0 12px;
+  font-size: 36px;
+  letter-spacing: -1.2px;
+}
+.description {
+  margin: 0;
+  color: #74747e;
+  font-size: 14px;
+  line-height: 1.7;
+}
+/* Ödenecek tutar ve ürün adedi */
+.paymentSummary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 28px 0;
+}
+.paymentSummary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 16px;
+  border: 1px solid #e0e0e5;
+  border-radius: 12px;
+  background-color: #f8f8fa;
+}
+.paymentSummary span {
+  color: #7a7a84;
+  font-size: 12px;
+}
+.paymentSummary strong {
+  color: #111116;
+  font-size: 17px;
+}
+/* Doğrulama kodu formu */
+.verificationForm {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.verificationForm label {
+  color: #34343b;
+  font-size: 13px;
+  font-weight: 700;
+}
+.verificationForm input {
+  width: 100%;
+  padding: 17px;
+  border: 1px solid #d8d8de;
+  border-radius: 12px;
+  outline: none;
+  background-color: #f8f8fa;
+  color: #111116;
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  text-align: center;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.verificationForm input:focus {
+  border-color: #111116;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(17, 17, 22, 0.07);
+}
+.verificationForm input::placeholder {
+  color: #aaaab2;
+}
+.testInformation {
+  color: #7a7a84;
+  font-size: 12px;
+}
+/* Hatalı doğrulama mesajı */
+.errorMessage {
+  margin: 2px 0 0;
+  padding: 11px 13px;
+  border: 1px solid #efb4b4;
+  border-radius: 9px;
+  background-color: #fff4f4;
+  color: #a51d1d;
+  font-size: 12px;
+}
+/* Ödemeyi doğrulama butonu */
+.verificationForm button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 8px;
+  padding: 16px;
+  border: none;
+  border-radius: 11px;
+  background-color: #111116;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+.verificationForm button:hover:not(:disabled) {
+  background-color: #35353c;
+  transform: translateY(-2px);
+}
+.verificationForm button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+.verificationForm button svg {
+  flex-shrink: 0;
+}
+.verificationForm button:disabled svg,
+.loadingState svg {
+  animation: spin 0.9s linear infinite;
+}
+/* Test ödeme açıklaması */
+.securityInformation {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 14px;
+  border-radius: 11px;
+  background-color: #f1f1f3;
+  color: #61616b;
+}
+.securityInformation svg {
+  flex-shrink: 0;
+}
+.securityInformation p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+/* Yükleme ve geçersiz işlem görünümleri */
+.loadingState,
+.invalidState {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.loadingState {
+  gap: 12px;
+  color: #71717b;
+}
+.invalidState {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.invalidState h1 {
+  margin: 20px 0 10px;
+  font-size: 30px;
+}
+.invalidState p {
+  margin: 0 0 24px;
+  color: #74747e;
+  line-height: 1.6;
+}
+.invalidState a {
+  padding: 13px 20px;
+  border-radius: 10px;
+  background-color: #111116;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 600px) {
+  .securePage {
+    padding: 0 18px 40px;
+  }
+  .topBar {
+    padding: 22px 0;
+  }
+  .secureContainer {
+    padding: 40px 0;
+  }
+  .secureCard {
+    padding: 28px 20px;
+    border-radius: 18px;
+  }
+  .secureCard h1 {
+    font-size: 30px;
+  }
+  .paymentSummary {
+    grid-template-columns: 1fr;
+  }
+}

@@ -8,6 +8,7 @@ import {
 import { AuthProvider } from "../context/AuthContext";
 import { CartProvider } from "../context/CartContext";
 import { AddressProvider } from "../context/AddressContext";
+import { OrderProvider } from "../context/OrderContext";
 
 import "./globals.css";
 
@@ -48,7 +49,9 @@ export default function RootLayout({
         <AuthProvider> {/* bütün uygulamayı sardığı için giriş, kayıt ve Header kullanıcı bilgisine ulaşabilir.*/}
           <AddressProvider>{/* kayıtlı adresleri ortak olarak bütün sayfalara ulaştırır. */}
             <CartProvider> {/* bütün sayfalarda ortak sepet bilgisinin kullanılmasını sağlar.*/}
-              {children}
+              <OrderProvider> {/* bütün sayfalarda ortak sipariş bilgisinin kullanılmasını sağlar.*/}
+                {children}
+              </OrderProvider>
             </CartProvider>
           </AddressProvider>
         </AuthProvider>

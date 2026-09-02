@@ -1,0 +1,420 @@
+.successPage {
+  min-height: 100vh;
+  padding: 0 70px 80px;
+  background-color: #f8f8fa;
+  color: #111116;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 0;
+  border-bottom: 1px solid #dedee3;
+}
+
+.logo {
+  color: #111116;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+
+.ordersLink {
+  color: #686873;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ordersLink:hover {
+  color: #111116;
+}
+
+.successContainer {
+  width: 100%;
+  max-width: 1100px;
+  margin: 55px auto 0;
+}
+
+.successHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.successIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 78px;
+  margin-bottom: 22px;
+  border-radius: 50%;
+  background-color: #111116;
+  color: #ffffff;
+}
+
+.label {
+  color: #72727c;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.successHeader h1 {
+  margin: 11px 0 10px;
+  font-size: 44px;
+  letter-spacing: -1.5px;
+}
+
+.successHeader > p {
+  max-width: 600px;
+  margin: 0;
+  color: #74747e;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.orderInformation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  margin-top: 28px;
+  padding: 21px;
+  border: 1px solid #dedee3;
+  border-radius: 15px;
+  background-color: #ffffff;
+}
+
+.orderInformation div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 20px;
+  border-right: 1px solid #e2e2e6;
+}
+
+.orderInformation div:last-child {
+  border-right: none;
+}
+
+.orderInformation span {
+  color: #81818b;
+  font-size: 12px;
+}
+
+.orderInformation strong {
+  font-size: 14px;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  align-items: start;
+  gap: 24px;
+}
+
+.detailCard,
+.summaryCard {
+  padding: 28px;
+  border: 1px solid #dedee3;
+  border-radius: 19px;
+  background-color: #ffffff;
+}
+
+.detailCard {
+  margin-bottom: 22px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 24px;
+}
+
+.cardHeader svg {
+  flex-shrink: 0;
+  color: #55555f;
+}
+
+.cardHeader h2 {
+  margin: 0 0 4px;
+  font-size: 21px;
+}
+
+.cardHeader p {
+  margin: 0;
+  color: #85858e;
+  font-size: 12px;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+}
+
+.productItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 0;
+  border-bottom: 1px solid #e6e6e9;
+}
+
+.productItem:first-child {
+  padding-top: 0;
+}
+
+.productItem:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.productItem > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.productItem span {
+  color: #80808a;
+  font-size: 12px;
+}
+
+.productItem > strong {
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.addressInformation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #55555e;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.addressInformation strong {
+  color: #111116;
+  font-size: 15px;
+}
+
+.addressInformation p,
+.addressInformation span {
+  margin: 0;
+}
+
+.summaryCard {
+  position: sticky;
+  top: 25px;
+}
+
+.summaryCard h2 {
+  margin: 0 0 25px;
+  font-size: 22px;
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 17px;
+  color: #74747e;
+  font-size: 14px;
+}
+
+.summaryRow strong {
+  color: #29292f;
+  text-align: right;
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 23px;
+  padding-top: 22px;
+  border-top: 1px solid #dedee3;
+}
+
+.totalRow span {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.totalRow strong {
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  text-align: right;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+  margin-top: 30px;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.primaryButton {
+  border: 1px solid #111116;
+  background-color: #111116;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  border: 1px solid #d2d2d8;
+  background-color: #ffffff;
+  color: #29292f;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-2px);
+}
+
+.primaryButton:hover {
+  background-color: #35353c;
+}
+
+.secondaryButton:hover {
+  border-color: #111116;
+}
+
+.loadingText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  color: #74747e;
+}
+
+.notFoundCard {
+  width: min(520px, calc(100% - 36px));
+  margin: 120px auto;
+  padding: 55px 30px;
+  border: 1px solid #dedee3;
+  border-radius: 20px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.notFoundCard svg {
+  color: #686873;
+}
+
+.notFoundCard h1 {
+  margin: 20px 0 10px;
+  font-size: 28px;
+}
+
+.notFoundCard p {
+  margin: 0 0 25px;
+  color: #777781;
+  line-height: 1.6;
+}
+
+.notFoundCard a {
+  display: inline-block;
+  padding: 13px 20px;
+  border-radius: 10px;
+  background-color: #111116;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .successPage {
+    padding: 0 30px 60px;
+  }
+
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryCard {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .successPage {
+    padding: 0 18px 45px;
+  }
+
+  .successContainer {
+    margin-top: 35px;
+  }
+
+  .successHeader h1 {
+    font-size: 34px;
+  }
+
+  .orderInformation {
+    grid-template-columns: 1fr;
+  }
+
+  .orderInformation div {
+    padding: 13px 0;
+    border-right: none;
+    border-bottom: 1px solid #e2e2e6;
+  }
+
+  .orderInformation div:first-child {
+    padding-top: 0;
+  }
+
+  .orderInformation div:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .detailCard,
+  .summaryCard {
+    padding: 22px 18px;
+  }
+
+  .productItem {
+    align-items: flex-start;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}
