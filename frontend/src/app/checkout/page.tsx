@@ -12,6 +12,7 @@ import {
 import {
   useEffect,
   useState,
+  type ChangeEvent,
 } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -74,6 +75,7 @@ export default function CheckoutPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: {
       errors,
       isSubmitting,
@@ -89,6 +91,32 @@ export default function CheckoutPage() {
     },
     mode: "onBlur",
   });
+
+  /*
+  Kart numarasındaki harf ve özel karakterleri
+  kaldırır, en fazla 16 rakam kabul eder ve
+  rakamları dörderli gruplara ayırır.
+*/
+  function handleCardNumberChange(
+    event: ChangeEvent<HTMLInputElement>
+  ) {
+    const digits = event.target.value
+      .replace(/\D/g, "")
+      .slice(0, 16);
+
+    const formattedCardNumber = digits.replace(
+      /(\d{4})(?=\d)/g,
+      "$1 "
+    );
+
+    setValue(
+      "cardNumber",
+      formattedCardNumber,
+      {
+        shouldDirty: true,
+      }
+    );
+  }
 
   /*
     Adresler yüklendiğinde varsayılan adresi, varsayılan yoksa ilk adresi otomatik seçer.
@@ -336,12 +364,11 @@ export default function CheckoutPage() {
                   >
                     {addresses.map((address) => (
                       <label
-                        className={`${styles.addressOption} ${
-                          selectedAddressId ===
+                        className={`${styles.addressOption} ${selectedAddressId ===
                           address.id
-                            ? styles.selectedAddress
-                            : ""
-                        }`}
+                          ? styles.selectedAddress
+                          : ""
+                          }`}
                         key={address.id}
                       >
                         <input
@@ -501,6 +528,7 @@ export default function CheckoutPage() {
                           : ""
                       }
                       {...register("cardNumber")}
+                      onChange={handleCardNumberChange}
                     />
                   </div>
 
@@ -677,7 +705,7 @@ export default function CheckoutPage() {
                     <strong>
                       {formatCurrency(
                         item.product.price *
-                          item.quantity
+                        item.quantity
                       )}
                     </strong>
                   </div>
