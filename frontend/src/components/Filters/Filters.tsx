@@ -2,30 +2,118 @@
 
 // filtre secimleri direkt URL query parametrelerine yazilmasi icin import ettik. ?category=telefon&brand=apple gibi 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FormEvent } from 'react';
+
+import {
+    useState,
+    type FormEvent,
+} from 'react';
+
 import styles from './Filters.module.css';
 
 export default function Filters() {
+
+    // Filtre alanlarında girilebilecek en yüksek fiyat.
+    const MAX_PRICE = 1_000_000;
     // Next.js yönlendirme ve URL parametrelerini okuma araçları (URL State yönetimi için)
     const router = useRouter();
     const searchParams = useSearchParams();
+
+    // Fiyat aralığıyla ilgili hata mesajını tutar.
+    const [priceError, setPriceError] =
+        useState('');
 
     // URL'den tekli parametreleri okumaya yardımcı fonksiyon
     const getParam = (key: string) => searchParams.get(key) || '';
     // URL'den aynı isimli çoklu parametreleri (örn: birden fazla kategori/renk) okumaya yardımcı fonksiyon
     const getAllParams = (key: string) => searchParams.getAll(key);
 
+    // URL'deki fiyat değerini güvenli biçimde okur.
+    const getPriceParam = (key: string) => {
+        const digits = getParam(key)
+            .replace(/\D/g, '')
+            .slice(0, 7);
+
+        if (!digits) {
+            return '';
+        }
+
+        return Math.min(
+            Number(digits),
+            MAX_PRICE
+        ).toString();
+    };
+
+    // Fiyat alanına yalnızca rakam girilmesini sağlar.
+    const handlePriceInput = (
+        event: FormEvent<HTMLInputElement>
+    ) => {
+        const digits = event.currentTarget.value
+            .replace(/\D/g, '')
+            .slice(0, 7);
+
+        if (!digits) {
+            event.currentTarget.value = '';
+            setPriceError('');
+            return;
+        }
+
+        event.currentTarget.value = Math.min(
+            Number(digits),
+            MAX_PRICE
+        ).toString();
+
+        setPriceError('');
+    };
+
     // Toplu Uygulama (Batch Filtering) -> Kullanıcı her seçim yaptığında değil,
     // Filtreleri Uygula butonuna basıldığı anda tüm form verileri URL'e aktarılır.
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (
+        e: FormEvent<HTMLFormElement>
+    ) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
+
+        const formData = new FormData(
+            e.currentTarget
+        );
+
+        const minPriceValue = formData
+            .get('minPrice')
+            ?.toString();
+
+        const maxPriceValue = formData
+            .get('maxPrice')
+            ?.toString();
+
+        const minPrice = minPriceValue
+            ? Number(minPriceValue)
+            : 0;
+
+        const maxPrice = maxPriceValue
+            ? Number(maxPriceValue)
+            : null;
+
+        // En az fiyat, en fazla fiyattan büyük olamaz.
+        if (
+            maxPrice !== null &&
+            minPrice > maxPrice
+        ) {
+            setPriceError(
+                'En az fiyat, en fazla fiyattan büyük olamaz.'
+            );
+            return;
+        }
+
+        setPriceError('');
+
         const params = new URLSearchParams();
 
         // Form içerisindeki tüm seçili alanları tarayıp URL parametrelerine ekliyoruz
         formData.forEach((value, key) => {
             if (value) {
-                params.append(key, value.toString());
+                params.append(
+                    key,
+                    value.toString()
+                );
             }
         });
 
@@ -44,7 +132,7 @@ export default function Filters() {
                 <h2>Filtreler</h2>
 
                 {/* Filtreleri sıfırlayan temizle butonu */}
-                <button 
+                <button
                     className={styles.clearButton}
                     type="button"
                     onClick={handleReset}
@@ -52,7 +140,7 @@ export default function Filters() {
                     Temizle
                 </button>
             </div>
-        
+
             {/* onSubmit ile Batch Filtering (Toplu Uygulama) mantığı ile calisir
             Kullanici filtreleri isaretlerken sayfa aninda yenilenmez. Bunun yerine tum secimler <form>
             etiketinin icinde tutulur. Filtreleri uygula denildikten sonra(type=submit)butonuna basinca 
@@ -107,8 +195,8 @@ export default function Filters() {
                         <input type="checkbox" name="category" value="pikap" defaultChecked={getAllParams('category').includes('pikap')} />
                         <span>Pikap</span>
                     </label>
-                </div>     
-        
+                </div>
+
                 <div className={styles.filterGroup}>
                     <label className={styles.groupTitle} htmlFor="brand">
                         Marka
@@ -141,29 +229,60 @@ export default function Filters() {
 
                     <div className={styles.priceInputs}>
                         <div>
-                            <label htmlFor="minPrice">En az</label>
+                            <label htmlFor="minPrice">
+                                En az
+                            </label>
+
                             <input
                                 id="minPrice"
                                 name="minPrice"
-                                type="number"
-                                min="0"
+                                type="text"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
+                                maxLength={7}
                                 placeholder="0 ₺"
-                                defaultValue={getParam('minPrice')}
+                                defaultValue={getPriceParam(
+                                    'minPrice'
+                                )}
+                                onInput={handlePriceInput}
+                                aria-invalid={Boolean(
+                                    priceError
+                                )}
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="maxPrice">En fazla</label>
+                            <label htmlFor="maxPrice">
+                                En fazla
+                            </label>
+
                             <input
                                 id="maxPrice"
                                 name="maxPrice"
-                                type="number"
-                                min="0"
-                                placeholder="100.000 ₺"
-                                defaultValue={getParam('maxPrice')}
+                                type="text"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
+                                maxLength={7}
+                                placeholder="1.000.000 ₺"
+                                defaultValue={getPriceParam(
+                                    'maxPrice'
+                                )}
+                                onInput={handlePriceInput}
+                                aria-invalid={Boolean(
+                                    priceError
+                                )}
                             />
                         </div>
                     </div>
+
+                    {priceError && (
+                        <p
+                            className={styles.priceError}
+                            role="alert"
+                        >
+                            {priceError}
+                        </p>
+                    )}
                 </div>
 
                 <div className={styles.filterGroup}>
@@ -209,7 +328,7 @@ export default function Filters() {
                 <button className={styles.applyButton} type="submit">
                     Filtreleri Uygula
                 </button>
-            </form> 
+            </form>
         </aside>
     );
 }
