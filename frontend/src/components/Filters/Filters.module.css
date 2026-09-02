@@ -223,6 +223,12 @@
   transform: scale(0.98);
 }
 
+.priceError {
+  margin: 10px 0 0;
+  color: #c4362e;
+  font-size: 12px;
+  line-height: 1.5;
+}
 /* Küçük ekranlarda filtre panelini tam genişlik yapar */
 @media (max-width: 900px) {
   .filterPanel {
