@@ -1,4 +1,4 @@
-﻿namespace TechCart.Cart.Application;
+﻿namespace TechCart.Inventory.Application;
 
 public class Class1
 {

@@ -1,4 +1,4 @@
-﻿namespace TechCart.Cart.Infrastructure;
+﻿namespace TechCart.Ordering.Infrastructure;
 
 public class Class1
 {
