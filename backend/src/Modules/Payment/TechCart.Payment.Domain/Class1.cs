@@ -1,4 +1,4 @@
-﻿namespace TechCart.Cart.Domain;
+﻿namespace TechCart.Payment.Domain;
 
 public class Class1
 {
