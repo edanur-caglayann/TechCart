@@ -6,4 +6,31 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Modules\addresses\TechCart.Addresses.Domain\TechCart.Addresses.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\brands\TechCart.Brands.Domain\TechCart.Brands.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\cart_items\TechCart.CartItems.Domain\TechCart.CartItems.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\carts\TechCart.Carts.Domain\TechCart.Carts.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\categories\TechCart.Categories.Domain\TechCart.Categories.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\order_items\TechCart.OrderItems.Domain\TechCart.OrderItems.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\orders\TechCart.Orders.Domain\TechCart.Orders.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\payments\TechCart.Payments.Domain\TechCart.Payments.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\product_images\TechCart.ProductImages.Domain\TechCart.ProductImages.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\product_stock\TechCart.ProductStock.Domain\TechCart.ProductStock.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\products\TechCart.Products.Domain\TechCart.Products.Domain.csproj" />
+    <ProjectReference Include="..\..\Modules\users\TechCart.Users.Domain\TechCart.Users.Domain.csproj" />
+    <ProjectReference Include="..\TechCart.SharedKernel\TechCart.SharedKernel.csproj" />
+  </ItemGroup>
+
 </Project>
