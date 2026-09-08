@@ -14,19 +14,19 @@ Next.js • ASP.NET Core • PostgreSQL • RabbitMQ • Docker
 
 TechCart; teknoloji ürünlerinin keşfedilmesi ve satın alınması süreçlerini kullanıcı dostu bir deneyimle sunan full-stack bir e-ticaret uygulamasıdır.
 
-Backend, event-driven modular monolith mimarisiyle yapılandırılmıştır. Sistemdeki kullanıcı, katalog, stok, sepet, sipariş, ödeme, arama ve puanlama süreçleri bağımsız modüllere ayrılmıştır. Modüller arası asenkron iletişim için RabbitMQ kullanılmaktadır.
+Backend, event-driven modular monolith mimarisiyle yapılandırılmıştır. Sistemdeki veritabanı tabloları bağımsız modüllere ayrılmıştır. Modüller arası asenkron iletişim için RabbitMQ kullanılmaktadır.
 
 ## Proje Kapsamı
 
 * Kullanıcı kaydı, giriş ve rol tabanlı yetkilendirme
 * Ürün, kategori, marka ve stok yönetimi
 * Ürün listeleme ve detay görüntüleme
-* Elasticsearch tabanlı arama, filtreleme ve sıralama
+* Ürün arama, filtreleme ve sıralama
 * Sepet ve ürün adedi yönetimi
 * Stok kontrolü ve stok rezervasyonu
 * Sipariş oluşturma, iptal ve durum takibi
 * 3D Secure destekli test ödeme entegrasyonu
-* Satın alınan ürünler için puanlama
+* Ürün puan bilgisinin yönetimi
 * Yönetici işlemleri
 
 ## Mimari Yapı
@@ -41,31 +41,26 @@ backend/
 │   │   ├── TechCart.Api/
 │   │   └── TechCart.Worker/
 │   └── Modules/
-│       ├── Identity/
-│       ├── Catalog/
-│       ├── Inventory/
-│       ├── Cart/
-│       ├── Ordering/
-│       ├── Payment/
-│       ├── Search/
-│       └── Ratings/
+│       ├── users/
+│       ├── addresses/
+│       ├── carts/
+│       ├── cart_items/
+│       ├── orders/
+│       ├── order_items/
+│       ├── payments/
+│       ├── categories/
+│       ├── brands/
+│       ├── products/
+│       ├── product_images/
+│       └── product_stock/
 ├── tests/
 └── TechCart.sln
 ```
 
-Her modül kendi içinde şu katmanlara ayrılır:
-
-```text
-Domain
-Application
-Infrastructure
-Contracts
-```
+Tablo modülleri kendi Domain projelerinde entity'leri içerir. Ortak persistence ve migration yapısı `BuildingBlocks/TechCart.Infrastructure` altında yönetilir.
 
 * **Domain:** Entity’leri ve temel iş kurallarını içerir.
-* **Application:** Kullanım senaryolarını ve işlem akışlarını yönetir.
-* **Infrastructure:** PostgreSQL, RabbitMQ ve dış servis bağlantılarını uygular.
-* **Contracts:** Modüller arası event ve mesaj sözleşmelerini içerir.
+* **Infrastructure:** PostgreSQL migration ve DbContext yapılandırmasını içerir.
 * **API:** Frontend’den gelen HTTP isteklerini karşılar.
 * **Worker:** RabbitMQ mesajlarını ve arka plan görevlerini işler.
 
@@ -78,7 +73,6 @@ Contracts
 | Mimari     | Event-Driven Modular Monolith |
 | Veritabanı | PostgreSQL                    |
 | Mesajlaşma | RabbitMQ                      |
-| Arama      | Elasticsearch                 |
 | Test       | xUnit                         |
 | Container  | Docker, Docker Compose        |
 
