@@ -10,47 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/AppException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Common/AppExceptionHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Common/FieldError.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/AuthController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/LoginRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/RegisterRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/SessionResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/ChangePasswordRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UpdateProfileRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IPasswordHasher.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/ITokenGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IUserReadRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Auth/AuthResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Login/LoginHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Profile/ChangePasswordHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Profile/GetMyProfileHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Profile/UpdateProfileHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Register/RegisterUserHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/Entities/UserRole.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/Exceptions/EmailAlreadyExistsException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/Exceptions/IncorrectCurrentPasswordException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/Exceptions/InvalidCredentialsException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/Exceptions/UserNotFoundException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/Repositories/IUserWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Configurations/UserConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Repositories/UserReadRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Repositories/UserWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Security/JwtSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Security/JwtTokenGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Security/PasswordHasher.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressesController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Abstractions/IAddressReadRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Create/CreateAddressHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Delete/DeleteAddressHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/List/ListMyAddressesHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/SetDefault/SetDefaultAddressHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Update/UpdateAddressHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Exceptions/AddressNotFoundException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Repositories/IAddressWriteRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/AddressesDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/AddressesModule.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Configurations/AddressConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressReadRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressWriteRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechCart.sln" beforeDir="false" afterPath="$PROJECT_DIR$/TechCart.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/Entities/AuditableEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/Entities/AuditableEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/Entities/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Entities/Address.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Entities/Address.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/TechCart.Addresses.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/TechCart.Addresses.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/services/apiClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/apiClient.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +56,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="fix/folder-structure" />
+        <entry key="$PROJECT_DIR$/.." value="fix/updated-modules" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -88,16 +68,28 @@
     &quot;assignee&quot;: &quot;edanur-caglayann&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/edanur-caglayann/TechCart.git&quot;,
-    &quot;accountId&quot;: &quot;fa7ec482-eed5-4be2-8730-eb71e25b201c&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/edanur-caglayann/TechCart.git",
+    "accountId": "fa7ec482-eed5-4be2-8730-eb71e25b201c"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "edanur-caglayann",
+    "repository": "TechCart"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/AppException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Common/AppExceptionHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Common/FieldError.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressesController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/AuthController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/LoginRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/RegisterRequest.cs" root0="FORCE_HIGHLIGHTING" />
@@ -105,6 +97,19 @@
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/ChangePasswordRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UpdateProfileRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Abstractions/IAddressReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Create/CreateAddressHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Delete/DeleteAddressHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/List/ListMyAddressesHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/SetDefault/SetDefaultAddressHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Update/UpdateAddressHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Exceptions/AddressNotFoundException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Repositories/IAddressWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/AddressesDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/AddressesModule.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Configurations/AddressConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IPasswordHasher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/ITokenGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IUserReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
@@ -147,7 +152,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "fix/updated-modules",
+    "git-widget-placeholder": "#25 on feature/authentication-and-profile",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -232,7 +237,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788858652728</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: complete authentication authorization and profile management">
+      <option name="closed" value="true" />
+      <created>1789024681950</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1789024681950</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +269,8 @@
     <MESSAGE value="Merge pull request #22 from edanur-caglayann/fix/price-filter-validation&#10;&#10;fix: validate price filter inputs" />
     <MESSAGE value="fıx: adjust folder structure" />
     <MESSAGE value="fix:updated modules" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix:updated modules" />
+    <MESSAGE value="feat: complete authentication authorization and profile management" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: complete authentication authorization and profile management" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

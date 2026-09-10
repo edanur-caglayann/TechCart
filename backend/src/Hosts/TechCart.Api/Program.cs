@@ -7,6 +7,8 @@ using TechCart.Api.Common;
 using TechCart.Infrastructure;
 using TechCart.Users.Infrastructure;
 using TechCart.Users.Infrastructure.Security;
+using TechCart.Addresses.Infrastructure;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddTechCartInfrastructure(builder.Configuration);
 builder.Services.AddOpenApi();
 builder.Services.AddUsersModule(builder.Configuration);
+builder.Services.AddAddressesModule(builder.Configuration); // AddUsersModule'ün hemen altına ekle
 
 // Doğrulama hatalarını:
 // { errors: [{ field, message }] }

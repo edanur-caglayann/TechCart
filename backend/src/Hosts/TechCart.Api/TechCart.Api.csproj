@@ -20,11 +20,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BuildingBlocks\TechCart.Infrastructure\TechCart.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\addresses\TechCart.Addresses.Application\TechCart.Addresses.Application.csproj" />
     <ProjectReference Include="..\..\Modules\Users\TechCart.Users.Infrastructure\TechCart.Users.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../../Modules/Users/TechCart.Users.Infrastructure/TechCart.Users.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Modules\addresses\TechCart.Addresses.Infrastructure\TechCart.Addresses.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
