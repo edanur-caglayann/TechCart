@@ -22,6 +22,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Modules\users\TechCart.Users.Domain\TechCart.Users.Domain.csproj" />
     <ProjectReference Include="..\..\src\Modules\users\TechCart.Users.Application\TechCart.Users.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\addresses\TechCart.Addresses.Domain\TechCart.Addresses.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\addresses\TechCart.Addresses.Application\TechCart.Addresses.Application.csproj" />
   </ItemGroup>
 
 </Project>
