@@ -122,37 +122,25 @@ export default function AddressesPage() {
     reset();
   }
 
-  // Yeni adres ekler veya mevcut adresi günceller.
-  function onSubmit(
-    formValues: AddressFormValues
-  ) {
-    const addressId =
-      editingAddressId ?? crypto.randomUUID();
-
-    const editedAddress = addresses.find(
-      (address) =>
-        address.id === editingAddressId
-    );
-
-    const shouldBeDefault =
-      addresses.length === 0 ||
-      formValues.isDefault ||
-      Boolean(editedAddress?.isDefault);
-
+  async function onSubmit(formValues: AddressFormValues) {
+    // ESKİDEN: yeni adres için de crypto.randomUUID() üretiliyordu, bu da
+    // AddressContext'in "id doluysa update" kararını yanıltıp backend'e
+    // olmayan bir adrese PATCH atılmasına yol açardı. Artık yeni adreste
+    // id boş string, editingAddressId doluysa o kullanılıyor.
     const savedAddress: Address = {
-      id: addressId,
+      id: editingAddressId ?? "",
       ...formValues,
-      isDefault: shouldBeDefault,
     };
 
-    saveAddress(savedAddress);
-    closeForm();
+    try {
+      await saveAddress(savedAddress);
+      closeForm();
+    } catch {
+      // Formu açık bırakıyoruz ki kullanıcı tekrar denesin; şimdilik basit bir uyarı yeterli.
+      window.alert("Adres kaydedilemedi. Lütfen tekrar deneyin.");
+    }
   }
-
-  // Kullanıcı onaylarsa seçilen adresi siler.
-  function handleDeleteAddress(
-    addressId: string
-  ) {
+  async function handleDeleteAddress(addressId: string) {
     const shouldDelete = window.confirm(
       "Bu adresi silmek istediğinize emin misiniz?"
     );
@@ -161,21 +149,18 @@ export default function AddressesPage() {
       return;
     }
 
-    removeAddress(addressId);
+    try {
+      await removeAddress(addressId);
+    } catch {
+      window.alert("Adres silinemedi. Lütfen tekrar deneyin.");
+    }
   }
-
-  if (
-    isAuthLoading ||
-    isAddressLoading ||
-    !user
-  ) {
-    return (
-      <main className={styles.addressesPage}>
-        <p className={styles.loadingText}>
-          Adres bilgileri yükleniyor...
-        </p>
-      </main>
-    );
+  async function handleMakeDefault(addressId: string) {
+    try {
+      await makeDefaultAddress(addressId);
+    } catch {
+      window.alert("Varsayılan adres güncellenemedi. Lütfen tekrar deneyin.");
+    }
   }
 
   return (
@@ -499,11 +484,10 @@ export default function AddressesPage() {
           <div className={styles.addressGrid}>
             {addresses.map((address) => (
               <article
-                className={`${styles.addressCard} ${
-                  address.isDefault
+                className={`${styles.addressCard} ${address.isDefault
                     ? styles.defaultCard
                     : ""
-                }`}
+                  }`}
                 key={address.id}
               >
                 <div className={styles.cardHeader}>

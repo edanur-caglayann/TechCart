@@ -10,204 +10,109 @@ import {
 
 import { useAuth } from "./AuthContext";
 import type { Address } from "../types/address";
+import {
+  listAddressesRequest,
+  createAddressRequest,
+  updateAddressRequest,
+  deleteAddressRequest,
+  setDefaultAddressRequest,
+} from "../services/addressService";
 
-/* AddressContext üzerinden paylaşılacak değerler. */
+/*
+  Üç fonksiyon da Promise<void> döndürüyor — backend'e gerçek istek attıkları
+  için asenkron. Çağıran kodda (addresses/page.tsx) await + try/catch kullanman gerekiyor.
+*/
 type AddressContextType = {
   addresses: Address[];
   isAddressLoading: boolean;
-  saveAddress: (address: Address) => void;
-  makeDefault: (addressId: string) => void;
-  deleteAddress: (addressId: string) => void;
+  saveAddress: (address: Address) => Promise<void>;
+  makeDefault: (addressId: string) => Promise<void>;
+  deleteAddress: (addressId: string) => Promise<void>;
 };
 
-const AddressContext = createContext<
-  AddressContextType | undefined
->(undefined);
+const AddressContext = createContext<AddressContextType | undefined>(undefined);
 
 type AddressProviderProps = {
   children: ReactNode;
 };
 
-export function AddressProvider({
-  children,
-}: AddressProviderProps) {
-  const { user } = useAuth();
+export function AddressProvider({ children }: AddressProviderProps) {
+  const { isAuthenticated } = useAuth();
 
-  // Giriş yapan kullanıcının adreslerini tutar.
-  const [addresses, setAddresses] = useState<
-    Address[]
-  >([]);
-
-  // Adreslerin tarayıcıdan yüklenme durumunu tutar.
-  const [
-    isAddressLoading,
-    setIsAddressLoading,
-  ] = useState(true);
-
-  // Kullanıcıya özel localStorage anahtarını tutar.
-  const [storageKey, setStorageKey] = useState<
-    string | null
-  >(null);
+  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [isAddressLoading, setIsAddressLoading] = useState(true);
 
   /*
-    Kullanıcı giriş yaptığında kendisine ait kayıtlı adresleri localStorage'dan yükler.
+    Giriş yapılmamışsa istek atmıyoruz.
   */
   useEffect(() => {
-    if (!user) {
+    if (!isAuthenticated) {
       setAddresses([]);
-      setStorageKey(null);
       setIsAddressLoading(false);
       return;
     }
 
+    refreshAddresses();
+  }, [isAuthenticated]);
+
+  async function refreshAddresses() {
     setIsAddressLoading(true);
-
-    const userStorageKey =
-      `techcart-addresses-${user.email}`;
-
-    const savedAddresses =
-      localStorage.getItem(userStorageKey);
-
-    if (savedAddresses) {
-      try {
-        const parsedAddresses: Address[] =
-          JSON.parse(savedAddresses);
-
-        setAddresses(parsedAddresses);
-      } catch {
-        // Kayıtlı adres verisi bozuksa temizler.
-        localStorage.removeItem(userStorageKey);
-        setAddresses([]);
-      }
-    } else {
-      setAddresses([]);
+    try {
+      const result = await listAddressesRequest();
+      setAddresses(result);
+    } finally {
+      setIsAddressLoading(false);
     }
-
-    setStorageKey(userStorageKey);
-    setIsAddressLoading(false);
-  }, [user]);
+  }
 
   /*
-    Adres listesi değiştiğinde güncel listeyi localStorage içerisine kaydeder.
+    create/update sadece adresin kendi bilgisini kaydediyor; varsayılan
+    işaretliyse AYRI bir istekle (setDefaultAddressRequest) işaretleniyor —
+    backend'deki "aynı anda tek varsayılan" kuralı atomik kalsın diye.
   */
-  useEffect(() => {
-    if (!storageKey || isAddressLoading) {
-      return;
+  async function saveAddress(address: Address) {
+    const savedAddress = address.id
+      ? await updateAddressRequest(address.id, address)
+      : await createAddressRequest(address);
+
+    if (address.isDefault) {
+      // Bu istek zaten güncel TÜM listeyi döndürüyor, ekstra bir liste isteği atmıyoruz.
+      const updatedList = await setDefaultAddressRequest(savedAddress.id);
+      setAddresses(updatedList);
+    } else {
+      await refreshAddresses();
     }
-
-    localStorage.setItem(
-      storageKey,
-      JSON.stringify(addresses)
-    );
-  }, [
-    addresses,
-    storageKey,
-    isAddressLoading,
-  ]);
-
-  // Yeni adres ekler veya mevcut adresi günceller.
-  function saveAddress(savedAddress: Address) {
-    setAddresses((currentAddresses) => {
-      const addressExists =
-        currentAddresses.some(
-          (address) =>
-            address.id === savedAddress.id
-        );
-
-      let updatedAddresses = addressExists
-        ? currentAddresses.map((address) =>
-            address.id === savedAddress.id
-              ? savedAddress
-              : address
-          )
-        : [...currentAddresses, savedAddress];
-
-      /*
-        Kaydedilen adres varsayılansa diğer adreslerin varsayılan özelliğini kaldırır.
-      */
-      if (
-        savedAddress.isDefault ||
-        currentAddresses.length === 0
-      ) {
-        updatedAddresses = updatedAddresses.map(
-          (address) => ({
-            ...address,
-            isDefault:
-              address.id === savedAddress.id,
-          })
-        );
-      }
-
-      return updatedAddresses;
-    });
   }
 
-  // Seçilen adresi varsayılan adres yapar.
-  function makeDefault(addressId: string) {
-    setAddresses((currentAddresses) =>
-      currentAddresses.map((address) => ({
-        ...address,
-        isDefault: address.id === addressId,
-      }))
-    );
+  async function makeDefault(addressId: string) {
+    const updatedList = await setDefaultAddressRequest(addressId);
+    setAddresses(updatedList);
   }
 
-  // Seçilen adresi listeden kaldırır.
-  function deleteAddress(addressId: string) {
-    setAddresses((currentAddresses) => {
-      const deletedAddress =
-        currentAddresses.find(
-          (address) => address.id === addressId
-        );
-
-      const remainingAddresses =
-        currentAddresses.filter(
-          (address) => address.id !== addressId
-        );
-
-      /*
-        Varsayılan adres silindiyse kalan ilk adresi varsayılan olarak belirler.
-      */
-      if (
-        deletedAddress?.isDefault &&
-        remainingAddresses.length > 0
-      ) {
-        return remainingAddresses.map(
-          (address, index) => ({
-            ...address,
-            isDefault: index === 0,
-          })
-        );
-      }
-
-      return remainingAddresses;
-    });
+  /*
+    Silinen adres varsayılansa hangi adresin yeni varsayılan olacağına backend
+    karar veriyor (en eski kalan adres) — bu mantığı frontend'de tekrar
+    üretmiyoruz, silme sonrası listeyi backend'den taze çekiyoruz.
+  */
+  async function deleteAddress(addressId: string) {
+    await deleteAddressRequest(addressId);
+    await refreshAddresses();
   }
 
   return (
     <AddressContext.Provider
-      value={{
-        addresses,
-        isAddressLoading,
-        saveAddress,
-        makeDefault,
-        deleteAddress,
-      }}
+      value={{ addresses, isAddressLoading, saveAddress, makeDefault, deleteAddress }}
     >
       {children}
     </AddressContext.Provider>
   );
 }
 
-/* Adres bilgilerine ve fonksiyonlarına ulaşmayı sağlar. */
-
 export function useAddress() {
   const context = useContext(AddressContext);
 
   if (!context) {
-    throw new Error(
-      "useAddress, AddressProvider içerisinde kullanılmalıdır."
-    );
+    throw new Error("useAddress, AddressProvider içerisinde kullanılmalıdır.");
   }
 
   return context;
