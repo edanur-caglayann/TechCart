@@ -10,27 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressesController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Abstractions/IAddressReadRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Create/CreateAddressHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Delete/DeleteAddressHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/List/ListMyAddressesHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/SetDefault/SetDefaultAddressHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Update/UpdateAddressHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Exceptions/AddressNotFoundException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Repositories/IAddressWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/AddressesDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/AddressesModule.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Configurations/AddressConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressReadRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressWriteRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/ChangePasswordHandlerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/GetMyProfileHandlerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/LoginHandlerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/RegisterUserHandlerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/UpdateProfileHandlerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Domain/UserTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Entities/Address.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/Entities/Address.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/TechCart.Addresses.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/TechCart.Addresses.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/services/apiClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/apiClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TechCart.UnitTests/TechCart.UnitTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/TechCart.UnitTests.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +43,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="fix/updated-modules" />
+        <entry key="$PROJECT_DIR$/.." value="feature/authentication-and-profile" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -131,6 +118,12 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Security/PasswordHasher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersModule.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/ChangePasswordHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/GetMyProfileHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/LoginHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/RegisterUserHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/UpdateProfileHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Domain/UserTests.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -152,7 +145,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "#25 on feature/authentication-and-profile",
+    "git-widget-placeholder": "feature/address-management",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -245,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789024681950</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: add address management operations&quot;">
+      <option name="closed" value="true" />
+      <created>1789032938184</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1789032938184</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,7 +271,8 @@
     <MESSAGE value="fıx: adjust folder structure" />
     <MESSAGE value="fix:updated modules" />
     <MESSAGE value="feat: complete authentication authorization and profile management" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: complete authentication authorization and profile management" />
+    <MESSAGE value="feat: add address management operations&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add address management operations&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
