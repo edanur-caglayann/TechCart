@@ -6,6 +6,7 @@ export type UserRole = "Customer" | "Admin";
   Parola bu nesne içerisinde tutulmaz.
 */
 export type AuthUser = {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;

@@ -28,6 +28,9 @@ import {
   type ProfileFormValues,
 } from "../../schemas/authSchemas";
 
+import { changePasswordRequest } from "../../services/authService";
+import { ApiError } from "../../services/apiClient";
+
 import styles from "./page.module.css";
 
 import Link from "next/link";
@@ -136,28 +139,50 @@ export default function ProfilePage() {
     }
   }
 
-  /*
-    Şimdilik yalnızca arayüz davranışını tamamlar.
-    Backend hazır olduğunda parola değiştirme API isteği bu fonksiyon içerisinde yapılacak
+   /*
+    Parola değiştirme isteğini backend'e gönderir.
+    AuthContext'e bilerek eklemedik (authService.ts'teki notu
+    hatırlarsan): bu işlem context'teki "user" state'ini
+    etkilemiyor, backend 204 No Content dönüyor — güncel bir
+    kullanıcı objesi dönmediği için context'in ilgilenmesi
+    gereken bir şey yok, doğrudan burada çağırıyoruz.
   */
   async function onPasswordSubmit(
-    _formValues: ChangePasswordFormValues
+    formValues: ChangePasswordFormValues
   ) {
     try {
-      await Promise.resolve();
+      await changePasswordRequest({
+        currentPassword: formValues.currentPassword,
+        newPassword: formValues.newPassword,
+        // Alan adı eşlemesi: formda confirmNewPassword, backend'de newPasswordConfirm.
+        newPasswordConfirm: formValues.confirmNewPassword,
+      });
 
       resetPassword();
       setIsChangingPassword(false);
       setPasswordMessage(
         "Parolanız başarıyla güncellendi."
       );
-    } catch {
-      setPasswordError("root", {
-        message: "Parola güncellenemedi.",
-      });
+    } catch (error) {
+      /*
+        Backend "mevcut parola yanlış" derse (400 + INCORRECT_CURRENT_PASSWORD),
+        genel bir mesaj yerine doğrudan currentPassword alanının altına yazıyoruz
+        — kullanıcı hangi alanı düzelteceğini net görsün.
+      */
+      if (
+        error instanceof ApiError &&
+        error.code === "INCORRECT_CURRENT_PASSWORD"
+      ) {
+        setPasswordError("currentPassword", {
+          message: error.message,
+        });
+      } else {
+        setPasswordError("root", {
+          message: "Parola güncellenemedi.",
+        });
+      }
     }
   }
-
   // Profil düzenleme işlemini iptal eder.
   function cancelProfileEditing() {
     if (user) {

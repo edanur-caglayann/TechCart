@@ -101,11 +101,12 @@ export default function Header() {
   }, [pathname]);
 
   /*
-    Çıkış Yap seçildiğinde AuthContext içerisindeki
-    kullanıcı bilgisi temizlenir ve ana sayfaya gidilir.
-  */
-  function handleLogout() {
-    logout();
+     Çıkış Yap seçildiğinde önce AuthContext'teki logout
+     tamamlanır (backend çağrısı + token/state temizliği),
+     SONRA menü kapatılıp ana sayfaya yönlendirilir — sıra önemli.
+   */
+  async function handleLogout() {
+    await logout();
     setIsAccountMenuOpen(false);
     router.push("/");
   }

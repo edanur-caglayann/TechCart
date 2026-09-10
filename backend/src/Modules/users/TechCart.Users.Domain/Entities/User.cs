@@ -1,16 +1,48 @@
+using System;
 using TechCart.SharedKernel.Entities;
+using TechCart.Users.Domain;
 
 namespace TechCart.Users.Domain.Entities;
-
-public sealed class User : AuditableEntity
+public class User : AuditableEntity
 {
-    public string FirstName { get; set; } = string.Empty;
+    public string FirstName { get; private set; } = default!;
+    public string LastName { get; private set; } = default!;
+    public string Email { get; private set; } = default!;
+    public string PasswordHash { get; private set; } = default!;
+    public UserRole Role { get; private set; }
 
-    public string LastName { get; set; } = string.Empty;
+    private User() { } 
 
-    public string Email { get; set; } = string.Empty;
+    private User(string firstName, string lastName, string email, string passwordHash, UserRole role)
+    {
+        Id = Guid.NewGuid();
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        PasswordHash = passwordHash;
+        Role = role;
+        CreatedAt = DateTime.UtcNow;
+    }
 
-    public string PasswordHash { get; set; } = string.Empty;
+    // Herkese açık kayıt akışı — rol parametre olarak alınmaz
+    public static User Register(string firstName, string lastName, string email, string passwordHash)
+        => new(firstName, lastName, email, passwordHash, UserRole.Customer);
 
-    public string Role { get; set; } = string.Empty;
+    // Sadece admin provisioning/seed için
+    public static User CreateAdmin(string firstName, string lastName, string email, string passwordHash)
+        => new(firstName, lastName, email, passwordHash, UserRole.Admin);
+    
+    public void UpdateProfile(string firstName, string lastName, string email)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        MarkUpdated(); // AuditableEntity'den geliyor, UpdatedAt'i now'a çeker
+    }
+    public void ChangePassword(string newPasswordHash)
+    {
+        PasswordHash = newPasswordHash;
+        MarkUpdated();
+    }
+
 }
