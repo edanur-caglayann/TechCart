@@ -10,14 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Addresses/Application/CreateAddressHandlerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Addresses/Application/DeleteAddressHandlerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Addresses/Application/ListMyAddressesHandlerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Addresses/Application/SetDefaultAddressHandlerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Addresses/Application/UpdateAddressHandlerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Addresses/Domain/AddressTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Categories/CategoriesController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/ICategoryReadRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/List/ListCategoriesHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Repositories/ICategoryWriteRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/CategoriesDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/CategoriesModule.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Configurations/CategoryConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Repositories/CategoryReadRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Repositories/CategoryWriteRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/TechCart.UnitTests/TechCart.UnitTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/TechCart.UnitTests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Entities/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Entities/Category.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/TechCart.Categories.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/TechCart.Categories.Infrastructure.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +87,7 @@
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/LoginRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/RegisterRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/SessionResponse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Categories/CategoriesController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/ChangePasswordRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UpdateProfileRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -97,6 +104,14 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Configurations/AddressConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/ICategoryReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/List/ListCategoriesHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Repositories/ICategoryWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/CategoriesDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/CategoriesModule.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Configurations/CategoryConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Repositories/CategoryReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Repositories/CategoryWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IPasswordHasher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/ITokenGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IUserReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
@@ -130,6 +145,7 @@
     <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/RegisterUserHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/UpdateProfileHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Domain/UserTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3c32b6774a69464667352a9e262bc924c57674f811c382e29abe8dbe3639f4c/CancellationToken.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -260,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789041790262</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="test(address): add unit tests for adres management">
+      <option name="closed" value="true" />
+      <created>1789042468056</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1789042468056</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +311,8 @@
     <MESSAGE value="feat: complete authentication authorization and profile management" />
     <MESSAGE value="feat: add address management operations&quot;" />
     <MESSAGE value="test(users): add unit tests for user management" />
-    <option name="LAST_COMMIT_MESSAGE" value="test(users): add unit tests for user management" />
+    <MESSAGE value="test(address): add unit tests for adres management" />
+    <option name="LAST_COMMIT_MESSAGE" value="test(address): add unit tests for adres management" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

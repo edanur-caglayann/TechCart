@@ -8,7 +8,7 @@ using TechCart.Infrastructure;
 using TechCart.Users.Infrastructure;
 using TechCart.Users.Infrastructure.Security;
 using TechCart.Addresses.Infrastructure;
-
+using TechCart.Categories.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +18,8 @@ builder.Services.AddControllers();
 builder.Services.AddTechCartInfrastructure(builder.Configuration);
 builder.Services.AddOpenApi();
 builder.Services.AddUsersModule(builder.Configuration);
-builder.Services.AddAddressesModule(builder.Configuration); // AddUsersModule'ün hemen altına ekle
+builder.Services.AddAddressesModule(builder.Configuration); 
+builder.Services.AddCategoriesModule(builder.Configuration);
 
 // Doğrulama hatalarını:
 // { errors: [{ field, message }] }

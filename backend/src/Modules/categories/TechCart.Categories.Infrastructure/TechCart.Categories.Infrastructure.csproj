@@ -10,6 +10,17 @@
     <ProjectReference Include="..\TechCart.Categories.Application\TechCart.Categories.Application.csproj" />
     <ProjectReference Include="..\TechCart.Categories.Contracts\TechCart.Categories.Contracts.csproj" />
     <ProjectReference Include="..\TechCart.Categories.Domain\TechCart.Categories.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\TechCart.SharedKernel\TechCart.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.12">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.12" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
   </ItemGroup>
 
 </Project>
