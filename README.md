@@ -42,6 +42,10 @@ backend/
 │   │   └── TechCart.Worker/
 │   └── Modules/
 │       ├── users/
+│       │   ├── TechCart.Users.Domain/
+│       │   ├── TechCart.Users.Application/
+│       │   ├── TechCart.Users.Contracts/
+│       │   └── TechCart.Users.Infrastructure/
 │       ├── addresses/
 │       ├── carts/
 │       ├── cart_items/
@@ -57,10 +61,12 @@ backend/
 └── TechCart.sln
 ```
 
-Tablo modülleri kendi Domain projelerinde entity'leri içerir. Ortak persistence ve migration yapısı `BuildingBlocks/TechCart.Infrastructure` altında yönetilir.
+Her tablo modülü kendi içinde aynı katman yapısını izler: `Domain`, `Application`, `Contracts` ve `Infrastructure`. Ortak EF Core DbContext ve migration yapısı `BuildingBlocks/TechCart.Infrastructure` altında yönetilir.
 
 * **Domain:** Entity’leri ve temel iş kurallarını içerir.
-* **Infrastructure:** PostgreSQL migration ve DbContext yapılandırmasını içerir.
+* **Application:** Use case, command/query handler ve modül içi iş akışlarını içerir.
+* **Contracts:** Modüller arası iletişimde kullanılan public DTO, event ve contract tiplerini içerir.
+* **Infrastructure:** Modülün dış sistem, persistence ve teknik implementasyonlarını içerir.
 * **API:** Frontend’den gelen HTTP isteklerini karşılar.
 * **Worker:** RabbitMQ mesajlarını ve arka plan görevlerini işler.
 

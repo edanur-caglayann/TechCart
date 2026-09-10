@@ -20,8 +20,15 @@ import type {
   UpdateProfileData,
 } from "../types/auth";
 
-/* Kullanıcı bilgisinin saklanacağı localStorage anahtarı. */
-const AUTH_STORAGE_KEY = "techcart-user";
+import {
+  registerRequest,
+  loginRequest,
+  sessionRequest,
+  logoutRequest,
+  updateProfileRequest,
+} from "../services/authService";
+
+import { getToken, setToken, clearToken } from "../services/apiClient";
 
 /* AuthContext üzerinden paylaşılacak değerler. */
 type AuthContextType = {
@@ -29,177 +36,124 @@ type AuthContextType = {
   isAuthenticated: boolean;
   isAuthLoading: boolean;
 
-  register: (
-    credentials: RegisterCredentials
-  ) => Promise<void>;
-
-  login: (
-    credentials: LoginCredentials
-  ) => Promise<void>;
-
-  // Profildeki ad, soyad ve e-posta bilgilerini günceller.
-  updateProfile: (
-    profileData: UpdateProfileData
-  ) => Promise<void>;
-
-  logout: () => void;
+  register: (credentials: RegisterCredentials) => Promise<void>;
+  login: (credentials: LoginCredentials) => Promise<void>;
+  updateProfile: (profileData: UpdateProfileData) => Promise<void>;
+  logout: () => Promise<void>; 
 };
 
-const AuthContext = createContext<
-  AuthContextType | undefined
->(undefined);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 type AuthProviderProps = {
   children: ReactNode;
 };
 
-export function AuthProvider({
-  children,
-}: AuthProviderProps) {
+export function AuthProvider({ children }: AuthProviderProps) {
   /*
     user, giriş yapan kullanıcıyı tutar.
     Oturum yoksa null değerindedir.
   */
-  const [user, setUser] = useState<AuthUser | null>(
-    null
-  );
+  const [user, setUser] = useState<AuthUser | null>(null);
 
   /*
-    Sayfa ilk açıldığında localStorage kontrolü
+    Sayfa ilk açıldığında token doğrulaması (GET /api/auth/session)
     tamamlanana kadar true değerindedir.
   */
-  const [isAuthLoading, setIsAuthLoading] =
-    useState(true);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   /*
-    Sayfa ilk açıldığında daha önce kaydedilmiş
-    kullanıcı bilgilerini localStorage üzerinden okur.
+    Sayfa ilk açıldığında localStorage'da token var mı bakılır.
+    ARTIK kullanıcı objesi cache'lenmiyor — sadece token saklanıyor,
+    kullanıcı bilgisi HER ZAMAN backend'den (GET /api/auth/session)
+    doğrulanarak alınıyor. Böylece token süresi dolmuş/geçersizse
+    (örn. şifre başka yerden değiştirilmişse) eski/yanlış bir
+    kullanıcı state'te asılı kalmıyor.
   */
   useEffect(() => {
-    const savedUser = localStorage.getItem(
-      AUTH_STORAGE_KEY
-    );
+    async function restoreSession() {
+      const token = getToken();
 
-    if (savedUser) {
+      if (!token) {
+        setIsAuthLoading(false);
+        return;
+      }
+
       try {
-        /*
-          JSON.parse, localStorage içindeki JSON metnini
-          tekrar kullanılabilir JavaScript nesnesine dönüştürür.
-        */
-        const parsedUser: AuthUser =
-          JSON.parse(savedUser);
-
-        setUser(parsedUser);
+        const session = await sessionRequest();
+        setUser(session.user);
       } catch {
-        /*
-          Kayıtlı veri geçerli JSON değilse
-          bozuk veriyi tarayıcıdan kaldırır.
-        */
-        localStorage.removeItem(AUTH_STORAGE_KEY);
+        /* Token geçersiz/süresi dolmuş: temizle, misafir durumuna düş. */
+        clearToken();
+        setUser(null);
+      } finally {
+        setIsAuthLoading(false);
       }
     }
 
-    setIsAuthLoading(false);
+    restoreSession();
   }, []);
 
   /*
-    Kullanıcıyı state ve localStorage içerisine kaydeden
-    ortak yardımcı fonksiyon.
-
-    Register ve Login işlemlerinde aynı kodun
-    tekrar yazılmasını engeller.
+    register ve login'in ortak yaptığı iş: backend'den dönen
+    token'ı localStorage'a, kullanıcıyı state'e yazmak.
   */
-  function persistUser(authUser: AuthUser) {
+  function persistSession(token: string, authUser: AuthUser) {
+    setToken(token);
     setUser(authUser);
-
-    localStorage.setItem(
-      AUTH_STORAGE_KEY,
-      JSON.stringify(authUser)
-    );
   }
 
   /*
-    Yeni kullanıcı kaydı tamamlandığında çalışır.
-    Şimdilik backend bulunmadığı için geçici bir
-    Customer kullanıcısı oluşturup oturumu başlatır.
-  */
-  async function register(
-    credentials: RegisterCredentials
-  ) {
-    const authUser: AuthUser = {
-      firstName: credentials.firstName,
-      lastName: credentials.lastName,
-      email: credentials.email,
-      role: "Customer",
-    };
+    Yeni kullanıcı kaydını backend'e gönderir. Başarılı olursa
+    backend login ile aynı formatta (token + user) döndüğü için
+    kullanıcı otomatik giriş yapmış sayılır, ayrıca login çağrısı
+    atmaya gerek yok.
 
-    persistUser(authUser);
+    Hata durumunda (örn. EMAIL_ALREADY_EXISTS) ApiError fırlar,
+    burada yakalamıyoruz — formun kendisi yakalayıp gösterecek.
+  */
+  async function register(credentials: RegisterCredentials) {
+    const { token, user: authUser } = await registerRequest(credentials);
+    persistSession(token, authUser);
   }
 
   /*
-    Giriş formundan e-posta ve parola bilgilerini alır.
-    Şimdilik frontend testi için geçici kullanıcı oluşturur.
-
-    Parola state veya localStorage içerisine kaydedilmez.
-    Backend eklendiğinde bu fonksiyon API'den gelen
-    kullanıcı bilgisini persistUser'a gönderecektir.
+    E-posta ve parolayla giriş yapar. Hata durumunda
+    (INVALID_CREDENTIALS) ApiError fırlar, formun kendisi yakalar.
   */
-  async function login(
-    credentials: LoginCredentials
-  ) {
-    const nameFromEmail =
-      credentials.email.split("@")[0];
-
-    const authUser: AuthUser = {
-      firstName: nameFromEmail,
-      lastName: "",
-      email: credentials.email,
-      role: "Customer",
-    };
-
-    persistUser(authUser);
+  async function login(credentials: LoginCredentials) {
+    const { token, user: authUser } = await loginRequest(credentials);
+    persistSession(token, authUser);
   }
 
   /*
-    Profil sayfasından gelen ad, soyad ve e-posta
-    bilgileriyle mevcut kullanıcıyı günceller.
-
-    Şimdilik bilgiler state ve localStorage içerisinde
-    güncellenir. daha sonra backend'de API
-    isteği ile yapılacak
+    Profildeki ad, soyad ve e-posta bilgilerini backend'e günceller.
+    Backend güncel kullanıcıyı döndürüyor, state'i onunla eşitliyoruz
+    (kendimiz local olarak birleştirip tahmin etmiyoruz).
   */
-  async function updateProfile(
-    profileData: UpdateProfileData
-  ) {
-    // Giriş yapan kullanıcı yoksa güncelleme yapılamaz.
+  async function updateProfile(profileData: UpdateProfileData) {
     if (!user) {
-      throw new Error(
-        "Profil güncellemek için giriş yapmalısınız."
-      );
+      throw new Error("Profil güncellemek için giriş yapmalısınız.");
     }
 
-    /*
-      Mevcut kullanıcının rol bilgisini koruyup değiştirilebilir profil alanlarını yenileriz.
-    */
-    const updatedUser: AuthUser = {
-      ...user,
-      firstName: profileData.firstName,
-      lastName: profileData.lastName,
-      email: profileData.email,
-    };
-
-    /*
-      Güncellenen kullanıcıyı hem React state'ine hem de localStorage içerisine kaydeder.
-    */
-    persistUser(updatedUser);
+    const updatedUser = await updateProfileRequest(profileData);
+    setUser(updatedUser);
   }
 
   /*
-    Kullanıcı çıkış yaptığında hem state'i hem de tarayıcıdaki kullanıcı bilgisini temizler.
+    Çıkış yapar. Doküman gereği asıl işlem frontend'de state/localStorage
+    temizliği — backend çağrısı best-effort: başarısız olsa bile
+    (örn. backend o an erişilemezse) kullanıcıyı yine de local olarak
+    çıkış yaptırıyoruz, kullanıcı "çıkış yapamadım" diye takılı kalmasın.
   */
-  function logout() {
+  async function logout() {
+    try {
+      await logoutRequest();
+    } catch {
+      // Sessizce yut — local temizlik zaten aşağıda yapılacak.
+    }
+
     setUser(null);
-    localStorage.removeItem(AUTH_STORAGE_KEY);
+    clearToken();
   }
 
   /*
@@ -231,9 +185,7 @@ export function useAuth() {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error(
-      "useAuth, AuthProvider içerisinde kullanılmalıdır."
-    );
+    throw new Error("useAuth, AuthProvider içerisinde kullanılmalıdır.");
   }
 
   return context;

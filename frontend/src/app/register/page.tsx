@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { useAuth } from "../../context/AuthContext";
+import { ApiError } from "../../services/apiClient";
 import {
   registerSchema,
   RegisterFormValues,
@@ -107,15 +108,21 @@ export default function RegisterPage() {
 
       // returnUrl varsa ilgili sayfaya, yoksa ana sayfaya gider.
       router.push(returnUrl);
-    } catch {
-
-      //Kayıt işlemi başarısız olursa formun üstünde genel bir hata mesajı gösterilir
-      setError("root", {
-        message:
-          "Kayıt işlemi tamamlanamadı. Lütfen tekrar deneyin.",
-      });
+       } catch (error) {
+      if (
+        error instanceof ApiError &&
+        error.code === "EMAIL_ALREADY_EXISTS"
+      ) {
+        setError("email", {
+          message: "Bu e-posta adresi zaten kayıtlı.",
+        });
+      } else {
+        setError("root", {
+          message: "Kayıt işlemi tamamlanamadı. Lütfen tekrar deneyin.",
+        });
+      }
     }
-  }
+     }
 
   return (
     <main className={styles.registerPage}>
