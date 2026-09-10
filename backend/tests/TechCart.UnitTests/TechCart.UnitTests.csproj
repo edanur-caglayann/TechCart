@@ -10,12 +10,20 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="xunit" Version="2.9.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\users\TechCart.Users.Domain\TechCart.Users.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\users\TechCart.Users.Application\TechCart.Users.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\addresses\TechCart.Addresses.Domain\TechCart.Addresses.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\addresses\TechCart.Addresses.Application\TechCart.Addresses.Application.csproj" />
   </ItemGroup>
 
 </Project>
