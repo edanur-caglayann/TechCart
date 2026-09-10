@@ -9,6 +9,8 @@ using TechCart.Users.Infrastructure;
 using TechCart.Users.Infrastructure.Security;
 using TechCart.Addresses.Infrastructure;
 using TechCart.Categories.Infrastructure;
+using TechCart.Brands.Infrastructure;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddUsersModule(builder.Configuration);
 builder.Services.AddAddressesModule(builder.Configuration); 
 builder.Services.AddCategoriesModule(builder.Configuration);
+builder.Services.AddBrandsModule(builder.Configuration);
 
 // Doğrulama hatalarını:
 // { errors: [{ field, message }] }

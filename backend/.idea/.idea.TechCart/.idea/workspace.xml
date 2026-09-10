@@ -10,20 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Categories/CategoriesController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/ICategoryReadRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/List/ListCategoriesHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Repositories/ICategoryWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/CategoriesDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/CategoriesModule.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Configurations/CategoryConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Repositories/CategoryReadRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/Repositories/CategoryWriteRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Brands/BrandsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Application/Abstractions/IBrandReadRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Application/List/ListBrandsHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Domain/Repositories/IBrandWriteRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/BrandsDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/BrandsModule.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Configurations/BrandConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Repositories/BrandReadRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Repositories/BrandWriteRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Entities/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Entities/Category.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/TechCart.Categories.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/TechCart.Categories.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Domain/Entities/Brand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Domain/Entities/Brand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/TechCart.Brands.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/TechCart.Brands.Infrastructure.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +49,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="feature/user-management-unit-tests" />
+        <entry key="$PROJECT_DIR$/.." value="feature/address-management-unit-tests" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -87,6 +87,7 @@
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/LoginRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/RegisterRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/SessionResponse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Brands/BrandsController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Categories/CategoriesController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/ChangePasswordRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UpdateProfileRequest.cs" root0="FORCE_HIGHLIGHTING" />
@@ -104,6 +105,14 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Configurations/AddressConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/Repositories/AddressWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Application/Abstractions/IBrandReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Application/List/ListBrandsHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Domain/Repositories/IBrandWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/BrandsDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/BrandsModule.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Configurations/BrandConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Repositories/BrandReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Repositories/BrandWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/ICategoryReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/List/ListCategoriesHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Repositories/ICategoryWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
@@ -167,7 +176,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "feature/address-management-unit-tests",
+    "git-widget-placeholder": "feature/categories-module",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -284,7 +293,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789042468056</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: add categories module with read-only listing">
+      <option name="closed" value="true" />
+      <created>1789045461432</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1789045461432</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +329,8 @@
     <MESSAGE value="feat: add address management operations&quot;" />
     <MESSAGE value="test(users): add unit tests for user management" />
     <MESSAGE value="test(address): add unit tests for adres management" />
-    <option name="LAST_COMMIT_MESSAGE" value="test(address): add unit tests for adres management" />
+    <MESSAGE value="feat: add categories module with read-only listing" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add categories module with read-only listing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
