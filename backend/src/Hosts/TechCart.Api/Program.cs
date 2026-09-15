@@ -10,6 +10,8 @@ using TechCart.Users.Infrastructure.Security;
 using TechCart.Addresses.Infrastructure;
 using TechCart.Categories.Infrastructure;
 using TechCart.Brands.Infrastructure;
+using TechCart.Products.Infrastructure;
+using TechCart.ProductImages.Infrastructure;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +25,8 @@ builder.Services.AddUsersModule(builder.Configuration);
 builder.Services.AddAddressesModule(builder.Configuration); 
 builder.Services.AddCategoriesModule(builder.Configuration);
 builder.Services.AddBrandsModule(builder.Configuration);
-
+builder.Services.AddProductsModule(builder.Configuration);
+builder.Services.AddProductImagesModule(builder.Configuration);
 // Doğrulama hatalarını:
 // { errors: [{ field, message }] }
 // formatına dönüştürür.

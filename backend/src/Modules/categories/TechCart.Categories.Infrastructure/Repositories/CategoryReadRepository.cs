@@ -14,4 +14,20 @@ public class CategoryReadRepository : ICategoryReadRepository
             .OrderBy(c => c.Name)
             .Select(c => new CategoryDto(c.Id, c.Name))
             .ToListAsync(ct);
+    
+    public Task<List<CategoryDto>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct)
+        => _dbContext.Categories
+            .AsNoTracking()
+            .Where(c => ids.Contains(c.Id))
+            .Select(c => new CategoryDto(c.Id, c.Name))
+            .ToListAsync(ct);
+
+    public Task<List<string>> SearchByNameAsync(string term, int limit, CancellationToken ct)
+        => _dbContext.Categories
+            .AsNoTracking()
+            .Where(c => EF.Functions.ILike(c.Name, $"%{term}%"))
+            .OrderBy(c => c.Name)
+            .Select(c => c.Name)
+            .Take(limit)
+            .ToListAsync(ct);
 }

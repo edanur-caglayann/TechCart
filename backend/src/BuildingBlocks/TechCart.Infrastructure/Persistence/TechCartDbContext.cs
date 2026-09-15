@@ -185,7 +185,6 @@ public sealed class TechCartDbContext(DbContextOptions<TechCartDbContext> option
             entity.Property(x => x.Color).HasColumnName("color").HasMaxLength(80).IsRequired();
             entity.Property(x => x.Price).HasColumnName("price").HasPrecision(18, 2).IsRequired();
             entity.Property(x => x.VatRate).HasColumnName("vat_rate").HasPrecision(5, 2).IsRequired();
-            entity.Property(x => x.Rating).HasColumnName("rating").HasPrecision(3, 2).IsRequired();
             entity.Property(x => x.CreatedAt).HasColumnName("created_at").HasColumnType("timestamp without time zone").IsRequired();
             entity.Property(x => x.UpdatedAt).HasColumnName("updated_at").HasColumnType("timestamp without time zone").IsRequired();
             entity.HasOne<Category>().WithMany().HasForeignKey(x => x.CategoryId).OnDelete(DeleteBehavior.Restrict);
