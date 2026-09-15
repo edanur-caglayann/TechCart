@@ -1,8 +1,3 @@
-/* Bu dosyada useState, useEffect ve localStorage kullanilir. 
-Bunlar tarayici tarafinda calistigi icin dosyayi Client compoent
-oalrak isaretleriz
-*/
-
 "use client";
 
 import {
@@ -14,265 +9,113 @@ import {
 } from "react";
 
 import type { CartItem } from "../types/cart";
-import type { Product } from "../types/product";
+import type { ProductListItem } from "../types/productListItem"; // Product yerine ProductListItem
 
-// Yapilabilecek sepet islemlerinin tiplerini belirleriz
+// Backend'in liste response'u sayısal bir stok adedi (stockQuantity) vermiyor,
+// sadece inStock (true/false) veriyor — gerçek stok sayısı sadece detay
+// endpoint'inde var. O yüzden sepette adet artırırken sınırsız değil ama
+// gerçek stoğa da bağlı olmayan, makul bir güvenlik sınırı kullanıyoruz.
+// GERÇEK stok doğrulaması Sepet Yönetimi'nde backend'e bağlanınca gelecek.
+const FALLBACK_MAX_QUANTITY = 99;
+
 type CartContextType = {
   cartItems: CartItem[];
-
-  addToCart: (
-    product: Product,
-    quantity?: number
-  ) => void;
-
-  increaseQuantity: (productId: number) => void; // miktari arttir
-
-  decreaseQuantity: (productId: number) => void; // miktari azlt
-
-  removeFromCart: (productId: number) => void;
-
+  addToCart: (product: ProductListItem, quantity?: number) => void;
+  increaseQuantity: (productId: string) => void; // number -> string
+  decreaseQuantity: (productId: string) => void; // number -> string
+  removeFromCart: (productId: string) => void;   // number -> string
   clearCart: () => void;
-
   totalQuantity: number;
-
   totalPrice: number;
 };
 
-const CartContext = createContext<
-  CartContextType | undefined
->(undefined);
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
 type CartProviderProps = {
   children: ReactNode;
 };
 
-export function CartProvider({
-  children,
-}: CartProviderProps) {
-  /* cartItems -> sepetin mevcut durumu
-  setCartItems -> sepeti degistirmek icin kullandigimiz fonks
-  */
-
-  const [cartItems, setCartItems] = useState<CartItem[]>(
-    []
-  );
-
-  /*
-  sayfa ilk acildiginda localStorage icindeki
-  onceden kaydedilen sepeti okuyarak cartItems state'ine aktarir
-  Syafa yenilendiginde kullanici bilgileri silinmez.
-  localStorage ile tarayicidan girilen kullanici bilgileri bilgisayarda kallici olarak
-  saklar. Ama kart bilgileri gibi ozel veriler hairc.
-  SEPETI KAYDEDERIZ
-  */
-
-  // syafa yenilendiginde getItem ile kaydedilmis sepeti okuruz
+export function CartProvider({ children }: CartProviderProps) {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    const savedCart = localStorage.getItem(
-      "techcart-cart"
-    );
-
-    /* localStorage verileri metin olarak sakladigi icin
-    metni tekrar js dizisine donustururuz
-    */
+    const savedCart = localStorage.getItem("techcart-cart");
 
     if (savedCart) {
       try {
-        const parsedCart: CartItem[] =
-          JSON.parse(savedCart);
-
+        const parsedCart: CartItem[] = JSON.parse(savedCart);
         setCartItems(parsedCart);
       } catch {
-        /*
-          Kaydedilen veri bozuksa bozuk sepet veriis silinir
-        */
-
         localStorage.removeItem("techcart-cart");
       }
     }
   }, []);
 
-  // sepet bilgileirni tarayicicya setItem ile kaydedriz
-
   useEffect(() => {
-    localStorage.setItem(
-      "techcart-cart",
-      JSON.stringify(cartItems)
-    );
+    localStorage.setItem("techcart-cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  /*
-  Sepete ürün ekleme işlemi.
-  quantity parametresi gönderilmezse
-  varsayılan olarak bir adet ürün eklenir.
-  */
-
-  function addToCart(
-    product: Product,
-    quantity = 1
-  ) {
+  function addToCart(product: ProductListItem, quantity = 1) {
     setCartItems((currentItems) => {
-      /*
-        Sepete eklenecek miktarın birden
-        küçük olmasını engelleriz.
-      */
-
       const quantityToAdd = Math.max(1, quantity);
 
-      /*
-        Ürün için stok miktarı tanımlanmışsa onu,
-        tanımlanmamışsa sınırsız değeri kullanırız.
-        Gerçek stok kontrolü daha sonra backend
-        tarafından da yapılacaktır.
-      */
+      const existingItem = currentItems.find((item) => item.product.id === product.id);
 
-      const maximumQuantity =
-        product.stockQuantity ??
-        Number.POSITIVE_INFINITY;
-
-      /*
-        Ürünün daha önce sepete eklenip
-        eklenmediğini id değeriyle kontrol ederiz.
-      */
-
-      const existingItem = currentItems.find(
-        (item) => item.product.id === product.id
-      );
-
-        // Ürün zaten sepetteyse yeni bir satır oluşturmak yerine mevcut ürünün adedini artırırız.
       if (existingItem) {
         return currentItems.map((item) =>
           item.product.id === product.id
-            ? {
-                ...item,
-
-                /*
-                  Mevcut adet ile eklenecek adedi toplarız.
-                  Math.min sayesinde sonuç ürünün stok miktarını geçemez.
-                */
-
-                quantity: Math.min(
-                  item.quantity + quantityToAdd,
-                  maximumQuantity
-                ),
-              }
+            ? { ...item, quantity: Math.min(item.quantity + quantityToAdd, FALLBACK_MAX_QUANTITY) }
             : item
         );
       }
-       // Ürün sepette yoksa seçilen adetle yeni sepet elemanı oluştururuz.
-      return [
-        ...currentItems,
-        {
-          product,
 
-          quantity: Math.min(
-            quantityToAdd,
-            maximumQuantity
-          ),
-        },
-      ];
+      return [...currentItems, { product, quantity: Math.min(quantityToAdd, FALLBACK_MAX_QUANTITY) }];
     });
   }
 
-  /* arti butonuna basilinca urün adedini bir artırır. */
-  function increaseQuantity(productId: number) {
+  function increaseQuantity(productId: string) {
     setCartItems((currentItems) =>
       currentItems.map((item) =>
         item.product.id === productId
-          ? {
-              ...item,
-
-              quantity: Math.min(
-                item.quantity + 1,
-                item.product.stockQuantity ??
-                  Number.POSITIVE_INFINITY
-              ),
-            }
+          ? { ...item, quantity: Math.min(item.quantity + 1, FALLBACK_MAX_QUANTITY) }
           : item
       )
     );
   }
 
-  function decreaseQuantity(productId: number) {
+  function decreaseQuantity(productId: string) {
     setCartItems((currentItems) =>
       currentItems.map((item) =>
-        item.product.id === productId
-          ? {
-              ...item,
-
-              quantity: Math.max(
-                // fonks ile urun adedi 1'in altina inmez
-                1,
-                item.quantity - 1
-              ),
-            }
-          : item
+        item.product.id === productId ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
       )
     );
   }
 
-  /* Belirtilen ürünü sepetten tamamen kaldırır. */
-
-  function removeFromCart(productId: number) {
-    setCartItems((currentItems) =>
-      currentItems.filter(
-        (item) => item.product.id !== productId
-      )
-    );
+  function removeFromCart(productId: string) {
+    setCartItems((currentItems) => currentItems.filter((item) => item.product.id !== productId));
   }
-
-  /* Sepetteki bütün ürünleri kaldırır. */
 
   function clearCart() {
     setCartItems([]);
   }
 
-  // toplam urun adedi
-
-  const totalQuantity = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
-
-  // toplam fiyat
-
-  const totalPrice = cartItems.reduce(
-    (total, item) =>
-      total + item.product.price * item.quantity,
-    0
-  );
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice = cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
 
   return (
     <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        increaseQuantity,
-        decreaseQuantity,
-        removeFromCart,
-        clearCart,
-        totalQuantity,
-        totalPrice,
-      }}
+      value={{ cartItems, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart, totalQuantity, totalPrice }}
     >
       {children}
     </CartContext.Provider>
   );
 }
 
-/*
-  useCart sayesinde bileşenler sepet bilgilerine
-  ve sepet fonksiyonlarına kolayca ulaşabilir.
-*/
-
 export function useCart() {
   const context = useContext(CartContext);
 
   if (!context) {
-    throw new Error(
-      "useCart, CartProvider içerisinde kullanılmalıdır."
-    );
+    throw new Error("useCart, CartProvider içerisinde kullanılmalıdır.");
   }
 
   return context;

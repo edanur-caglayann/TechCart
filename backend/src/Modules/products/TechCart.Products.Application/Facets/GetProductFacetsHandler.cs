@@ -4,16 +4,14 @@ using TechCart.Products.Application.Abstractions;
 
 namespace TechCart.Products.Application.Facets;
 
-// kullanicidan gelen filtreleme istegi
 public record GetProductFacetsQuery(string? SearchTerm, Guid? CategoryId, Guid? BrandId,
-    decimal? MinPrice, decimal? MaxPrice, string? Color);
+    decimal? MinPrice, decimal? MaxPrice, string? Color, bool? InStock);
 
 public record FacetOptionDto(Guid Id, string Name, int Count);
 public record ColorFacetOptionDto(string Color, int Count);
 public record ProductFacetsDto(List<FacetOptionDto> Categories, List<FacetOptionDto> Brands,
     List<ColorFacetOptionDto> Colors, decimal MinPrice, decimal MaxPrice);
 
-// filtre seceneklerini ve sayilarini 
 public class GetProductFacetsHandler
 {
     private readonly IProductReadRepository _productReadRepository;
@@ -31,7 +29,7 @@ public class GetProductFacetsHandler
     public async Task<ProductFacetsDto> Handle(GetProductFacetsQuery query, CancellationToken ct)
     {
         var filter = new ProductSearchFilter(query.SearchTerm, query.CategoryId, query.BrandId,
-            query.MinPrice, query.MaxPrice, query.Color, SortBy: "relevance", Page: 1, PageSize: 1);
+            query.MinPrice, query.MaxPrice, query.Color, query.InStock, SortBy: "relevance", Page: 1, PageSize: 1);
 
         var categoryFacets = await _productReadRepository.GetCategoryFacetsAsync(filter, ct);
         var brandFacets = await _productReadRepository.GetBrandFacetsAsync(filter, ct);

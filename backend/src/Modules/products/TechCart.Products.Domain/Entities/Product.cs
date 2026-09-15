@@ -1,3 +1,4 @@
+using System.Drawing;
 using TechCart.SharedKernel;
 using TechCart.SharedKernel.Entities;
 
@@ -14,6 +15,7 @@ public class Product : AuditableEntity
     public string Color { get; private set; } = default!;
     public decimal Price { get; private set; }
     public decimal VatRate { get; private set; }
+    public int Stock { get; private set; } // inventory'deki gercek stogun replikasi
 
     private Product() { } 
 
@@ -36,4 +38,17 @@ public class Product : AuditableEntity
     public static Product Create(Guid categoryId, Guid brandId, string name, string model,
         string description, string specs, string color, decimal price, decimal vatRate)
         => new(categoryId, brandId, name, model, description, specs, color, price, vatRate);
+    
+    // seeder'daki tek seferlik "renk doldurma"
+    public void SetColor(string color)
+    {
+        Color = color;
+        MarkUpdated();
+    }
+    // inventory'deki kolonun kopyasini yazar
+    public void SetStock(int stock)
+    {
+        Stock = stock;
+        MarkUpdated();
+    }
 }

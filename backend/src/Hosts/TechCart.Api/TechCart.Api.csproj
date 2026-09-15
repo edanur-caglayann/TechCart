@@ -9,10 +9,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.12" />
+
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
@@ -20,20 +22,26 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BuildingBlocks\TechCart.Infrastructure\TechCart.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Modules\addresses\TechCart.Addresses.Application\TechCart.Addresses.Application.csproj" />
-    <ProjectReference Include="..\..\Modules\brands\TechCart.Brands.Application\TechCart.Brands.Application.csproj" />
-    <ProjectReference Include="..\..\Modules\Users\TechCart.Users.Infrastructure\TechCart.Users.Infrastructure.csproj" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../../Modules/Users/TechCart.Users.Infrastructure/TechCart.Users.Infrastructure.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Modules\addresses\TechCart.Addresses.Infrastructure\TechCart.Addresses.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Modules\categories\TechCart.Categories.Infrastructure\TechCart.Categories.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Modules\brands\TechCart.Brands.Infrastructure\TechCart.Brands.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Modules\products\TechCart.Products.Infrastructure\TechCart.Products.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Modules\product_images\TechCart.ProductImages.Infrastructure\TechCart.ProductImages.Infrastructure.csproj" />
-  </ItemGroup>
+    <ProjectReference Include="..\..\Modules\Users\TechCart.Users.Infrastructure\TechCart.Users.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\Modules\Addresses\TechCart.Addresses.Application\TechCart.Addresses.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\Addresses\TechCart.Addresses.Infrastructure\TechCart.Addresses.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\Modules\Brands\TechCart.Brands.Application\TechCart.Brands.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\Brands\TechCart.Brands.Infrastructure\TechCart.Brands.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\Modules\Categories\TechCart.Categories.Infrastructure\TechCart.Categories.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\Modules\Products\TechCart.Products.Application\TechCart.Products.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\Products\TechCart.Products.Infrastructure\TechCart.Products.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\Modules\ProductImages\TechCart.ProductImages.Infrastructure\TechCart.ProductImages.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\Modules\Inventory\TechCart.Inventory.Application\TechCart.Inventory.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\Inventory\TechCart.Inventory.Infrastructure\TechCart.Inventory.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Infrastructure\TechCart.Inventory.Infrastructure.csproj" />
+
+    <ProjectReference Include="..\..\Modules\product_images\TechCart.ProductImages.Infrastructure\TechCart.ProductImages.Infrastructure.csproj" />  </ItemGroup>
 
 </Project>

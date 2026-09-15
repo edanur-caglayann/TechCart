@@ -12,6 +12,7 @@ using TechCart.Categories.Infrastructure;
 using TechCart.Brands.Infrastructure;
 using TechCart.Products.Infrastructure;
 using TechCart.ProductImages.Infrastructure;
+using TechCart.Inventory.Infrastructure;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,8 @@ builder.Services.AddCategoriesModule(builder.Configuration);
 builder.Services.AddBrandsModule(builder.Configuration);
 builder.Services.AddProductsModule(builder.Configuration);
 builder.Services.AddProductImagesModule(builder.Configuration);
+builder.Services.AddInventoryModule(builder.Configuration);
+
 // Doğrulama hatalarını:
 // { errors: [{ field, message }] }
 // formatına dönüştürür.

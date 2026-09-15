@@ -5,6 +5,7 @@
     <ProjectReference Include="..\..\Modules\brands\TechCart.Brands.Infrastructure\TechCart.Brands.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\products\TechCart.Products.Infrastructure\TechCart.Products.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\product_images\TechCart.ProductImages.Infrastructure\TechCart.ProductImages.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Infrastructure\TechCart.Inventory.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

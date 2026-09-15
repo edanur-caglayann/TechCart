@@ -7,6 +7,8 @@ using TechCart.Brands.Domain.Repositories;
 using TechCart.Categories.Application.Abstractions;
 using TechCart.Categories.Domain.Entities;
 using TechCart.Categories.Domain.Repositories;
+using TechCart.Inventory.Domain.Entities;
+using TechCart.Inventory.Domain.Repositories;
 using TechCart.ProductImages.Domain.Entities;
 using TechCart.ProductImages.Domain.Repositories;
 using TechCart.Products.Domain.Entities;
@@ -14,16 +16,27 @@ using TechCart.Products.Domain.Repositories;
 
 namespace TechCart.Seeder;
 
-// CSV'deki ürünleri okuyup Postgres'e (Category/Brand/Product/ProductImage
-// tablolarına) toplu şekilde yazan, tek seferlik çalıştırılan sınıf.
 public class ProductSeeder
 {
-    // Kaç üründe bir SaveChanges çağrılacağı — tek tek değil, gruplar halinde
-    // kaydederek veritabanına gidiş-geliş sayısını azaltıyoruz.
     private const int BatchSize = 200;
-
-    // Veri setinde Türkiye KDV bilgisi olmadığı için sabit oran kullanıyoruz.
     private const decimal DefaultVatRate = 0.20m;
+
+    // Bunun yerine ürün başlığında geçen anahtar kelimeye göre kategori çıkarıyoruz.
+    private static readonly (string Keyword, string CategoryName)[] CategoryKeywords =
+    {
+        ("laptop", "Bilgisayar"), ("notebook", "Bilgisayar"), ("macbook", "Bilgisayar"),
+        ("chromebook", "Bilgisayar"), ("desktop", "Bilgisayar"),
+        ("tablet", "Tablet"), ("ipad", "Tablet"),
+        ("keyboard", "Klavye"),
+        ("trackpad", "Mouse"), ("mouse", "Mouse"),
+        ("turntable", "Pikap"), ("record player", "Pikap"), ("vinyl", "Pikap"),
+        ("headphone", "Kulaklık"), ("earphone", "Kulaklık"), ("earbud", "Kulaklık"), ("headset", "Kulaklık"),
+        ("soundbar", "Hoparlör"), ("speaker", "Hoparlör"),
+        ("smart tv", "Televizyon"), ("television", "Televizyon"),
+        ("smartwatch", "Akıllı Saat"), ("smart watch", "Akıllı Saat"), ("fitness band", "Akıllı Saat"),
+        ("webcam", "Kamera"), ("dslr", "Kamera"), ("gopro", "Kamera"), ("camera", "Kamera"),
+        ("smartphone", "Telefon"), ("mobile phone", "Telefon"),
+    };
 
     private readonly ICategoryReadRepository _categoryReadRepository;
     private readonly ICategoryWriteRepository _categoryWriteRepository;
@@ -31,6 +44,7 @@ public class ProductSeeder
     private readonly IBrandWriteRepository _brandWriteRepository;
     private readonly IProductWriteRepository _productWriteRepository;
     private readonly IProductImageWriteRepository _productImageWriteRepository;
+    private readonly IProductStockWriteRepository _productStockWriteRepository;
 
     public ProductSeeder(
         ICategoryReadRepository categoryReadRepository,
@@ -38,7 +52,8 @@ public class ProductSeeder
         IBrandReadRepository brandReadRepository,
         IBrandWriteRepository brandWriteRepository,
         IProductWriteRepository productWriteRepository,
-        IProductImageWriteRepository productImageWriteRepository)
+        IProductImageWriteRepository productImageWriteRepository,
+        IProductStockWriteRepository productStockWriteRepository)
     {
         _categoryReadRepository = categoryReadRepository;
         _categoryWriteRepository = categoryWriteRepository;
@@ -46,28 +61,33 @@ public class ProductSeeder
         _brandWriteRepository = brandWriteRepository;
         _productWriteRepository = productWriteRepository;
         _productImageWriteRepository = productImageWriteRepository;
+        _productStockWriteRepository = productStockWriteRepository;
     }
 
     public async Task RunAsync(string csvPath, CancellationToken ct)
     {
-        // Mevcut kategori/marka/ürün isimlerini TEK seferde belleğe çekiyoruz —
-        // döngü içinde her satırda ayrı ayrı veritabanına sormuyoruz.
         var categoryIdsByName = (await _categoryReadRepository.GetAllAsync(ct))
             .ToDictionary(c => c.Name, c => c.Id, StringComparer.OrdinalIgnoreCase);
 
         var brandIdsByName = (await _brandReadRepository.GetAllAsync(ct))
             .ToDictionary(b => b.Name, b => b.Id, StringComparer.OrdinalIgnoreCase);
 
-        var existingProductNames = await _productWriteRepository.GetAllNamesAsync(ct);
+        var productIdsByName = await _productWriteRepository.GetAllProductIdsByNameAsync(ct);
+        var productIdsWithStock = await _productStockWriteRepository.GetAllProductIdsAsync(ct);
 
-        Console.WriteLine($"Başlangıç: {categoryIdsByName.Count} kategori, {brandIdsByName.Count} marka, {existingProductNames.Count} ürün zaten kayıtlı.");
+        Console.WriteLine($"Başlangıç: {categoryIdsByName.Count} kategori, {brandIdsByName.Count} marka, " +
+            $"{productIdsByName.Count} ürün, {productIdsWithStock.Count} stok kaydı zaten var.");
 
         using var reader = new StreamReader(csvPath);
         using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
         var records = csv.GetRecords<AmazonElectronicsCsvRow>();
 
-        var processedCount = 0;
-        var skippedCount = 0;
+        var newProductCount = 0;
+        var newStockCount = 0;
+        var skippedEmptyTitleCount = 0;
+        var skippedNoCategoryMatchCount = 0; // kaç ürünün "teknolojik alet değil" diye atlandığını görmek için
+
+        var rowsHandled = 0;
 
         foreach (var row in records)
         {
@@ -75,74 +95,99 @@ public class ProductSeeder
 
             if (string.IsNullOrWhiteSpace(row.Title))
             {
-                skippedCount++;
-                continue; // ürün adı zorunlu, boşsa satırı atla
-            }
-
-            // Script tekrar çalıştırılırsa aynı ürün ikinci kez eklenmesin.
-            if (existingProductNames.Contains(row.Title))
-            {
-                skippedCount++;
+                skippedEmptyTitleCount++;
                 continue;
             }
 
-            var categoryId = await GetOrCreateCategoryAsync(row.Category, categoryIdsByName, ct);
+            Guid productId;
 
-            // Marka kolonu yok — ürün adının ilk kelimesini marka olarak kullanıyoruz.
-            var brandName = ExtractBrandName(row.Title);
-            var brandId = await GetOrCreateBrandAsync(brandName, brandIdsByName, ct);
-
-            // Önce indirimli fiyatı dene, yoksa orijinal (MRP) fiyata düş.
-            var discountPrice = ParseDecimal(row.DiscountPrice);
-            var actualPrice = ParseDecimal(row.ActualPrice);
-            var price = discountPrice > 0 ? discountPrice : actualPrice;
-
-            var product = Product.Create(
-                categoryId,
-                brandId,
-                name: row.Title,
-                model: string.Empty,
-                description: string.Empty,
-                specs: "{}",
-                color: string.Empty,
-                price: price,
-                vatRate: DefaultVatRate);
-
-            await _productWriteRepository.AddAsync(product, ct);
-            existingProductNames.Add(product.Name); // aynı çalıştırma içindeki tekrarı da engeller
-
-            if (!string.IsNullOrWhiteSpace(row.ImageUrl))
+            if (productIdsByName.TryGetValue(row.Title, out var existingProductId))
             {
-                var image = ProductImage.Create(product.Id, row.ImageUrl, sortOrder: 0);
-                await _productImageWriteRepository.AddAsync(image, ct);
+                productId = existingProductId;
+            }
+            else
+            {
+                var inferredCategory = TryInferCategory(row.Title);
+                if (inferredCategory is null)
+                {
+                    skippedNoCategoryMatchCount++;
+                    continue;
+                }
+
+                var categoryId = await GetOrCreateCategoryAsync(inferredCategory, categoryIdsByName, ct);
+                var brandName = ExtractBrandName(row.Title);
+                var brandId = await GetOrCreateBrandAsync(brandName, brandIdsByName, ct);
+
+                var discountPrice = ParseDecimal(row.DiscountPrice);
+                var actualPrice = ParseDecimal(row.ActualPrice);
+                var price = discountPrice > 0 ? discountPrice : actualPrice;
+
+                var product = Product.Create(categoryId, brandId, row.Title, string.Empty,
+                    string.Empty, "{}", string.Empty, price, DefaultVatRate);
+
+                await _productWriteRepository.AddAsync(product, ct);
+                productIdsByName[row.Title] = product.Id;
+                productId = product.Id;
+                newProductCount++;
+
+                if (!string.IsNullOrWhiteSpace(row.ImageUrl))
+                {
+                    var image = ProductImage.Create(product.Id, row.ImageUrl, sortOrder: 0);
+                    await _productImageWriteRepository.AddAsync(image, ct);
+                }
             }
 
-            processedCount++;
+            if (!productIdsWithStock.Contains(productId))
+            {
+                var stock = ProductStock.Create(
+                    productId,
+                    stock: Random.Shared.Next(0, 101),
+                    isReadyToShip: Random.Shared.Next(0, 100) < 80,
+                    hasFastDelivery: Random.Shared.Next(0, 100) < 50);
 
-            if (processedCount % BatchSize == 0)
+                await _productStockWriteRepository.AddAsync(stock, ct);
+                productIdsWithStock.Add(productId);
+                newStockCount++;
+            }
+
+            rowsHandled++;
+
+            if (rowsHandled % BatchSize == 0)
             {
                 await SaveAllAsync(ct);
-                Console.WriteLine($"{processedCount} ürün işlendi...");
+                Console.WriteLine($"{rowsHandled} satır işlendi... ({newProductCount} yeni ürün, {newStockCount} yeni stok kaydı)");
             }
         }
 
-        await SaveAllAsync(ct); 
+        await SaveAllAsync(ct);
 
-        Console.WriteLine($"Tamamlandı: {processedCount} ürün eklendi, {skippedCount} satır atlandı.");
+        Console.WriteLine($"Tamamlandı: {newProductCount} yeni ürün, {newStockCount} yeni stok kaydı eklendi. " +
+            $"Atlanan: {skippedEmptyTitleCount} boş isim, {skippedNoCategoryMatchCount} kategori eşleşmedi.");
     }
 
-    // Kategori belleğimizdeki sözlükte varsa id'sini döner; yoksa yeni Category
-    // oluşturup (henüz kaydetmeden, sadece AddAsync ile) sözlüğe ekler.
+    // başlıkta CategoryKeywords listesindeki ilk eşleşen anahtar kelimeyi arar, karşılık gelen kategori adını döner. 
+    // Hiçbiri eşleşmezse null döner
+    private static string? TryInferCategory(string title)
+    {
+        var lowerTitle = title.ToLowerInvariant();
+
+        foreach (var (keyword, categoryName) in CategoryKeywords)
+        {
+            if (lowerTitle.Contains(keyword))
+                return categoryName;
+        }
+
+        return null;
+    }
+
     private async Task<Guid> GetOrCreateCategoryAsync(string categoryName, Dictionary<string, Guid> cache, CancellationToken ct)
     {
-        var name = string.IsNullOrWhiteSpace(categoryName) ? "Diğer" : categoryName.Trim();
-
-        if (cache.TryGetValue(name, out var existingId))
+        if (cache.TryGetValue(categoryName, out var existingId))
             return existingId;
 
-        var category = Category.Create(name);
+        var category = Category.Create(categoryName);
         await _categoryWriteRepository.AddAsync(category, ct);
-        cache[name] = category.Id;
+        cache[categoryName] = category.Id;
         return category.Id;
     }
 
@@ -159,7 +204,6 @@ public class ProductSeeder
         return brand.Id;
     }
 
-    // Regex.Replace ile rakam/nokta disindaki her şeyi siliyoruz 
     private static decimal ParseDecimal(string? raw)
     {
         if (string.IsNullOrWhiteSpace(raw)) return 0;
@@ -167,21 +211,19 @@ public class ProductSeeder
         var cleaned = Regex.Replace(raw, @"[^\d.]", "");
         return decimal.TryParse(cleaned, NumberStyles.Any, CultureInfo.InvariantCulture, out var value) ? value : 0;
     }
-    
-    // Amazon başlıkları neredeyse her zaman markayla başlar, o yüzden ilk kelimeyi marka olarak alıyoruz.
+
     private static string ExtractBrandName(string title)
     {
         var firstWord = title.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
         return string.IsNullOrWhiteSpace(firstWord) ? "Bilinmeyen Marka" : firstWord;
     }
 
-    // Her modül kendi DbContext'ini kaydediyor — tek bir dev transaction yok,
-    // "her modül kendi verisinden sorumlu" kuralımız burada da geçerli.
     private async Task SaveAllAsync(CancellationToken ct)
     {
         await _categoryWriteRepository.SaveChangesAsync(ct);
         await _brandWriteRepository.SaveChangesAsync(ct);
         await _productWriteRepository.SaveChangesAsync(ct);
         await _productImageWriteRepository.SaveChangesAsync(ct);
+        await _productStockWriteRepository.SaveChangesAsync(ct);
     }
 }

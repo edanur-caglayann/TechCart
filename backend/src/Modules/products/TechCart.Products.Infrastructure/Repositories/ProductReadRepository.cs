@@ -8,16 +8,16 @@ namespace TechCart.Products.Infrastructure.Repositories;
 public class ProductReadRepository : IProductReadRepository
 {
     private readonly ProductsDbContext _dbContext;
-    public ProductReadRepository(ProductsDbContext dbContext) => _dbContext = dbContext;
+    public ProductReadRepository(ProductsDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
 
     public async Task<PagedResult<ProductRowDto>> SearchAsync(ProductSearchFilter filter, CancellationToken ct)
     {
-        // tum degerler true: kullanici hangi filtreleri sectiyse urun listesine hepsi uygulanir.
-        // ornegin Kategori: Telefon, Marka: Samsung, Renk: Siyah -> sadece siyah Samsung telefonlar listelenir
         var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
             includeCategory: true, includeBrand: true, includeColor: true);
 
-        // filtreye uyan toplam urun sayisi
         var totalCount = await query.CountAsync(ct);
 
         query = filter.SortBy switch
@@ -31,7 +31,7 @@ public class ProductReadRepository : IProductReadRepository
         var items = await query
             .Skip((filter.Page - 1) * filter.PageSize)
             .Take(filter.PageSize)
-            .Select(p => new ProductRowDto(p.Id, p.BrandId, p.Name, p.Price, p.VatRate))
+            .Select(p => new ProductRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Price, p.VatRate, p.Stock))
             .ToListAsync(ct);
 
         return new PagedResult<ProductRowDto>(items, totalCount, filter.Page, filter.PageSize);
@@ -40,12 +40,9 @@ public class ProductReadRepository : IProductReadRepository
     public async Task<List<CategoryFacetDto>> GetCategoryFacetsAsync(ProductSearchFilter filter, CancellationToken ct)
     {
         var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
-            includeCategory: false, includeBrand: true, includeColor: true); // kendi boyutu hariç
+            includeCategory: false, includeBrand: true, includeColor: true);
 
-        return await query
-            .GroupBy(p => p.CategoryId)
-            .Select(g => new CategoryFacetDto(g.Key, g.Count()))
-            .ToListAsync(ct);
+        return await query.GroupBy(p => p.CategoryId).Select(g => new CategoryFacetDto(g.Key, g.Count())).ToListAsync(ct);
     }
 
     public async Task<List<BrandFacetDto>> GetBrandFacetsAsync(ProductSearchFilter filter, CancellationToken ct)
@@ -53,10 +50,7 @@ public class ProductReadRepository : IProductReadRepository
         var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
             includeCategory: true, includeBrand: false, includeColor: true);
 
-        return await query
-            .GroupBy(p => p.BrandId)
-            .Select(g => new BrandFacetDto(g.Key, g.Count()))
-            .ToListAsync(ct);
+        return await query.GroupBy(p => p.BrandId).Select(g => new BrandFacetDto(g.Key, g.Count())).ToListAsync(ct);
     }
 
     public async Task<List<ColorFacetDto>> GetColorFacetsAsync(ProductSearchFilter filter, CancellationToken ct)
@@ -64,11 +58,7 @@ public class ProductReadRepository : IProductReadRepository
         var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
             includeCategory: true, includeBrand: true, includeColor: false);
 
-        return await query
-            .Where(p => p.Color != "") // boş renk bilgisi facet'te anlamsız
-            .GroupBy(p => p.Color)
-            .Select(g => new ColorFacetDto(g.Key, g.Count()))
-            .ToListAsync(ct);
+        return await query.Where(p => p.Color != "").GroupBy(p => p.Color).Select(g => new ColorFacetDto(g.Key, g.Count())).ToListAsync(ct);
     }
 
     public async Task<(decimal Min, decimal Max)> GetPriceRangeAsync(ProductSearchFilter filter, CancellationToken ct)
@@ -77,28 +67,18 @@ public class ProductReadRepository : IProductReadRepository
             includeCategory: true, includeBrand: true, includeColor: true, includePrice: false);
 
         if (!await query.AnyAsync(ct)) return (0, 0);
-
         return (await query.MinAsync(p => p.Price, ct), await query.MaxAsync(p => p.Price, ct));
     }
 
     public Task<ProductDetailRowDto?> GetByIdAsync(Guid id, CancellationToken ct)
-        => _dbContext.Products
-            .AsNoTracking()
-            .Where(p => p.Id == id)
-            .Select(p => new ProductDetailRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Model,
-                p.Description, p.Specs, p.Price, p.VatRate))
+        => _dbContext.Products.AsNoTracking().Where(p => p.Id == id)
+            .Select(p => new ProductDetailRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Model, p.Description, p.Specs, p.Price, p.VatRate))
             .FirstOrDefaultAsync(ct);
 
     public Task<List<string>> SearchProductNamesAsync(string term, int limit, CancellationToken ct)
-        => _dbContext.Products
-            .AsNoTracking()
-            .Where(p => EF.Functions.ILike(p.Name, $"%{term}%"))
-            .OrderBy(p => p.Name)
-            .Select(p => p.Name)
-            .Take(limit)
-            .ToListAsync(ct);
+        => _dbContext.Products.AsNoTracking().Where(p => EF.Functions.ILike(p.Name, $"%{term}%"))
+            .OrderBy(p => p.Name).Select(p => p.Name).Take(limit).ToListAsync(ct);
 
-    // Butun ortak filtreleri uygular.
     private static IQueryable<Product> ApplyFilters(IQueryable<Product> query, ProductSearchFilter filter,
         bool includeCategory, bool includeBrand, bool includeColor, bool includePrice = true)
     {
@@ -119,6 +99,9 @@ public class ProductReadRepository : IProductReadRepository
             if (filter.MinPrice.HasValue) query = query.Where(p => p.Price >= filter.MinPrice.Value);
             if (filter.MaxPrice.HasValue) query = query.Where(p => p.Price <= filter.MaxPrice.Value);
         }
+        
+        if (filter.InStock == true)
+            query = query.Where(p => p.Stock > 0);
 
         return query;
     }

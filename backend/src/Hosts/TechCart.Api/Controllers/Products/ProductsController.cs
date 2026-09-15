@@ -8,7 +8,6 @@ namespace TechCart.Api.Controllers.Products;
 
 [ApiController]
 [Route("api/products")]
-// [Authorize] YOK — misafir kullanıcı da ürünleri görebilmeli/arayabilmeli.
 public class ProductsController : ControllerBase
 {
     private const int MaxPageSize = 100;
@@ -30,25 +29,26 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetProducts([FromQuery] ProductListRequest request, CancellationToken ct)
     {
-        // Client aşırı büyük pageSize isterse veritabanını zorlamayalım.
         var pageSize = Math.Clamp(request.PageSize, 1, MaxPageSize);
         var page = Math.Max(request.Page, 1);
-
+        
+        // istekten gelen bilgiler ListProductsQuery nesensine donusturulur
         var query = new ListProductsQuery(request.Q, request.Category, request.Brand,
-            request.MinPrice, request.MaxPrice, request.Color, request.SortBy, page, pageSize);
+            request.MinPrice, request.MaxPrice, request.Color, request.InStock, request.SortBy, page, pageSize);
 
         var result = await _listProductsHandler.Handle(query, ct);
         var totalPages = (int)Math.Ceiling(result.TotalCount / (double)pageSize);
 
         return Ok(new ProductListResponse(
-            result.Items.Select(p => new ProductListItemResponse(p.Id, p.Name, p.Brand, p.Price, p.Image)).ToList(),
+            result.Items.Select(p => new ProductListItemResponse(p.Id, p.Name, p.Brand, p.Category, p.Price, p.Image, p.InStock)).ToList(),
             new PaginationResponse(page, pageSize, result.TotalCount, totalPages)));
     }
 
     [HttpGet("facets")]
     public async Task<IActionResult> GetFacets([FromQuery] ProductFacetsRequest request, CancellationToken ct)
     {
-        var query = new GetProductFacetsQuery(request.Q, request.Category, request.Brand, request.MinPrice, request.MaxPrice, request.Color);
+        var query = new GetProductFacetsQuery(request.Q, request.Category, request.Brand,
+            request.MinPrice, request.MaxPrice, request.Color, request.InStock);
         var result = await _getProductFacetsHandler.Handle(query, ct);
 
         return Ok(new ProductFacetsResponse(
@@ -65,13 +65,14 @@ public class ProductsController : ControllerBase
         return Ok(result.Select(s => new SuggestionResponse(s.Text, s.Type)));
     }
 
-    // {id:guid} kısıtı sayesinde "facets"/"suggestions" gibi metin route'larla
-    // hiç çakışmıyor — ASP.NET Core bunları otomatik ayırt ediyor.
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetProductDetail(Guid id, CancellationToken ct)
     {
         var result = await _getProductDetailHandler.Handle(new GetProductDetailQuery(id), ct);
         return Ok(new ProductDetailResponse(result.Id, result.Name, result.Brand, result.Category,
-            result.Model, result.Description, result.Specs, result.Price, result.Images));
+            result.Model, result.Description, result.Specs, result.Price, result.PriceWithoutVat, result.VatRate, result.VatAmount,
+            result.Stock, result.InStock, result.CartQuantity,
+            result.IsReadyToShip, result.HasFastDelivery,
+            result.Images));
     }
 }

@@ -2,18 +2,19 @@
 using Microsoft.Extensions.DependencyInjection;
 using TechCart.Brands.Infrastructure;
 using TechCart.Categories.Infrastructure;
+using TechCart.Inventory.Infrastructure;
 using TechCart.ProductImages.Infrastructure;
 using TechCart.Products.Infrastructure;
 using TechCart.Seeder;
-using TechCart.ProductImages.Infrastructure;
 
 if (args.Length == 0)
 {
-    Console.WriteLine("Kullanım: dotnet run -- <csv-dosya-yolu>");
+    Console.WriteLine("Kullanım:");
+    Console.WriteLine("  Ürün içe aktarma: dotnet run -- <csv-dosya-yolu>");
+    Console.WriteLine("  Renk geri doldurma: dotnet run -- backfill-colors");
+    Console.WriteLine("  Stok kopyalama: dotnet run -- backfill-stock"); // YENİ
     return;
 }
-
-var csvPath = args[0];
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(AppContext.BaseDirectory)
@@ -22,17 +23,30 @@ var configuration = new ConfigurationBuilder()
 
 var services = new ServiceCollection();
 
-// Api'de kullandığımız aynı extension metotları — DbContext kurulumunu
-// burada tekrar yazmıyoruz, olduğu gibi yeniden kullanıyoruz.
 services.AddCategoriesModule(configuration);
 services.AddBrandsModule(configuration);
 services.AddProductsModule(configuration);
 services.AddProductImagesModule(configuration);
+services.AddInventoryModule(configuration);
 services.AddScoped<ProductSeeder>();
-
+services.AddScoped<ColorBackfiller>();
+services.AddScoped<ProductStockReplicator>(); 
 
 await using var provider = services.BuildServiceProvider();
 using var scope = provider.CreateScope();
 
-var seeder = scope.ServiceProvider.GetRequiredService<ProductSeeder>();
-await seeder.RunAsync(csvPath, CancellationToken.None);
+if (args[0] == "backfill-colors")
+{
+    var colorBackfiller = scope.ServiceProvider.GetRequiredService<ColorBackfiller>();
+    await colorBackfiller.RunAsync(CancellationToken.None);
+}
+else if (args[0] == "backfill-stock") 
+{
+    var stockReplicator = scope.ServiceProvider.GetRequiredService<ProductStockReplicator>();
+    await stockReplicator.RunAsync(CancellationToken.None);
+}
+else
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<ProductSeeder>();
+    await seeder.RunAsync(args[0], CancellationToken.None);
+}

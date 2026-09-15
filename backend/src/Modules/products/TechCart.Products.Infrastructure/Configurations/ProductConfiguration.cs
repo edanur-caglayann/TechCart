@@ -22,7 +22,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.VatRate).HasColumnName("vat_rate").HasColumnType("decimal(5,4)");
         builder.Property(p => p.CreatedAt).HasColumnName("created_at");
         builder.Property(p => p.UpdatedAt).HasColumnName("updated_at");
-
+        builder.Property(p => p.Stock).HasColumnName("stock"); 
        
         builder.HasIndex(p => p.CategoryId);
         builder.HasIndex(p => p.BrandId);
