@@ -1,6 +1,7 @@
 namespace TechCart.Products.Contracts;
 
-public record ProductListItemResponse(Guid Id, string Name, string Brand, string Category, decimal Price, string? Image, bool InStock);
+public record ProductListItemResponse(Guid Id, string Name, string Model, string Brand, string Category,
+    decimal Price, decimal VatRate, string? Image, bool InStock);
 public record PaginationResponse(int Page, int PageSize, int TotalItems, int TotalPages);
 public record ProductListResponse(List<ProductListItemResponse> Items, PaginationResponse Pagination);
 

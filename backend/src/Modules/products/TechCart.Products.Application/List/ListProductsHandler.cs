@@ -44,10 +44,11 @@ public class ListProductsHandler
         var imagesByProductId = await _productImageReadRepository.GetPrimaryImagesByProductIdsAsync(productIds, ct);
 
         var items = page.Items.Select(p => new ProductListItemResponse(
-            p.Id, p.Name,
+            p.Id, p.Name, p.Model,
             brandsById.TryGetValue(p.BrandId, out var brand) ? brand.Name : "Bilinmeyen Marka",
             categoriesById.TryGetValue(p.CategoryId, out var category) ? category.Name : "Bilinmiyor",
             Math.Round(p.Price * (1 + p.VatRate), 2),
+            p.VatRate,
             imagesByProductId.GetValueOrDefault(p.Id),
             p.Stock > 0
         )).ToList();

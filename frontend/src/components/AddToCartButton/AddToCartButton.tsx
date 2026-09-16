@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 
 import { useCart } from "../../context/CartContext";
+import type { CartProduct } from "../../types/cart";
 import type { Product } from "../../types/product";
 
 import styles from "./AddToCartButton.module.css";
@@ -30,6 +31,19 @@ export default function AddToCartButton({
   className,
   showCartLink = false,
 }: AddToCartButtonProps) {
+  const cartProduct: CartProduct = {
+    id: String(product.id),
+    name: product.name,
+    model: product.model,
+    brand: product.brand,
+    category: product.category,
+    price: product.price,
+    vatRate: product.vatRate,
+    image: product.images?.[0] ?? null,
+    inStock: product.inStock,
+    stockQuantity: product.stockQuantity,
+  };
+
   /*
     addToCart, seçilen ürünü ve adedi sepete eklemek için;
 
@@ -49,7 +63,7 @@ export default function AddToCartButton({
   */
 
   const cartItem = cartItems.find(
-    (item) => item.product.id === product.id
+    (item) => item.product.id === cartProduct.id
   );
 
   /*
@@ -76,11 +90,11 @@ export default function AddToCartButton({
     }
 
     if (cartQuantity === 1) {
-      removeFromCart(product.id);
+      removeFromCart(cartProduct.id);
       return;
     }
 
-    decreaseQuantity(product.id);
+    decreaseQuantity(cartProduct.id);
   }
 
   /*
@@ -95,11 +109,11 @@ export default function AddToCartButton({
 
   function increaseSelectedQuantity() {
     if (cartQuantity === 0) {
-      addToCart(product, 1);
+      addToCart(cartProduct, 1);
       return;
     }
 
-    increaseQuantity(product.id);
+    increaseQuantity(cartProduct.id);
   }
 
   /*
@@ -115,7 +129,7 @@ export default function AddToCartButton({
       sepete bir adet daha eklenir.
     */
 
-    addToCart(product, 1);
+    addToCart(cartProduct, 1);
   }
 
   /*
