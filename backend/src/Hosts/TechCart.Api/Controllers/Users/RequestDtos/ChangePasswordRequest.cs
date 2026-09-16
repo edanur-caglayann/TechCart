@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TechCart.Api.Controllers.Users;
+namespace TechCart.Api.Controllers.Users.RequestDtos;
 
 public class ChangePasswordRequest
 {

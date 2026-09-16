@@ -1,4 +1,6 @@
 using TechCart.Users.Application.Abstractions;
+using TechCart.Users.Application.Auth.RequestDtos;
+using TechCart.Users.Application.Auth.ResponseDtos;
 using TechCart.Users.Domain.Exceptions;
 
 namespace TechCart.Users.Application.Auth;
@@ -16,10 +18,6 @@ public class GetSessionHandler
             ?? throw new UserNotFoundException(query.UserId);
 
         return new SessionResponse(true,
-            new AuthUserDto(profile.Id, profile.FirstName, profile.LastName, profile.Email, profile.Role));
+            new AuthUserResponse(profile.Id, profile.FirstName, profile.LastName, profile.Email, profile.Role));
     }
 }
-
-public record GetSessionQuery(Guid UserId);
-
-public record SessionResponse(bool IsAuthenticated, AuthUserDto User);

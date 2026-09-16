@@ -1,6 +1,8 @@
 using Moq;
 using TechCart.Users.Application.Abstractions;
 using TechCart.Users.Application.Login;
+using TechCart.Users.Application.Login.RequestDtos;
+using TechCart.Users.Application.Login.ResponseDtos;
 using TechCart.Users.Domain.Entities;
 using TechCart.Users.Domain.Exceptions;
 using Xunit;
@@ -16,7 +18,7 @@ public class LoginHandlerTests
         var userReadRepositoryMock = new Mock<IUserReadRepository>();
         userReadRepositoryMock
             .Setup(r => r.GetCredentialsByEmailAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((UserCredentialsDto?)null);
+            .ReturnsAsync((UserCredentialsResponse?)null);
 
         var handler = new LoginHandler(userReadRepositoryMock.Object, new Mock<IPasswordHasher>().Object, new Mock<ITokenGenerator>().Object);
         var command = new LoginCommand("olmayan@example.com", "AnyPassword1!");
@@ -29,7 +31,7 @@ public class LoginHandlerTests
     public async Task Handle_ShouldThrowInvalidCredentialsException_WhenPasswordIsWrong()
     {
         // Arrange: kullanıcı bulunuyor ama şifre doğrulaması BAŞARISIZ olacak.
-        var credentials = new UserCredentialsDto(Guid.NewGuid(), "Ada", "Lovelace", "ada@example.com", "stored-hash", UserRole.Customer);
+        var credentials = new UserCredentialsResponse(Guid.NewGuid(), "Ada", "Lovelace", "ada@example.com", "stored-hash", UserRole.Customer);
 
         var userReadRepositoryMock = new Mock<IUserReadRepository>();
         userReadRepositoryMock
@@ -50,11 +52,11 @@ public class LoginHandlerTests
     }
 
     [Fact]
-    public async Task Handle_ShouldReturnAuthResult_WhenCredentialsAreValid()
+    public async Task Handle_ShouldReturnAuthResponse_WhenCredentialsAreValid()
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var credentials = new UserCredentialsDto(userId, "Ada", "Lovelace", "ada@example.com", "stored-hash", UserRole.Customer);
+        var credentials = new UserCredentialsResponse(userId, "Ada", "Lovelace", "ada@example.com", "stored-hash", UserRole.Customer);
 
         var userReadRepositoryMock = new Mock<IUserReadRepository>();
         userReadRepositoryMock

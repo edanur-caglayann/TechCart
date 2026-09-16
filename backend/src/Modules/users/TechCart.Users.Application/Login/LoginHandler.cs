@@ -1,10 +1,9 @@
 using TechCart.Users.Application.Abstractions;
-using TechCart.Users.Application.Auth;
+using TechCart.Users.Application.Auth.ResponseDtos;
+using TechCart.Users.Application.Login.RequestDtos;
 using TechCart.Users.Domain.Exceptions;
 
 namespace TechCart.Users.Application.Login;
-
-public record LoginCommand(string Email, string Password);
 
 public class LoginHandler
 {
@@ -19,7 +18,7 @@ public class LoginHandler
         _tokenGenerator = tokenGenerator;
     }
 
-    public async Task<AuthResult> Handle(LoginCommand command, CancellationToken ct)
+    public async Task<AuthResponse> Handle(LoginCommand command, CancellationToken ct)
     {
         var credentials = await _userReadRepository.GetCredentialsByEmailAsync(command.Email, ct);
 
@@ -28,6 +27,6 @@ public class LoginHandler
             throw new InvalidCredentialsException();
 
         var token = _tokenGenerator.GenerateToken(credentials.Id, credentials.FirstName, credentials.LastName, credentials.Email, credentials.Role);
-        return new AuthResult(token, new AuthUserDto(credentials.Id, credentials.FirstName, credentials.LastName, credentials.Email, credentials.Role.ToString()));
+        return new AuthResponse(token, new AuthUserResponse(credentials.Id, credentials.FirstName, credentials.LastName, credentials.Email, credentials.Role.ToString()));
     }
 }

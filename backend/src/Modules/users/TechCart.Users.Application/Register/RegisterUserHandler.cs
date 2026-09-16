@@ -1,13 +1,11 @@
 using TechCart.Users.Application.Abstractions;
-using TechCart.Users.Application.Auth;
+using TechCart.Users.Application.Auth.ResponseDtos;
+using TechCart.Users.Application.Register.RequestDtos;
 using TechCart.Users.Domain.Entities;
 using TechCart.Users.Domain.Exceptions;
 using TechCart.Users.Domain.Repositories;
 
 namespace TechCart.Users.Application.Register;
-
-// frontend/API tarafindan gonderilen kayit bilgilerini tasir
-public record RegisterUserCommand(string FirstName, string LastName, string Email, string Password);
 
 public class RegisterUserHandler
 {
@@ -22,8 +20,8 @@ public class RegisterUserHandler
         _tokenGenerator = tokenGenerator;
     }
 
-    // donus tipi AuthResult: kullanici bilgileri ve token 
-    public async Task<AuthResult> Handle(RegisterUserCommand command, CancellationToken ct) 
+    // donus tipi AuthResponse: kullanici bilgileri ve token
+    public async Task<AuthResponse> Handle(RegisterUserCommand command, CancellationToken ct)
     {
         var alreadyExists = await _userWriteRepository.ExistsByEmailAsync(command.Email, ct);
         if (alreadyExists)
@@ -38,6 +36,6 @@ public class RegisterUserHandler
         // kayıt sonrası hemen token üretir, kullanıcı tekrar giriş yapmak zorunda kalmaz.
         var token = _tokenGenerator.GenerateToken(user.Id, user.FirstName, user.LastName, user.Email, user.Role);
         // frontend'e token ve kullanici bilgileri gonderilir.
-        return new AuthResult(token, new AuthUserDto(user.Id, user.FirstName, user.LastName, user.Email, user.Role.ToString()));
+        return new AuthResponse(token, new AuthUserResponse(user.Id, user.FirstName, user.LastName, user.Email, user.Role.ToString()));
     }
 }

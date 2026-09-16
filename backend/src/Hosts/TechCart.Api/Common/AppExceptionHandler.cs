@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Diagnostics;
+using TechCart.Api.Common.ResponseDtos;
 using TechCart.SharedKernel;
 
 namespace TechCart.Api.Common;
@@ -13,7 +14,7 @@ public class AppExceptionHandler : IExceptionHandler
 
         httpContext.Response.StatusCode = appException.StatusCode;
         await httpContext.Response.WriteAsJsonAsync(
-            new { code = appException.Code, message = appException.Message },
+            new AppExceptionResponse(appException.Code, appException.Message),
             cancellationToken);
 
         return true;
