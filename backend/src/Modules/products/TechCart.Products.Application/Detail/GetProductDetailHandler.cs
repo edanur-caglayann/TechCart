@@ -3,18 +3,12 @@ using TechCart.Categories.Application.Abstractions;
 using TechCart.Inventory.Application.Abstractions; // YENİ
 using TechCart.ProductImages.Application.Abstractions;
 using TechCart.Products.Application.Abstractions;
+using TechCart.Products.Contracts;
 using TechCart.Products.Domain.Exceptions;
 
 namespace TechCart.Products.Application.Detail;
 
 public record GetProductDetailQuery(Guid ProductId);
-
-public record ProductDetailDto(
-    Guid Id, string Name, string Brand, string Category, string Model, string Description, string Specs,
-    decimal Price, decimal PriceWithoutVat, decimal VatRate, decimal VatAmount, // 3.5
-    int Stock, bool InStock, int CartQuantity,                                  // 3.6
-    bool IsReadyToShip, bool HasFastDelivery,                                   // 3.7
-    List<string> Images);
 
 public class GetProductDetailHandler
 {
@@ -38,7 +32,7 @@ public class GetProductDetailHandler
         _productStockReadRepository = productStockReadRepository;
     }
 
-    public async Task<ProductDetailDto> Handle(GetProductDetailQuery query, CancellationToken ct)
+    public async Task<ProductDetailResponse> Handle(GetProductDetailQuery query, CancellationToken ct)
     {
         var product = await _productReadRepository.GetByIdAsync(query.ProductId, ct)
             ?? throw new ProductNotFoundException(query.ProductId);
@@ -57,7 +51,7 @@ public class GetProductDetailHandler
         var stockInfo = await _productStockReadRepository.GetByProductIdAsync(product.Id, ct)
             ?? new ProductStockDto(Stock: 0, InStock: false, IsReadyToShip: false, HasFastDelivery: false);
 
-        return new ProductDetailDto(
+        return new ProductDetailResponse(
             product.Id, product.Name,
             brand.FirstOrDefault()?.Name ?? "Bilinmeyen Marka",
             category.FirstOrDefault()?.Name ?? "Bilinmiyor",

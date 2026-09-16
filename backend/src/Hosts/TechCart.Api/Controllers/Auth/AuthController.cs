@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TechCart.Users.Application.Auth;
 using TechCart.Users.Application.Login;
-using TechCart.Users.Application.Profile;
 using TechCart.Users.Application.Register;
 
 namespace TechCart.Api.Controllers.Auth;
@@ -15,18 +14,18 @@ public class AuthController : ControllerBase
 {   
     private readonly RegisterUserHandler _registerUserHandler;
     private readonly LoginHandler _loginHandler;
-    private readonly GetMyProfileHandler _getMyProfileHandler;
+    private readonly GetSessionHandler _getSessionHandler;
     private readonly LogoutHandler _logoutHandler;
 
     public AuthController(
         RegisterUserHandler registerUserHandler,
         LoginHandler loginHandler,
-        GetMyProfileHandler getMyProfileHandler,
+        GetSessionHandler getSessionHandler,
         LogoutHandler logoutHandler)
     {
         _registerUserHandler = registerUserHandler;
         _loginHandler = loginHandler;
-        _getMyProfileHandler = getMyProfileHandler;
+        _getSessionHandler = getSessionHandler;
         _logoutHandler = logoutHandler;
     }
 
@@ -54,12 +53,10 @@ public class AuthController : ControllerBase
     //istek buraya ulasamadan once JWT kontorlu yapilir 
     public async Task<IActionResult> Session(CancellationToken ct) // artık async, dikkat
     {
-        // Sadece kimliği (userId) token'dan alıyoruz diger bilgileri GetMyProfileHandler uzerinden aliriz
+        // Sadece kimliği (userId) token'dan alıyoruz; response mapping application katmanında yapılır.
         var userId = Guid.Parse(User.FindFirstValue(JwtRegisteredClaimNames.Sub)!);
-        var profile = await _getMyProfileHandler.Handle(new GetMyProfileQuery(userId), ct);
-
-        var authUser = new AuthUserDto(profile.Id, profile.FirstName, profile.LastName, profile.Email, profile.Role);
-        return Ok(new SessionResponse(true, authUser));
+        var result = await _getSessionHandler.Handle(new GetSessionQuery(userId), ct);
+        return Ok(result);
     }
 
 

@@ -1,4 +1,4 @@
-namespace TechCart.Api.Controllers.Products;
+namespace TechCart.Products.Contracts;
 
 public record ProductListItemResponse(Guid Id, string Name, string Brand, string Category, decimal Price, string? Image, bool InStock);
 public record PaginationResponse(int Page, int PageSize, int TotalItems, int TotalPages);

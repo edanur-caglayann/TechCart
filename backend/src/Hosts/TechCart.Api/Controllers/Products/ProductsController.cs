@@ -37,11 +37,7 @@ public class ProductsController : ControllerBase
             request.MinPrice, request.MaxPrice, request.Color, request.InStock, request.SortBy, page, pageSize);
 
         var result = await _listProductsHandler.Handle(query, ct);
-        var totalPages = (int)Math.Ceiling(result.TotalCount / (double)pageSize);
-
-        return Ok(new ProductListResponse(
-            result.Items.Select(p => new ProductListItemResponse(p.Id, p.Name, p.Brand, p.Category, p.Price, p.Image, p.InStock)).ToList(),
-            new PaginationResponse(page, pageSize, result.TotalCount, totalPages)));
+        return Ok(result);
     }
 
     [HttpGet("facets")]
@@ -51,28 +47,20 @@ public class ProductsController : ControllerBase
             request.MinPrice, request.MaxPrice, request.Color, request.InStock);
         var result = await _getProductFacetsHandler.Handle(query, ct);
 
-        return Ok(new ProductFacetsResponse(
-            result.Categories.Select(c => new FacetOptionResponse(c.Id, c.Name, c.Count)).ToList(),
-            result.Brands.Select(b => new FacetOptionResponse(b.Id, b.Name, b.Count)).ToList(),
-            result.Colors.Select(c => new ColorFacetResponse(c.Color, c.Count)).ToList(),
-            result.MinPrice, result.MaxPrice));
+        return Ok(result);
     }
 
     [HttpGet("suggestions")]
     public async Task<IActionResult> GetSuggestions([FromQuery] string q, CancellationToken ct)
     {
         var result = await _getProductSuggestionsHandler.Handle(new GetProductSuggestionsQuery(q), ct);
-        return Ok(result.Select(s => new SuggestionResponse(s.Text, s.Type)));
+        return Ok(result);
     }
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetProductDetail(Guid id, CancellationToken ct)
     {
         var result = await _getProductDetailHandler.Handle(new GetProductDetailQuery(id), ct);
-        return Ok(new ProductDetailResponse(result.Id, result.Name, result.Brand, result.Category,
-            result.Model, result.Description, result.Specs, result.Price, result.PriceWithoutVat, result.VatRate, result.VatAmount,
-            result.Stock, result.InStock, result.CartQuantity,
-            result.IsReadyToShip, result.HasFastDelivery,
-            result.Images));
+        return Ok(result);
     }
 }

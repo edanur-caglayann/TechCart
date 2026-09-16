@@ -1,16 +1,12 @@
 using TechCart.Brands.Application.Abstractions;
 using TechCart.Categories.Application.Abstractions;
 using TechCart.Products.Application.Abstractions;
+using TechCart.Products.Contracts;
 
 namespace TechCart.Products.Application.Facets;
 
 public record GetProductFacetsQuery(string? SearchTerm, Guid? CategoryId, Guid? BrandId,
     decimal? MinPrice, decimal? MaxPrice, string? Color, bool? InStock);
-
-public record FacetOptionDto(Guid Id, string Name, int Count);
-public record ColorFacetOptionDto(string Color, int Count);
-public record ProductFacetsDto(List<FacetOptionDto> Categories, List<FacetOptionDto> Brands,
-    List<ColorFacetOptionDto> Colors, decimal MinPrice, decimal MaxPrice);
 
 public class GetProductFacetsHandler
 {
@@ -26,7 +22,7 @@ public class GetProductFacetsHandler
         _brandReadRepository = brandReadRepository;
     }
 
-    public async Task<ProductFacetsDto> Handle(GetProductFacetsQuery query, CancellationToken ct)
+    public async Task<ProductFacetsResponse> Handle(GetProductFacetsQuery query, CancellationToken ct)
     {
         var filter = new ProductSearchFilter(query.SearchTerm, query.CategoryId, query.BrandId,
             query.MinPrice, query.MaxPrice, query.Color, query.InStock, SortBy: "relevance", Page: 1, PageSize: 1);
@@ -41,12 +37,12 @@ public class GetProductFacetsHandler
         var brandsById = (await _brandReadRepository
             .GetByIdsAsync(brandFacets.Select(f => f.BrandId), ct)).ToDictionary(b => b.Id);
 
-        return new ProductFacetsDto(
-            categoryFacets.Select(f => new FacetOptionDto(f.CategoryId,
+        return new ProductFacetsResponse(
+            categoryFacets.Select(f => new FacetOptionResponse(f.CategoryId,
                 categoriesById.TryGetValue(f.CategoryId, out var c) ? c.Name : "Bilinmiyor", f.Count)).ToList(),
-            brandFacets.Select(f => new FacetOptionDto(f.BrandId,
+            brandFacets.Select(f => new FacetOptionResponse(f.BrandId,
                 brandsById.TryGetValue(f.BrandId, out var b) ? b.Name : "Bilinmiyor", f.Count)).ToList(),
-            colorFacets.Select(f => new ColorFacetOptionDto(f.Color, f.Count)).ToList(),
+            colorFacets.Select(f => new ColorFacetResponse(f.Color, f.Count)).ToList(),
             minPrice, maxPrice);
     }
 }

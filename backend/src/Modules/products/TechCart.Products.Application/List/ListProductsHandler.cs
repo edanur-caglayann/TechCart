@@ -2,15 +2,13 @@ using TechCart.Brands.Application.Abstractions;
 using TechCart.Categories.Application.Abstractions;
 using TechCart.ProductImages.Application.Abstractions;
 using TechCart.Products.Application.Abstractions;
-using TechCart.SharedKernel;
+using TechCart.Products.Contracts;
 
 namespace TechCart.Products.Application.List;
 
 public record ListProductsQuery(string? SearchTerm, Guid? CategoryId, Guid? BrandId,
     decimal? MinPrice, decimal? MaxPrice, string? Color, bool? InStock,
     string SortBy, int Page, int PageSize);
-
-public record ProductListItemDto(Guid Id, string Name, string Brand, string Category, decimal Price, string? Image, bool InStock);
 
 public class ListProductsHandler
 {
@@ -29,7 +27,7 @@ public class ListProductsHandler
         _productImageReadRepository = productImageReadRepository;
     }
 
-    public async Task<PagedResult<ProductListItemDto>> Handle(ListProductsQuery query, CancellationToken ct)
+    public async Task<ProductListResponse> Handle(ListProductsQuery query, CancellationToken ct)
     {
         var filter = new ProductSearchFilter(query.SearchTerm, query.CategoryId, query.BrandId,
             query.MinPrice, query.MaxPrice, query.Color, query.InStock, query.SortBy, query.Page, query.PageSize);
@@ -45,15 +43,18 @@ public class ListProductsHandler
         var productIds = page.Items.Select(p => p.Id).ToList();
         var imagesByProductId = await _productImageReadRepository.GetPrimaryImagesByProductIdsAsync(productIds, ct);
 
-        var items = page.Items.Select(p => new ProductListItemDto(
+        var items = page.Items.Select(p => new ProductListItemResponse(
             p.Id, p.Name,
             brandsById.TryGetValue(p.BrandId, out var brand) ? brand.Name : "Bilinmeyen Marka",
             categoriesById.TryGetValue(p.CategoryId, out var category) ? category.Name : "Bilinmiyor",
             Math.Round(p.Price * (1 + p.VatRate), 2),
             imagesByProductId.GetValueOrDefault(p.Id),
-            p.Stock > 0 
+            p.Stock > 0
         )).ToList();
 
-        return new PagedResult<ProductListItemDto>(items, page.TotalCount, page.PageNumber, page.PageSize);
+        var totalPages = (int)Math.Ceiling(page.TotalCount / (double)page.PageSize);
+        var pagination = new PaginationResponse(page.PageNumber, page.PageSize, page.TotalCount, totalPages);
+
+        return new ProductListResponse(items, pagination);
     }
 }

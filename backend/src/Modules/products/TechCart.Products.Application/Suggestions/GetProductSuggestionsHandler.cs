@@ -1,11 +1,11 @@
 using TechCart.Brands.Application.Abstractions;
 using TechCart.Categories.Application.Abstractions;
 using TechCart.Products.Application.Abstractions;
+using TechCart.Products.Contracts;
 
 namespace TechCart.Products.Application.Suggestions;
 
 public record GetProductSuggestionsQuery(string SearchTerm);
-public record SuggestionDto(string Text, string Type); // Type: "product" | "category" | "brand"
 
 // arama onerilerini getirir
 public class GetProductSuggestionsHandler
@@ -24,10 +24,10 @@ public class GetProductSuggestionsHandler
         _brandReadRepository = brandReadRepository;
     }
 
-    public async Task<List<SuggestionDto>> Handle(GetProductSuggestionsQuery query, CancellationToken ct)
+    public async Task<List<SuggestionResponse>> Handle(GetProductSuggestionsQuery query, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(query.SearchTerm))
-            return new List<SuggestionDto>();
+            return new List<SuggestionResponse>();
 
         // Üç kaynağı paralel sorguluyoruz — sırayla çağırsak üç bekleme süresi
         // toplanırdı, Task.WhenAll aynı anda çalıştırıp toplam süreyi kısaltır.
@@ -37,10 +37,10 @@ public class GetProductSuggestionsHandler
 
         await Task.WhenAll(productNamesTask, categoryNamesTask, brandNamesTask);
 
-        var suggestions = new List<SuggestionDto>();
-        suggestions.AddRange(productNamesTask.Result.Select(n => new SuggestionDto(n, "product")));
-        suggestions.AddRange(categoryNamesTask.Result.Select(n => new SuggestionDto(n, "category")));
-        suggestions.AddRange(brandNamesTask.Result.Select(n => new SuggestionDto(n, "brand")));
+        var suggestions = new List<SuggestionResponse>();
+        suggestions.AddRange(productNamesTask.Result.Select(n => new SuggestionResponse(n, "product")));
+        suggestions.AddRange(categoryNamesTask.Result.Select(n => new SuggestionResponse(n, "category")));
+        suggestions.AddRange(brandNamesTask.Result.Select(n => new SuggestionResponse(n, "brand")));
 
         return suggestions;
     }

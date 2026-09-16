@@ -29,6 +29,7 @@ public static class UsersModule
         services.AddScoped<RegisterUserHandler>();
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>(); 
         services.AddScoped<LoginHandler>(); 
+        services.AddScoped<GetSessionHandler>();
         services.AddScoped<LogoutHandler>();
         services.AddScoped<GetMyProfileHandler>();   
         services.AddScoped<UpdateProfileHandler>(); 
