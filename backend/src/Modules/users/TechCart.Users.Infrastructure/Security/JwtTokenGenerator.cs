@@ -18,13 +18,11 @@ public class JwtTokenGenerator : ITokenGenerator
     // kullanici bilgilerini alarak JWT uretir
     public string GenerateToken(Guid userId, string firstName, string lastName, string email, UserRole role)
     {
-        // claims, token'in icinde tasinacak kullanici bilgileridir.
+        // Token icinde sadece authorization icin gerekli minimum bilgiler tutulur.
+        // Profil bilgileri login/session response uzerinden doner; JWT payload'i gizli kabul edilmez.
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()), // token'in sahibi
-            new Claim(JwtRegisteredClaimNames.Email, email),
-            new Claim(JwtRegisteredClaimNames.GivenName, firstName),
-            new Claim(JwtRegisteredClaimNames.FamilyName, lastName),
             new Claim(ClaimTypes.Role, role.ToString()),
             // jti-> JWT Id -> ayni kullanici tekrar giris yapsa bile her seferinde farkli bir
             // token id'si uretilir
