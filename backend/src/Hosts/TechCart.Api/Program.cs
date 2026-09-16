@@ -1,13 +1,21 @@
 using Microsoft.OpenApi.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TechCart.Api.Common;
+using TechCart.Users.Application.Abstractions;
 using TechCart.Infrastructure;
 using TechCart.Users.Infrastructure;
 using TechCart.Users.Infrastructure.Security;
 using TechCart.Addresses.Infrastructure;
+using TechCart.Categories.Infrastructure;
+using TechCart.Brands.Infrastructure;
+using TechCart.Products.Infrastructure;
+using TechCart.ProductImages.Infrastructure;
+using TechCart.Inventory.Infrastructure;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +26,12 @@ builder.Services.AddControllers();
 builder.Services.AddTechCartInfrastructure(builder.Configuration);
 builder.Services.AddOpenApi();
 builder.Services.AddUsersModule(builder.Configuration);
-builder.Services.AddAddressesModule(builder.Configuration); // AddUsersModule'ün hemen altına ekle
+builder.Services.AddAddressesModule(builder.Configuration); 
+builder.Services.AddCategoriesModule(builder.Configuration);
+builder.Services.AddBrandsModule(builder.Configuration);
+builder.Services.AddProductsModule(builder.Configuration);
+builder.Services.AddProductImagesModule(builder.Configuration);
+builder.Services.AddInventoryModule(builder.Configuration);
 
 // Doğrulama hatalarını:
 // { errors: [{ field, message }] }
@@ -71,6 +84,27 @@ builder.Services
 
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnTokenValidated = async context =>
+            {
+                var jti = context.Principal?.FindFirstValue(JwtRegisteredClaimNames.Jti);
+                if (string.IsNullOrWhiteSpace(jti))
+                {
+                    context.Fail("Token missing jti.");
+                    return;
+                }
+
+                var revokedTokenRepository = context.HttpContext.RequestServices
+                    .GetRequiredService<IRevokedTokenRepository>();
+
+                if (await revokedTokenRepository.IsRevokedAsync(jti, context.HttpContext.RequestAborted))
+                {
+                    context.Fail("Token revoked.");
+                }
+            }
         };
     });
 

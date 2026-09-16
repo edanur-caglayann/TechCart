@@ -10,6 +10,12 @@
     <ProjectReference Include="..\TechCart.Products.Application\TechCart.Products.Application.csproj" />
     <ProjectReference Include="..\TechCart.Products.Contracts\TechCart.Products.Contracts.csproj" />
     <ProjectReference Include="..\TechCart.Products.Domain\TechCart.Products.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\TechCart.SharedKernel\TechCart.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
   </ItemGroup>
 
 </Project>

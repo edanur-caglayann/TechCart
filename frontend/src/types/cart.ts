@@ -1,6 +1,6 @@
-import { Product } from "./product";
+import type { ProductListItem } from "./productListItem";
 
 export type CartItem = {
-  product: Product;
-  quantity: number; // urunden kac adet eklendi
+  product: ProductListItem;
+  quantity: number;
 };

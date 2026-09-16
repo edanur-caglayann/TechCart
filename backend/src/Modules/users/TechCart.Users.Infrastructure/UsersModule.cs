@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TechCart.Users.Application.Abstractions;
+using TechCart.Users.Application.Auth;
 using TechCart.Users.Application.Login;
 using TechCart.Users.Application.Profile;
 using TechCart.Users.Application.Register;
@@ -23,10 +24,13 @@ public static class UsersModule
 
         services.AddScoped<IUserWriteRepository, UserWriteRepository>();
         services.AddScoped<IUserReadRepository, UserReadRepository>(); 
+        services.AddScoped<IRevokedTokenRepository, RevokedTokenRepository>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<RegisterUserHandler>();
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>(); 
         services.AddScoped<LoginHandler>(); 
+        services.AddScoped<GetSessionHandler>();
+        services.AddScoped<LogoutHandler>();
         services.AddScoped<GetMyProfileHandler>();   
         services.AddScoped<UpdateProfileHandler>(); 
         services.AddScoped<ChangePasswordHandler>();
