@@ -9,7 +9,7 @@ import {
 } from "react";
 
 import type { CartItem } from "../types/cart";
-import type { ProductListItem } from "../types/productListItem"; // Product yerine ProductListItem
+import type { CartProduct } from "../types/cart";
 
 // Backend'in liste response'u sayısal bir stok adedi (stockQuantity) vermiyor,
 // sadece inStock (true/false) veriyor — gerçek stok sayısı sadece detay
@@ -20,7 +20,7 @@ const FALLBACK_MAX_QUANTITY = 99;
 
 type CartContextType = {
   cartItems: CartItem[];
-  addToCart: (product: ProductListItem, quantity?: number) => void;
+  addToCart: (product: CartProduct, quantity?: number) => void;
   increaseQuantity: (productId: string) => void; // number -> string
   decreaseQuantity: (productId: string) => void; // number -> string
   removeFromCart: (productId: string) => void;   // number -> string
@@ -55,7 +55,7 @@ export function CartProvider({ children }: CartProviderProps) {
     localStorage.setItem("techcart-cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  function addToCart(product: ProductListItem, quantity = 1) {
+  function addToCart(product: CartProduct, quantity = 1) {
     setCartItems((currentItems) => {
       const quantityToAdd = Math.max(1, quantity);
 
