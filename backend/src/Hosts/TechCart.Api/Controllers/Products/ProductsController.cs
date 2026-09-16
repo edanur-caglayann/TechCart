@@ -40,7 +40,7 @@ public class ProductsController : ControllerBase
         var totalPages = (int)Math.Ceiling(result.TotalCount / (double)pageSize);
 
         return Ok(new ProductListResponse(
-            result.Items.Select(p => new ProductListItemResponse(p.Id, p.Name, p.Brand, p.Category, p.Price, p.Image, p.InStock)).ToList(),
+            result.Items.Select(p => new ProductListItemResponse(p.Id, p.Name, p.Model, p.Brand, p.Category, p.Price, p.VatRate, p.Image, p.InStock)).ToList(),
             new PaginationResponse(page, pageSize, result.TotalCount, totalPages)));
     }
 

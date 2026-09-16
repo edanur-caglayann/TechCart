@@ -7,7 +7,7 @@ public record ProductSearchFilter(
     decimal? MinPrice, decimal? MaxPrice, string? Color, bool? InStock,
     string SortBy, int Page, int PageSize);
 
-public record ProductRowDto(Guid Id, Guid CategoryId, Guid BrandId, string Name, decimal Price, decimal VatRate, int Stock);
+public record ProductRowDto(Guid Id, Guid CategoryId, Guid BrandId, string Name, string Model, decimal Price, decimal VatRate, int Stock);
 
 public record ProductDetailRowDto(Guid Id, Guid CategoryId, Guid BrandId, string Name, string Model,
     string Description, string Specs, decimal Price, decimal VatRate);

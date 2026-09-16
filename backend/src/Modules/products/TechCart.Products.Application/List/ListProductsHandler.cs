@@ -10,7 +10,8 @@ public record ListProductsQuery(string? SearchTerm, Guid? CategoryId, Guid? Bran
     decimal? MinPrice, decimal? MaxPrice, string? Color, bool? InStock,
     string SortBy, int Page, int PageSize);
 
-public record ProductListItemDto(Guid Id, string Name, string Brand, string Category, decimal Price, string? Image, bool InStock);
+public record ProductListItemDto(Guid Id, string Name, string Model, string Brand, string Category,
+    decimal Price, decimal VatRate, string? Image, bool InStock);
 
 public class ListProductsHandler
 {
@@ -46,10 +47,11 @@ public class ListProductsHandler
         var imagesByProductId = await _productImageReadRepository.GetPrimaryImagesByProductIdsAsync(productIds, ct);
 
         var items = page.Items.Select(p => new ProductListItemDto(
-            p.Id, p.Name,
+            p.Id, p.Name, p.Model,
             brandsById.TryGetValue(p.BrandId, out var brand) ? brand.Name : "Bilinmeyen Marka",
             categoriesById.TryGetValue(p.CategoryId, out var category) ? category.Name : "Bilinmiyor",
             Math.Round(p.Price * (1 + p.VatRate), 2),
+            p.VatRate,
             imagesByProductId.GetValueOrDefault(p.Id),
             p.Stock > 0 
         )).ToList();

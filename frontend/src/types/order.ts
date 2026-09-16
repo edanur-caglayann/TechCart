@@ -8,7 +8,7 @@ export type OrderStatus =
 
 // Sipariş içerisindeki ürünün anlık bilgilerini tutar.
 export type OrderItem = {
-  productId: number;
+  productId: string;
   name: string;
   model: string;
   brand: string;
