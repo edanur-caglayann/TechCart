@@ -1,9 +1,12 @@
 using Microsoft.OpenApi.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TechCart.Api.Common;
+using TechCart.Users.Application.Abstractions;
 using TechCart.Infrastructure;
 using TechCart.Users.Infrastructure;
 using TechCart.Users.Infrastructure.Security;
@@ -81,6 +84,27 @@ builder.Services
 
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnTokenValidated = async context =>
+            {
+                var jti = context.Principal?.FindFirstValue(JwtRegisteredClaimNames.Jti);
+                if (string.IsNullOrWhiteSpace(jti))
+                {
+                    context.Fail("Token missing jti.");
+                    return;
+                }
+
+                var revokedTokenRepository = context.HttpContext.RequestServices
+                    .GetRequiredService<IRevokedTokenRepository>();
+
+                if (await revokedTokenRepository.IsRevokedAsync(jti, context.HttpContext.RequestAborted))
+                {
+                    context.Fail("Token revoked.");
+                }
+            }
         };
     });
 

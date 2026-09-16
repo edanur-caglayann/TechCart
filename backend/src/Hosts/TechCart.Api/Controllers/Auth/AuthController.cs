@@ -16,12 +16,18 @@ public class AuthController : ControllerBase
     private readonly RegisterUserHandler _registerUserHandler;
     private readonly LoginHandler _loginHandler;
     private readonly GetMyProfileHandler _getMyProfileHandler;
+    private readonly LogoutHandler _logoutHandler;
 
-    public AuthController(RegisterUserHandler registerUserHandler, LoginHandler loginHandler,  GetMyProfileHandler getMyProfileHandler)
+    public AuthController(
+        RegisterUserHandler registerUserHandler,
+        LoginHandler loginHandler,
+        GetMyProfileHandler getMyProfileHandler,
+        LogoutHandler logoutHandler)
     {
         _registerUserHandler = registerUserHandler;
         _loginHandler = loginHandler;
         _getMyProfileHandler = getMyProfileHandler;
+        _logoutHandler = logoutHandler;
     }
 
     [HttpPost("register")]
@@ -59,8 +65,15 @@ public class AuthController : ControllerBase
 
     [HttpPost("logout")]
     [Authorize] // yalnizca gecerli token'a sahip kullanicilar cagirabilir
-    public IActionResult Logout()
+    public async Task<IActionResult> Logout(CancellationToken ct)
     {
+        var userId = Guid.Parse(User.FindFirstValue(JwtRegisteredClaimNames.Sub)!);
+        var jti = User.FindFirstValue(JwtRegisteredClaimNames.Jti)!;
+        var exp = long.Parse(User.FindFirstValue(JwtRegisteredClaimNames.Exp)!);
+        var expiresAt = DateTimeOffset.FromUnixTimeSeconds(exp).UtcDateTime;
+
+        await _logoutHandler.Handle(new LogoutCommand(jti, userId, expiresAt), ct);
+
         return NoContent();
     }
 }
