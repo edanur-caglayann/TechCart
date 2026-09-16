@@ -1,10 +1,11 @@
-
 export type ProductListItem = {
-  id: string;      // backend GUID kullanıyor, sayı değil
+  id: string;
   name: string;
+  model: string;
   brand: string;
   category: string;
-  price: number;    // KDV dahil, backend'de hesaplanmış
+  price: number;
+  vatRate: number;
   image: string | null;
   inStock: boolean;
 };

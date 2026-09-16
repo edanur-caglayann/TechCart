@@ -31,7 +31,7 @@ public class ProductReadRepository : IProductReadRepository
         var items = await query
             .Skip((filter.Page - 1) * filter.PageSize)
             .Take(filter.PageSize)
-            .Select(p => new ProductRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Price, p.VatRate, p.Stock))
+            .Select(p => new ProductRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Model, p.Price, p.VatRate, p.Stock))
             .ToListAsync(ct);
 
         return new PagedResult<ProductRowDto>(items, totalCount, filter.Page, filter.PageSize);
