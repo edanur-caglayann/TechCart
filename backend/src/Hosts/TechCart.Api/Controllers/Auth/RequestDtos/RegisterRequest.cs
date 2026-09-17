@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TechCart.Api.Controllers.Auth;
+namespace TechCart.Api.Controllers.Auth.RequestDtos;
 
 // kullanican kayit bigileri alinir, dogrulanir, parola hash'lenir
 // kullanici db kaydedilir ve kullaniciya jwt uretilir.

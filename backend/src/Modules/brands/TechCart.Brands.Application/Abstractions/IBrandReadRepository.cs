@@ -1,11 +1,11 @@
-namespace TechCart.Brands.Application.Abstractions;
+using TechCart.Brands.Application.ResponseDtos;
 
-public record BrandDto(Guid Id, string Name);
+namespace TechCart.Brands.Application.Abstractions;
 
 public interface IBrandReadRepository
 {
-    Task<List<BrandDto>> GetAllAsync(CancellationToken ct);
-    Task<List<BrandDto>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct);
+    Task<List<BrandResponse>> GetAllAsync(CancellationToken ct);
+    Task<List<BrandResponse>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken ct);
 
     Task<List<string>> SearchByNameAsync(string term, int limit, CancellationToken ct);
 }

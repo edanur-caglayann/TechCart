@@ -1,5 +1,6 @@
 /* Tek bir ürün kartının tamamı */
 .card {
+  cursor: pointer;
   display: flex;
   min-width: 0;
   height: 100%;
@@ -37,9 +38,7 @@
   min-height: 220px;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(circle at top, #ffffff, transparent 55%),
-    linear-gradient(145deg, #eeeef0, #d5d5d9);
+  background-color: #ffffff;
   color: #202027;
 }
 
@@ -107,14 +106,14 @@
   font-size: 12px;
 }
 
-/* Ürünün ana adı */
 .productName {
   min-height: 48px;
   margin: 0 0 6px;
-  color: #111116;
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.4;
+  color: #16161a;
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.1px;
 }
 
 /*
@@ -291,4 +290,9 @@
 .controlButton:disabled {
   cursor: not-allowed;
   opacity: 0.4;
+}
+
+.productImage {
+  object-fit: contain;
+  padding: 18px;
 }

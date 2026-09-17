@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TechCart.Api.Controllers.Auth;
+namespace TechCart.Api.Controllers.Auth.RequestDtos;
 
 public class LoginRequest
 {

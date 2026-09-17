@@ -1,6 +1,8 @@
 using Moq;
 using TechCart.Users.Application.Abstractions;
 using TechCart.Users.Application.Profile;
+using TechCart.Users.Application.Profile.RequestDtos;
+using TechCart.Users.Application.Profile.ResponseDtos;
 using TechCart.Users.Domain.Exceptions;
 using Xunit;
 
@@ -15,7 +17,7 @@ public class GetMyProfileHandlerTests
         var userReadRepositoryMock = new Mock<IUserReadRepository>();
         userReadRepositoryMock
             .Setup(r => r.GetProfileByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync((UserProfileDto?)null);
+            .ReturnsAsync((UserProfileResponse?)null);
 
         var handler = new GetMyProfileHandler(userReadRepositoryMock.Object);
         var query = new GetMyProfileQuery(Guid.NewGuid());
@@ -29,7 +31,7 @@ public class GetMyProfileHandlerTests
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var profile = new UserProfileDto(userId, "Ada", "Lovelace", "ada@example.com", "Customer", DateTime.UtcNow);
+        var profile = new UserProfileResponse(userId, "Ada", "Lovelace", "ada@example.com", "Customer", DateTime.UtcNow);
 
         var userReadRepositoryMock = new Mock<IUserReadRepository>();
         userReadRepositoryMock

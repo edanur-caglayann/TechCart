@@ -1,5 +1,6 @@
 using Moq;
 using TechCart.Users.Application.Profile;
+using TechCart.Users.Application.Profile.RequestDtos;
 using TechCart.Users.Domain.Entities;
 using TechCart.Users.Domain.Exceptions;
 using TechCart.Users.Domain.Repositories;

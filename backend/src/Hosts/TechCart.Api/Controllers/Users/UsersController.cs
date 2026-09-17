@@ -2,7 +2,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TechCart.Api.Controllers.Users.RequestDtos;
 using TechCart.Users.Application.Profile;
+using TechCart.Users.Application.Profile.RequestDtos;
 
 namespace TechCart.Api.Controllers.Users;
 
@@ -32,7 +34,7 @@ public class UsersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("me")]
+    [HttpPut("me/update")]
     public async Task<IActionResult> UpdateMe([FromBody] UpdateProfileRequest request, CancellationToken ct)
     {
         var command = new UpdateProfileCommand(CurrentUserId, request.FirstName, request.LastName, request.Email);

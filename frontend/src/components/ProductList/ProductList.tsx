@@ -86,7 +86,7 @@ export default function ProductList() {
   function pushParam(updates: Record<string, string>) {
     const params = new URLSearchParams(searchParams.toString());
     Object.entries(updates).forEach(([key, value]) => params.set(key, value));
-    router.push(`/?${params.toString()}#products`);
+    router.push(`/?${params.toString()}#products`, { scroll: false });
     document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
   }
 

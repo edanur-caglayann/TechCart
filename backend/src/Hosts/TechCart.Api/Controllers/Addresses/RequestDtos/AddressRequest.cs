@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TechCart.Api.Controllers.Addresses;
+namespace TechCart.Api.Controllers.Addresses.RequestDtos;
 
 public class AddressRequest
 {
@@ -23,13 +23,12 @@ public class AddressRequest
     [Required(ErrorMessage = "İlçe zorunludur.")]
     [MaxLength(100)]
     public string District { get; set; } = default!;
-    
+
     [Required(ErrorMessage = "Mahalle zorunludur.")]
     [MaxLength(150)]
-    
     public string Neighborhood { get; set; } = default!;
+
     [Required(ErrorMessage = "Adres satırı zorunludur.")]
-    
     public string AddressLine { get; set; } = default!;
 
     [Required(ErrorMessage = "Posta kodu zorunludur.")]

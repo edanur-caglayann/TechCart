@@ -1,10 +1,9 @@
 using TechCart.Users.Application.Abstractions;
+using TechCart.Users.Application.Profile.RequestDtos;
 using TechCart.Users.Domain.Exceptions;
 using TechCart.Users.Domain.Repositories;
 
 namespace TechCart.Users.Application.Profile;
-
-public record ChangePasswordCommand(Guid UserId, string CurrentPassword, string NewPassword);
 
 public class ChangePasswordHandler
 {

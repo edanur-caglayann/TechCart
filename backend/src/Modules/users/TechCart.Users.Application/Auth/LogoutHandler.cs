@@ -1,4 +1,5 @@
 using TechCart.Users.Application.Abstractions;
+using TechCart.Users.Application.Auth.RequestDtos;
 
 namespace TechCart.Users.Application.Auth;
 
@@ -12,5 +13,3 @@ public class LogoutHandler
     public Task Handle(LogoutCommand command, CancellationToken ct)
         => _revokedTokenRepository.RevokeAsync(command.Jti, command.UserId, command.ExpiresAt, ct);
 }
-
-public record LogoutCommand(string Jti, Guid UserId, DateTime ExpiresAt);

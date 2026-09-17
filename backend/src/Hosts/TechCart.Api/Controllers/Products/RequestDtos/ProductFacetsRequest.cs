@@ -1,4 +1,4 @@
-namespace TechCart.Api.Controllers.Products;
+namespace TechCart.Api.Controllers.Products.RequestDtos;
 
 public class ProductFacetsRequest
 {

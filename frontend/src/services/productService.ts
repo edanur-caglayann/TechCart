@@ -1,5 +1,6 @@
 import { apiFetch } from "./apiClient";
 import type { ProductListItem } from "../types/productListItem";
+import type { ProductDetail } from "../types/productDetail";
 
 // Filtre/sıralama/sayfalama parametrelerinin tümü — Filters.tsx ve
 // ProductList.tsx bu tipi kullanarak backend'e ne göndereceğini kurar.
@@ -57,4 +58,8 @@ export function getProductFacetsRequest(filters: Omit<ProductFilters, "sortBy" |
 
 export function getProductSuggestionsRequest(term: string): Promise<Suggestion[]> {
   return apiFetch<Suggestion[]>(`/api/products/suggestions${buildQueryString({ q: term })}`, { method: "GET" });
+}
+
+export function getProductDetailRequest(id: string): Promise<ProductDetail> {
+  return apiFetch<ProductDetail>(`/api/products/${id}`, { method: "GET" });
 }

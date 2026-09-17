@@ -84,11 +84,10 @@ export default function Filters() {
 
     const params = new URLSearchParams();
     formData.forEach((value, key) => { if (value) params.append(key, value.toString()); });
-    router.push(`?${params.toString()}`);
-  };
+    router.push(`?${params.toString()}`, { scroll: false });
+    };
 
-  const handleReset = () => router.push(window.location.pathname);
-
+  const handleReset = () => router.push(window.location.pathname, { scroll: false });
   return (
     <aside className={styles.filterPanel}>
       <div className={styles.filterHeader}>
@@ -96,20 +95,19 @@ export default function Filters() {
         <button className={styles.clearButton} type="button" onClick={handleReset}>Temizle</button>
       </div>
 
-      <form className={styles.filterForm} onSubmit={handleSubmit}>
-        <div className={styles.filterGroup}>
-          <label className={styles.groupTitle} htmlFor="category">Kategori</label>
-          {/*
-            backend tek bir category id kabul ettiği için (Marka'daki gibi) tek
+      <form key={searchParams.toString()} className={styles.filterForm} onSubmit={handleSubmit}>        <div className={styles.filterGroup}>
+        <label className={styles.groupTitle} htmlFor="category">Kategori</label>
+        {/*
+            backend tek bir category id kabßul ettiği için (Marka'daki gibi) tek
             seçime düşürüldü, seçenekler facet'lerden dinamik geliyor.
           */}
-          <select className={styles.select} id="category" name="category" defaultValue={getParam("category")}>
-            <option value="">Tüm kategoriler</option>
-            {facets?.categories.map((category) => (
-              <option key={category.id} value={category.id}>{category.name} ({category.count})</option>
-            ))}
-          </select>
-        </div>
+        <select className={styles.select} id="category" name="category" defaultValue={getParam("category")}>
+          <option value="">Tüm kategoriler</option>
+          {facets?.categories.map((category) => (
+            <option key={category.id} value={category.id}>{category.name} ({category.count})</option>
+          ))}
+        </select>
+      </div>
 
         <div className={styles.filterGroup}>
           <label className={styles.groupTitle} htmlFor="brand">Marka</label>
