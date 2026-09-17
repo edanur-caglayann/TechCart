@@ -149,7 +149,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       await logoutRequest();
     } catch {
-      // Sessizce yut — local temizlik zaten aşağıda yapılacak.
     }
 
     setUser(null);

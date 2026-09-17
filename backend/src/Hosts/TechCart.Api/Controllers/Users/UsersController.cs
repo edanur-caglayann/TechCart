@@ -34,7 +34,7 @@ public class UsersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("me")]
+    [HttpPut("me/update")]
     public async Task<IActionResult> UpdateMe([FromBody] UpdateProfileRequest request, CancellationToken ct)
     {
         var command = new UpdateProfileCommand(CurrentUserId, request.FirstName, request.LastName, request.Email);

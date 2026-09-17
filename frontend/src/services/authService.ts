@@ -61,7 +61,7 @@ export function updateProfileRequest(payload: {
   lastName: string;
   email: string;
 }) {
-  return apiFetch<AuthUser>("/api/users/me", {
+  return apiFetch<AuthUser>("/api/users/me/update", {
     method: "PUT",
     body: payload,
     requiresAuth: true,

@@ -12,11 +12,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Migrations/UsersDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/Migrations/UsersDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Filters/Filters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Filters/Filters.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductList/ProductList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductList/ProductList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/context/AuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/context/AuthContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/services/authService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/authService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/services/productService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/productService.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,20 +77,11 @@
     <setting file="file://$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/PagedResult.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Common/AppExceptionHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Common/FieldError.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressesController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/AuthController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/LoginRequest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/RegisterRequest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Auth/SessionResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Brands/BrandsController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Categories/CategoriesController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Products/ProductFacetsRequest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Products/ProductListRequest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Products/ProductResponses.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Products/ProductsController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/ChangePasswordRequest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UpdateProfileRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Seeder/AmazonElectronicsCsvRow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Seeder/ColorBackfiller.cs" root0="FORCE_HIGHLIGHTING" />
@@ -153,7 +146,6 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IPasswordHasher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/ITokenGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IUserReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Auth/AuthResult.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Login/LoginHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Profile/ChangePasswordHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Profile/GetMyProfileHandler.cs" root0="FORCE_HIGHLIGHTING" />
@@ -209,7 +201,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "feature/handle-logout",
+    "git-widget-placeholder": "codex/dto-request-response-refactor",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -307,7 +299,8 @@
       <workItem from="1789459579452" duration="1438000" />
       <workItem from="1789461024583" duration="23000" />
       <workItem from="1789461069045" duration="14129000" />
-      <workItem from="1789483574708" duration="11928000" />
+      <workItem from="1789483574708" duration="20103000" />
+      <workItem from="1789560757325" duration="6481000" />
     </task>
     <task id="LOCAL-00001" summary="fıx: adjust folder structure">
       <option name="closed" value="true" />
@@ -381,7 +374,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789502642742</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix: JWT token logout flow">
+      <option name="closed" value="true" />
+      <created>1789545848754</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1789545848754</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,7 +395,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -412,7 +425,8 @@
     <MESSAGE value="feat: add categories module with read-only listing" />
     <MESSAGE value="feat: complete product catalog with read endpoints and dataset import" />
     <MESSAGE value="feat(products): add stock-aware product catalog&#10;&#10;- add inventory stock model, repositories, migrations and seeding flow&#10;- expose stock, category, VAT and delivery details from product APIs&#10;- connect frontend product list, filters, sorting and cart types to backend catalog data" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(products): add stock-aware product catalog&#10;&#10;- add inventory stock model, repositories, migrations and seeding flow&#10;- expose stock, category, VAT and delivery details from product APIs&#10;- connect frontend product list, filters, sorting and cart types to backend catalog data" />
+    <MESSAGE value="fix: JWT token logout flow" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: JWT token logout flow" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
