@@ -107,4 +107,10 @@ public class ProductReadRepository : IProductReadRepository
 
         return query;
     }
+    
+    public Task<List<ProductRowDto>> GetByIdsAsync(List<Guid> ids, CancellationToken ct)
+        => _dbContext.Products.AsNoTracking()
+            .Where(p => ids.Contains(p.Id))
+            .Select(p => new ProductRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Model, p.Price, p.VatRate, p.Stock))
+            .ToListAsync(ct);
 }

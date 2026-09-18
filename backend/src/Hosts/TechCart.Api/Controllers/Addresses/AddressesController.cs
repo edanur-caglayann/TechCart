@@ -15,32 +15,20 @@ namespace TechCart.Api.Controllers.Addresses;
 [ApiController]
 [Route("api/users/me/addresses")]
 [Authorize] // bu controller'daki her şey giriş gerektirir
-public class AddressesController : ControllerBase
+public class AddressesController(
+    ListMyAddressesHandler listMyAddressesHandler,
+    CreateAddressHandler createAddressHandler,
+    UpdateAddressHandler updateAddressHandler,
+    DeleteAddressHandler deleteAddressHandler,
+    SetDefaultAddressHandler setDefaultAddressHandler)
+    : ControllerBase
 {
-    private readonly ListMyAddressesHandler _listMyAddressesHandler;
-    private readonly CreateAddressHandler _createAddressHandler;
-    private readonly UpdateAddressHandler _updateAddressHandler;
-    private readonly DeleteAddressHandler _deleteAddressHandler;
-    private readonly SetDefaultAddressHandler _setDefaultAddressHandler;
-
-    public AddressesController(
-        ListMyAddressesHandler listMyAddressesHandler,
-        CreateAddressHandler createAddressHandler,
-        UpdateAddressHandler updateAddressHandler,
-        DeleteAddressHandler deleteAddressHandler,
-        SetDefaultAddressHandler setDefaultAddressHandler)
-    {
-        _listMyAddressesHandler = listMyAddressesHandler;
-        _createAddressHandler = createAddressHandler;
-        _updateAddressHandler = updateAddressHandler;
-        _deleteAddressHandler = deleteAddressHandler;
-        _setDefaultAddressHandler = setDefaultAddressHandler;
-    }
+    private readonly DeleteAddressHandler _deleteAddressHandler = deleteAddressHandler ?? throw new ArgumentNullException(nameof(deleteAddressHandler));
 
     [HttpGet]
     public async Task<IActionResult> GetMyAddresses(CancellationToken ct)
     {
-        var result = await _listMyAddressesHandler.Handle(new ListMyAddressesQuery(CurrentUserId), ct);
+        var result = await listMyAddressesHandler.Handle(new ListMyAddressesQuery(CurrentUserId), ct);
         return Ok(result);
     }
 
@@ -49,7 +37,7 @@ public class AddressesController : ControllerBase
     {
         var command = new CreateAddressCommand(CurrentUserId, request.Title, request.FullName,
             request.Phone, request.City, request.District, request.Neighborhood, request.AddressLine, request.PostalCode);
-        var result = await _createAddressHandler.Handle(command, ct);
+        var result = await createAddressHandler.Handle(command, ct);
         return StatusCode(StatusCodes.Status201Created, result);
     }
 
@@ -58,7 +46,7 @@ public class AddressesController : ControllerBase
     {
         var command = new UpdateAddressCommand(addressId, CurrentUserId, request.Title, request.FullName,
             request.Phone, request.City, request.District, request.Neighborhood, request.AddressLine, request.PostalCode);
-        var result = await _updateAddressHandler.Handle(command, ct);
+        var result = await updateAddressHandler.Handle(command, ct);
         return Ok(result);
     }
 
@@ -72,7 +60,7 @@ public class AddressesController : ControllerBase
     [HttpPatch("{addressId:guid}/default")]
     public async Task<IActionResult> SetDefaultAddress(Guid addressId, CancellationToken ct)
     {
-        var result = await _setDefaultAddressHandler.Handle(new SetDefaultAddressCommand(addressId, CurrentUserId), ct);
+        var result = await setDefaultAddressHandler.Handle(new SetDefaultAddressCommand(addressId, CurrentUserId), ct);
         return Ok(result);
     }
 
