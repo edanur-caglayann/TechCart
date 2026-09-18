@@ -10,19 +10,13 @@ import Link from "next/link";
 
 import { useCart } from "../../context/CartContext";
 import type { CartProduct } from "../../types/cart";
-import type { Product } from "../../types/product";
+import type { ProductDetail } from "../../types/productDetail"; 
 
 import styles from "./AddToCartButton.module.css";
 
-// Detay sayfasındaki sepete ekleme işlemi için gerekli propslar.
-
 type AddToCartButtonProps = {
-  product: Product;
-
+  product: ProductDetail;
   className: string;
-
-  // Sepete Git bağlantısının gösterilip gösterilmeyeceği.
-
   showCartLink?: boolean;
 };
 
@@ -32,23 +26,17 @@ export default function AddToCartButton({
   showCartLink = false,
 }: AddToCartButtonProps) {
   const cartProduct: CartProduct = {
-    id: String(product.id),
+    id: product.id, 
     name: product.name,
     model: product.model,
     brand: product.brand,
     category: product.category,
     price: product.price,
     vatRate: product.vatRate,
-    image: product.images?.[0] ?? null,
+    image: product.images[0] ?? null, 
     inStock: product.inStock,
-    stockQuantity: product.stockQuantity,
+    stockQuantity: product.stock, 
   };
-
-  /*
-    addToCart, seçilen ürünü ve adedi sepete eklemek için;
-
-    cartItems ise ürünün sepetteki güncel adedini bulmak için kullanılır.
-  */
 
   const {
     addToCart,
@@ -58,31 +46,12 @@ export default function AddToCartButton({
     removeFromCart,
   } = useCart();
 
-  /*
-    Bu ürünün sepette daha önce bulunup bulunmadığını ürün id'sine göre kontrol ederiz.
-  */
-
   const cartItem = cartItems.find(
     (item) => item.product.id === cartProduct.id
   );
 
-  /*
-    Ürün sepetteyse güncel adedini, sepette değilse sıfır değerini kullanırız.
-  */
-
   const cartQuantity = cartItem?.quantity ?? 0;
-
-  /*
-    Ürün sepetteyse sepet içerisindeki gerçek adedi, sepette değilse sıfır gösteririz.
-  */
-
   const displayedQuantity = cartQuantity;
-
-  /*
-    Ürün sepetteyse sepet adedi azaltılır. 
-
-    Sepette yalnızca bir adet ürün varsa eksi butonuna basıldığında ürün sepetten kaldırılır.
-  */
 
   function decreaseSelectedQuantity() {
     if (cartQuantity === 0) {
@@ -97,16 +66,6 @@ export default function AddToCartButton({
     decreaseQuantity(cartProduct.id);
   }
 
-  /*
-    Kullanıcı artı butonuna bastığında ürün sepette değilse bir adet eklenir.
-
-    Stok miktarı tanımlanmışsa ürün adedi stok miktarını geçemez.
-  */
-
-  /*
-    Ürün sepetteyse artı butonu sepet içerisindeki gerçek ürün adedini artırır.
-  */
-
   function increaseSelectedQuantity() {
     if (cartQuantity === 0) {
       addToCart(cartProduct, 1);
@@ -116,46 +75,13 @@ export default function AddToCartButton({
     increaseQuantity(cartProduct.id);
   }
 
-  /*
-    Sepete Ekle butonuna basıldığında ürünle birlikte
-
-    bir adet ürün sepete gönderilir.
-  */
-
   function handleAddToCart() {
-    /*
-      Ürün zaten sepetteyse butona her basıldığında
-
-      sepete bir adet daha eklenir.
-    */
-
     addToCart(cartProduct, 1);
   }
 
-  /*
-    Stok miktarı tanımlanmışsa kullanıcının en yüksek adede ulaşıp ulaşmadığını kontrol eder.
-  */
+  const hasReachedStockLimit = cartQuantity >= product.stock;
 
-  const hasReachedStockLimit =
-    product.stockQuantity !== undefined &&
-    cartQuantity >= product.stockQuantity;
-
-  /*
-    Ürün sepette değilse eksi butonu devre dışı bırakılır.
-
-    Ürün sepette bir adet bulunuyorsa aktif kalır ve
-
-    ürünü sepetten kaldırır.
-  */
-
-  const isDecreaseDisabled =
-    cartQuantity === 0;
-
-  /*
-    Ürün sepetteyken stok sınırına ulaşıldıysa
-
-    Sepete Ekle butonuyla daha fazla ürün eklenemez.
-  */
+  const isDecreaseDisabled = cartQuantity === 0;
 
   const isAddButtonDisabled =
     !product.inStock ||
@@ -163,19 +89,11 @@ export default function AddToCartButton({
 
   return (
     <div className={styles.purchaseArea}>
-      {/*
-        Stoktaki ürünler için adet azaltma,
-
-        mevcut adet ve adet artırma alanı gösterilir.
-      */}
-
       {product.inStock && (
         <div
           className={styles.quantityControl}
           aria-label="Ürün adedi"
         >
-          {/* Seçilen adedi bir azaltır */}
-
           <button
             className={styles.quantityButton}
             type="button"
@@ -190,16 +108,12 @@ export default function AddToCartButton({
             <Minus size={18} />
           </button>
 
-          {/* Kullanıcının sepetteki mevcut ürün adedi */}
-
           <span
             className={styles.quantityValue}
             aria-live="polite"
           >
             {displayedQuantity}
           </span>
-
-          {/* Ürün adedini stok sınırına kadar artırır */}
 
           <button
             className={styles.quantityButton}
@@ -213,14 +127,6 @@ export default function AddToCartButton({
         </div>
       )}
 
-      {/*
-        Ürün stoktaysa seçilen adet sepete eklenir.
-
-        Ürün stokta değilse buton devre dışı kalır
-
-        ve kullanıcıya "Ürün Tükendi" metni gösterilir.
-      */}
-
       <button
         className={`${className} ${styles.cartButtonWithBadge}`}
         type="button"
@@ -230,14 +136,6 @@ export default function AddToCartButton({
         {product.inStock
           ? "Sepete Ekle"
           : "Ürün Tükendi"}
-
-        {/*
-          Ürün sepete en az bir kez eklendiyse
-
-          butonun sağ üst köşesinde sepetteki
-
-          güncel ürün adedini gösterir.
-        */}
 
         {cartQuantity > 0 && (
           <span
@@ -250,19 +148,12 @@ export default function AddToCartButton({
         )}
       </button>
 
-      {/*
-        Bu bileşen ürün detayında kullanılıyorsa ve
-
-        ürün sepette bulunuyorsa Sepete Git butonu çıksın.
-      */}
-
       {showCartLink && cartQuantity > 0 && (
         <Link
           className={styles.goToCartButton}
           href="/cart"
         >
           <ShoppingCart size={18} />
-
           Sepete Git
         </Link>
       )}

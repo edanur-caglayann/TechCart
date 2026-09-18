@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TechCart.Api.Common;
 using TechCart.Users.Application.Abstractions;
-using TechCart.Infrastructure;
 using TechCart.Users.Infrastructure;
 using TechCart.Users.Infrastructure.Security;
 using TechCart.Addresses.Infrastructure;
@@ -23,7 +22,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Controller servislerini ekler.
 builder.Services.AddControllers();
 
-builder.Services.AddTechCartInfrastructure(builder.Configuration);
 builder.Services.AddOpenApi();
 builder.Services.AddUsersModule(builder.Configuration);
 builder.Services.AddAddressesModule(builder.Configuration); 
