@@ -3,6 +3,7 @@
 import { Camera, Cpu, Disc3, Headphones, Keyboard, Laptop, Minus, Mouse, Plus, Smartphone, Speaker, Tablet, Trash2, Tv, Watch } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; 
 
 import type { ProductListItem } from "../../types/productListItem";
 import styles from "./ProductCard.module.css";
@@ -10,9 +11,6 @@ import { useCart } from "../../context/CartContext";
 
 type ProductCardProps = { product: ProductListItem };
 
-// kategori adında geçen kelimeye göre TAHMİNİ bir ikon
-// seçiyoruz — kesin değil, sadece görsel yaklaşım. Gerçek fotoğraf varsa
-// zaten buraya hiç gelmiyoruz (aşağıdaki product.image kontrolüne bak).
 function ProductFallbackVisual({ category }: { category: string }) {
   switch (category) {
     case "Bilgisayar": return <Laptop size={120} strokeWidth={1.2} />;
@@ -31,13 +29,26 @@ function ProductFallbackVisual({ category }: { category: string }) {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const router = useRouter();
   const { addToCart, increaseQuantity, decreaseQuantity, removeFromCart, cartItems } = useCart();
 
   const cartItem = cartItems.find((item) => item.product.id === product.id);
   const cartQuantity = cartItem?.quantity ?? 0;
 
+  function goToDetail() {
+    router.push(`/products/${product.id}`);
+  }
+
   return (
-    <article className={styles.card}>
+    <article
+      className={styles.card}
+      onClick={goToDetail}
+      role="link"
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key === "Enter") goToDetail();
+      }}
+    >
       <div className={styles.visual}>
         {product.image ? (
           <Image src={product.image} alt={`${product.name} ürün görseli`} fill sizes="(max-width: 600px) 50vw, 25vw" className={styles.productImage} />
@@ -55,11 +66,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         <h3 className={styles.productName}>{product.name}</h3>
-        {/* Model bilgisi kaldırıldı — liste response'unda yok, sadece detayda var. */}
 
         <strong className={styles.price}>{product.price.toLocaleString("tr-TR")} ₺</strong>
 
-        <div className={styles.actions}>
+        <div className={styles.actions} onClick={(event) => event.stopPropagation()}>
           <Link className={styles.detailsButton} href={`/products/${product.id}`}>Detayları Gör</Link>
 
           {cartQuantity === 0 ? (

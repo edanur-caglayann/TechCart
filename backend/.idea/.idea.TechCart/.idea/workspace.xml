@@ -11,14 +11,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/CartItemsDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/CartItemsModule.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/Configurations/CartItemConfiguration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Filters/Filters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Filters/Filters.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductList/ProductList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductList/ProductList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/context/AuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/context/AuthContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/services/authService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/authService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/services/productService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/productService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechCart.sln" beforeDir="false" afterPath="$PROJECT_DIR$/TechCart.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/DependencyInjection.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/Persistence/Migrations/20260908084421_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/Persistence/Migrations/20260908084421_InitialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/Persistence/Migrations/TechCartDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/Persistence/TechCartDbContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/Persistence/TechCartDbContextFactory.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/TechCart.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/TechCart.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Domain/Entities/CartItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Domain/Entities/CartItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/TechCart.CartItems.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/TechCart.CartItems.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/carts/TechCart.Carts.Application/TechCart.Carts.Application.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/carts/TechCart.Carts.Contracts/TechCart.Carts.Contracts.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/carts/TechCart.Carts.Domain/Entities/Cart.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/carts/TechCart.Carts.Domain/TechCart.Carts.Domain.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/carts/TechCart.Carts.Infrastructure/TechCart.Carts.Infrastructure.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_stock/TechCart.ProductStock.Application/TechCart.ProductStock.Application.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_stock/TechCart.ProductStock.Contracts/TechCart.ProductStock.Contracts.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_stock/TechCart.ProductStock.Domain/Entities/ProductStock.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_stock/TechCart.ProductStock.Domain/TechCart.ProductStock.Domain.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_stock/TechCart.ProductStock.Infrastructure/TechCart.ProductStock.Infrastructure.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Register/RegisterUserHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Register/RegisterUserHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Register/RequestDtos/RegisterUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Register/RequestDtos/RegisterUserCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/products/[id]/page.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/products/[id]/page.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/products/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/products/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/AddToCartButton/AddToCartButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/AddToCartButton/AddToCartButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductCard/ProductCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductGallery/ProductGallery.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductGallery/ProductGallery.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ProductGallery/ProductGallery.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ProductGallery/ProductGallery.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +134,8 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Configurations/BrandConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Repositories/BrandReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/Repositories/BrandWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/CartItemsModule.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/Configurations/CartItemConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/ICategoryReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/Abstractions/List/ListCategoriesHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/Repositories/ICategoryWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
@@ -193,23 +221,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.TechCart.Api: http.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "codex/dto-request-response-refactor",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.TechCart.Api: http.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;codex/dto-request-response-refactor&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.TechCart.Api: http">
     <configuration name="TechCart.Seeder" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -300,7 +328,12 @@
       <workItem from="1789461024583" duration="23000" />
       <workItem from="1789461069045" duration="14129000" />
       <workItem from="1789483574708" duration="20103000" />
-      <workItem from="1789560757325" duration="6481000" />
+      <workItem from="1789560757325" duration="8318000" />
+      <workItem from="1789636287352" duration="2027000" />
+      <workItem from="1789638325054" duration="3438000" />
+      <workItem from="1789642453450" duration="1036000" />
+      <workItem from="1789648505912" duration="1544000" />
+      <workItem from="1789650087330" duration="142000" />
     </task>
     <task id="LOCAL-00001" summary="fıx: adjust folder structure">
       <option name="closed" value="true" />
@@ -366,7 +399,7 @@
       <option name="project" value="LOCAL" />
       <updated>1789455237718</updated>
     </task>
-    <task id="LOCAL-00009" summary="feat(products): add stock-aware product catalog&#10;&#10;- add inventory stock model, repositories, migrations and seeding flow&#10;- expose stock, category, VAT and delivery details from product APIs&#10;- connect frontend product list, filters, sorting and cart types to backend catalog data">
+    <task id="LOCAL-00009" summary="feat(products): add stock-aware product catalog&#10;&#10;- add inventory stock model, repositories, migrations and seeding flow&#10;- expose stock, category, VAT and delivery details from product APIs">
       <option name="closed" value="true" />
       <created>1789502642742</created>
       <option name="number" value="00009" />
@@ -382,7 +415,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789545848754</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Refactor: DTOs into request and response folders">
+      <option name="closed" value="true" />
+      <created>1789631886301</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1789631886301</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +442,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="HEAD" />
                       </list>
                     </value>
                   </entry>
@@ -424,9 +465,10 @@
     <MESSAGE value="test(address): add unit tests for adres management" />
     <MESSAGE value="feat: add categories module with read-only listing" />
     <MESSAGE value="feat: complete product catalog with read endpoints and dataset import" />
-    <MESSAGE value="feat(products): add stock-aware product catalog&#10;&#10;- add inventory stock model, repositories, migrations and seeding flow&#10;- expose stock, category, VAT and delivery details from product APIs&#10;- connect frontend product list, filters, sorting and cart types to backend catalog data" />
+    <MESSAGE value="feat(products): add stock-aware product catalog&#10;&#10;- add inventory stock model, repositories, migrations and seeding flow&#10;- expose stock, category, VAT and delivery details from product APIs" />
     <MESSAGE value="fix: JWT token logout flow" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: JWT token logout flow" />
+    <MESSAGE value="Refactor: DTOs into request and response folders" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor: DTOs into request and response folders" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

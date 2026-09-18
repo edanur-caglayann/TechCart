@@ -35,7 +35,7 @@ public class RegisterUserHandler
 
         // kayıt sonrası hemen token üretir, kullanıcı tekrar giriş yapmak zorunda kalmaz.
         var token = _tokenGenerator.GenerateToken(user.Id, user.FirstName, user.LastName, user.Email, user.Role);
-        // frontend'e token ve kullanici bilgileri gonderilir.
+        // Yanitta token ve kullanici bilgileri donulur.
         return new AuthResponse(token, new AuthUserResponse(user.Id, user.FirstName, user.LastName, user.Email, user.Role.ToString()));
     }
 }

@@ -14,13 +14,7 @@
   overflow: hidden;
   border: 1px solid #dedee3;
   border-radius: 26px;
-  background:
-    radial-gradient(
-      circle at center,
-      #f7f7f9 0%,
-      #ededf0 58%,
-      #dcdce1 100%
-    );
+  background-color: #ffffff;
   color: #17171c;
 }
 
@@ -37,13 +31,10 @@
   position: relative;
   z-index: 1;
 }
-
 .productImage {
-  position: relative;
   z-index: 1;
-  padding: 0;
+  padding: 40px; 
   object-fit: contain;
-  transform: scale(1.25);
 }
 
 .outOfStockBadge {

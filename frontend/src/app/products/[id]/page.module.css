@@ -68,6 +68,7 @@
   max-width: 1400px;
   margin: 60px auto 0;
 }
+
 /* Ürün bilgilerinin bulunduğu sağ alan */
 .informationArea {
   display: flex;
@@ -95,9 +96,10 @@
   margin: 0 0 12px;
 
   color: #111116;
-  font-size: clamp(38px, 4vw, 58px);
-  line-height: 1.05;
-  letter-spacing: -2px;
+  font-size: clamp(28px, 2.4vw, 36px);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
 }
 
 /* Model bilgisi */
@@ -127,13 +129,13 @@
 }
 
 /* Yalnızca ana fiyat başlığını etkiler */
-.priceArea > span {
+.priceArea>span {
   color: #797983;
   font-size: 13px;
 }
 
 /* Yalnızca KDV dahil ana satış fiyatını etkiler */
-.priceArea > strong {
+.priceArea>strong {
   color: #111116;
   font-size: 36px;
   letter-spacing: -1px;
@@ -221,7 +223,7 @@
   margin-top: 22px;
 }
 
-.serviceInformation > div {
+.serviceInformation>div {
   display: flex;
   align-items: center;
   gap: 11px;
