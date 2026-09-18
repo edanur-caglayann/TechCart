@@ -4,26 +4,49 @@ import {
   createContext,
   useContext,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
 
-import type { CartItem } from "../types/cart";
-import type { CartProduct } from "../types/cart";
+import type { CartItem, CartProduct } from "../types/cart";
+import type { CartLineResponse, CartResponse } from "../types/cartResponse";
+import { useAuth } from "./AuthContext";
+import {
+  addCartItemRequest,
+  clearCartRequest,
+  mergeCartRequest,
+  removeCartItemRequest,
+  updateCartItemQuantityRequest,
+} from "../services/cartService";
 
-// Backend'in liste response'u sayısal bir stok adedi (stockQuantity) vermiyor,
-// sadece inStock (true/false) veriyor — gerçek stok sayısı sadece detay
-// endpoint'inde var. O yüzden sepette adet artırırken sınırsız değil ama
-// gerçek stoğa da bağlı olmayan, makul bir güvenlik sınırı kullanıyoruz.
-// GERÇEK stok doğrulaması Sepet Yönetimi'nde backend'e bağlanınca gelecek.
 const FALLBACK_MAX_QUANTITY = 99;
+const STORAGE_KEY = "techcart-cart";
+
+function toCartItems(response: CartResponse): CartItem[] {
+  return response.items.map((line: CartLineResponse) => ({
+    product: {
+      id: line.productId,
+      name: line.name,
+      model: line.model,
+      brand: line.brand,
+      category: line.category,
+      price: line.unitPrice,
+      vatRate: line.vatRate,
+      image: line.image,
+      inStock: line.inStock,
+      stockQuantity: line.stock,
+    },
+    quantity: line.quantity,
+  }));
+}
 
 type CartContextType = {
   cartItems: CartItem[];
   addToCart: (product: CartProduct, quantity?: number) => void;
-  increaseQuantity: (productId: string) => void; // number -> string
-  decreaseQuantity: (productId: string) => void; // number -> string
-  removeFromCart: (productId: string) => void;   // number -> string
+  increaseQuantity: (productId: string) => void;
+  decreaseQuantity: (productId: string) => void;
+  removeFromCart: (productId: string) => void;
   clearCart: () => void;
   totalQuantity: number;
   totalPrice: number;
@@ -36,29 +59,72 @@ type CartProviderProps = {
 };
 
 export function CartProvider({ children }: CartProviderProps) {
+  const { isAuthenticated, isAuthLoading } = useAuth();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const hasMergedRef = useRef(false);
 
   useEffect(() => {
-    const savedCart = localStorage.getItem("techcart-cart");
+    if (isAuthLoading || isAuthenticated) return;
+
+    const savedCart = localStorage.getItem(STORAGE_KEY);
 
     if (savedCart) {
       try {
-        const parsedCart: CartItem[] = JSON.parse(savedCart);
-        setCartItems(parsedCart);
+        setCartItems(JSON.parse(savedCart));
       } catch {
-        localStorage.removeItem("techcart-cart");
+        localStorage.removeItem(STORAGE_KEY);
       }
     }
-  }, []);
+  }, [isAuthenticated, isAuthLoading]);
 
   useEffect(() => {
-    localStorage.setItem("techcart-cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+    if (isAuthLoading || isAuthenticated) return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
+  }, [cartItems, isAuthenticated, isAuthLoading]);
+
+  useEffect(() => {
+    if (isAuthLoading) return;
+
+    if (!isAuthenticated) {
+      hasMergedRef.current = false;
+      return;
+    }
+
+    if (hasMergedRef.current) return;
+    hasMergedRef.current = true;
+
+    const savedCart = localStorage.getItem(STORAGE_KEY);
+    let localItems: CartItem[] = [];
+
+    if (savedCart) {
+      try {
+        localItems = JSON.parse(savedCart);
+      } catch {
+        localItems = [];
+      }
+    }
+
+    const payload = localItems.map((item) => ({
+      productId: item.product.id,
+      quantity: item.quantity,
+    }));
+
+    mergeCartRequest(payload).then((response) => {
+      setCartItems(toCartItems(response));
+      localStorage.removeItem(STORAGE_KEY);
+    });
+  }, [isAuthenticated, isAuthLoading]);
 
   function addToCart(product: CartProduct, quantity = 1) {
+    if (isAuthenticated) {
+      addCartItemRequest(product.id, quantity).then((response) => {
+        setCartItems(toCartItems(response));
+      });
+      return;
+    }
+
     setCartItems((currentItems) => {
       const quantityToAdd = Math.max(1, quantity);
-
       const existingItem = currentItems.find((item) => item.product.id === product.id);
 
       if (existingItem) {
@@ -74,6 +140,16 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function increaseQuantity(productId: string) {
+    if (isAuthenticated) {
+      const current = cartItems.find((item) => item.product.id === productId);
+      const newQuantity = (current?.quantity ?? 0) + 1;
+
+      updateCartItemQuantityRequest(productId, newQuantity).then((response) => {
+        setCartItems(toCartItems(response));
+      });
+      return;
+    }
+
     setCartItems((currentItems) =>
       currentItems.map((item) =>
         item.product.id === productId
@@ -84,6 +160,16 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function decreaseQuantity(productId: string) {
+    if (isAuthenticated) {
+      const current = cartItems.find((item) => item.product.id === productId);
+      if (!current || current.quantity <= 1) return;
+
+      updateCartItemQuantityRequest(productId, current.quantity - 1).then((response) => {
+        setCartItems(toCartItems(response));
+      });
+      return;
+    }
+
     setCartItems((currentItems) =>
       currentItems.map((item) =>
         item.product.id === productId ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
@@ -92,10 +178,24 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function removeFromCart(productId: string) {
+    if (isAuthenticated) {
+      removeCartItemRequest(productId).then((response) => {
+        setCartItems(toCartItems(response));
+      });
+      return;
+    }
+
     setCartItems((currentItems) => currentItems.filter((item) => item.product.id !== productId));
   }
 
   function clearCart() {
+    if (isAuthenticated) {
+      clearCartRequest().then(() => {
+        setCartItems([]);
+      });
+      return;
+    }
+
     setCartItems([]);
   }
 

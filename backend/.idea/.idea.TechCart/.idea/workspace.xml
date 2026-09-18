@@ -11,34 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Cart/CartController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Cart/Dtos/RequestDtos/AddCartItemRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Cart/Dtos/RequestDtos/MergeCartItemRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Cart/Dtos/RequestDtos/MergeCartRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Cart/Dtos/RequestDtos/UpdateCartItemRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Add/AddCartItemHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Clear/ClearCartHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Get/GetCartHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Merge/MergeCartHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Remove/RemoveCartItemHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Update/UpdateCartItemQuantityHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Contracts/Dtos/ResponseDtos/CartItemResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Contracts/Dtos/ResponseDtos/CartResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Domain/Exceptions/CartItemNotFoundException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Domain/Exceptions/InsufficientStockException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Domain/Exceptions/InvalidQuantityException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Domain/Exceptions/ProductNotFoundException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/ResponseDtos/ProductSummaryDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Summaries/GetProductSummariesHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Addresses/AddressesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Abstractions/ICartItemReadRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Abstractions/ICartItemReadRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/TechCart.CartItems.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/TechCart.CartItems.Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/CartItemsModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/CartItemsModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/TechCart.CartItems.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/TechCart.CartItems.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Abstractions/IProductReadRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Abstractions/IProductReadRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/ProductsModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/ProductsModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Repositories/ProductReadRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Repositories/ProductReadRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -353,7 +326,7 @@
       <workItem from="1789712320178" duration="2352000" />
       <workItem from="1789715533951" duration="7072000" />
       <workItem from="1789729574256" duration="10000" />
-      <workItem from="1789729598317" duration="1860000" />
+      <workItem from="1789729598317" duration="4552000" />
     </task>
     <task id="LOCAL-00001" summary="fıx: adjust folder structure">
       <option name="closed" value="true" />
@@ -459,7 +432,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789715684140</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: add cart management module (CartItems)">
+      <option name="closed" value="true" />
+      <created>1789731619959</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1789731619960</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,7 +487,8 @@
     <MESSAGE value="Refactor: DTOs into request and response folders" />
     <MESSAGE value="fix" />
     <MESSAGE value="fix: dto updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: dto updated" />
+    <MESSAGE value="feat: add cart management module (CartItems)" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add cart management module (CartItems)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

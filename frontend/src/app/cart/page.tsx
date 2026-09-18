@@ -54,8 +54,7 @@ export default function CartPage() {
       const itemTotal =
         item.product.price * item.quantity;
 
-      const vatRate =
-        item.product.vatRate ?? DEFAULT_VAT_RATE;
+      const vatRate = item.product.vatRate * 100;
 
       return (
         total +
