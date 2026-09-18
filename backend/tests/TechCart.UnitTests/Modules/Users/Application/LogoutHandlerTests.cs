@@ -1,7 +1,7 @@
 using Moq;
 using TechCart.Users.Application.Abstractions;
 using TechCart.Users.Application.Auth;
-using TechCart.Users.Application.Auth.RequestDtos;
+using TechCart.Users.Application.Dtos.RequestDtos;
 using Xunit;
 
 namespace TechCart.UnitTests.Modules.Users.Application;

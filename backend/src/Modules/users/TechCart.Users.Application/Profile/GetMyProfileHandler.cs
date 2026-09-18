@@ -1,6 +1,6 @@
 using TechCart.Users.Application.Abstractions;
-using TechCart.Users.Application.Profile.RequestDtos;
-using TechCart.Users.Application.Profile.ResponseDtos;
+using TechCart.Users.Application.Dtos.RequestDtos;
+using TechCart.Users.Application.Dtos.ResponseDtos;
 using TechCart.Users.Domain.Exceptions;
 
 namespace TechCart.Users.Application.Profile;

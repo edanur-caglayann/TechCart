@@ -1,5 +1,5 @@
 using TechCart.Users.Application.Abstractions;
-using TechCart.Users.Application.Auth.RequestDtos;
+using TechCart.Users.Application.Dtos.RequestDtos;
 
 namespace TechCart.Users.Application.Auth;
 

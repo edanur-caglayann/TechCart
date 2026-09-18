@@ -1,6 +1,6 @@
-namespace TechCart.Inventory.Application.Abstractions;
+using TechCart.Inventory.Application.Dtos.ResponseDtos;
 
-public record ProductStockDto(int Stock, bool InStock, bool IsReadyToShip, bool HasFastDelivery);
+namespace TechCart.Inventory.Application.Abstractions;
 
 public interface IProductStockReadRepository
 {

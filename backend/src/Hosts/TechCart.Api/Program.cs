@@ -12,6 +12,7 @@ using TechCart.Users.Infrastructure.Security;
 using TechCart.Addresses.Infrastructure;
 using TechCart.Categories.Infrastructure;
 using TechCart.Brands.Infrastructure;
+using TechCart.CartItems.Infrastructure;
 using TechCart.Products.Infrastructure;
 using TechCart.ProductImages.Infrastructure;
 using TechCart.Inventory.Infrastructure;
@@ -30,6 +31,7 @@ builder.Services.AddBrandsModule(builder.Configuration);
 builder.Services.AddProductsModule(builder.Configuration);
 builder.Services.AddProductImagesModule(builder.Configuration);
 builder.Services.AddInventoryModule(builder.Configuration);
+builder.Services.AddCartItemsModule(builder.Configuration);
 
 // Doğrulama hatalarını:
 // { errors: [{ field, message }] }

@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TechCart.Products.Application.Abstractions;
+using TechCart.Products.Application.Dtos.RequestDtos;
+using TechCart.Products.Application.Dtos.ResponseDtos;
 using TechCart.Products.Domain.Entities;
 using TechCart.SharedKernel;
 

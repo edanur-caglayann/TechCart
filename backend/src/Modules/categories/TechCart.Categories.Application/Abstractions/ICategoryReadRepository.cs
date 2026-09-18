@@ -1,6 +1,6 @@
-namespace TechCart.Categories.Application.Abstractions;
+using TechCart.Categories.Application.Dtos.ResponseDtos;
 
-public record CategoryDto(Guid Id, string Name);
+namespace TechCart.Categories.Application.Abstractions;
 
 public interface ICategoryReadRepository
 {

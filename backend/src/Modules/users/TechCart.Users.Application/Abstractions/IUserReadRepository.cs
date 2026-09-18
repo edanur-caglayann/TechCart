@@ -1,5 +1,4 @@
-using TechCart.Users.Application.Login.ResponseDtos;
-using TechCart.Users.Application.Profile.ResponseDtos;
+using TechCart.Users.Application.Dtos.ResponseDtos;
 
 namespace TechCart.Users.Application.Abstractions;
 

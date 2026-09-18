@@ -2,13 +2,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TechCart.Api.Controllers.Auth.RequestDtos;
+using TechCart.Api.Controllers.Auth.Dtos.RequestDtos;
 using TechCart.Users.Application.Auth;
-using TechCart.Users.Application.Auth.RequestDtos;
+using TechCart.Users.Application.Dtos.RequestDtos;
 using TechCart.Users.Application.Login;
-using TechCart.Users.Application.Login.RequestDtos;
 using TechCart.Users.Application.Register;
-using TechCart.Users.Application.Register.RequestDtos;
 
 namespace TechCart.Api.Controllers.Auth;
 

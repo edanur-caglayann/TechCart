@@ -1,11 +1,10 @@
 using TechCart.Addresses.Application.Abstractions;
+using TechCart.Addresses.Application.Dtos.RequestDtos;
+using TechCart.Addresses.Application.Dtos.ResponseDtos;
 using TechCart.Addresses.Domain.Exceptions;
 using TechCart.Addresses.Domain.Repositories;
 
 namespace TechCart.Addresses.Application.Update;
-
-public record UpdateAddressCommand(Guid AddressId, Guid UserId, string Title, string FullName,
-    string Phone, string City, string District,string Neighborhood, string AddressLine, string PostalCode);
 
 public class UpdateAddressHandler
 {

@@ -1,11 +1,10 @@
 using TechCart.Brands.Application.Abstractions;
 using TechCart.Categories.Application.Abstractions;
 using TechCart.Products.Application.Abstractions;
-using TechCart.Products.Contracts;
+using TechCart.Products.Application.Dtos.RequestDtos;
+using TechCart.Products.Contracts.Dtos.ResponseDtos;
 
 namespace TechCart.Products.Application.Suggestions;
-
-public record GetProductSuggestionsQuery(string SearchTerm);
 
 // arama onerilerini getirir
 public class GetProductSuggestionsHandler

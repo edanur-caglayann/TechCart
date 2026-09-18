@@ -1,8 +1,6 @@
-namespace TechCart.Addresses.Application.Abstractions;
+using TechCart.Addresses.Application.Dtos.ResponseDtos;
 
-public record AddressDto(
-    Guid Id, string Title, string FullName, string Phone,
-    string City, string District,string Neighborhood, string AddressLine, string PostalCode, bool IsDefault);
+namespace TechCart.Addresses.Application.Abstractions;
 
 public interface IAddressReadRepository
 {

@@ -40,6 +40,7 @@
 
     <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Application\TechCart.Inventory.Application.csproj" />
     <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Infrastructure\TechCart.Inventory.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\cart_items\TechCart.CartItems.Infrastructure\TechCart.CartItems.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
