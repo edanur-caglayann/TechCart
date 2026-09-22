@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\TechCart.SharedKernel\TechCart.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\orders\TechCart.Orders.Domain\TechCart.Orders.Domain.csproj" />
   </ItemGroup>
 
 </Project>

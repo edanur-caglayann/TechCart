@@ -15,4 +15,6 @@ public interface IProductWriteRepository
     Task SaveChangesAsync(CancellationToken ct);
     // tum urunleri filtreler. Her bir urun uzerinden SetStock() cagirilir
     Task<List<Product>> GetAllAsync(CancellationToken ct);
+    
+    Task<Product?> GetByIdAsync(Guid productId, CancellationToken ct);
 }

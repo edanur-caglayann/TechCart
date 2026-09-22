@@ -7,6 +7,7 @@ using TechCart.Products.Application.Facets;
 using TechCart.Products.Application.List;
 using TechCart.Products.Application.Suggestions;
 using TechCart.Products.Application.Summaries;
+using TechCart.Products.Application.UpdateStock;
 using TechCart.Products.Domain.Repositories;
 using TechCart.Products.Infrastructure.Repositories;
 
@@ -28,6 +29,7 @@ public static class ProductsModule
         services.AddScoped<GetProductSuggestionsHandler>();  
         services.AddScoped<GetProductDetailHandler>();     
         services.AddScoped<GetProductSummariesHandler>();
+        services.AddScoped<UpdateProductStockHandler>();
         return services;
     }
 }

@@ -17,5 +17,8 @@ public class ProductStockConfiguration : IEntityTypeConfiguration<ProductStock>
         builder.Property(s => s.IsReadyToShip).HasColumnName("is_ready_to_ship");
         builder.Property(s => s.HasFastDelivery).HasColumnName("has_fast_delivery");
         builder.Property(s => s.UpdatedAt).HasColumnName("updated_at");
+        builder.Property(s => s.Stock).HasColumnName("stock");
+        builder.Property(s => s.ReservedStock).HasColumnName("reserved_stock").HasDefaultValue(0); 
+        builder.Property(s => s.IsReadyToShip).HasColumnName("is_ready_to_ship");
     }
 }

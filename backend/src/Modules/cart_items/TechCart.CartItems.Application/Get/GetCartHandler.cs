@@ -9,7 +9,7 @@ public record GetCartQuery(Guid UserId);
 
 public class GetCartHandler
 {
-    private const decimal ShippingFee = 0m; // MVP kapsamında her zaman 0 — 4.7
+    private const decimal ShippingFee = 0m; 
 
     private readonly ICartItemReadRepository _cartItemReadRepository;
     private readonly GetProductSummariesHandler _getProductSummariesHandler;

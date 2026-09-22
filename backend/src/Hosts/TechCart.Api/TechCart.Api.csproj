@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.12" />
 
@@ -41,6 +42,11 @@
     <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Application\TechCart.Inventory.Application.csproj" />
     <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Infrastructure\TechCart.Inventory.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\cart_items\TechCart.CartItems.Infrastructure\TechCart.CartItems.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\orders\TechCart.Orders.Infrastructure\TechCart.Orders.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\payments\TechCart.Payments.Infrastructure\TechCart.Payments.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\order_items\TechCart.OrderItems.Infrastructure\TechCart.OrderItems.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\orders\TechCart.Orders.Application\TechCart.Orders.Application.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\TechCart.EventBus\TechCart.EventBus.csproj" />
   </ItemGroup>
 
 </Project>

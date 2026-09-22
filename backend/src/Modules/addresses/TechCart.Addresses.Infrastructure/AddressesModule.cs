@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TechCart.Addresses.Application.Abstractions;
 using TechCart.Addresses.Application.Create;
 using TechCart.Addresses.Application.Delete;
+using TechCart.Addresses.Application.Detail;
 using TechCart.Addresses.Application.List;
 using TechCart.Addresses.Application.SetDefault;
 using TechCart.Addresses.Application.Update;
@@ -27,7 +28,7 @@ public static class AddressesModule
         services.AddScoped<UpdateAddressHandler>();
         services.AddScoped<DeleteAddressHandler>();
         services.AddScoped<SetDefaultAddressHandler>();
-
+        services.AddScoped<GetAddressDetailHandler>();
         return services;
     }
 }

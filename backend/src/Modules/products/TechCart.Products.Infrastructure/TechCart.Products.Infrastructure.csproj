@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\TechCart.EventBus\TechCart.EventBus.csproj" />
     <ProjectReference Include="..\TechCart.Products.Application\TechCart.Products.Application.csproj" />
     <ProjectReference Include="..\TechCart.Products.Contracts\TechCart.Products.Contracts.csproj" />
     <ProjectReference Include="..\TechCart.Products.Domain\TechCart.Products.Domain.csproj" />
@@ -14,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit.Abstractions" Version="8.5.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
   </ItemGroup>

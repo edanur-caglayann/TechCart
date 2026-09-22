@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TechCart.Inventory.Application.Abstractions;
+using TechCart.Inventory.Application.Confirm;
+using TechCart.Inventory.Application.Release;
+using TechCart.Inventory.Application.Reserve;
 using TechCart.Inventory.Domain.Repositories;
 using TechCart.Inventory.Infrastructure.Repositories;
 
@@ -16,6 +19,9 @@ public static class InventoryModule
 
         services.AddScoped<IProductStockWriteRepository, ProductStockWriteRepository>();
         services.AddScoped<IProductStockReadRepository, ProductStockReadRepository>();
+        services.AddScoped<ReserveStockHandler>();
+        services.AddScoped<ConfirmReservationHandler>();
+        services.AddScoped<ReleaseReservationHandler>();
 
         return services;
     }

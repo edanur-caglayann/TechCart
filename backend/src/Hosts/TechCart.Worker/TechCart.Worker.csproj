@@ -10,4 +10,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Modules\orders\TechCart.Orders.Application\TechCart.Orders.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\orders\TechCart.Orders.Infrastructure\TechCart.Orders.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\order_items\TechCart.OrderItems.Application\TechCart.OrderItems.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\order_items\TechCart.OrderItems.Infrastructure\TechCart.OrderItems.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Application\TechCart.Inventory.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Infrastructure\TechCart.Inventory.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>
