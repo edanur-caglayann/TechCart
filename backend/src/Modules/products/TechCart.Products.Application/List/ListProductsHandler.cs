@@ -2,13 +2,10 @@ using TechCart.Brands.Application.Abstractions;
 using TechCart.Categories.Application.Abstractions;
 using TechCart.ProductImages.Application.Abstractions;
 using TechCart.Products.Application.Abstractions;
-using TechCart.Products.Contracts;
+using TechCart.Products.Application.Dtos.RequestDtos;
+using TechCart.Products.Contracts.Dtos.ResponseDtos;
 
 namespace TechCart.Products.Application.List;
-
-public record ListProductsQuery(string? SearchTerm, Guid? CategoryId, Guid? BrandId,
-    decimal? MinPrice, decimal? MaxPrice, string? Color, bool? InStock,
-    string SortBy, int Page, int PageSize);
 
 public class ListProductsHandler
 {

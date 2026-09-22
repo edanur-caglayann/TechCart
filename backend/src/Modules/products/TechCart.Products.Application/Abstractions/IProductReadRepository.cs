@@ -1,20 +1,8 @@
 using TechCart.SharedKernel;
+using TechCart.Products.Application.Dtos.RequestDtos;
+using TechCart.Products.Application.Dtos.ResponseDtos;
 
 namespace TechCart.Products.Application.Abstractions;
-
-public record ProductSearchFilter(
-    string? SearchTerm, Guid? CategoryId, Guid? BrandId,
-    decimal? MinPrice, decimal? MaxPrice, string? Color, bool? InStock,
-    string SortBy, int Page, int PageSize);
-
-public record ProductRowDto(Guid Id, Guid CategoryId, Guid BrandId, string Name, string Model, decimal Price, decimal VatRate, int Stock);
-
-public record ProductDetailRowDto(Guid Id, Guid CategoryId, Guid BrandId, string Name, string Model,
-    string Description, string Specs, decimal Price, decimal VatRate);
-
-public record CategoryFacetDto(Guid CategoryId, int Count);
-public record BrandFacetDto(Guid BrandId, int Count);
-public record ColorFacetDto(string Color, int Count);
 
 public interface IProductReadRepository
 {
@@ -25,4 +13,7 @@ public interface IProductReadRepository
     Task<(decimal Min, decimal Max)> GetPriceRangeAsync(ProductSearchFilter filter, CancellationToken ct);
     Task<ProductDetailRowDto?> GetByIdAsync(Guid id, CancellationToken ct);
     Task<List<string>> SearchProductNamesAsync(string term, int limit, CancellationToken ct);
+    
+    // cartitem modulu icin -> bir id listesi verilir, o urunlerin satirlarini tek sorguda doner
+    Task<List<ProductRowDto>> GetByIdsAsync(List<Guid> ids, CancellationToken ct);
 }

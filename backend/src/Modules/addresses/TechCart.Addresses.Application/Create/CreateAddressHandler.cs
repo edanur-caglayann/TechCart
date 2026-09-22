@@ -1,12 +1,10 @@
 using TechCart.Addresses.Application.Abstractions;
+using TechCart.Addresses.Application.Dtos.RequestDtos;
+using TechCart.Addresses.Application.Dtos.ResponseDtos;
 using TechCart.Addresses.Domain.Entities;
 using TechCart.Addresses.Domain.Repositories;
 
 namespace TechCart.Addresses.Application.Create;
-
-// kullanicidan gelen yeni adres bilgisini tasir
-public record CreateAddressCommand(Guid UserId, string Title, string FullName, string Phone,
-    string City, string District,string Neighborhood, string AddressLine, string PostalCode);
 
 public class CreateAddressHandler
 {

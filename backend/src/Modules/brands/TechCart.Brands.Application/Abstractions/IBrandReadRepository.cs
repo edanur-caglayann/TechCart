@@ -1,4 +1,4 @@
-using TechCart.Brands.Application.ResponseDtos;
+using TechCart.Brands.Application.Dtos.ResponseDtos;
 
 namespace TechCart.Brands.Application.Abstractions;
 

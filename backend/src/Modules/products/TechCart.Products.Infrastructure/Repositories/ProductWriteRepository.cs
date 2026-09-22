@@ -20,6 +20,8 @@ public class ProductWriteRepository : IProductWriteRepository
     public Task<List<Product>> GetProductsWithEmptyColorAsync(CancellationToken ct)
         => _dbContext.Products.Where(p => p.Color == "").ToListAsync(ct);
     
+    public Task<Product?> GetByIdAsync(Guid productId, CancellationToken ct)
+        => _dbContext.Products.FirstOrDefaultAsync(p => p.Id == productId, ct);
 
     public async Task<Dictionary<string, Guid>> GetAllProductIdsByNameAsync(CancellationToken ct)
     {

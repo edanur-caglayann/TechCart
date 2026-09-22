@@ -1,14 +1,14 @@
 using TechCart.Brands.Application.Abstractions;
 using TechCart.Categories.Application.Abstractions;
 using TechCart.Inventory.Application.Abstractions; // YENİ
+using TechCart.Inventory.Application.Dtos.ResponseDtos;
 using TechCart.ProductImages.Application.Abstractions;
 using TechCart.Products.Application.Abstractions;
-using TechCart.Products.Contracts;
+using TechCart.Products.Application.Dtos.RequestDtos;
+using TechCart.Products.Contracts.Dtos.ResponseDtos;
 using TechCart.Products.Domain.Exceptions;
 
 namespace TechCart.Products.Application.Detail;
-
-public record GetProductDetailQuery(Guid ProductId);
 
 public class GetProductDetailHandler
 {

@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\TechCart.EventBus\TechCart.EventBus.csproj" />
+    <ProjectReference Include="..\..\inventory\TechCart.Inventory.Application\TechCart.Inventory.Application.csproj" />
+    <ProjectReference Include="..\..\users\TechCart.Users.Application\TechCart.Users.Application.csproj" />
     <ProjectReference Include="..\TechCart.Payments.Contracts\TechCart.Payments.Contracts.csproj" />
     <ProjectReference Include="..\TechCart.Payments.Domain\TechCart.Payments.Domain.csproj" />
+    <ProjectReference Include="..\..\order_items\TechCart.OrderItems.Application\TechCart.OrderItems.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.Abstractions" Version="8.5.7" />
   </ItemGroup>
 
 </Project>

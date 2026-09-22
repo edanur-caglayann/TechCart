@@ -1,9 +1,8 @@
+using TechCart.Addresses.Application.Dtos.RequestDtos;
 using TechCart.Addresses.Domain.Exceptions;
 using TechCart.Addresses.Domain.Repositories;
 
 namespace TechCart.Addresses.Application.Delete;
-
-public record DeleteAddressCommand(Guid AddressId, Guid UserId);
 
 public class DeleteAddressHandler
 {

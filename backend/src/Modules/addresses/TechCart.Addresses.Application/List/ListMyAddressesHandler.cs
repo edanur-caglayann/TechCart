@@ -1,9 +1,8 @@
 using TechCart.Addresses.Application.Abstractions;
+using TechCart.Addresses.Application.Dtos.RequestDtos;
+using TechCart.Addresses.Application.Dtos.ResponseDtos;
 
 namespace TechCart.Addresses.Application.List;
-
-// adresleri listelenecek olan kullanicinin kimligini tasir
-public record ListMyAddressesQuery(Guid UserId);
 
 // Query'yi karsilar, kullanici id'sini repository'ye gondererek adres listesini alir
 public class ListMyAddressesHandler

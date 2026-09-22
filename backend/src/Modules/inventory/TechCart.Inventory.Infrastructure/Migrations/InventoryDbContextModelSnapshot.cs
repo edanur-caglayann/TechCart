@@ -37,6 +37,12 @@ namespace TechCart.Inventory.Infrastructure.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("is_ready_to_ship");
 
+                    b.Property<int>("ReservedStock")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0)
+                        .HasColumnName("reserved_stock");
+
                     b.Property<int>("Stock")
                         .HasColumnType("integer")
                         .HasColumnName("stock");

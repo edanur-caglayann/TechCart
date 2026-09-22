@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TechCart.Inventory.Application.Abstractions;
+using TechCart.Inventory.Application.Dtos.ResponseDtos;
 
 namespace TechCart.Inventory.Infrastructure.Repositories;
 

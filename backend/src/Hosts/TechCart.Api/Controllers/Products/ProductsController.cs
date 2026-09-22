@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using TechCart.Api.Controllers.Products.RequestDtos;
+using TechCart.Api.Controllers.Products.Dtos.RequestDtos;
 using TechCart.Products.Application.Detail;
+using TechCart.Products.Application.Dtos.RequestDtos;
 using TechCart.Products.Application.Facets;
 using TechCart.Products.Application.List;
 using TechCart.Products.Application.Suggestions;

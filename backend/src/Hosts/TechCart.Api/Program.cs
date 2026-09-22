@@ -12,14 +12,20 @@ using TechCart.Users.Infrastructure.Security;
 using TechCart.Addresses.Infrastructure;
 using TechCart.Categories.Infrastructure;
 using TechCart.Brands.Infrastructure;
+using TechCart.CartItems.Infrastructure;
 using TechCart.Products.Infrastructure;
 using TechCart.ProductImages.Infrastructure;
 using TechCart.Inventory.Infrastructure;
+using TechCart.OrderItems.Infrastructure;
+using TechCart.Orders.Infrastructure;
+using TechCart.Payments.Infrastructure;
+using MassTransit;
+using TechCart.Products.Infrastructure.Consumers;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Controller servislerini ekler.
+
 builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
@@ -30,10 +36,31 @@ builder.Services.AddBrandsModule(builder.Configuration);
 builder.Services.AddProductsModule(builder.Configuration);
 builder.Services.AddProductImagesModule(builder.Configuration);
 builder.Services.AddInventoryModule(builder.Configuration);
+builder.Services.AddCartItemsModule(builder.Configuration);
+builder.Services.AddOrdersModule(builder.Configuration);
+builder.Services.AddPaymentsModule(builder.Configuration);
+builder.Services.AddOrderItemsModule(builder.Configuration);
 
-// Doğrulama hatalarını:
-// { errors: [{ field, message }] }
-// formatına dönüştürür.
+// RabbitMQ bağlantı bilgilerini appsettings'ten okuyoruz.
+var rabbitMqHost = builder.Configuration["RabbitMQ:Host"] ?? "localhost";
+var rabbitMqUsername = builder.Configuration["RabbitMQ:Username"] ?? "guest";
+var rabbitMqPassword = builder.Configuration["RabbitMQ:Password"] ?? "guest";
+
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<ProductStockChangedConsumer>();
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(rabbitMqHost, "/", host =>
+        {
+            host.Username(rabbitMqUsername);
+            host.Password(rabbitMqPassword);
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
+
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.InvalidModelStateResponseFactory = context =>
@@ -122,7 +149,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Swagger ayarları.
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
