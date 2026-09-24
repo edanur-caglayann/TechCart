@@ -20,8 +20,10 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.Property(p => p.ProviderReference).HasColumnName("provider_reference").IsRequired();
         builder.Property(p => p.TdsReference).HasColumnName("tds_reference");
         builder.Property(p => p.FailureReason).HasColumnName("failure_reason");
+        builder.Property(p => p.MaskedCardNumber).HasColumnName("masked_card_number");
         builder.Property(p => p.CreatedAt).HasColumnName("created_at");
         builder.Property(p => p.UpdatedAt).HasColumnName("updated_at");
+        
 
         // ayni odeme islemi iki kez kaydedilmesin.
         // ProviderReference, iyzico gibi odeme araclarinin her odeme islemine verdi id'dir.

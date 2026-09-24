@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TechCart.Payments.Application.Abstractions;
 using TechCart.Payments.Application.InitiateCheckout;
+using TechCart.Payments.Application.List;
 using TechCart.Payments.Application.ProcessCallback;
 using TechCart.Payments.Domain.Repositories;
 using TechCart.Payments.Infrastructure.Iyzico;
@@ -21,6 +22,8 @@ public static class PaymentsModule
         services.AddScoped<IPaymentWriteRepository, PaymentWriteRepository>();
         services.AddScoped<InitiateCheckoutHandler>();
         services.AddScoped<ProcessPaymentCallbackHandler>();
+        services.AddScoped<IPaymentReadRepository, PaymentReadRepository>();
+        services.AddScoped<ListPaymentSummariesHandler>();
         return services;
     }
 }

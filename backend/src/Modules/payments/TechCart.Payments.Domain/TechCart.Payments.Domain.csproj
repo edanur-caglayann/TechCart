@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\TechCart.SharedKernel\TechCart.SharedKernel.csproj" />
     <ProjectReference Include="..\..\orders\TechCart.Orders.Domain\TechCart.Orders.Domain.csproj" />
+    <ProjectReference Include="..\TechCart.Payments.Contracts\TechCart.Payments.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -350,3 +350,44 @@
     width: 100%;
   }
 }
+
+.detailSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 27px;
+  border-top: 1px solid #e5e5e9;
+  color: #55555f;
+}
+
+.detailSection > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detailSection strong {
+  font-size: 14px;
+  color: #111116;
+}
+
+.detailSection span {
+  color: #81818b;
+  font-size: 12px;
+}
+
+.priceBreakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 27px;
+  border-top: 1px solid #e5e5e9;
+}
+
+.priceBreakdownRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #696973;
+  font-size: 13px;
+}

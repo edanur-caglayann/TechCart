@@ -73,8 +73,8 @@ public class ProcessPaymentCallbackHandler(
             }
 
             var payment = Payment.CreateSucceeded(order.Id, Provider, result.PaidPrice, "TRY",
-                result.ProviderPaymentId, tdsReference: null);
-            await paymentWriteRepository.AddAsync(payment, ct);
+                providerReference: result.ProviderPaymentId, tdsReference: null,
+                maskedCardNumber: result.MaskedCardNumber);
         }
         else
         {

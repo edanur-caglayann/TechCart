@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\addresses\TechCart.Addresses.Application\TechCart.Addresses.Application.csproj" />
     <ProjectReference Include="..\..\cart_items\TechCart.CartItems.Application\TechCart.CartItems.Application.csproj" />
     <ProjectReference Include="..\..\order_items\TechCart.OrderItems.Application\TechCart.OrderItems.Application.csproj" />
+    <ProjectReference Include="..\..\payments\TechCart.Payments.Application\TechCart.Payments.Application.csproj" />
     <ProjectReference Include="..\TechCart.Orders.Contracts\TechCart.Orders.Contracts.csproj" />
     <ProjectReference Include="..\TechCart.Orders.Domain\TechCart.Orders.Domain.csproj" />
     <ProjectReference Include="..\..\cart_items\TechCart.CartItems.Contracts\TechCart.CartItems.Contracts.csproj" />

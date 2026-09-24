@@ -30,6 +30,12 @@ public class OrderWriteRepository(OrdersDbContext dbContext) : IOrderWriteReposi
             .Where(o => o.Status == OrderStatus.AwaitingPayment && o.CreatedAt < cutoffTime)
             .ToListAsync(ct);
     
+    public Task<List<Order>> GetByUserIdAsync(Guid userId, CancellationToken ct)
+        => dbContext.Orders
+            .Where(o => o.UserId == userId)
+            .OrderByDescending(o => o.CreatedAt)
+            .ToListAsync(ct);
+    
     public Task SaveChangesAsync(CancellationToken ct)
         => dbContext.SaveChangesAsync(ct);
 }

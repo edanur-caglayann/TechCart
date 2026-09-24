@@ -11,95 +11,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.EventBus/Events/ProductStockChangedEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Orders/Dtos/RequestDtos/CreateOrderRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Orders/OrdersController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Payments/PaymentsController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/ExpiredOrdersBackgroundService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Detail/GetAddressDetailHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/Dtos/RequestDtos/GetAddressDetailQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/Confirm/ConfirmReservationHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/Dtos/RequestDtos/ConfirmReservationCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/Dtos/RequestDtos/ReleaseReservationCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/Dtos/RequestDtos/ReserveStockCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/Release/ReleaseReservationHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/Reserve/ReserveStockHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Application/Create/CreateOrderItemsHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Application/Dtos/RequestDtos/CreateOrderItemsCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Application/Dtos/RequestDtos/ListOrderItemsQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Application/List/ListOrderItemsHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Domain/Repositories/IOrderItemReadRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Domain/Repositories/IOrderItemWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/Configurations/OrderItemConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/OrderItemsDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/OrderItemsModule.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/Repositories/OrderItemReadRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/Repositories/OrderItemWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CancelExpiredOrders/CancelExpiredOrdersHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CreateOrder/CreateOrderHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CreateOrderNumber/OrderNumberGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/Dtos/RequestDtos/CreateOrderCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/ResponseDtos/OrderItemLineResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/ResponseDtos/OrderResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Enums/OrderStatus.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Enums/PaymentStatus.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Exceptions/EmptyCartException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Exceptions/InsufficientStockException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Exceptions/OrderNotAwaitingPaymentException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Repositories/IOrderWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/Configurations/OrderConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/OrdersDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/OrdersModule.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/Repositories/OrderWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Abstractions/IPaymentGateway.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/RequestDtos/InitiateCheckoutCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/RequestDtos/ProcessPaymentCallbackCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/ResponseDtos/PaymentResultDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/InitiateCheckout/InitiateCheckoutHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/ProcessCallback/ProcessPaymentCallbackHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Contracts/ResponseDtos/CheckoutInitResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Contracts/ResponseDtos/OrderItemDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/Exceptions/OrderNotFoundForPaymentException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/Repositories/IPaymentWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Configurations/PaymentConfiguration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Iyzico/IyzicoCheckoutClient.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Iyzico/IyzicoOptions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/PaymentsDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/PaymentsModule.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Repositories/PaymentWriteRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/UpdateStock/UpdateProductStockHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Consumers/ProductStockChangedConsumer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/Dtos/RequestDtos/ListMyOrdersQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/ListMyOrders/ListMyOrdersHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/ResponseDtos/OrderPaymentSummaryResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/RequestDtos/ListPaymentSummariesQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/List/ListPaymentSummariesHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Contracts/ResponseDtos/PaymentSummaryDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/Repositories/IPaymentReadRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Repositories/PaymentReadRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechCart.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/TechCart.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.EventBus/TechCart.EventBus.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.EventBus/TechCart.EventBus.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Orders/OrdersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Orders/OrdersController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/TechCart.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/TechCart.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/AddressesModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/AddressesModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Get/GetCartHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Get/GetCartHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/TechCart.Inventory.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/TechCart.Inventory.Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Domain/Entities/ProductStock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Domain/Entities/ProductStock.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Domain/Repositories/IProductStockWriteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Domain/Repositories/IProductStockWriteRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/Configurations/ProductStockConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/Configurations/ProductStockConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/InventoryModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/InventoryModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/Migrations/InventoryDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/Migrations/InventoryDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/Repositories/ProductStockWriteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/Repositories/ProductStockWriteRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Domain/Entities/OrderItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Domain/Entities/OrderItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Domain/TechCart.OrderItems.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Domain/TechCart.OrderItems.Domain.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/TechCart.OrderItems.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/TechCart.OrderItems.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CreateOrder/CreateOrderHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CreateOrder/CreateOrderHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/TechCart.Orders.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/TechCart.Orders.Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Entities/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Entities/Order.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/TechCart.Orders.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/TechCart.Orders.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/TechCart.Payments.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/TechCart.Payments.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/ResponseDtos/OrderResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/ResponseDtos/OrderResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Repositories/IOrderWriteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Repositories/IOrderWriteRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/OrdersModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/OrdersModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/Repositories/OrderWriteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/Repositories/OrderWriteRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/ProcessCallback/ProcessPaymentCallbackHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/ProcessCallback/ProcessPaymentCallbackHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/Entities/Payment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/Entities/Payment.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/TechCart.Payments.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/TechCart.Payments.Domain.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/TechCart.Payments.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/TechCart.Payments.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Domain/Repositories/IProductWriteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Domain/Repositories/IProductWriteRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/ProductsModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/ProductsModule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Repositories/ProductWriteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Repositories/ProductWriteRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/TechCart.Products.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/TechCart.Products.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Configurations/PaymentConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Configurations/PaymentConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Migrations/PaymentsDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Migrations/PaymentsDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/PaymentsModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/PaymentsModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/checkout/3d-secure/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/checkout/3d-secure/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/checkout/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/checkout/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +62,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="codex/dto-request-response-refactor" />
+        <entry key="$PROJECT_DIR$/.." value="feature/cart-management" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -252,7 +189,10 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/Repositories/OrderItemWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CancelExpiredOrders/CancelExpiredOrdersHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/Dtos/RequestDtos/CreateOrderCommand.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/Dtos/RequestDtos/ListMyOrdersQuery.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/ListMyOrders/ListMyOrdersHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/ResponseDtos/OrderItemLineResponse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/ResponseDtos/OrderPaymentSummaryResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/ResponseDtos/OrderResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Enums/OrderStatus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/Enums/PaymentStatus.cs" root0="FORCE_HIGHLIGHTING" />
@@ -265,19 +205,24 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/Repositories/OrderWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Abstractions/IPaymentGateway.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/RequestDtos/InitiateCheckoutCommand.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/RequestDtos/ListPaymentSummariesQuery.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/RequestDtos/ProcessPaymentCallbackCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/ResponseDtos/PaymentResultDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/InitiateCheckout/InitiateCheckoutHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/List/ListPaymentSummariesHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/ProcessCallback/ProcessPaymentCallbackHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Contracts/ResponseDtos/CheckoutInitResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Contracts/ResponseDtos/OrderItemDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Contracts/ResponseDtos/PaymentSummaryDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/Exceptions/OrderNotFoundForPaymentException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/Repositories/IPaymentReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/Repositories/IPaymentWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Configurations/PaymentConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Iyzico/IyzicoCheckoutClient.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Iyzico/IyzicoOptions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/PaymentsDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/PaymentsModule.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Repositories/PaymentReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Repositories/PaymentWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Application/Abstractions/IProductImageReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Domain/Exceptions/ProductNotFoundException.cs" root0="FORCE_HIGHLIGHTING" />
@@ -356,23 +301,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.TechCart.Api: http.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/cart-management&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.TechCart.Api: http.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "feature/payment-integration",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.TechCart.Api: http">
     <configuration name="TechCart.Seeder" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -473,7 +418,7 @@
       <workItem from="1789715533951" duration="7072000" />
       <workItem from="1789729574256" duration="10000" />
       <workItem from="1789729598317" duration="8624000" />
-      <workItem from="1789987200502" duration="29531000" />
+      <workItem from="1789987200502" duration="38232000" />
     </task>
     <task id="LOCAL-00001" summary="fıx: adjust folder structure">
       <option name="closed" value="true" />
@@ -595,7 +540,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789736989340</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="&quot;feat: add order creation, iyzico payment integration, and event-driven stock sync&quot; -m &quot;- Add Orders, Payments, OrderItems modules (Domain/Application/Infrastructure/Contracts)&#10;- Implement cart-to-order flow with atomic stock reservation (reserve/confirm/release)&#10;- Integrate iyzico Checkout Form for payment initiation and result callback&#10;- Add idempotent payment confirmation via conditional order status update and unique provider reference constraint&#10;- Publish ProductStockChanged via MassTransit/RabbitMQ; consume in Products module to keep replica stock column in sync&#10;- Add TechCart.Worker background service to auto-cancel expired reservations&quot;&#10;git push -u origin feature/payment-integration">
+      <option name="closed" value="true" />
+      <created>1790085931485</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1790085931485</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +597,8 @@
     <MESSAGE value="fix: dto updated" />
     <MESSAGE value="feat: add cart management module (CartItems)" />
     <MESSAGE value="fix: editing the cart screens" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: editing the cart screens" />
+    <MESSAGE value="&quot;feat: add order creation, iyzico payment integration, and event-driven stock sync&quot; -m &quot;- Add Orders, Payments, OrderItems modules (Domain/Application/Infrastructure/Contracts)&#10;- Implement cart-to-order flow with atomic stock reservation (reserve/confirm/release)&#10;- Integrate iyzico Checkout Form for payment initiation and result callback&#10;- Add idempotent payment confirmation via conditional order status update and unique provider reference constraint&#10;- Publish ProductStockChanged via MassTransit/RabbitMQ; consume in Products module to keep replica stock column in sync&#10;- Add TechCart.Worker background service to auto-cancel expired reservations&quot;&#10;git push -u origin feature/payment-integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;feat: add order creation, iyzico payment integration, and event-driven stock sync&quot; -m &quot;- Add Orders, Payments, OrderItems modules (Domain/Application/Infrastructure/Contracts)&#10;- Implement cart-to-order flow with atomic stock reservation (reserve/confirm/release)&#10;- Integrate iyzico Checkout Form for payment initiation and result callback&#10;- Add idempotent payment confirmation via conditional order status update and unique provider reference constraint&#10;- Publish ProductStockChanged via MassTransit/RabbitMQ; consume in Products module to keep replica stock column in sync&#10;- Add TechCart.Worker background service to auto-cancel expired reservations&quot;&#10;git push -u origin feature/payment-integration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
