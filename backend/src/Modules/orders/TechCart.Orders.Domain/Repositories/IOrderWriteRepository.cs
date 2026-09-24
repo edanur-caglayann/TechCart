@@ -10,6 +10,8 @@ public interface IOrderWriteRepository
     // Worker'ın ihtiyacı: belirtilen zamandan once oluşturulmuş, hâlâ
     // AwaitingPayment durumundaki tüm siparişleri  getirir.
     Task<List<Order>> GetExpiredAwaitingPaymentOrdersAsync(DateTime cutoffTime, CancellationToken ct);
+    // Kullanıcının tum siparişlerini, en yeniden en eskiye getirir.
+    Task<List<Order>> GetByUserIdAsync(Guid userId, CancellationToken ct);
     Task SaveChangesAsync(CancellationToken ct);
     
 }

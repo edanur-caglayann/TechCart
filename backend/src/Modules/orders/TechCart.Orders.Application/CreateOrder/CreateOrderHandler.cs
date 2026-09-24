@@ -82,9 +82,11 @@ public class CreateOrderHandler(
         await clearCartHandler.Handle(new ClearCartCommand(command.UserId), ct);
         
         // siparis ile ilgili bilgiler clienta gonderilir
-        return new OrderResponse(order.Id, order.OrderNumber, order.Status.ToString(),
+        return new OrderResponse(order.Id, order.OrderNumber, order.Status.ToString(), order.CreatedAt,
             order.Subtotal, order.VatTotal, order.ShippingFee, order.Total,
+            order.ShippingFullName, order.ShippingPhone, order.ShippingCity,
+            order.ShippingDistrict, order.ShippingAddressLine, order.ShippingPostalCode,
+            Payment: null, // sipariş yeni oluştu, henüz ödeme yok
             orderItemLines.Select(line => new OrderItemLineResponse(
-                line.ProductId, line.ProductName, line.ProductModel, line.Quantity, line.UnitPrice, line.VatRate, line.VatAmount)).ToList());
-    }
+                line.ProductId, line.ProductName, line.ProductModel, line.Quantity, line.UnitPrice, line.VatRate, line.VatAmount)).ToList()); }
 }

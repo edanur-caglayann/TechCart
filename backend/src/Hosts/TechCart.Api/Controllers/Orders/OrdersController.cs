@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using TechCart.Api.Controllers.Orders.Dtos.RequestDtos;
 using TechCart.Orders.Application.CreateOrder;
 using TechCart.Orders.Application.Dtos.RequestDtos;
+using TechCart.Orders.Application.ListMyOrders;
 using TechCart.Payments.Application.Dtos.RequestDtos;
 using TechCart.Payments.Application.InitiateCheckout;
 
@@ -15,7 +16,8 @@ namespace TechCart.Api.Controllers.Orders;
 [Authorize]
 public class OrdersController(
     CreateOrderHandler createOrderHandler,
-    InitiateCheckoutHandler initiateCheckoutHandler) : ControllerBase
+    InitiateCheckoutHandler initiateCheckoutHandler,
+    ListMyOrdersHandler listMyOrdersHandler) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request, CancellationToken ct)
@@ -31,6 +33,13 @@ public class OrdersController(
     {
         var command = new InitiateCheckoutCommand(orderId, CurrentUserId);
         var result = await initiateCheckoutHandler.Handle(command, ct);
+        return Ok(result);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> ListMyOrders(CancellationToken ct)
+    {
+        var result = await listMyOrdersHandler.Handle(new ListMyOrdersQuery(CurrentUserId), ct);
         return Ok(result);
     }
 

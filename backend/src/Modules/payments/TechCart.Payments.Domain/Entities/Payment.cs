@@ -13,11 +13,12 @@ public sealed class Payment : AuditableEntity
     public string ProviderReference { get; private set; } = string.Empty;
     public string? TdsReference { get; private set; }
     public string? FailureReason { get; private set; }
+    public string? MaskedCardNumber { get; private set; }
 
     private Payment() { } 
 
     private Payment(Guid orderId, string provider, PaymentStatus status, decimal amount, string currency,
-        string providerReference, string? tdsReference, string? failureReason)
+        string providerReference, string? tdsReference, string? failureReason, string? maskedCardNumber)
     {
         Id = Guid.NewGuid();
         OrderId = orderId;
@@ -28,6 +29,7 @@ public sealed class Payment : AuditableEntity
         ProviderReference = providerReference; // ayni iyzcio ilemi icin 2 kez payment satiri olusmamsi icin 
         TdsReference = tdsReference;
         FailureReason = failureReason;
+        MaskedCardNumber = maskedCardNumber;
         CreatedAt = DateTime.UtcNow;
     }
 
@@ -36,10 +38,10 @@ public sealed class Payment : AuditableEntity
     // Kullanici baska bir kartla yeniden dener. ikinci odeme basarili oldu. -> CreateSucceeded cagrilir ve
     // yeni bir payment satiri olusturulur.
     public static Payment CreateSucceeded(Guid orderId, string provider, decimal amount, string currency,
-        string providerReference, string? tdsReference)
-        => new(orderId, provider, PaymentStatus.Succeeded, amount, currency, providerReference, tdsReference, failureReason: null);
+        string providerReference, string? tdsReference, string? maskedCardNumber)
+        => new(orderId, provider, PaymentStatus.Succeeded, amount, currency, providerReference, tdsReference, failureReason: null, maskedCardNumber);
 
     public static Payment CreateFailed(Guid orderId, string provider, decimal amount, string currency,
         string providerReference, string failureReason)
-        => new(orderId, provider, PaymentStatus.Failed, amount, currency, providerReference, tdsReference: null, failureReason);
+        => new(orderId, provider, PaymentStatus.Failed, amount, currency, providerReference, tdsReference: null, failureReason, maskedCardNumber: null);
 }

@@ -1,6 +1,4 @@
-export type OrderStatus = "AwaitingPayment" | "Paid" | "Cancelled";
-
-export type OrderItem = {
+export type OrderItemLineResponse = {
   productId: string | null;
   productName: string;
   productModel: string;
@@ -10,16 +8,16 @@ export type OrderItem = {
   vatAmount: number;
 };
 
-export type OrderPayment = {
+export type OrderPaymentSummaryResponse = {
   provider: string;
   maskedCardNumber: string | null;
   paidAt: string;
 };
 
-export type Order = {
+export type OrderResponse = {
   id: string;
   orderNumber: string;
-  status: OrderStatus;
+  status: string;
   createdAt: string;
   subtotal: number;
   vatTotal: number;
@@ -31,6 +29,11 @@ export type Order = {
   shippingDistrict: string;
   shippingAddressLine: string;
   shippingPostalCode: string;
-  payment: OrderPayment | null;
-  items: OrderItem[];
+  payment: OrderPaymentSummaryResponse | null;
+  items: OrderItemLineResponse[];
+};
+
+export type CheckoutInitResponse = {
+  paymentPageUrl: string;
+  token: string;
 };
