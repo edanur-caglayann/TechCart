@@ -47,6 +47,7 @@
     <ProjectReference Include="..\..\Modules\order_items\TechCart.OrderItems.Infrastructure\TechCart.OrderItems.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\orders\TechCart.Orders.Application\TechCart.Orders.Application.csproj" />
     <ProjectReference Include="..\..\BuildingBlocks\TechCart.EventBus\TechCart.EventBus.csproj" />
+    <ProjectReference Include="..\..\Modules\search\TechCart.Search.Infrastructure\TechCart.Search.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

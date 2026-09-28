@@ -17,7 +17,7 @@ public class CancelExpiredOrdersHandler(
     // 15 dk boyunca odemesi tamamlanmayan siparisleri (AwaitingPaymnet duurmunda olan) otomatik iptal eder 
     public async Task<int> Handle(CancellationToken ct)
     {
-        // simdiki UTC zamanindan 15 dk ciakrilir. cutoffTime degiskenine atilri
+        // simdiki UTC zamanindan 15 dk cikarilir. cutoffTime degiskenine atilri
         var cutoffTime = DateTime.UtcNow - ReservationDuration;
         // cutoffTime zamanindan once olusturulmus ve haal bekleyen siparisler suresi dolmus kabul edilir
         var expiredOrders = await orderWriteRepository.GetExpiredAwaitingPaymentOrdersAsync(cutoffTime, ct);
