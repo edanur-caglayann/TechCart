@@ -1,4 +1,5 @@
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Core.Bulk;
 using Elastic.Clients.Elasticsearch.Mapping;
 using TechCart.Search.Application.Abstractions;
 using TechCart.Search.Application.Documents;
@@ -52,5 +53,34 @@ public class ProductSearchIndex(ElasticsearchClient client) : IProductSearchInde
 
         // yeni indeks olusturma istegi basarili mi
         return response.IsValidResponse;
+    }
+    
+    // birden fazla urunu tek bir istekle toplu olarak elk indeksine yazan fonks.
+    // documents-> indekslenecek urun dokumanlari
+    public async Task IndexManyAsync(IReadOnlyCollection<ProductSearchDocument> documents, CancellationToken ct)
+    {
+        if (documents.Count == 0)
+            return;
+
+        // bulk istegi hazirlanir. bos bir toplu istek olusturulur.
+        // IndexName -> dokumanalrin yazilacagi indeksin adi
+        // Operations -> dokuman icindeki yapilacak islemler
+        var request = new BulkRequest(IndexName) { Operations = [] };
+
+        // her urun dokumana ekleniyor
+        foreach (var document in documents)
+            request.Operations.Add(new BulkIndexOperation<ProductSearchDocument>(document) { Id = document.Id });
+
+        // İsteği Elasticsearch’e gönderir
+        var response = await client.BulkAsync(request, ct);
+        
+        if (!response.IsValidResponse || response.Errors)
+        {
+            var problems = string.Join("; ", response.ItemsWithErrors
+                .Take(5)
+                .Select(item => $"{item.Id}: {item.Error?.Reason}"));
+
+            throw new InvalidOperationException($"Toplu yazma başarısız: {problems}");
+        }
     }
 }

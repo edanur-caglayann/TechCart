@@ -27,12 +27,22 @@ public class SearchDevController(IProductSearchIndex productSearchIndex,
         return Ok(items);
     }
 
-    // Products'tan gelen sayfayı, Elasticsearch'e yazılacak doküman hâline çevirip gösterir.
-    // Henüz hiçbir şey yazmıyor, yalnızca çeviriyi doğrulamak için.
     [HttpGet("documents-preview")]
     public async Task<IActionResult> DocumentsPreview(CancellationToken ct, [FromQuery] int page = 1, [FromQuery] int pageSize = 5)
     {
         var items = await listProductsForIndexingHandler.Handle(new ListProductsForIndexingQuery(page, pageSize), ct);
         return Ok(items.Select(ProductSearchDocumentMapper.ToDocument));
+    }
+
+    // Products'tan bir sayfa okuyup dokümana çevirir ve Elasticsearch'e yazar.
+    [HttpPost("index-page")]
+    public async Task<IActionResult> IndexPage(CancellationToken ct, [FromQuery] int page = 1, [FromQuery] int pageSize = 3)
+    {
+        var items = await listProductsForIndexingHandler.Handle(new ListProductsForIndexingQuery(page, pageSize), ct);
+        var documents = items.Select(ProductSearchDocumentMapper.ToDocument).ToList();
+
+        await productSearchIndex.IndexManyAsync(documents, ct);
+
+        return Ok(new { indexed = documents.Count });
     }
 }

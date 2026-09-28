@@ -11,25 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Documents/ProductSearchDocument.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechCart.sln" beforeDir="false" afterPath="$PROJECT_DIR$/TechCart.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Get/GetCartHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/Get/GetCartHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CancelExpiredOrders/CancelExpiredOrdersHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CancelExpiredOrders/CancelExpiredOrdersHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/InitiateCheckout/InitiateCheckoutHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/InitiateCheckout/InitiateCheckoutHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/ProcessCallback/ProcessPaymentCallbackHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/ProcessCallback/ProcessPaymentCallbackHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Iyzico/IyzicoCheckoutClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Iyzico/IyzicoCheckoutClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/cart/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/cart/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/checkout/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/checkout/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/context/CartContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/context/CartContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,12 +213,17 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Infrastructure/Repositories/ProductImageWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Abstractions/IProductReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Detail/GetProductDetailHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Documents/ProductSearchDocumentMapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/RequestDtos/ListProductsForIndexingQuery.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/ResponseDtos/ProductIndexRowDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/ResponseDtos/ProductSummaryDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Facets/GetProductFacetsHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/List/ListProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/ListForIndexing/ListProductsForIndexingHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Suggestions/GetProductSuggestionsHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Summaries/GetProductSummariesHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/UpdateStock/UpdateProductStockHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Contracts/Dtos/ResponseDtos/ProductIndexItemResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Domain/Repositories/IProductWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Configurations/ProductConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Consumers/ProductStockChangedConsumer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -417,7 +407,7 @@
       <workItem from="1789729574256" duration="10000" />
       <workItem from="1789729598317" duration="8624000" />
       <workItem from="1789987200502" duration="52827000" />
-      <workItem from="1790598291272" duration="1794000" />
+      <workItem from="1790598291272" duration="5786000" />
     </task>
     <task id="LOCAL-00001" summary="fıx: adjust folder structure">
       <option name="closed" value="true" />
@@ -555,7 +545,23 @@
       <option name="project" value="LOCAL" />
       <updated>1790248919594</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="feat(search): add Elasticsearch container, Search module and index schema">
+      <option name="closed" value="true" />
+      <created>1790600099525</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1790600099525</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat(search): add paged product read for indexing and search document mapper">
+      <option name="closed" value="true" />
+      <created>1790604884338</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1790604884338</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -606,7 +612,9 @@
     <MESSAGE value="fix: editing the cart screens" />
     <MESSAGE value="&quot;feat: add order creation, iyzico payment integration, and event-driven stock sync&quot; -m &quot;- Add Orders, Payments, OrderItems modules (Domain/Application/Infrastructure/Contracts)&#10;- Implement cart-to-order flow with atomic stock reservation (reserve/confirm/release)&#10;- Integrate iyzico Checkout Form for payment initiation and result callback&#10;- Add idempotent payment confirmation via conditional order status update and unique provider reference constraint&#10;- Publish ProductStockChanged via MassTransit/RabbitMQ; consume in Products module to keep replica stock column in sync&#10;- Add TechCart.Worker background service to auto-cancel expired reservations&quot;&#10;git push -u origin feature/payment-integration" />
     <MESSAGE value="feat: connect payment flow to iyzico and add order history" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: connect payment flow to iyzico and add order history" />
+    <MESSAGE value="feat(search): add Elasticsearch container, Search module and index schema" />
+    <MESSAGE value="feat(search): add paged product read for indexing and search document mapper" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(search): add paged product read for indexing and search document mapper" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
