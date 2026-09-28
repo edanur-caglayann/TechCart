@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\inventory\TechCart.Inventory.Application\TechCart.Inventory.Application.csproj" />
     <ProjectReference Include="..\..\product_images\TechCart.ProductImages.Domain\TechCart.ProductImages.Domain.csproj" />
+    <ProjectReference Include="..\..\search\TechCart.Search.Application\TechCart.Search.Application.csproj" />
     <ProjectReference Include="..\TechCart.Products.Contracts\TechCart.Products.Contracts.csproj" />
     <ProjectReference Include="..\TechCart.Products.Domain\TechCart.Products.Domain.csproj" />
     <ProjectReference Include="..\..\categories\TechCart.Categories.Application\TechCart.Categories.Application.csproj" />

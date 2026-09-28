@@ -5,6 +5,7 @@ using TechCart.Products.Application.Abstractions;
 using TechCart.Products.Application.Detail;
 using TechCart.Products.Application.Facets;
 using TechCart.Products.Application.List;
+using TechCart.Products.Application.ListForIndexing;
 using TechCart.Products.Application.Suggestions;
 using TechCart.Products.Application.Summaries;
 using TechCart.Products.Application.UpdateStock;
@@ -30,6 +31,7 @@ public static class ProductsModule
         services.AddScoped<GetProductDetailHandler>();     
         services.AddScoped<GetProductSummariesHandler>();
         services.AddScoped<UpdateProductStockHandler>();
+        services.AddScoped<ListProductsForIndexingHandler>();
         return services;
     }
 }

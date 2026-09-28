@@ -5,43 +5,41 @@ using TechCart.Products.Application.Abstractions;
 using TechCart.Products.Application.Dtos.RequestDtos;
 using TechCart.Products.Contracts.Dtos.ResponseDtos;
 
-namespace TechCart.Products.Application.List;
+namespace TechCart.Products.Application.ListForIndexing;
 
-public class ListProductsHandler(
+// repository aracailgi ile db'den ham urun satirlarini alir ve ProductIndexItemResponse olarak doner
+public class ListProductsForIndexingHandler(
     IProductReadRepository productReadRepository,
     ICategoryReadRepository categoryReadRepository,
     IBrandReadRepository brandReadRepository,
     IProductImageReadRepository productImageReadRepository)
 {
-    public async Task<ProductListResponse> Handle(ListProductsQuery query, CancellationToken ct)
+    public async Task<List<ProductIndexItemResponse>> Handle(ListProductsForIndexingQuery query, CancellationToken ct)
     {
-        var filter = new ProductSearchFilter(query.SearchTerm, query.CategoryId, query.BrandId,
-            query.MinPrice, query.MaxPrice, query.Color, query.InStock, query.SortBy, query.Page, query.PageSize);
+        var rows = await productReadRepository.GetPageForIndexingAsync(query.Page, query.PageSize, ct);
 
-        var page = await productReadRepository.SearchAsync(filter, ct);
+        if (rows.Count == 0)
+            return [];
 
-        var categoryIds = page.Items.Select(p => p.CategoryId).Distinct().ToList();
+        // sayfadaki tüm ürünlerin kategori, marka ve görsel bilgisi ürün başına ayrı ayrı değil, tek sorguyla çekilir.
+        var categoryIds = rows.Select(p => p.CategoryId).Distinct().ToList();
         var categoriesById = (await categoryReadRepository.GetByIdsAsync(categoryIds, ct)).ToDictionary(c => c.Id);
 
-        var brandIds = page.Items.Select(p => p.BrandId).Distinct().ToList();
+        var brandIds = rows.Select(p => p.BrandId).Distinct().ToList();
         var brandsById = (await brandReadRepository.GetByIdsAsync(brandIds, ct)).ToDictionary(b => b.Id);
 
-        var productIds = page.Items.Select(p => p.Id).ToList();
+        var productIds = rows.Select(p => p.Id).ToList();
         var imagesByProductId = await productImageReadRepository.GetPrimaryImagesByProductIdsAsync(productIds, ct);
 
-        var items = page.Items.Select(p => new ProductListItemResponse(
-            p.Id, p.Name, p.Model,
+        return rows.Select(p => new ProductIndexItemResponse(
+            p.Id,
+            p.Name,
             brandsById.TryGetValue(p.BrandId, out var brand) ? brand.Name : "Bilinmeyen Marka",
             categoriesById.TryGetValue(p.CategoryId, out var category) ? category.Name : "Bilinmiyor",
+            p.Color,
             Math.Round(p.Price * (1 + p.VatRate), 2),
-            p.VatRate,
             imagesByProductId.GetValueOrDefault(p.Id),
-            p.Stock > 0
-        )).ToList();
-
-        var totalPages = (int)Math.Ceiling(page.TotalCount / (double)page.PageSize);
-        var pagination = new PaginationResponse(page.PageNumber, page.PageSize, page.TotalCount, totalPages);
-
-        return new ProductListResponse(items, pagination);
+            p.Stock > 0,
+            p.CreatedAt)).ToList();
     }
 }
