@@ -2,6 +2,7 @@ using Elastic.Clients.Elasticsearch;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TechCart.Search.Application.Abstractions;
+using TechCart.Search.Application.Reindex;
 
 namespace TechCart.Search.Infrastructure;
 
@@ -14,6 +15,7 @@ public static class SearchModule
 
         services.AddSingleton(_ => new ElasticsearchClient(new ElasticsearchClientSettings(new Uri(url))));
         services.AddSingleton<IProductSearchIndex, ProductSearchIndex>();
+        services.AddScoped<ReindexProductsHandler>();
         return services;
     }
 }

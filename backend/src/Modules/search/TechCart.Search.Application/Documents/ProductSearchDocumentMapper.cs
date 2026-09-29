@@ -2,14 +2,11 @@ using TechCart.Products.Contracts.Dtos.ResponseDtos;
 
 namespace TechCart.Search.Application.Documents;
 
-//product modulunden gelen urunu elk'ya gondermek icin uygun dokuman formatina cevirir. 
-//buna mapper deriz
 public static class ProductSearchDocumentMapper
 {
-    // ToDocument -> Mapper girdisini alip ciktiisni ureten hazir fonks
     public static ProductSearchDocument ToDocument(ProductIndexItemResponse item) => new()
     {
-        Id = item.Id.ToString(), // elk'da id alanini metin tanimaldigimiz icin 
+        Id = item.Id.ToString(),
         Name = item.Name,
         SearchText = BuildSearchText(item),
         Brand = item.Brand,
@@ -21,13 +18,15 @@ public static class ProductSearchDocumentMapper
         CreatedAt = item.CreatedAt
     };
 
-    // Aranabilir dort alani tek bir metinde birleştirir. önce ürün adını listeye ekler.
-    // marka zaten adin icinde oldugu icin marka alanini tekrar eklemez
+    // Aranabilir alanları tek bir metinde birleştirir: "yeşil kulaklık" gibi bir
+    // arama, farklı alanlarda duran kelimeleri tek sorguyla bulabilsin diye.
     private static string BuildSearchText(ProductIndexItemResponse item)
     {
         var parts = new List<string> { item.Name };
-        
-        // StringComparison.OrdinalIgnoreCase -> büyük/küçük harfi ve kültürü yok sayarak karşılaştırır
+
+        // Amazon başlıkları markayla başlıyor ve markayı da başlığın ilk kelimesinden
+        // türettik. Bu yüzden marka genellikle zaten adın içinde, aynı kelimeyi ikinci
+        // kez yazmıyoruz.
         if (!string.IsNullOrWhiteSpace(item.Brand) &&
             !item.Name.Contains(item.Brand, StringComparison.OrdinalIgnoreCase))
             parts.Add(item.Brand);

@@ -4,8 +4,10 @@ namespace TechCart.Search.Application.Abstractions;
 
 public interface IProductSearchIndex
 {
-    // İndeksi (varsa) siler ve şemasıyla birlikte yeniden oluşturur.
-    // true = indeks başarıyla oluştu.
+    // Elasticsearch’te 101 id'li urun var. 102 id'li urun PostgreSQL’den silinmiş ama Elasticsearch’te hâlâ duruyor
+    // Bu metot ile Elasticsearch’teki ürün indeksi boş hâle gelir.
+    // kod PostgreSQL’de şu anda bulunan ürünleri yeniden okuyup yazar:
+    // 101 geri gelir; 102 ise PostgreSQL’den okunamadığı için geri gelmez.
     Task<bool> RecreateAsync(CancellationToken ct);
 
     // Verilen dokümanları tek bir toplu istekle indekse yazar. Her doküman kendi

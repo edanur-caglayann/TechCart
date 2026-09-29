@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\products\TechCart.Products.Contracts\TechCart.Products.Contracts.csproj" />
+    <ProjectReference Include="..\..\products\TechCart.Products.Application\TechCart.Products.Application.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

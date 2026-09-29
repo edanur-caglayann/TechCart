@@ -3,15 +3,15 @@ using TechCart.Products.Application.Dtos.RequestDtos;
 using TechCart.Products.Application.ListForIndexing;
 using TechCart.Search.Application.Abstractions;
 using TechCart.Search.Application.Documents;
+using TechCart.Search.Application.Reindex;
 
 namespace TechCart.Api.Controllers.Search;
 
-// GEÇİCİ: geliştirme sırasında elle tetiklemek için. Yeniden indeksleme komutu
-// yazıldığında kaldırılacak.
 [ApiController]
 [Route("api/search/dev")]
 public class SearchDevController(IProductSearchIndex productSearchIndex,
-    ListProductsForIndexingHandler listProductsForIndexingHandler) : ControllerBase
+    ListProductsForIndexingHandler listProductsForIndexingHandler,
+    ReindexProductsHandler reindexProductsHandler) : ControllerBase
 {
     [HttpPost("recreate-index")]
     public async Task<IActionResult> RecreateIndex(CancellationToken ct)
@@ -34,7 +34,6 @@ public class SearchDevController(IProductSearchIndex productSearchIndex,
         return Ok(items.Select(ProductSearchDocumentMapper.ToDocument));
     }
 
-    // Products'tan bir sayfa okuyup dokümana çevirir ve Elasticsearch'e yazar.
     [HttpPost("index-page")]
     public async Task<IActionResult> IndexPage(CancellationToken ct, [FromQuery] int page = 1, [FromQuery] int pageSize = 3)
     {
@@ -44,5 +43,13 @@ public class SearchDevController(IProductSearchIndex productSearchIndex,
         await productSearchIndex.IndexManyAsync(documents, ct);
 
         return Ok(new { indexed = documents.Count });
+    }
+
+    // GEÇİCİ: tüm ürünleri baştan indeksleyen döngüyü tetikler.
+    [HttpPost("reindex-all")]
+    public async Task<IActionResult> ReindexAll(CancellationToken ct)
+    {
+        var result = await reindexProductsHandler.Handle(new ReindexProductsCommand(), ct);
+        return Ok(result);
     }
 }
