@@ -11,16 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/SearchProducts/SearchProductsHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchProductsResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Suggest/SuggestProductsHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchSuggestionsResponse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechCart.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/TechCart.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/TechCart.Seeder.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/TechCart.Seeder.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/TechCart.Search.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/TechCart.Search.Application.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" afterDir="false" />
     </list>
@@ -242,7 +237,9 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Documents/ProductSearchDocument.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Reindex/ReindexProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/SearchProducts/SearchProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Suggest/SuggestProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchProductsResponse.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchSuggestionsResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IPasswordHasher.cs" root0="FORCE_HIGHLIGHTING" />
@@ -288,6 +285,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c7afd9724cf757c4a8469dba2bdc22ab5ac111c91f431dbfefc992dacb3e8635/ControllerBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e096e6f12c5d6b49356bc34ff1ea08738f910c0929c9d717c9cba7f44288/EntityFrameworkQueryableExtensions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -418,7 +419,7 @@
       <workItem from="1789729574256" duration="10000" />
       <workItem from="1789729598317" duration="8624000" />
       <workItem from="1789987200502" duration="52827000" />
-      <workItem from="1790598291272" duration="13804000" />
+      <workItem from="1790598291272" duration="15516000" />
     </task>
     <task id="LOCAL-00001" summary="fıx: adjust folder structure">
       <option name="closed" value="true" />
@@ -588,7 +589,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790679961693</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat(search): add real search endpoint with typo tolerance and number safety">
+      <option name="closed" value="true" />
+      <created>1790689280338</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1790689280338</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -643,7 +652,8 @@
     <MESSAGE value="feat(search): add paged product read for indexing and search document mapper" />
     <MESSAGE value="feat(search): bulk-index product documents into Elasticsearch" />
     <MESSAGE value="feat(search): add full reindex loop over all products" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(search): add full reindex loop over all products" />
+    <MESSAGE value="feat(search): add real search endpoint with typo tolerance and number safety" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(search): add real search endpoint with typo tolerance and number safety" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

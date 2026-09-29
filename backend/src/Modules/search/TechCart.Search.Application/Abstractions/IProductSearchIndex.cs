@@ -20,5 +20,9 @@ public interface IProductSearchIndex
     // searchText alanında arar. Harf içeren kelimeler yazım hatasına toleranslı,
     // sayı olan kelimeler tam eşleşme ister 
     Task<ProductSearchPage> SearchAsync(string term, int page, int pageSize, CancellationToken ct);
+    
+    // searchText'in ön ek alt alanlarında arar. "blu" yazınca "Bluetooth"lu
+    // ürünleri bulur — kullanıcı henüz yazarken, Enter'a basmadan çalışır.
+    Task<IReadOnlyList<string>> SuggestAsync(string term, int limit, CancellationToken ct);
 
 }

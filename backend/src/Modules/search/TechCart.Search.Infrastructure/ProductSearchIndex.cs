@@ -133,4 +133,43 @@ public class ProductSearchIndex(ElasticsearchClient client) : IProductSearchInde
             };
         }).ToList();
     }
+    
+    // bu metot, elasticsearch'te oneriye uygun urunleri arar ve urun adlarindan olusan bir liste doner
+    public async Task<IReadOnlyList<string>> SuggestAsync(string term, int limit, CancellationToken ct)
+    {
+        // elasticsearch'e IndexName adli indekste, ProductSearchDocument turundeki urunleri aramak icin nesne olustururuz
+        var request = new SearchRequest<ProductSearchDocument>(IndexName)
+        {
+            // en fazla 8 urun dokumani getir 
+            Size = limit,
+            
+            // neye gore arayacaginin kuralini belirtiriz
+            Query = new Query
+            {
+                MultiMatch = new MultiMatchQuery
+                {
+                    Query = term, // kullanicinin yazfigi metni aramaya ver
+                    Type = TextQueryType.BoolPrefix,
+                    // fields -> bu metni hangi alanlarda araycagimizi souleriz 
+                    // searchText alan, _2gram ve _3gram alt alanlar.
+                    // Kullanıcının yazdığı metni bu üç arama alanını kullanarak değerlendirir
+                    Fields = new[] { "searchText", "searchText._2gram", "searchText._3gram" } 
+                    //  Samsung Galaxy S24 duz metin olsun. 
+                    // searchText -> Samsung, Galaxy, S24
+                    // searchText._2gram -> yan yana iki kelimelik gruplar. Samsung Galaxy, Galaxy S24
+                    // searchText._3gram -> Samsung Galaxy S24
+                }
+            }
+        };
+
+        // elasticsarhte arama yapilir. uygun bulunan urun dokumanlari repsone icinde doner
+        var response = await client.SearchAsync<ProductSearchDocument>(request, ct);
+
+        // elasticsearch istegi basarisizsa hata firlatir
+        if (!response.IsValidResponse)
+            throw new InvalidOperationException($"Öneri sorgusu başarısız: {response.DebugInformation}");
+
+        // urunun sadeve isimlerini alir. Distinct ile ayni adin tekrar etmesini onleriz
+        return response.Documents.Select(d => d.Name).Distinct().ToList();
+    }
 }

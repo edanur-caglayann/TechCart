@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TechCart.Search.Application.Abstractions;
 using TechCart.Search.Application.Reindex;
 using TechCart.Search.Application.SearchProducts;
+using TechCart.Search.Application.Suggest;
 
 namespace TechCart.Search.Infrastructure;
 
@@ -18,6 +19,7 @@ public static class SearchModule
         services.AddSingleton<IProductSearchIndex, ProductSearchIndex>();
         services.AddScoped<ReindexProductsHandler>();
         services.AddScoped<SearchProductsHandler>();
+        services.AddScoped<SuggestProductsHandler>();
         return services;
     }
 }
