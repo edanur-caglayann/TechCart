@@ -1,6 +1,7 @@
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Core.Bulk;
 using Elastic.Clients.Elasticsearch.Mapping;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 using TechCart.Search.Application.Abstractions;
 using TechCart.Search.Application.Documents;
 
@@ -82,5 +83,54 @@ public class ProductSearchIndex(ElasticsearchClient client) : IProductSearchInde
 
             throw new InvalidOperationException($"Toplu yazma başarısız: {problems}");
         }
+    }
+    // Elasticsearch’teki ürün dokümanları arasında arama yapıp sonuçların istenen sayfasını döndürür
+    public async Task<ProductSearchPage> SearchAsync(string term, int page, int pageSize, CancellationToken ct)
+    {
+        var request = new SearchRequest<ProductSearchDocument>(IndexName)
+        {
+            From = (page - 1) * pageSize,
+            Size = pageSize,
+            Query = new Query { Bool = new BoolQuery { Must = BuildMustClauses(term) } }
+        };
+
+        // Elasticsearch’e arama isteği bu satırda gönderilir
+        var response = await client.SearchAsync<ProductSearchDocument>(request, ct);
+        if (!response.IsValidResponse)
+            throw new InvalidOperationException($"Arama başarısız: {response.DebugInformation}");
+
+        return new ProductSearchPage(response.Documents.ToList(), response.Total);
+    }
+
+    // Sorguyu kelime kelime ayırır. Yalnızca rakamlardan oluşan kelimeler tam eşleşme ister; harf içeren kelimeler yazım hatasına
+    // toleranslı (fuzzy) aranır. Böylece "250" araması "260"ı getirmez, ama "bluetoth" yine de "bluetooth"u bulur.
+    
+    
+    // bu metor kullancinin yazdigi arama metnini kelimelere ayirip her kelime icin bir elasticsearch arama kosuli haizrlar.
+    private static List<Query> BuildMustClauses(string term)
+    {
+        // metni kelimelere ayirir. kullancii "Samsung S24 256" yazsin.
+        // sonu ["Samsung", "S24", "256"] olur
+        // RemoveEmptyEntries -> arada birden fazla boşluk varsa boş parçaları atar.
+        // TrimEntries ise parçaların başındaki ve sonundaki boşlukları temizler.
+        var tokens = term.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        // her kelime icin ayri bir kosul olusturur
+        return tokens.Select(token =>
+        {
+            // kelimenin tamami rakamlardan mi olusuyor diye kontrol eder
+            var isNumeric = token.All(char.IsDigit);
+
+            return new Query
+            {
+                // her kelimeyi urun dokumaninin searchText alaninda arar
+                Match = new MatchQuery
+                {
+                    Field = "searchText",
+                    Query = token,
+                    Fuzziness = isNumeric ? null : new Fuzziness("AUTO")
+                }
+            };
+        }).ToList();
     }
 }

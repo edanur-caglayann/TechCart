@@ -2,6 +2,7 @@ using TechCart.Search.Application.Documents;
 
 namespace TechCart.Search.Application.Abstractions;
 
+public record ProductSearchPage(IReadOnlyList<ProductSearchDocument> Items, long TotalCount);
 public interface IProductSearchIndex
 {
     // Elasticsearch’te 101 id'li urun var. 102 id'li urun PostgreSQL’den silinmiş ama Elasticsearch’te hâlâ duruyor
@@ -14,4 +15,10 @@ public interface IProductSearchIndex
     // Id'siyle yazılır: aynı ürün tekrar yazılırsa kopyası oluşmaz, üzerine yazılır.
     // Herhangi bir doküman reddedilirse hata fırlatır.
     Task IndexManyAsync(IReadOnlyCollection<ProductSearchDocument> documents, CancellationToken ct);
+    
+    
+    // searchText alanında arar. Harf içeren kelimeler yazım hatasına toleranslı,
+    // sayı olan kelimeler tam eşleşme ister 
+    Task<ProductSearchPage> SearchAsync(string term, int page, int pageSize, CancellationToken ct);
+
 }

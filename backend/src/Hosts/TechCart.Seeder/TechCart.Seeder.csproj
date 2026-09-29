@@ -6,6 +6,8 @@
     <ProjectReference Include="..\..\Modules\products\TechCart.Products.Infrastructure\TechCart.Products.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\product_images\TechCart.ProductImages.Infrastructure\TechCart.ProductImages.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\inventory\TechCart.Inventory.Infrastructure\TechCart.Inventory.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\search\TechCart.Search.Application\TechCart.Search.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\search\TechCart.Search.Infrastructure\TechCart.Search.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

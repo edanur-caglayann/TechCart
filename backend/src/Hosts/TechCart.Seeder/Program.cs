@@ -5,6 +5,8 @@ using TechCart.Categories.Infrastructure;
 using TechCart.Inventory.Infrastructure;
 using TechCart.ProductImages.Infrastructure;
 using TechCart.Products.Infrastructure;
+using TechCart.Search.Application.Reindex;
+using TechCart.Search.Infrastructure;
 using TechCart.Seeder;
 
 if (args.Length == 0)
@@ -12,7 +14,8 @@ if (args.Length == 0)
     Console.WriteLine("Kullanım:");
     Console.WriteLine("  Ürün içe aktarma: dotnet run -- <csv-dosya-yolu>");
     Console.WriteLine("  Renk geri doldurma: dotnet run -- backfill-colors");
-    Console.WriteLine("  Stok kopyalama: dotnet run -- backfill-stock"); // YENİ
+    Console.WriteLine("  Stok kopyalama: dotnet run -- backfill-stock");
+    Console.WriteLine("  Arama indeksini yeniden oluşturma: dotnet run -- reindex-search"); 
     return;
 }
 
@@ -28,9 +31,11 @@ services.AddBrandsModule(configuration);
 services.AddProductsModule(configuration);
 services.AddProductImagesModule(configuration);
 services.AddInventoryModule(configuration);
+services.AddSearchModule(configuration); 
 services.AddScoped<ProductSeeder>();
 services.AddScoped<ColorBackfiller>();
-services.AddScoped<ProductStockReplicator>(); 
+services.AddScoped<ProductStockReplicator>();
+services.AddScoped<ReindexProductsHandler>(); 
 
 await using var provider = services.BuildServiceProvider();
 using var scope = provider.CreateScope();
@@ -40,10 +45,16 @@ if (args[0] == "backfill-colors")
     var colorBackfiller = scope.ServiceProvider.GetRequiredService<ColorBackfiller>();
     await colorBackfiller.RunAsync(CancellationToken.None);
 }
-else if (args[0] == "backfill-stock") 
+else if (args[0] == "backfill-stock")
 {
     var stockReplicator = scope.ServiceProvider.GetRequiredService<ProductStockReplicator>();
     await stockReplicator.RunAsync(CancellationToken.None);
+}
+else if (args[0] == "reindex-search") 
+{
+    var reindexHandler = scope.ServiceProvider.GetRequiredService<ReindexProductsHandler>();
+    var result = await reindexHandler.Handle(new ReindexProductsCommand(), CancellationToken.None);
+    Console.WriteLine($"{result.TotalIndexed} ürün Elasticsearch'e indekslendi.");
 }
 else
 {

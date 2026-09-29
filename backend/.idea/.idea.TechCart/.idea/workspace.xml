@@ -11,13 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Reindex/ReindexProductsHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/SearchProducts/SearchProductsHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchProductsResponse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Documents/ProductSearchDocumentMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Documents/ProductSearchDocumentMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/TechCart.Products.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/TechCart.Products.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechCart.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/TechCart.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/TechCart.Seeder.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/TechCart.Seeder.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/TechCart.Search.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/TechCart.Search.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +95,7 @@
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Orders/OrdersController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Payments/PaymentsController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Products/ProductsController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Users/UsersController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Seeder/AmazonElectronicsCsvRow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Hosts/TechCart.Seeder/ColorBackfiller.cs" root0="FORCE_HIGHLIGHTING" />
@@ -217,7 +221,6 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Infrastructure/Repositories/ProductImageWriteRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Abstractions/IProductReadRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Detail/GetProductDetailHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Documents/ProductSearchDocumentMapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/RequestDtos/ListProductsForIndexingQuery.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/ResponseDtos/ProductIndexRowDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/ResponseDtos/ProductSummaryDto.cs" root0="FORCE_HIGHLIGHTING" />
@@ -238,6 +241,8 @@
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Documents/ProductSearchDocument.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Reindex/ReindexProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/SearchProducts/SearchProductsHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchProductsResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Abstractions/IPasswordHasher.cs" root0="FORCE_HIGHLIGHTING" />
@@ -279,6 +284,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cd62f95532924f47ac4e19711d43e51e16730/dc/bb7363f8/JwtSecurityTokenHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1750dff95ce6347f7797ec095c5c17196efe67de17ff2666b9992265f0b6/AuthorizeAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3c32b6774a69464667352a9e262bc924c57674f811c382e29abe8dbe3639f4c/CancellationToken.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a65c48494325afb6b2479eca71b3a0a6bf479589e0d86b50f3ea3bbe2b834/ElasticsearchClient.g.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c7afd9724cf757c4a8469dba2bdc22ab5ac111c91f431dbfefc992dacb3e8635/ControllerBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e096e6f12c5d6b49356bc34ff1ea08738f910c0929c9d717c9cba7f44288/EntityFrameworkQueryableExtensions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -412,7 +418,7 @@
       <workItem from="1789729574256" duration="10000" />
       <workItem from="1789729598317" duration="8624000" />
       <workItem from="1789987200502" duration="52827000" />
-      <workItem from="1790598291272" duration="8781000" />
+      <workItem from="1790598291272" duration="13804000" />
     </task>
     <task id="LOCAL-00001" summary="fıx: adjust folder structure">
       <option name="closed" value="true" />
@@ -574,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790606194796</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat(search): add full reindex loop over all products">
+      <option name="closed" value="true" />
+      <created>1790679961693</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1790679961693</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,7 +642,8 @@
     <MESSAGE value="feat(search): add Elasticsearch container, Search module and index schema" />
     <MESSAGE value="feat(search): add paged product read for indexing and search document mapper" />
     <MESSAGE value="feat(search): bulk-index product documents into Elasticsearch" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(search): bulk-index product documents into Elasticsearch" />
+    <MESSAGE value="feat(search): add full reindex loop over all products" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(search): add full reindex loop over all products" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
