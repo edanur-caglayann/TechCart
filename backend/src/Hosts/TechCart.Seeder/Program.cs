@@ -22,7 +22,16 @@ if (args.Length == 0)
 var configuration = new ConfigurationBuilder()
     .SetBasePath(AppContext.BaseDirectory)
     .AddJsonFile("appsettings.json")
+    .AddEnvironmentVariables()
     .Build();
+
+if (string.IsNullOrWhiteSpace(
+        configuration.GetConnectionString("PostgreSQL")))
+{
+    throw new InvalidOperationException(
+        "PostgreSQL bağlantı bilgisi eksik. " +
+        "ConnectionStrings__PostgreSQL ortam değişkenini sağlayın.");
+}
 
 var services = new ServiceCollection();
 
@@ -50,12 +59,14 @@ else if (args[0] == "backfill-stock")
     var stockReplicator = scope.ServiceProvider.GetRequiredService<ProductStockReplicator>();
     await stockReplicator.RunAsync(CancellationToken.None);
 }
+
 else if (args[0] == "reindex-search") 
 {
     var reindexHandler = scope.ServiceProvider.GetRequiredService<ReindexProductsHandler>();
     var result = await reindexHandler.Handle(new ReindexProductsCommand(), CancellationToken.None);
     Console.WriteLine($"{result.TotalIndexed} ürün Elasticsearch'e indekslendi.");
 }
+
 else
 {
     var seeder = scope.ServiceProvider.GetRequiredService<ProductSeeder>();

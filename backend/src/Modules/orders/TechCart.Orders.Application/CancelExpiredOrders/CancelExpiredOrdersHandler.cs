@@ -12,7 +12,7 @@ public class CancelExpiredOrdersHandler(
     ReleaseReservationHandler releaseReservationHandler)
 {
     // rezervasyon suresi tanimlariz
-    private static readonly TimeSpan ReservationDuration = TimeSpan.FromMinutes(1);
+    private static readonly TimeSpan ReservationDuration = TimeSpan.FromMinutes(15);
 
     // 15 dk boyunca odemesi tamamlanmayan siparisleri (AwaitingPaymnet duurmunda olan) otomatik iptal eder 
     public async Task<int> Handle(CancellationToken ct)

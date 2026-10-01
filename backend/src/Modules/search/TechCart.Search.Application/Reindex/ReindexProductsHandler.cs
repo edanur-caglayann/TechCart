@@ -19,8 +19,14 @@ public class ReindexProductsHandler(
 {
     public async Task<ReindexProductsResult> Handle(ReindexProductsCommand command, CancellationToken ct)
     {
-        // İndeksi sıfırlıyoruz — silinmiş ürünleri remizler
-        await productSearchIndex.RecreateAsync(ct);
+        // İndeks olusturulamazsa veri yuklmeeye devam etmek yerine burada durur
+        var recreated = await productSearchIndex.RecreateAsync(ct);
+
+        if (!recreated)
+        {
+            throw new InvalidOperationException(
+                "Ürün arama indeksi oluşturulamadı.");
+        }
 
         var totalIndexed = 0;
         var page = 1;

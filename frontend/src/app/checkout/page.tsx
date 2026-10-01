@@ -54,6 +54,7 @@ export default function CheckoutPage() {
       const defaultAddress = addresses.find((address) => address.isDefault);
       return defaultAddress?.id ?? addresses[0].id;
     });
+
   }, [addresses, isAddressLoading]);
 
   const totalNetPrice = cartItems.reduce((total, item) => {
@@ -87,6 +88,7 @@ export default function CheckoutPage() {
       const checkout = await initiateCheckoutRequest(order.id);
 
       window.location.href = checkout.paymentPageUrl;
+  
     } catch (error) {
       setErrorMessage(getFriendlyErrorMessage(error));
       setIsProcessing(false);

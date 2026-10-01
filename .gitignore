@@ -56,3 +56,6 @@ next-env.d.ts
 
 **/bin/
 **/obj/
+
+# Ortam ayarları için paylaşılabilir şablon
+!/.env.example

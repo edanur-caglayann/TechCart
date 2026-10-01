@@ -16,7 +16,14 @@ using TechCart.Products.Domain.Repositories;
 
 namespace TechCart.Seeder;
 
-public class ProductSeeder
+public class ProductSeeder(
+    ICategoryReadRepository categoryReadRepository,
+    ICategoryWriteRepository categoryWriteRepository,
+    IBrandReadRepository brandReadRepository,
+    IBrandWriteRepository brandWriteRepository,
+    IProductWriteRepository productWriteRepository,
+    IProductImageWriteRepository productImageWriteRepository,
+    IProductStockWriteRepository productStockWriteRepository)
 {
     private const int BatchSize = 200;
     private const decimal DefaultVatRate = 0.20m;
@@ -38,42 +45,16 @@ public class ProductSeeder
         ("smartphone", "Telefon"), ("mobile phone", "Telefon"),
     };
 
-    private readonly ICategoryReadRepository _categoryReadRepository;
-    private readonly ICategoryWriteRepository _categoryWriteRepository;
-    private readonly IBrandReadRepository _brandReadRepository;
-    private readonly IBrandWriteRepository _brandWriteRepository;
-    private readonly IProductWriteRepository _productWriteRepository;
-    private readonly IProductImageWriteRepository _productImageWriteRepository;
-    private readonly IProductStockWriteRepository _productStockWriteRepository;
-
-    public ProductSeeder(
-        ICategoryReadRepository categoryReadRepository,
-        ICategoryWriteRepository categoryWriteRepository,
-        IBrandReadRepository brandReadRepository,
-        IBrandWriteRepository brandWriteRepository,
-        IProductWriteRepository productWriteRepository,
-        IProductImageWriteRepository productImageWriteRepository,
-        IProductStockWriteRepository productStockWriteRepository)
-    {
-        _categoryReadRepository = categoryReadRepository;
-        _categoryWriteRepository = categoryWriteRepository;
-        _brandReadRepository = brandReadRepository;
-        _brandWriteRepository = brandWriteRepository;
-        _productWriteRepository = productWriteRepository;
-        _productImageWriteRepository = productImageWriteRepository;
-        _productStockWriteRepository = productStockWriteRepository;
-    }
-
     public async Task RunAsync(string csvPath, CancellationToken ct)
     {
-        var categoryIdsByName = (await _categoryReadRepository.GetAllAsync(ct))
+        var categoryIdsByName = (await categoryReadRepository.GetAllAsync(ct))
             .ToDictionary(c => c.Name, c => c.Id, StringComparer.OrdinalIgnoreCase);
 
-        var brandIdsByName = (await _brandReadRepository.GetAllAsync(ct))
+        var brandIdsByName = (await brandReadRepository.GetAllAsync(ct))
             .ToDictionary(b => b.Name, b => b.Id, StringComparer.OrdinalIgnoreCase);
 
-        var productIdsByName = await _productWriteRepository.GetAllProductIdsByNameAsync(ct);
-        var productIdsWithStock = await _productStockWriteRepository.GetAllProductIdsAsync(ct);
+        var productIdsByName = await productWriteRepository.GetAllProductIdsByNameAsync(ct);
+        var productIdsWithStock = await productStockWriteRepository.GetAllProductIdsAsync(ct);
 
         Console.WriteLine($"Başlangıç: {categoryIdsByName.Count} kategori, {brandIdsByName.Count} marka, " +
             $"{productIdsByName.Count} ürün, {productIdsWithStock.Count} stok kaydı zaten var.");
@@ -125,7 +106,7 @@ public class ProductSeeder
                 var product = Product.Create(categoryId, brandId, row.Title, string.Empty,
                     string.Empty, "{}", string.Empty, price, DefaultVatRate);
 
-                await _productWriteRepository.AddAsync(product, ct);
+                await productWriteRepository.AddAsync(product, ct);
                 productIdsByName[row.Title] = product.Id;
                 productId = product.Id;
                 newProductCount++;
@@ -133,7 +114,7 @@ public class ProductSeeder
                 if (!string.IsNullOrWhiteSpace(row.ImageUrl))
                 {
                     var image = ProductImage.Create(product.Id, row.ImageUrl, sortOrder: 0);
-                    await _productImageWriteRepository.AddAsync(image, ct);
+                    await productImageWriteRepository.AddAsync(image, ct);
                 }
             }
 
@@ -145,7 +126,7 @@ public class ProductSeeder
                     isReadyToShip: Random.Shared.Next(0, 100) < 80,
                     hasFastDelivery: Random.Shared.Next(0, 100) < 50);
 
-                await _productStockWriteRepository.AddAsync(stock, ct);
+                await productStockWriteRepository.AddAsync(stock, ct);
                 productIdsWithStock.Add(productId);
                 newStockCount++;
             }
@@ -186,7 +167,7 @@ public class ProductSeeder
             return existingId;
 
         var category = Category.Create(categoryName);
-        await _categoryWriteRepository.AddAsync(category, ct);
+        await categoryWriteRepository.AddAsync(category, ct);
         cache[categoryName] = category.Id;
         return category.Id;
     }
@@ -199,7 +180,7 @@ public class ProductSeeder
             return existingId;
 
         var brand = Brand.Create(name);
-        await _brandWriteRepository.AddAsync(brand, ct);
+        await brandWriteRepository.AddAsync(brand, ct);
         cache[name] = brand.Id;
         return brand.Id;
     }
@@ -220,10 +201,10 @@ public class ProductSeeder
 
     private async Task SaveAllAsync(CancellationToken ct)
     {
-        await _categoryWriteRepository.SaveChangesAsync(ct);
-        await _brandWriteRepository.SaveChangesAsync(ct);
-        await _productWriteRepository.SaveChangesAsync(ct);
-        await _productImageWriteRepository.SaveChangesAsync(ct);
-        await _productStockWriteRepository.SaveChangesAsync(ct);
+        await categoryWriteRepository.SaveChangesAsync(ct);
+        await brandWriteRepository.SaveChangesAsync(ct);
+        await productWriteRepository.SaveChangesAsync(ct);
+        await productImageWriteRepository.SaveChangesAsync(ct);
+        await productStockWriteRepository.SaveChangesAsync(ct);
     }
 }

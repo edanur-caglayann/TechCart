@@ -79,7 +79,15 @@ public class ProductReadRepository(ProductsDbContext dbContext) : IProductReadRe
         bool includeCategory, bool includeBrand, bool includeColor, bool includePrice = true)
     {
         if (!string.IsNullOrWhiteSpace(filter.SearchTerm))
-            query = query.Where(p => EF.Functions.ILike(p.Name, $"%{filter.SearchTerm}%"));
+        {
+            var matchedCategoryIds = filter.MatchedCategoryIds ?? [];
+            var matchedBrandIds = filter.MatchedBrandIds ?? [];
+
+            query = query.Where(p =>
+                EF.Functions.ILike(p.Name, $"%{filter.SearchTerm}%") ||
+                matchedCategoryIds.Contains(p.CategoryId) ||
+                matchedBrandIds.Contains(p.BrandId));
+        }
 
         if (includeCategory && filter.CategoryId.HasValue)
             query = query.Where(p => p.CategoryId == filter.CategoryId.Value);

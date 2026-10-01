@@ -2,6 +2,7 @@ using TechCart.Search.Application.Documents;
 
 namespace TechCart.Search.Application.Abstractions;
 
+public record ProductSuggestion(string Id, string Name);
 public record ProductSearchPage(IReadOnlyList<ProductSearchDocument> Items, long TotalCount);
 public interface IProductSearchIndex
 {
@@ -23,6 +24,10 @@ public interface IProductSearchIndex
     
     // searchText'in ön ek alt alanlarında arar. "blu" yazınca "Bluetooth"lu
     // ürünleri bulur — kullanıcı henüz yazarken, Enter'a basmadan çalışır.
-    Task<IReadOnlyList<string>> SuggestAsync(string term, int limit, CancellationToken ct);
+    Task<IReadOnlyList<ProductSuggestion>> SuggestAsync(string term, int limit, CancellationToken ct);
+    
+    // Bir ürünün yalnızca stok durumunu (inStock) günceller. Dokümanın diğer
+    // alanlarına dokunmaz.
+    Task UpdateStockAsync(Guid productId, bool inStock, CancellationToken ct);
 
 }

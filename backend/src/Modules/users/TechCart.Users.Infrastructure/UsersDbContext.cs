@@ -14,12 +14,7 @@ public class UsersDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Tüm Users tablolarını ayrı bir Postgres şemasında tut ("users" şeması).
-        // Aynı fiziksel veritabanını paylaşsak da, tablo mülkiyeti şema seviyesinde net kalıyor.
         modelBuilder.HasDefaultSchema("users");
-
-        // Bu assembly içindeki tüm IEntityTypeConfiguration<T> sınıflarını (UserConfiguration gibi)
-        // otomatik bulup uygular — her yeni entity eklediğinde burayı elle güncellemene gerek yok.
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(UsersDbContext).Assembly);
     }
 }

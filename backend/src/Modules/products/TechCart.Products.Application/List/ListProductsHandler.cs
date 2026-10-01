@@ -15,11 +15,33 @@ public class ListProductsHandler(
 {
     public async Task<ProductListResponse> Handle(ListProductsQuery query, CancellationToken ct)
     {
+        
+        // Arama terimi bir kategori/marka adıyla da eşleşebilir — örn. "bilgisayar"
+        // İngilizce ürün adlarında hiç geçmeyebilir, ama kategori adı Türkçe "Bilgisayar"dır.
+        IReadOnlyList<Guid> matchedCategoryIds = [];
+        IReadOnlyList<Guid> matchedBrandIds = [];
+
+        if (!string.IsNullOrWhiteSpace(query.SearchTerm))
+        {
+            var allCategories = await categoryReadRepository.GetAllAsync(ct);
+            matchedCategoryIds = allCategories
+                .Where(c => c.Name.Contains(query.SearchTerm, StringComparison.OrdinalIgnoreCase))
+                .Select(c => c.Id)
+                .ToList();
+
+            var allBrands = await brandReadRepository.GetAllAsync(ct);
+            matchedBrandIds = allBrands
+                .Where(b => b.Name.Contains(query.SearchTerm, StringComparison.OrdinalIgnoreCase))
+                .Select(b => b.Id)
+                .ToList();
+        }
+
         var filter = new ProductSearchFilter(query.SearchTerm, query.CategoryId, query.BrandId,
-            query.MinPrice, query.MaxPrice, query.Color, query.InStock, query.SortBy, query.Page, query.PageSize);
+            query.MinPrice, query.MaxPrice, query.Color, query.InStock, query.SortBy, query.Page, query.PageSize,
+            matchedCategoryIds, matchedBrandIds);
 
         var page = await productReadRepository.SearchAsync(filter, ct);
-
+        
         var categoryIds = page.Items.Select(p => p.CategoryId).Distinct().ToList();
         var categoriesById = (await categoryReadRepository.GetByIdsAsync(categoryIds, ct)).ToDictionary(c => c.Id);
 
