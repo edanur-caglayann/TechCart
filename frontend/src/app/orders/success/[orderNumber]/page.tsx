@@ -21,9 +21,9 @@ const orderStatusLabels: Record<
   OrderStatus,
   string
 > = {
-  Preparing: "Hazırlanıyor",
-  Shipped: "Kargoya Verildi",
-  Delivered: "Teslim Edildi",
+  AwaitingPayment: "Ödeme Bekleniyor",
+  Paid: "Ödendi",
+  Cancelled: "İptal Edildi",
 };
 
 export default function OrderSuccessPage() {
@@ -48,6 +48,12 @@ export default function OrderSuccessPage() {
   // Sipariş numarasına ait siparişi bulur.
   const order =
     getOrderByNumber(orderNumber);
+
+  const totalQuantity =
+    order?.items.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    ) ?? 0;
 
   // Siparişler localStorage üzerinden yüklenirken gösterilir.
   if (isOrderLoading) {
@@ -162,10 +168,12 @@ export default function OrderSuccessPage() {
                   key={item.productId}
                 >
                   <div>
-                    <strong>{item.name}</strong>
+                    <strong>
+                      {item.productName}
+                    </strong>
 
                     <span>
-                      {item.brand} • {item.model}
+                      {item.productModel}
                     </span>
 
                     <span>
@@ -175,7 +183,8 @@ export default function OrderSuccessPage() {
 
                   <strong>
                     {formatCurrency(
-                      item.totalPrice
+                      item.unitPrice *
+                        item.quantity
                     )}
                   </strong>
                 </article>
@@ -198,33 +207,22 @@ export default function OrderSuccessPage() {
 
             <div className={styles.addressInformation}>
               <strong>
-                {order.deliveryAddress.title}
+                {order.shippingFullName}
               </strong>
 
               <span>
-                {order.deliveryAddress.firstName}{" "}
-                {order.deliveryAddress.lastName}
+                {order.shippingPhone}
               </span>
 
-              <p>
-                {
-                  order.deliveryAddress
-                    .neighborhood
-                }
-                ,{" "}
-                {
-                  order.deliveryAddress
-                    .addressLine
-                }
-              </p>
+              <p>{order.shippingAddressLine}</p>
 
               <span>
-                {order.deliveryAddress.district} /{" "}
-                {order.deliveryAddress.city}
+                {order.shippingDistrict} /{" "}
+                {order.shippingCity}
               </span>
 
               <span>
-                {order.deliveryAddress.phone}
+                {order.shippingPostalCode}
               </span>
             </div>
           </section>
@@ -236,14 +234,14 @@ export default function OrderSuccessPage() {
 
           <div className={styles.summaryRow}>
             <span>Ürün adedi</span>
-            <strong>{order.totalQuantity}</strong>
+            <strong>{totalQuantity}</strong>
           </div>
 
           <div className={styles.summaryRow}>
             <span>KDV hariç ara toplam</span>
             <strong>
               {formatCurrency(
-                order.totalNetPrice
+                order.subtotal
               )}
             </strong>
           </div>
@@ -251,7 +249,7 @@ export default function OrderSuccessPage() {
           <div className={styles.summaryRow}>
             <span>Toplam KDV</span>
             <strong>
-              {formatCurrency(order.totalVat)}
+              {formatCurrency(order.vatTotal)}
             </strong>
           </div>
 
@@ -263,7 +261,7 @@ export default function OrderSuccessPage() {
           <div className={styles.totalRow}>
             <span>Ödenen toplam</span>
             <strong>
-              {formatCurrency(order.totalPrice)}
+              {formatCurrency(order.total)}
             </strong>
           </div>
         </section>
