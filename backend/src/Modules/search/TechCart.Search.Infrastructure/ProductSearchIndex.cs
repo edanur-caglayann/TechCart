@@ -172,4 +172,25 @@ public class ProductSearchIndex(ElasticsearchClient client) : IProductSearchInde
         // urunun sadeve isimlerini alir. Distinct ile ayni adin tekrar etmesini onleriz
         return response.Documents.Select(d => d.Name).Distinct().ToList();
     }
+    
+    // Elasticsearch'teki belirli bir urunun sadece InStock alanini guncelliyor.
+    // stok adedi güncellenmiyor sadece ürünün stokta olup olmadığı bilgisi güncelleniyor.
+    // Guncellenecek urunu ve yeni stok durumunu alir
+    public async Task UpdateStockAsync(Guid productId, bool inStock, CancellationToken ct)
+    {
+        // guncellemenin hangi indekste o indeksin hangi dokumaninda yapilacagi bulunur
+        var response = await client.UpdateAsync<ProductSearchDocument, ProductStockPatch>(
+            IndexName, productId.ToString(), u => 
+                // Bu dokümanın InStock alanına gelen değer ile guncelle.
+                u.Doc(new ProductStockPatch { InStock = inStock }), ct);
+
+        if (!response.IsValidResponse)
+            throw new InvalidOperationException($"Stok güncellemesi başarısız: {response.DebugInformation}");
+    }
+
+    // Kısmi güncelleme için yalnızca InStock alanını taşır.
+    private class ProductStockPatch
+    {
+        public bool InStock { get; set; }
+    }
 }

@@ -9,10 +9,12 @@
   <ItemGroup>
     <PackageReference Include="Elastic.Clients.Elasticsearch" Version="9.5.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\TechCart.EventBus\TechCart.EventBus.csproj" />
     <ProjectReference Include="..\TechCart.Search.Application\TechCart.Search.Application.csproj" />
   </ItemGroup>
 
