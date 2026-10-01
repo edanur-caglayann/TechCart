@@ -16,6 +16,7 @@ type OrderContextType = {
   orders: Order[];
   isOrderLoading: boolean;
   refreshOrders: () => Promise<void>;
+  getOrderByNumber: (orderNumber: string) => Order | undefined;
 };
 
 const OrderContext = createContext<OrderContextType | undefined>(undefined);
@@ -50,8 +51,19 @@ export function OrderProvider({ children }: OrderProviderProps) {
     }
   }
 
+  function getOrderByNumber(orderNumber: string) {
+    return orders.find((order) => order.orderNumber === orderNumber);
+  }
+
   return (
-    <OrderContext.Provider value={{ orders, isOrderLoading, refreshOrders }}>
+    <OrderContext.Provider
+      value={{
+        orders,
+        isOrderLoading,
+        refreshOrders,
+        getOrderByNumber,
+      }}
+    >
       {children}
     </OrderContext.Provider>
   );
