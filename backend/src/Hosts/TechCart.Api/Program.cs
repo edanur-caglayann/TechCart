@@ -51,6 +51,7 @@ var rabbitMqPassword = builder.Configuration["RabbitMQ:Password"] ?? "guest";
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<ProductStockChangedConsumer>();
+    x.AddConsumer<TechCart.Search.Infrastructure.Consumers.SearchProductStockChangedConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(rabbitMqHost, "/", host =>
