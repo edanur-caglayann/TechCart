@@ -26,6 +26,7 @@ import {
 } from "../../utils/tax";
 
 import styles from "./page.module.css";
+import { getFriendlyErrorMessage } from "../../utils/apiErrors";
 
 export default function CheckoutPage() {
   const { cartItems, totalQuantity, totalPrice } = useCart();
@@ -87,11 +88,7 @@ export default function CheckoutPage() {
 
       window.location.href = checkout.paymentPageUrl;
     } catch (error) {
-      if (error instanceof ApiError) {
-        setErrorMessage(error.message);
-      } else {
-        setErrorMessage("Ödeme başlatılamadı. Lütfen tekrar deneyin.");
-      }
+      setErrorMessage(getFriendlyErrorMessage(error));
       setIsProcessing(false);
     }
   }
@@ -151,9 +148,8 @@ export default function CheckoutPage() {
                   <div className={styles.addressList}>
                     {addresses.map((address) => (
                       <label
-                        className={`${styles.addressOption} ${
-                          selectedAddressId === address.id ? styles.selectedAddress : ""
-                        }`}
+                        className={`${styles.addressOption} ${selectedAddressId === address.id ? styles.selectedAddress : ""
+                          }`}
                         key={address.id}
                       >
                         <input

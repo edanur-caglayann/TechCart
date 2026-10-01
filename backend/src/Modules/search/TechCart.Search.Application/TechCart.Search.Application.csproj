@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\products\TechCart.Products.Contracts\TechCart.Products.Contracts.csproj" />
+    <ProjectReference Include="..\..\products\TechCart.Products.Application\TechCart.Products.Application.csproj" />
+    <ProjectReference Include="..\TechCart.Search.Contracts\TechCart.Search.Contracts.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

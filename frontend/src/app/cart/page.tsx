@@ -44,6 +44,8 @@ export default function CartPage() {
     clearCart,
     totalQuantity,
     totalPrice,
+    errorMessage,
+    clearError,
   } = useCart();
 
   /*
@@ -147,6 +149,43 @@ export default function CartPage() {
             </button>
           )}
         </div>
+
+        {errorMessage && (
+          <div
+            role="alert"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "12px",
+              padding: "14px 18px",
+              marginBottom: "20px",
+              borderRadius: "10px",
+              backgroundColor: "#fef2f2",
+              border: "1px solid #fecaca",
+              color: "#b91c1c",
+              fontSize: "14px",
+            }}
+          >
+            <span>{errorMessage}</span>
+
+            <button
+              type="button"
+              onClick={clearError}
+              aria-label="Hatayı kapat"
+              style={{
+                background: "none",
+                border: "none",
+                color: "#b91c1c",
+                cursor: "pointer",
+                fontSize: "18px",
+                lineHeight: 1,
+              }}
+            >
+              ×
+            </button>
+          </div>
+        )}
 
         {/* Sepet boşsa boş sepet görünümü gösterilir. */}
         {cartItems.length === 0 ? (

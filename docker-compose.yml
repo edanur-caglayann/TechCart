@@ -74,6 +74,20 @@ services:
         timeout: 5s
         retries: 5
       restart: unless-stopped
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.0
+    container_name: techcart-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    mem_limit: 1g
+    ports:
+      - "127.0.0.1:9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    restart: unless-stopped
 
 volumes:
   techcart-postgres-data:
+  esdata:

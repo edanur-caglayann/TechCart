@@ -14,7 +14,7 @@ namespace TechCart.Payments.Application.InitiateCheckout;
 public class InitiateCheckoutHandler(
     IOrderWriteRepository orderWriteRepository,
     GetMyProfileHandler getMyProfileHandler,
-    ListOrderItemsHandler _listOrderItemsHandler,
+    ListOrderItemsHandler listOrderItemsHandler,
     IPaymentGateway paymentGateway)
 {
     public async Task<CheckoutInitResponse> Handle(InitiateCheckoutCommand command, CancellationToken ct)
@@ -33,7 +33,7 @@ public class InitiateCheckoutHandler(
         var profile = await getMyProfileHandler.Handle(new GetMyProfileQuery(command.UserId), ct);
         
         // siparisin satirlarinlarini listeler
-        var orderItems = await _listOrderItemsHandler.Handle(new ListOrderItemsQuery(order.Id), ct);
+        var orderItems = await listOrderItemsHandler.Handle(new ListOrderItemsQuery(order.Id), ct);
         var basketItems = orderItems // iyzico'nun istedigi basket formatina donusturur
             .Select(item => (item.ProductName, item.UnitPrice * item.Quantity))
             .ToList();

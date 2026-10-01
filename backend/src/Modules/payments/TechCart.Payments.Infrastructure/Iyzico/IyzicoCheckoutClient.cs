@@ -5,7 +5,6 @@ using Iyzipay.Request;
 using Microsoft.Extensions.Options;
 using TechCart.Payments.Application.Abstractions;
 using TechCart.Payments.Application.Dtos.ResponseDtos;
-using TechCart.Payments.Contracts.ResponseDtos;
 
 namespace TechCart.Payments.Infrastructure.Iyzico;
 

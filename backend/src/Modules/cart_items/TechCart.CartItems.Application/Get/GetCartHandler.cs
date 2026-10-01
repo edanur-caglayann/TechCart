@@ -7,28 +7,21 @@ namespace TechCart.CartItems.Application.Get;
 
 public record GetCartQuery(Guid UserId);
 
-public class GetCartHandler
+public class GetCartHandler(
+    ICartItemReadRepository cartItemReadRepository,
+    GetProductSummariesHandler getProductSummariesHandler)
 {
-    private const decimal ShippingFee = 0m; 
-
-    private readonly ICartItemReadRepository _cartItemReadRepository;
-    private readonly GetProductSummariesHandler _getProductSummariesHandler;
-
-    public GetCartHandler(ICartItemReadRepository cartItemReadRepository, GetProductSummariesHandler getProductSummariesHandler)
-    {
-        _cartItemReadRepository = cartItemReadRepository;
-        _getProductSummariesHandler = getProductSummariesHandler;
-    }
+    private const decimal ShippingFee = 0m;
 
     public async Task<CartResponse> Handle(GetCartQuery query, CancellationToken ct)
     {
-        var cartItems = await _cartItemReadRepository.GetAllByUserAsync(query.UserId, ct);
+        var cartItems = await cartItemReadRepository.GetAllByUserAsync(query.UserId, ct);
 
         if (cartItems.Count == 0)
             return new CartResponse([], 0, 0, 0, ShippingFee, ShippingFee);
 
         var productIds = cartItems.Select(c => c.ProductId).ToList();
-        var summaries = await _getProductSummariesHandler.Handle(new GetProductSummariesQuery(productIds), ct);
+        var summaries = await getProductSummariesHandler.Handle(new GetProductSummariesQuery(productIds), ct);
         var summariesById = summaries.ToDictionary(s => s.Id);
 
         var items = new List<CartItemResponse>();

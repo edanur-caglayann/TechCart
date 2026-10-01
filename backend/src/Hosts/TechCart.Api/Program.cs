@@ -21,6 +21,7 @@ using TechCart.Orders.Infrastructure;
 using TechCart.Payments.Infrastructure;
 using MassTransit;
 using TechCart.Products.Infrastructure.Consumers;
+using TechCart.Search.Infrastructure;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,7 @@ builder.Services.AddCartItemsModule(builder.Configuration);
 builder.Services.AddOrdersModule(builder.Configuration);
 builder.Services.AddPaymentsModule(builder.Configuration);
 builder.Services.AddOrderItemsModule(builder.Configuration);
+builder.Services.AddSearchModule(builder.Configuration);
 
 // RabbitMQ bağlantı bilgilerini appsettings'ten okuyoruz.
 var rabbitMqHost = builder.Configuration["RabbitMQ:Host"] ?? "localhost";

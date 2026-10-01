@@ -7,17 +7,11 @@ using TechCart.SharedKernel;
 
 namespace TechCart.Products.Infrastructure.Repositories;
 
-public class ProductReadRepository : IProductReadRepository
+public class ProductReadRepository(ProductsDbContext dbContext) : IProductReadRepository
 {
-    private readonly ProductsDbContext _dbContext;
-    public ProductReadRepository(ProductsDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     public async Task<PagedResult<ProductRowDto>> SearchAsync(ProductSearchFilter filter, CancellationToken ct)
     {
-        var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
+        var query = ApplyFilters(dbContext.Products.AsNoTracking(), filter,
             includeCategory: true, includeBrand: true, includeColor: true);
 
         var totalCount = await query.CountAsync(ct);
@@ -41,7 +35,7 @@ public class ProductReadRepository : IProductReadRepository
 
     public async Task<List<CategoryFacetDto>> GetCategoryFacetsAsync(ProductSearchFilter filter, CancellationToken ct)
     {
-        var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
+        var query = ApplyFilters(dbContext.Products.AsNoTracking(), filter,
             includeCategory: false, includeBrand: true, includeColor: true);
 
         return await query.GroupBy(p => p.CategoryId).Select(g => new CategoryFacetDto(g.Key, g.Count())).ToListAsync(ct);
@@ -49,7 +43,7 @@ public class ProductReadRepository : IProductReadRepository
 
     public async Task<List<BrandFacetDto>> GetBrandFacetsAsync(ProductSearchFilter filter, CancellationToken ct)
     {
-        var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
+        var query = ApplyFilters(dbContext.Products.AsNoTracking(), filter,
             includeCategory: true, includeBrand: false, includeColor: true);
 
         return await query.GroupBy(p => p.BrandId).Select(g => new BrandFacetDto(g.Key, g.Count())).ToListAsync(ct);
@@ -57,7 +51,7 @@ public class ProductReadRepository : IProductReadRepository
 
     public async Task<List<ColorFacetDto>> GetColorFacetsAsync(ProductSearchFilter filter, CancellationToken ct)
     {
-        var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
+        var query = ApplyFilters(dbContext.Products.AsNoTracking(), filter,
             includeCategory: true, includeBrand: true, includeColor: false);
 
         return await query.Where(p => p.Color != "").GroupBy(p => p.Color).Select(g => new ColorFacetDto(g.Key, g.Count())).ToListAsync(ct);
@@ -65,7 +59,7 @@ public class ProductReadRepository : IProductReadRepository
 
     public async Task<(decimal Min, decimal Max)> GetPriceRangeAsync(ProductSearchFilter filter, CancellationToken ct)
     {
-        var query = ApplyFilters(_dbContext.Products.AsNoTracking(), filter,
+        var query = ApplyFilters(dbContext.Products.AsNoTracking(), filter,
             includeCategory: true, includeBrand: true, includeColor: true, includePrice: false);
 
         if (!await query.AnyAsync(ct)) return (0, 0);
@@ -73,12 +67,12 @@ public class ProductReadRepository : IProductReadRepository
     }
 
     public Task<ProductDetailRowDto?> GetByIdAsync(Guid id, CancellationToken ct)
-        => _dbContext.Products.AsNoTracking().Where(p => p.Id == id)
+        => dbContext.Products.AsNoTracking().Where(p => p.Id == id)
             .Select(p => new ProductDetailRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Model, p.Description, p.Specs, p.Price, p.VatRate))
             .FirstOrDefaultAsync(ct);
 
     public Task<List<string>> SearchProductNamesAsync(string term, int limit, CancellationToken ct)
-        => _dbContext.Products.AsNoTracking().Where(p => EF.Functions.ILike(p.Name, $"%{term}%"))
+        => dbContext.Products.AsNoTracking().Where(p => EF.Functions.ILike(p.Name, $"%{term}%"))
             .OrderBy(p => p.Name).Select(p => p.Name).Take(limit).ToListAsync(ct);
 
     private static IQueryable<Product> ApplyFilters(IQueryable<Product> query, ProductSearchFilter filter,
@@ -108,8 +102,17 @@ public class ProductReadRepository : IProductReadRepository
         return query;
     }
     
+    public Task<List<ProductIndexRowDto>> GetPageForIndexingAsync(int page, int pageSize, CancellationToken ct)
+        => dbContext.Products.AsNoTracking()
+            .OrderBy(p => p.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(p => new ProductIndexRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Color,
+                p.Price, p.VatRate, p.Stock, p.CreatedAt))
+            .ToListAsync(ct);
+    
     public Task<List<ProductRowDto>> GetByIdsAsync(List<Guid> ids, CancellationToken ct)
-        => _dbContext.Products.AsNoTracking()
+        => dbContext.Products.AsNoTracking()
             .Where(p => ids.Contains(p.Id))
             .Select(p => new ProductRowDto(p.Id, p.CategoryId, p.BrandId, p.Name, p.Model, p.Price, p.VatRate, p.Stock))
             .ToListAsync(ct);

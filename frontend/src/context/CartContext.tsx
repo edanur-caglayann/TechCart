@@ -12,6 +12,7 @@ import {
 import type { CartItem, CartProduct } from "../types/cart";
 import type { CartLineResponse, CartResponse } from "../types/cartResponse";
 import { useAuth } from "./AuthContext";
+import { getFriendlyErrorMessage } from "../utils/apiErrors";
 import {
   addCartItemRequest,
   clearCartRequest,
@@ -50,6 +51,8 @@ type CartContextType = {
   clearCart: () => void;
   totalQuantity: number;
   totalPrice: number;
+  errorMessage: string | null;
+  clearError: () => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -61,7 +64,12 @@ type CartProviderProps = {
 export function CartProvider({ children }: CartProviderProps) {
   const { isAuthenticated, isAuthLoading } = useAuth();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const hasMergedRef = useRef(false);
+
+  function clearError() {
+    setErrorMessage(null);
+  }
 
   useEffect(() => {
     if (isAuthLoading || isAuthenticated) return;
@@ -109,17 +117,27 @@ export function CartProvider({ children }: CartProviderProps) {
       quantity: item.quantity,
     }));
 
-    mergeCartRequest(payload).then((response) => {
-      setCartItems(toCartItems(response));
-      localStorage.removeItem(STORAGE_KEY);
-    });
+    mergeCartRequest(payload)
+      .then((response) => {
+        setCartItems(toCartItems(response));
+        localStorage.removeItem(STORAGE_KEY);
+      })
+      .catch((error) => {
+        setErrorMessage(getFriendlyErrorMessage(error, "Sepetin birleştirilemedi."));
+      });
   }, [isAuthenticated, isAuthLoading]);
 
   function addToCart(product: CartProduct, quantity = 1) {
+    setErrorMessage(null);
+
     if (isAuthenticated) {
-      addCartItemRequest(product.id, quantity).then((response) => {
-        setCartItems(toCartItems(response));
-      });
+      addCartItemRequest(product.id, quantity)
+        .then((response) => {
+          setCartItems(toCartItems(response));
+        })
+        .catch((error) => {
+          setErrorMessage(getFriendlyErrorMessage(error, "Ürün sepete eklenemedi."));
+        });
       return;
     }
 
@@ -140,13 +158,19 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function increaseQuantity(productId: string) {
+    setErrorMessage(null);
+
     if (isAuthenticated) {
       const current = cartItems.find((item) => item.product.id === productId);
       const newQuantity = (current?.quantity ?? 0) + 1;
 
-      updateCartItemQuantityRequest(productId, newQuantity).then((response) => {
-        setCartItems(toCartItems(response));
-      });
+      updateCartItemQuantityRequest(productId, newQuantity)
+        .then((response) => {
+          setCartItems(toCartItems(response));
+        })
+        .catch((error) => {
+          setErrorMessage(getFriendlyErrorMessage(error, "Miktar güncellenemedi."));
+        });
       return;
     }
 
@@ -160,13 +184,19 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function decreaseQuantity(productId: string) {
+    setErrorMessage(null);
+
     if (isAuthenticated) {
       const current = cartItems.find((item) => item.product.id === productId);
       if (!current || current.quantity <= 1) return;
 
-      updateCartItemQuantityRequest(productId, current.quantity - 1).then((response) => {
-        setCartItems(toCartItems(response));
-      });
+      updateCartItemQuantityRequest(productId, current.quantity - 1)
+        .then((response) => {
+          setCartItems(toCartItems(response));
+        })
+        .catch((error) => {
+          setErrorMessage(getFriendlyErrorMessage(error, "Miktar güncellenemedi."));
+        });
       return;
     }
 
@@ -178,10 +208,16 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function removeFromCart(productId: string) {
+    setErrorMessage(null);
+
     if (isAuthenticated) {
-      removeCartItemRequest(productId).then((response) => {
-        setCartItems(toCartItems(response));
-      });
+      removeCartItemRequest(productId)
+        .then((response) => {
+          setCartItems(toCartItems(response));
+        })
+        .catch((error) => {
+          setErrorMessage(getFriendlyErrorMessage(error, "Ürün sepetten çıkarılamadı."));
+        });
       return;
     }
 
@@ -189,10 +225,16 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function clearCart() {
+    setErrorMessage(null);
+
     if (isAuthenticated) {
-      clearCartRequest().then(() => {
-        setCartItems([]);
-      });
+      clearCartRequest()
+        .then(() => {
+          setCartItems([]);
+        })
+        .catch((error) => {
+          setErrorMessage(getFriendlyErrorMessage(error, "Sepet temizlenemedi."));
+        });
       return;
     }
 
@@ -204,7 +246,18 @@ export function CartProvider({ children }: CartProviderProps) {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart, totalQuantity, totalPrice }}
+      value={{
+        cartItems,
+        addToCart,
+        increaseQuantity,
+        decreaseQuantity,
+        removeFromCart,
+        clearCart,
+        totalQuantity,
+        totalPrice,
+        errorMessage,
+        clearError,
+      }}
     >
       {children}
     </CartContext.Provider>
