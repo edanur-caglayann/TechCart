@@ -21,6 +21,7 @@ type OrderContextType = {
   isOrderLoading: boolean;
   orderError: string | null;
   refreshOrders: () => Promise<void>;
+  getOrderByNumber: (orderNumber: string) => Order | undefined;
 };
 
 type OrderState = {
@@ -146,6 +147,10 @@ function UserOrderProvider({
 
     await loadOrders(requestId);
   }, [userId, loadOrders]);
+
+  function getOrderByNumber(orderNumber: string) {
+    return orders.find((order) => order.orderNumber === orderNumber);
+  }
 
   return (
     <OrderContext.Provider
