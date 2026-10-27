@@ -25,7 +25,6 @@ public class ProductStockReplicator(
         foreach (var product in products)
         {
             ct.ThrowIfCancellationRequested();
-
             if (stocksByProductId.TryGetValue(product.Id, out var stock))
             {
                 product.SetStock(stock);
@@ -35,9 +34,7 @@ public class ProductStockReplicator(
             {
                 missingCount++;
             }
-
             processedCount++;
-
             if (processedCount % BatchSize == 0)
             {
                 await productWriteRepository.SaveChangesAsync(ct);

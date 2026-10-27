@@ -28,7 +28,12 @@ const orderStatusLabels: Record<OrderStatus, string> = {
 export default function OrdersPage() {
   const router = useRouter();
   const { user, isAuthLoading } = useAuth();
-  const { orders, isOrderLoading } = useOrder();
+  const {
+    orders,
+    isOrderLoading,
+    orderError, // siparis istegi basarisizsa gosterilecek olan mesaj
+    refreshOrders, // Kullanıcı tekrar denemek istediğinde çalıştırılacak fonksiyon.
+  } = useOrder();
 
   useEffect(() => {
     if (!isAuthLoading && !user) {
@@ -58,6 +63,23 @@ export default function OrdersPage() {
     return (
       <main className={styles.ordersPage}>
         <p className={styles.loadingText}>Siparişler yükleniyor...</p>
+      </main>
+    );
+  }
+
+  if (orderError) {
+    return (
+      <main className={styles.ordersPage}>
+        <p role="alert">{orderError}</p>
+
+        <button
+          type="button"
+          onClick={() => {
+            void refreshOrders();
+          }}
+        >
+          Tekrar dene
+        </button>
       </main>
     );
   }

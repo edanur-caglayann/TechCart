@@ -11,7 +11,6 @@ public class ProductStockChangedConsumer(UpdateProductStockHandler updateProduct
     // Biz elle cagirmayiz, MassTransit cagirir.
     public async Task Consume(ConsumeContext<ProductStockChangedEvent> context)
     {
-        // mesajdaki bilgiyi alip (ProductId, NewStock) UpdateProductStockHandler fonksiyonuna iletiriz
         var message = context.Message;
 
         await updateProductStockHandler.Handle(

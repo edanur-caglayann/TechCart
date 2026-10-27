@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a891de93-8a27-4be9-a3fd-ec3676edd365" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/RequestDtos/ProductSearchFilter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/RequestDtos/ProductSearchFilter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/List/ListProductsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/List/ListProductsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Consumers/ProductStockChangedConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Consumers/ProductStockChangedConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Repositories/ProductReadRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Repositories/ProductReadRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Suggest/SuggestProductsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Suggest/SuggestProductsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchSuggestionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchSuggestionsResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/Consumers/SearchProductStockChangedConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/Consumers/SearchProductStockChangedConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/checkout/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/checkout/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchBar/SearchBar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SearchBar/SearchBar.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchBar/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SearchBar/SearchBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/utils/apiErrors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/utils/apiErrors.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "edanur-caglayann"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/edanur-caglayann/TechCart.git",
+    "accountId": "fa7ec482-eed5-4be2-8730-eb71e25b201c"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3KaZajxTINTlSGt0ejCUFIVZYGG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "feature/elasticsearch-search",
+    "junie.onboarding.icon.badge.shown": "true",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a891de93-8a27-4be9-a3fd-ec3676edd365" name="Changes" comment="" />
+      <created>1791797705941</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1791797705941</updated>
+      <workItem from="1791797707229" duration="9000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

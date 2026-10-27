@@ -8,7 +8,12 @@ RUN npm ci
 
 FROM node:22-alpine AS build
 
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
 WORKDIR /app
+
+RUN test -n "$NEXT_PUBLIC_API_URL"
 
 COPY --from=dependencies /app/node_modules ./node_modules
 

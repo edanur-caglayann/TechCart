@@ -1,0 +1,98 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB:?POSTGRES_DB eksik}"
+      POSTGRES_USER: "${POSTGRES_USER:?POSTGRES_USER eksik}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?POSTGRES_PASSWORD eksik}"
+    ports:
+      - "127.0.0.1:5434:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USERNAME:?RABBITMQ_USERNAME eksik}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD:?RABBITMQ_PASSWORD eksik}"
+    ports:
+      - "127.0.0.1:15673:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_running"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.0
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      cluster.name: techcart-clean
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    mem_limit: 1g
+    ports:
+      - "127.0.0.1:9201:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl --fail --silent --show-error 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s' > /dev/null
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/api.Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      PublicUrls__ApiBaseUrl: http://localhost:8081
+      PublicUrls__FrontendBaseUrl: http://localhost:3000
+      ConnectionStrings__PostgreSQL: "Host=postgres;Port=5432;Database=${POSTGRES_DB:?POSTGRES_DB eksik};Username=${POSTGRES_USER:?POSTGRES_USER eksik};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD eksik}"
+      Jwt__Secret: "${JWT_SECRET:?JWT_SECRET eksik}"
+      Iyzico__ApiKey: "${IYZICO_API_KEY:?IYZICO_API_KEY eksik}"
+      Iyzico__SecretKey: "${IYZICO_SECRET_KEY:?IYZICO_SECRET_KEY eksik}"
+      Iyzico__BaseUrl: https://sandbox-api.iyzipay.com
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Username: "${RABBITMQ_USERNAME:?RABBITMQ_USERNAME eksik}"
+      RabbitMQ__Password: "${RABBITMQ_PASSWORD:?RABBITMQ_PASSWORD eksik}"
+      Elasticsearch__Url: http://elasticsearch:9200
+    ports:
+      - "127.0.0.1:8081:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+        
+  worker:
+    build:
+      context: ..
+      dockerfile: deploy/worker.Dockerfile
+    environment:
+      DOTNET_ENVIRONMENT: Development
+      ConnectionStrings__PostgreSQL: "Host=postgres;Port=5432;Database=${POSTGRES_DB:?POSTGRES_DB eksik};Username=${POSTGRES_USER:?POSTGRES_USER eksik};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD eksik}"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
+  rabbitmq-data:
+  elasticsearch-data:

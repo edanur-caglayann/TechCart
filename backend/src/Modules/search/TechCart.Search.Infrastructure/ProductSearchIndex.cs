@@ -135,7 +135,7 @@ public class ProductSearchIndex(ElasticsearchClient client) : IProductSearchInde
     }
     
     // bu metot, elasticsearch'te oneriye uygun urunleri arar ve urun adlarindan olusan bir liste doner
-    public async Task<IReadOnlyList<string>> SuggestAsync(string term, int limit, CancellationToken ct)
+    public async Task<IReadOnlyList<ProductSuggestion>> SuggestAsync(string term, int limit, CancellationToken ct)
     {
         // elasticsearch'e IndexName adli indekste, ProductSearchDocument turundeki urunleri aramak icin nesne olustururuz
         var request = new SearchRequest<ProductSearchDocument>(IndexName)
@@ -170,7 +170,30 @@ public class ProductSearchIndex(ElasticsearchClient client) : IProductSearchInde
             throw new InvalidOperationException($"Öneri sorgusu başarısız: {response.DebugInformation}");
 
         // urunun sadeve isimlerini alir. Distinct ile ayni adin tekrar etmesini onleriz
-        return response.Documents.Select(d => d.Name).Distinct().ToList();
+ return response.Documents
+            .Select(d => new ProductSuggestion(d.Id, d.Name))
+            .DistinctBy(s => s.Name)
+            .ToList();    }
+    
+    // Elasticsearch'teki belirli bir urunun sadece InStock alanini guncelliyor.
+    // stok adedi güncellenmiyor sadece ürünün stokta olup olmadığı bilgisi güncelleniyor.
+    // Guncellenecek urunu ve yeni stok durumunu alir
+    public async Task UpdateStockAsync(Guid productId, bool inStock, CancellationToken ct)
+    {
+        // guncellemenin hangi indekste o indeksin hangi dokumaninda yapilacagi bulunur
+        var response = await client.UpdateAsync<ProductSearchDocument, ProductStockPatch>(
+            IndexName, productId.ToString(), u => 
+                // Bu dokümanın InStock alanına gelen değer ile guncelle.
+                u.Doc(new ProductStockPatch { InStock = inStock }), ct);
+
+        if (!response.IsValidResponse)
+            throw new InvalidOperationException($"Stok güncellemesi başarısız: {response.DebugInformation}");
+    }
+
+    // Kısmi güncelleme için yalnızca InStock alanını taşır.
+    private class ProductStockPatch
+    {
+        public bool InStock { get; set; }
     }
     
     // Elasticsearch'teki belirli bir urunun sadece InStock alanini guncelliyor.

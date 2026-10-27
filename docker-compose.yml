@@ -3,15 +3,15 @@ services:
     image: postgres:17-alpine
     container_name: techcart-postgres
     environment:
-      POSTGRES_DB: techcart
-      POSTGRES_USER: techcart
-      POSTGRES_PASSWORD: techcart
+      POSTGRES_DB: "${POSTGRES_DB:?POSTGRES_DB eksik}"
+      POSTGRES_USER: "${POSTGRES_USER:?POSTGRES_USER eksik}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?POSTGRES_PASSWORD eksik}"
     ports:
       - "5433:5432"
     volumes:
       - techcart-postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U techcart -d techcart"]
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -24,25 +24,39 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
-      ConnectionStrings__PostgreSQL: Host=postgres;Port=5432;Database=techcart;Username=techcart;Password=techcart
+      PublicUrls__ApiBaseUrl: http://localhost:8080
+      PublicUrls__FrontendBaseUrl: http://localhost:3000
+      ConnectionStrings__PostgreSQL: "Host=postgres;Port=5432;Database=${POSTGRES_DB:?POSTGRES_DB eksik};Username=${POSTGRES_USER:?POSTGRES_USER eksik};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD eksik}"
+      Jwt__Secret: "${JWT_SECRET:?JWT_SECRET eksik}"
+      Iyzico__ApiKey: "${IYZICO_API_KEY:?IYZICO_API_KEY eksik}"
+      Iyzico__SecretKey: "${IYZICO_SECRET_KEY:?IYZICO_SECRET_KEY eksik}"
+      Iyzico__BaseUrl: https://sandbox-api.iyzipay.com
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Username: "${RABBITMQ_USERNAME:?RABBITMQ_USERNAME eksik}"
+      RabbitMQ__Password: "${RABBITMQ_PASSWORD:?RABBITMQ_PASSWORD eksik}"
+      Elasticsearch__Url: http://elasticsearch:9200
     ports:
       - "8080:8080"
     depends_on:
       postgres:
         condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_started
 
   frontend:
     container_name: techcart-frontend
     build:
       context: .
       dockerfile: deploy/frontend.Dockerfile
-    environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8080
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8080
     ports:
       - "3000:3000"
     depends_on:
       - api
-  
+
   worker:
     build:
       context: .
@@ -50,30 +64,34 @@ services:
     container_name: techcart-worker
     environment:
       DOTNET_ENVIRONMENT: Development
-      RabbitMq__Host: rabbitmq
-      RabbitMq__Port: 5672
-      RabbitMq__Username: guest
-      RabbitMq__Password: guest
+      ConnectionStrings__PostgreSQL: "Host=postgres;Port=5432;Database=${POSTGRES_DB:?POSTGRES_DB eksik};Username=${POSTGRES_USER:?POSTGRES_USER eksik};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD eksik}"
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__Port: "5672"
+      RabbitMQ__Username: "${RABBITMQ_USERNAME:?RABBITMQ_USERNAME eksik}"
+      RabbitMQ__Password: "${RABBITMQ_PASSWORD:?RABBITMQ_PASSWORD eksik}"
     depends_on:
+      postgres:
+        condition: service_healthy
       rabbitmq:
         condition: service_healthy
     restart: unless-stopped
-    
+
   rabbitmq:
-      image: rabbitmq:4-management
-      container_name: techcart-rabbitmq
-      environment:
-        RABBITMQ_DEFAULT_USER: guest
-        RABBITMQ_DEFAULT_PASS: guest
-      ports:
-        - "5672:5672"
-        - "15672:15672"
-      healthcheck:
-        test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
-        interval: 10s
-        timeout: 5s
-        retries: 5
-      restart: unless-stopped
+    image: rabbitmq:4-management
+    container_name: techcart-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_USERNAME:?RABBITMQ_USERNAME eksik}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD:?RABBITMQ_PASSWORD eksik}"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.5.0
     container_name: techcart-elasticsearch

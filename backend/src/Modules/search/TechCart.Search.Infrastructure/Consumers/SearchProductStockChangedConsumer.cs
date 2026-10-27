@@ -15,8 +15,8 @@ public class SearchProductStockChangedConsumer(IProductSearchIndex productSearch
     {
         // context.Message, stok değişikliği mesajının kendisi.
         // Stok adedi, stokta var mı bilgisine çevriliyor.
+        
         var inStock = context.Message.NewStock > 0;
-
         try
         {
             // Mesajdaki ürünün Elasticsearch dokümanını bul ve InStock alanını hesapladığım değerle güncelle.

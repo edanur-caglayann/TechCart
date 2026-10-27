@@ -15,7 +15,7 @@ public class Product : AuditableEntity
     public string Color { get; private set; } = default!;
     public decimal Price { get; private set; }
     public decimal VatRate { get; private set; }
-    public int Stock { get; private set; } // inventory'deki gercek stogun replikasi
+    public int Stock { get; private set; } 
 
     private Product() { } 
 

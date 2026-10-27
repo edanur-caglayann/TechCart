@@ -11,6 +11,8 @@ namespace TechCart.Search.Infrastructure;
 public static class SearchModule
 {
     // API ile Elasticsearch arasındaki iletişim aracını hazırlar
+    
+    
     public static IServiceCollection AddSearchModule(this IServiceCollection services, IConfiguration configuration)
     {
         var url = configuration["Elasticsearch:Url"] ?? "http://localhost:9200";

@@ -11,17 +11,110 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c13f4d8-3c25-47ad-92bb-94f02d643281" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Search/SearchDevController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/Consumers/SearchProductStockChangedConsumer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/.idea/.idea.TechCart.dir/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechCart/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.EventBus/TechCart.EventBus.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.EventBus/TechCart.EventBus.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/TechCart.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.Infrastructure/TechCart.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/TechCart.SharedKernel.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/TechCart.SharedKernel.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Cart/CartController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Cart/CartController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Orders/OrdersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Orders/OrdersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Payments/PaymentsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Controllers/Payments/PaymentsController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/ProductSeeder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/ProductSeeder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/TechCart.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Api/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/ProductStockReplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/ProductStockReplicator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/SetDefault/SetDefaultAddressHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/SetDefault/SetDefaultAddressHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/TechCart.Seeder.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/TechCart.Seeder.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Seeder/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/TechCart.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Hosts/TechCart.Worker/TechCart.Worker.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/TechCart.Addresses.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Application/TechCart.Addresses.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Contracts/TechCart.Addresses.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Contracts/TechCart.Addresses.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/TechCart.Addresses.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Domain/TechCart.Addresses.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/TechCart.Addresses.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/addresses/TechCart.Addresses.Infrastructure/TechCart.Addresses.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Application/TechCart.Brands.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Application/TechCart.Brands.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Contracts/TechCart.Brands.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Contracts/TechCart.Brands.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Domain/TechCart.Brands.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Domain/TechCart.Brands.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/TechCart.Brands.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/brands/TechCart.Brands.Infrastructure/TechCart.Brands.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/TechCart.CartItems.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Application/TechCart.CartItems.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Contracts/TechCart.CartItems.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Contracts/TechCart.CartItems.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Domain/TechCart.CartItems.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Domain/TechCart.CartItems.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/TechCart.CartItems.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/cart_items/TechCart.CartItems.Infrastructure/TechCart.CartItems.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/TechCart.Categories.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Application/TechCart.Categories.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Contracts/TechCart.Categories.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Contracts/TechCart.Categories.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/TechCart.Categories.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Domain/TechCart.Categories.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/TechCart.Categories.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/categories/TechCart.Categories.Infrastructure/TechCart.Categories.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/TechCart.Inventory.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Application/TechCart.Inventory.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Contracts/TechCart.Inventory.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Contracts/TechCart.Inventory.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Domain/TechCart.Inventory.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Domain/TechCart.Inventory.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/InventoryDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/InventoryDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/Repositories/ProductStockWriteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/Repositories/ProductStockWriteRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/TechCart.Inventory.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/inventory/TechCart.Inventory.Infrastructure/TechCart.Inventory.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Application/TechCart.OrderItems.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Application/TechCart.OrderItems.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Contracts/TechCart.OrderItems.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Contracts/TechCart.OrderItems.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Domain/TechCart.OrderItems.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Domain/TechCart.OrderItems.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/TechCart.OrderItems.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/order_items/TechCart.OrderItems.Infrastructure/TechCart.OrderItems.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CancelExpiredOrders/CancelExpiredOrdersHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/CancelExpiredOrders/CancelExpiredOrdersHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/TechCart.Orders.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Application/TechCart.Orders.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/TechCart.Orders.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Contracts/TechCart.Orders.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/TechCart.Orders.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Domain/TechCart.Orders.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/TechCart.Orders.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/orders/TechCart.Orders.Infrastructure/TechCart.Orders.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/RequestDtos/InitiateCheckoutCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/Dtos/RequestDtos/InitiateCheckoutCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/InitiateCheckout/InitiateCheckoutHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/InitiateCheckout/InitiateCheckoutHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/TechCart.Payments.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Application/TechCart.Payments.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Contracts/TechCart.Payments.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Contracts/TechCart.Payments.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/TechCart.Payments.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Domain/TechCart.Payments.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Iyzico/IyzicoCheckoutClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/Iyzico/IyzicoCheckoutClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/TechCart.Payments.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/payments/TechCart.Payments.Infrastructure/TechCart.Payments.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Application/TechCart.ProductImages.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Application/TechCart.ProductImages.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Contracts/TechCart.ProductImages.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Contracts/TechCart.ProductImages.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Domain/TechCart.ProductImages.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Domain/TechCart.ProductImages.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Infrastructure/TechCart.ProductImages.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/product_images/TechCart.ProductImages.Infrastructure/TechCart.ProductImages.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Detail/GetProductDetailHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Detail/GetProductDetailHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/RequestDtos/ProductSearchFilter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/Dtos/RequestDtos/ProductSearchFilter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/List/ListProductsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/List/ListProductsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/TechCart.Products.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Application/TechCart.Products.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Contracts/TechCart.Products.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Contracts/TechCart.Products.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Domain/Entities/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Domain/Entities/Product.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Domain/TechCart.Products.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Domain/TechCart.Products.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Consumers/ProductStockChangedConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Consumers/ProductStockChangedConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/ProductsDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/ProductsDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Repositories/ProductReadRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/Repositories/ProductReadRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/TechCart.Products.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/products/TechCart.Products.Infrastructure/TechCart.Products.Infrastructure.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Abstractions/IProductSearchIndex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Reindex/ReindexProductsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Reindex/ReindexProductsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Suggest/SuggestProductsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/Suggest/SuggestProductsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/TechCart.Search.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Application/TechCart.Search.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchSuggestionsResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/Dtos/ResponseDtos/SearchSuggestionsResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/TechCart.Search.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Contracts/TechCart.Search.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/Consumers/SearchProductStockChangedConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/Consumers/SearchProductStockChangedConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/ProductSearchIndex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/SearchModule.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/TechCart.Search.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/search/TechCart.Search.Infrastructure/TechCart.Search.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Login/LoginHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/Login/LoginHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/TechCart.Users.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Application/TechCart.Users.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Contracts/TechCart.Users.Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Contracts/TechCart.Users.Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/TechCart.Users.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Domain/TechCart.Users.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/TechCart.Users.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/TechCart.Users.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/users/TechCart.Users.Infrastructure/UsersDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TechCart.ArchitectureTests/TechCart.ArchitectureTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TechCart.ArchitectureTests/TechCart.ArchitectureTests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TechCart.ArchitectureTests/UnitTest1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TechCart.IntegrationTests/TechCart.IntegrationTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TechCart.IntegrationTests/TechCart.IntegrationTests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TechCart.IntegrationTests/UnitTest1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/TechCart.UnitTests/TechCart.UnitTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TechCart.UnitTests/TechCart.UnitTests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../deploy/api.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../deploy/api.Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../deploy/frontend.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../deploy/frontend.Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../deploy/worker.Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../deploy/worker.Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/checkout/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/checkout/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/orders/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/orders/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/orders/success/[orderNumber]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/orders/success/[orderNumber]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchBar/SearchBar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SearchBar/SearchBar.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchBar/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SearchBar/SearchBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/context/OrderContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/context/OrderContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/utils/apiErrors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/utils/apiErrors.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +169,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/.microsoft/usersecrets/a7b732fe-a68a-4a4a-8564-73de12486190/secrets.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BuildingBlocks/TechCart.EventBus/Events/ProductStockChangedEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/AppException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/BuildingBlocks/TechCart.SharedKernel/PagedResult.cs" root0="FORCE_HIGHLIGHTING" />
@@ -279,6 +373,7 @@
     <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/RegisterUserHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Application/UpdateProfileHandlerTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/TechCart.UnitTests/Modules/Users/Domain/UserTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../global.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/17b2c79f9bae458c8d4a9f0a763fab4d28c00/8a/4d3ffd98/Options.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/17b2c79f9bae458c8d4a9f0a763fab4d28c00/a6/4e6c11a6/RetrieveCheckoutFormRequest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/17b2c79f9bae458c8d4a9f0a763fab4d28c00/cb/5de958e4/CheckoutFormInitialize.cs" root0="SKIP_HIGHLIGHTING" />
@@ -290,10 +385,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c7afd9724cf757c4a8469dba2bdc22ab5ac111c91f431dbfefc992dacb3e8635/ControllerBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e096e6f12c5d6b49356bc34ff1ea08738f910c0929c9d717c9cba7f44288/EntityFrameworkQueryableExtensions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -306,22 +401,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.TechCart.Api: http.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "feature/elasticsearch-search",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.TechCart.Api: http.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;I do mind&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/elasticsearch-search&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.TechCart.Api: http">
@@ -425,7 +521,16 @@
       <workItem from="1789729574256" duration="10000" />
       <workItem from="1789729598317" duration="8624000" />
       <workItem from="1789987200502" duration="52827000" />
-      <workItem from="1790598291272" duration="27716000" />
+      <workItem from="1790598291272" duration="53276000" />
+      <workItem from="1792417311766" duration="3306000" />
+      <workItem from="1792422286168" duration="3299000" />
+      <workItem from="1792427713359" duration="1472000" />
+      <workItem from="1792488717157" duration="11000" />
+      <workItem from="1792488837753" duration="7798000" />
+      <workItem from="1792501488511" duration="1815000" />
+      <workItem from="1792503313391" duration="8450000" />
+      <workItem from="1792591179625" duration="630000" />
+      <workItem from="1792741233535" duration="2423000" />
     </task>
     <task id="LOCAL-00001" summary="fıx: adjust folder structure">
       <option name="closed" value="true" />
@@ -611,7 +716,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790690889792</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="feat(search): sync inStock to Elasticsearch via ProductStockChangedEvent">
+      <option name="closed" value="true" />
+      <created>1790846101516</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1790846101516</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +781,8 @@
     <MESSAGE value="feat(search): add full reindex loop over all products" />
     <MESSAGE value="feat(search): add real search endpoint with typo tolerance and number safety" />
     <MESSAGE value="feat(search): add autocomplete suggestions endpoint using bool_prefix" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(search): add autocomplete suggestions endpoint using bool_prefix" />
+    <MESSAGE value="feat(search): sync inStock to Elasticsearch via ProductStockChangedEvent" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(search): sync inStock to Elasticsearch via ProductStockChangedEvent" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

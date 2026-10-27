@@ -48,7 +48,8 @@ public class IyzicoCheckoutClient : IPaymentGateway
             Locale = Locale.TR.ToString(),
             ConversationId = conversationId, // techcart'daki odemeyle iyzico islemini iliskilendiren takip numarasidir
             Price = price.ToString("F2", CultureInfo.InvariantCulture),
-            PaidPrice = price.ToString("F2", CultureInfo.InvariantCulture),            Currency = Currency.TRY.ToString(),
+            PaidPrice = price.ToString("F2", CultureInfo.InvariantCulture),           
+            Currency = Currency.TRY.ToString(),
             BasketId = conversationId,
             PaymentGroup = PaymentGroup.PRODUCT.ToString(),
             CallbackUrl = callbackUrl,

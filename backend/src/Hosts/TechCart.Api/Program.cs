@@ -26,6 +26,20 @@ using TechCart.Search.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Yanlis bir donus adresi, odeme tamamlandiktan sonra fark edilmemeli.
+// Her kurulum kendi disaridan erisilen API ve frontend adresini saglar.
+foreach (var settingKey in new[] { "PublicUrls:ApiBaseUrl", "PublicUrls:FrontendBaseUrl" })
+{
+    if (!Uri.TryCreate(builder.Configuration[settingKey], UriKind.Absolute, out var publicUri)
+        || (publicUri.Scheme != Uri.UriSchemeHttp && publicUri.Scheme != Uri.UriSchemeHttps)
+        || !string.IsNullOrEmpty(publicUri.UserInfo)
+        || !string.IsNullOrEmpty(publicUri.Query)
+        || !string.IsNullOrEmpty(publicUri.Fragment))
+    {
+        throw new InvalidOperationException(
+            $"{settingKey} kullanici bilgisi, sorgu veya fragment icermeyen gecerli bir HTTP/HTTPS adresi olmalidir.");
+    }
+}
 
 builder.Services.AddControllers();
 

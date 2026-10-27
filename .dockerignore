@@ -4,3 +4,7 @@
 **/obj
 frontend/node_modules
 frontend/.next
+
+# Yerel ortam dosyalari
+.env
+.env.*

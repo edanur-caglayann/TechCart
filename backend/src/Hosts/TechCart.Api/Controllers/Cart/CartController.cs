@@ -21,6 +21,7 @@ public class CartController(GetCartHandler getCartHandler,
     RemoveCartItemHandler removeCartItemHandler, 
     ClearCartHandler clearCartHandler,
     MergeCartHandler mergeCartHandler) : ControllerBase{
+   
     [HttpGet]
     public async Task<IActionResult> GetCart(CancellationToken ct)
     {

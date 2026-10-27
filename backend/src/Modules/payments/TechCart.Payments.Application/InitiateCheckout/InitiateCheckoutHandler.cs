@@ -51,7 +51,8 @@ public class InitiateCheckoutHandler(
             buyerPhone: order.ShippingPhone,
             buyerAddress: order.ShippingAddressLine,
             buyerCity: order.ShippingCity,
-            callbackUrl: $"http://localhost:5223/api/payments/iyzico/callback?orderId={order.Id}",            basketItems: basketItems,
+            callbackUrl: command.CallbackUrl,
+            basketItems: basketItems,
             ct: ct);
 
         return result;
